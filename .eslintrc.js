@@ -1,6 +1,7 @@
 module.exports = {
-  plugins: ['react', 'react-hooks', '@typescript-eslint'],
-  extends: ['airbnb', 'prettier', 'plugin:@typescript-eslint/recommended'],
+  root: true,
+  plugins: ['react', 'react-hooks', '@typescript-eslint', 'prettier'],
+  extends: ['airbnb', 'plugin:@typescript-eslint/recommended', 'prettier'],
   parser: '@typescript-eslint/parser',
   globals: {
     JSX: true
