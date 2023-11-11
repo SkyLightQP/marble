@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   plugins: ['react', 'react-hooks', '@typescript-eslint', 'prettier'],
-  extends: ['airbnb', 'plugin:@typescript-eslint/recommended', 'prettier'],
+  extends: ['airbnb', 'plugin:react/jsx-runtime', 'plugin:@typescript-eslint/recommended', 'prettier'],
   parser: '@typescript-eslint/parser',
   globals: {
     JSX: true
@@ -25,6 +25,7 @@ module.exports = {
 
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
-    'import/no-extraneous-dependencies': 'off'
+    'import/no-extraneous-dependencies': 'off',
+    'import/prefer-default-export': 'off'
   }
 };
