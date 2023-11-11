@@ -1,3 +1,5 @@
+import './styles/global.css';
+
 import React, { useState } from 'react';
 
 function App() {
@@ -8,14 +10,7 @@ function App() {
       <button type="button" onClick={() => setCount((prev) => prev + 1)}>
         Counter
       </button>
-      <p
-        style={{
-          color: 'red',
-          fontWeight: 'bold'
-        }}
-      >
-        {count}
-      </p>
+      <p className="text-red-500 text-bold">{count}</p>
     </div>
   );
 }
