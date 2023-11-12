@@ -5,7 +5,7 @@ import { RiBuildingLine } from 'react-icons/ri';
 interface CityCardProps {
   readonly nameKo: string;
   readonly nameEn: string;
-  readonly price: string;
+  readonly price: number;
   readonly className?: string;
 }
 
@@ -23,7 +23,7 @@ export const CityCard: React.FC<CityCardProps> = ({ nameKo, nameEn, price, class
       <div>
         <p className="text-[1.2rem]">{nameKo}</p>
         <p className="text-lg">{nameEn}</p>
-        <p className="text-sm text-gray-400">{price} 원</p>
+        <p className="text-sm text-gray-400">{price.toLocaleString('ko-KR')} 원</p>
       </div>
     </div>
   );
