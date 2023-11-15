@@ -13,7 +13,7 @@ export const CityCard: React.FC<CityCardProps> = ({ nameKo, nameEn, price, class
   return (
     <div
       className={clsx(
-        'w-28 h-40 border-2 border-black text-center flex flex-col items-center justify-around p-2',
+        'w-28 h-36 border-2 border-black text-center flex flex-col items-center justify-around p-2',
         className
       )}
     >
@@ -21,8 +21,8 @@ export const CityCard: React.FC<CityCardProps> = ({ nameKo, nameEn, price, class
         <RiBuildingLine size={48} />
       </div>
       <div>
-        <p className="text-[1.2rem]">{nameKo}</p>
-        <p className="text-lg">{nameEn}</p>
+        <p className="text-[1.1rem]">{nameKo}</p>
+        <p className="text-[1.1rem]">{nameEn}</p>
         <p className="text-sm text-gray-400">{price.toLocaleString('ko-KR')} 원</p>
       </div>
     </div>
