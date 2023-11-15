@@ -28,5 +28,15 @@ export const DUMMY_CITY_LIST = [
     nameKo: '로마',
     nameEn: 'Roma',
     price: 1000000
+  },
+  {
+    nameKo: '로마',
+    nameEn: 'Roma',
+    price: 1000000
+  },
+  {
+    nameKo: '로마',
+    nameEn: 'Roma',
+    price: 1000000
   }
 ];
