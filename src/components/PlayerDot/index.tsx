@@ -1,6 +1,5 @@
 import React from 'react';
-
-type DotColor = 'blue' | 'red' | 'green' | 'yellow';
+import { DotColor } from '../../types/DotColor';
 
 interface PlayerDotProps {
   readonly color: DotColor;
