@@ -22,7 +22,7 @@ export const CityCard: React.FC<CityCardProps> = ({ icon: Icon, nameKo, price, c
         <Icon size={48} />
       </div>
       <div>
-        <p className="text-[1.1rem]">{nameKo}</p>
+        <p className="text-[1.1rem] font-bold">{nameKo}</p>
         <p className="text-sm text-gray-400">{price.toLocaleString('ko-KR')} 원</p>
       </div>
       <div className="flex space-x-1 mt-1">
