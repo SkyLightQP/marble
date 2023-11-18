@@ -5,12 +5,11 @@ import { IconType } from 'react-icons';
 interface CityCardProps {
   readonly icon: IconType;
   readonly nameKo: string;
-  readonly nameEn: string;
   readonly price: number;
   readonly className?: string;
 }
 
-export const CityCard: React.FC<CityCardProps> = ({ icon: Icon, nameKo, nameEn, price, className }) => {
+export const CityCard: React.FC<CityCardProps> = ({ icon: Icon, nameKo, price, className }) => {
   return (
     <div
       className={clsx(
@@ -23,7 +22,6 @@ export const CityCard: React.FC<CityCardProps> = ({ icon: Icon, nameKo, nameEn, 
       </div>
       <div>
         <p className="text-[1.1rem]">{nameKo}</p>
-        <p className="text-sm">{nameEn}</p>
         <p className="text-sm text-gray-400">{price.toLocaleString('ko-KR')} 원</p>
       </div>
     </div>
