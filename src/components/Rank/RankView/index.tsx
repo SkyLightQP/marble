@@ -7,7 +7,7 @@ export const RankView: React.FC = () => {
     <div className="w-60 h-60 bg-white border-2 border-gray-300 rounded-xl p-4 ">
       <h1 className="font-bold text-xl mb-2 flex items-center">
         <RiTrophyLine className="mr-1" />
-        RANK
+        순위
       </h1>
       <div className="space-y-1">
         <RankPlayerItem rank={1} name="홍길동" playerColor="red" currentPrice={3000} />

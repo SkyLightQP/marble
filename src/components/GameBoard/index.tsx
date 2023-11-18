@@ -1,5 +1,5 @@
 import React from 'react';
-import { RiBuildingLine } from 'react-icons/ri';
+import { RiBuildingLine, RiFlagLine, RiQuestionLine } from 'react-icons/ri';
 import { SpecialCard } from '../SpecialCard';
 import { DUMMY_CITY_LIST, DUMMY_CITY_LIST_FOR_VERTICAL } from '../../constants/dummy-data';
 import { CityCard } from '../CityCard';
@@ -10,12 +10,18 @@ export const GameBoard: React.FC = () => {
     <div>
       <div className="flex flex-row justify-center space-x-1">
         <SpecialCard>
-          <h1 className="font-bold text-2xl">START</h1>
+          <h1 className="font-bold text-2xl flex items-center">
+            <RiFlagLine className="mr-1" /> 출발
+          </h1>
         </SpecialCard>
         {DUMMY_CITY_LIST.map((city) => (
           <CityCard key={city.nameKo} icon={RiBuildingLine} nameKo={city.nameKo} price={city.price} />
         ))}
-        <SpecialCard />
+        <SpecialCard>
+          <h1 className="font-bold text-2xl flex items-center">
+            <RiQuestionLine className="mr-1" /> ?
+          </h1>
+        </SpecialCard>
       </div>
       <div className="flex flex-row justify-center mt-1 mb-1">
         <div className="flex flex-col space-y-1">
@@ -23,7 +29,7 @@ export const GameBoard: React.FC = () => {
             <CityCard key={city.nameKo} icon={RiBuildingLine} nameKo={city.nameKo} price={city.price} />
           ))}
         </div>
-        <div className="w-[1060px] h-full p-10">
+        <div className="w-[1060px] h-full flex p-10">
           <RankView />
         </div>
         <div className="flex flex-col space-y-1">
@@ -33,11 +39,19 @@ export const GameBoard: React.FC = () => {
         </div>
       </div>
       <div className="flex flex-row justify-center space-x-1">
-        <SpecialCard />
+        <SpecialCard>
+          <h1 className="font-bold text-2xl flex items-center">
+            <RiQuestionLine className="mr-1" /> ?
+          </h1>
+        </SpecialCard>
         {DUMMY_CITY_LIST.map((city) => (
           <CityCard key={city.nameKo} icon={RiBuildingLine} nameKo={city.nameKo} price={city.price} />
         ))}
-        <SpecialCard />
+        <SpecialCard>
+          <h1 className="font-bold text-2xl flex items-center">
+            <RiQuestionLine className="mr-1" /> ?
+          </h1>
+        </SpecialCard>
       </div>
     </div>
   );
