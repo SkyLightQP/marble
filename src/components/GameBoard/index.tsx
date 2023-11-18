@@ -4,6 +4,7 @@ import { SpecialCard } from '../SpecialCard';
 import { DUMMY_CITY_LIST, DUMMY_CITY_LIST_FOR_VERTICAL } from '../../constants/dummy-data';
 import { CityCard } from '../CityCard';
 import { RankView } from '../Rank/RankView';
+import { BalanceInformationView } from '../BalanceInformation/BalanceInformationView';
 
 export const GameBoard: React.FC = () => {
   return (
@@ -29,8 +30,9 @@ export const GameBoard: React.FC = () => {
             <CityCard key={city.nameKo} icon={RiBuildingLine} nameKo={city.nameKo} price={city.price} />
           ))}
         </div>
-        <div className="w-[1060px] h-full flex p-10">
+        <div className="w-[1060px] h-full flex space-x-4 p-10">
           <RankView />
+          <BalanceInformationView />
         </div>
         <div className="flex flex-col space-y-1">
           {DUMMY_CITY_LIST_FOR_VERTICAL.map((city) => (
