@@ -3,7 +3,7 @@ import { GameBoard } from '../components/GameBoard';
 
 export const MainPage: React.FC = () => {
   return (
-    <div className="bg-gray-50">
+    <div className="w-screen h-screen bg-gray-50">
       <GameBoard />
     </div>
   );
