@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 import { IconType } from 'react-icons';
-import { Player } from '../Player';
+import { PlayerDot } from '../PlayerDot';
 
 interface CityCardProps {
   readonly icon: IconType;
@@ -26,10 +26,10 @@ export const CityCard: React.FC<CityCardProps> = ({ icon: Icon, nameKo, price, c
         <p className="text-sm text-gray-400">{price.toLocaleString('ko-KR')} 원</p>
       </div>
       <div className="flex space-x-1 mt-1">
-        <Player color="blue" />
-        <Player color="yellow" />
-        <Player color="green" />
-        <Player color="red" />
+        <PlayerDot color="blue" />
+        <PlayerDot color="yellow" />
+        <PlayerDot color="green" />
+        <PlayerDot color="red" />
       </div>
     </div>
   );
