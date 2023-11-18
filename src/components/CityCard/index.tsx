@@ -14,7 +14,7 @@ export const CityCard: React.FC<CityCardProps> = ({ icon: Icon, nameKo, nameEn, 
   return (
     <div
       className={clsx(
-        'w-28 h-36 border-2 border-black text-center flex flex-col items-center justify-around p-2',
+        'w-32 h-32 border-2 border-black text-center flex flex-col items-center justify-around p-2',
         className
       )}
     >
