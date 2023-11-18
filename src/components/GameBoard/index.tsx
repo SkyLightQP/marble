@@ -1,7 +1,7 @@
 import React from 'react';
 import { RiBuildingLine } from 'react-icons/ri';
 import { SpecialCard } from '../SpecialCard';
-import { DUMMY_CITY_LIST } from '../../constants/dummy-data';
+import { DUMMY_CITY_LIST, DUMMY_CITY_LIST_FOR_VERTICAL } from '../../constants/dummy-data';
 import { CityCard } from '../CityCard';
 
 export const GameBoard: React.FC = () => {
@@ -24,7 +24,7 @@ export const GameBoard: React.FC = () => {
       </div>
       <div className="flex flex-row justify-center space-x-[1060px] mt-1 mb-1">
         <div className="flex flex-col space-y-1">
-          {DUMMY_CITY_LIST.map((city) => (
+          {DUMMY_CITY_LIST_FOR_VERTICAL.map((city) => (
             <CityCard
               key={city.nameEn}
               icon={RiBuildingLine}
@@ -35,7 +35,7 @@ export const GameBoard: React.FC = () => {
           ))}
         </div>
         <div className="flex flex-col space-y-1">
-          {DUMMY_CITY_LIST.map((city) => (
+          {DUMMY_CITY_LIST_FOR_VERTICAL.map((city) => (
             <CityCard
               key={city.nameEn}
               icon={RiBuildingLine}
