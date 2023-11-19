@@ -20,16 +20,10 @@
     "@types/node": "^16.18.59",
     "@types/react": "^18.2.33",
     "@types/react-dom": "^18.2.14",
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
-    "eslint": "^8.53.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-prettier": "^5.0.1",
-    "prettier": "^3.0.3",
+    "eslint-config-custom": "*",
     "tailwindcss": "^3.3.5",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "@marble/tsconfig": "*"
   },
   "browserslist": {
     "production": [
