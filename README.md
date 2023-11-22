@@ -10,7 +10,7 @@ yarn
 ```
 
 ```shell
-yarn start
+yarn dev
 ```
 
 ```shell
