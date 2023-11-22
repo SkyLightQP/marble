@@ -1,4 +1,4 @@
 {
-  "extends": "@marble/tsconfig/base.json",
+  "extends": "@marble/tsconfig/react.json",
   "include": ["src"]
 }

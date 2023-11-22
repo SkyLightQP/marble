@@ -1,0 +1,7 @@
+{
+  "extends": "@marble/tsconfig/nest.json",
+  "compilerOptions": {
+	"outDir": "./dist",
+	"baseUrl": "./src"
+  },
+}

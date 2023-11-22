@@ -7,6 +7,7 @@
     "access": "public"
   },
   "files": [
-    "base.json"
+    "base.json",
+	"nest.json"
   ]
 }

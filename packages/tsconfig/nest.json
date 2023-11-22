@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Nest",
+  "extends": "./base.json",
+  "compilerOptions": {
+	"module": "commonjs",
+	"declaration": true,
+	"removeComments": true,
+	"emitDecoratorMetadata": true,
+	"experimentalDecorators": true,
+	"allowSyntheticDefaultImports": true,
+	"sourceMap": true,
+	"incremental": true,
+	"strictNullChecks": false,
+	"noImplicitAny": false,
+	"strictBindCallApply": false,
+	"forceConsistentCasingInFileNames": false,
+	"noFallthroughCasesInSwitch": false
+  }
+}

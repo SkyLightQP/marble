@@ -1,6 +1,6 @@
 module.exports = {
-  plugins: ['react', 'react-hooks', '@typescript-eslint', 'prettier'],
-  extends: ['airbnb', 'plugin:react/jsx-runtime', 'plugin:@typescript-eslint/recommended', 'prettier', 'turbo'],
+  plugins: ['@typescript-eslint', 'prettier'],
+  extends: ['airbnb', 'plugin:@typescript-eslint/recommended', 'prettier', 'turbo'],
   parser: '@typescript-eslint/parser',
   globals: {
     JSX: true
@@ -11,16 +11,8 @@ module.exports = {
     'comma-dangle': 'off',
     'object-curly-newline': 'off',
     'linebreak-style': 'off',
-
-    'react/jsx-filename-extension': 'off',
-    'react/no-unescaped-entities': 'off',
-    'react/jsx-tag-spacing': 'off',
-    'react/prop-types': 'off',
-    'react/jsx-one-expression-per-line': 'off',
-    'react/jsx-props-no-spreading': 'off',
-    'react/function-component-definition': 'off',
-    'react/jsx-no-useless-fragment': 'off',
-    'react/require-default-props': 'off',
+    'no-useless-constructor': 'off',
+    'class-methods-use-this': 'off',
 
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
