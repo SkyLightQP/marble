@@ -6,7 +6,7 @@ interface PlayerDotProps {
   readonly color: DotColor;
 }
 
-const COLOR_MAP = {
+const COLOR_MAP: Record<DotColor, string> = {
   red: 'bg-red-500',
   blue: 'bg-blue-500',
   green: 'bg-green-500',
