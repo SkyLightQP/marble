@@ -1,12 +1,18 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
-	"build": {
-	  "outputs": ["build/**", "dist/**"]
-	},
-	"dev": {
-	  "cache": false,
-	  "persistent": true
-	}
+    "build": {
+      "outputs": ["build/**", "dist/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "db:generate": {
+      "cache": false
+    },
+    "db:push": {
+      "cache": false
+    }
   }
 }
