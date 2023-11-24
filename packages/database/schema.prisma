@@ -6,3 +6,41 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+model User {
+  userId    String   @id @default(dbgenerated("gen_random_uuid()")) @map("user_id") @db.Uuid
+  id        String   @unique
+  password  String
+  nickname  String?  @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model City {
+  id        Int      @id @default(autoincrement())
+  name      String
+  icon      String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  cityPrices CityPrice[] @relation("cityPrice")
+
+  @@map("cities")
+}
+
+model CityPrice {
+  id     Int @id @default(autoincrement())
+  cityId Int @map("city_id")
+  landPrice     Int      @map("land_price")
+  housePrice    Int      @map("house_price")
+  buildingPrice Int      @map("building_price")
+  hotelPrice    Int      @map("hotel_price")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  city City @relation("cityPrice", fields: [cityId], references: [id])
+
+  @@map("city_prices")
+}
