@@ -4,7 +4,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "turbo dev",
-    "build": "turbo build"
+    "build": "turbo build",
+    "db:generate": "turbo db:generate",
+    "db:push": "turbo db:push"
   },
   "private": true,
   "devDependencies": {
