@@ -4,6 +4,9 @@
     "build": {
       "outputs": ["build/**", "dist/**"]
     },
+    "prepare": {
+      "outputs": ["dist/**"]
+    },
     "dev": {
       "cache": false,
       "persistent": true
