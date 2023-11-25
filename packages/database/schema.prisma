@@ -31,8 +31,8 @@ model City {
 }
 
 model CityPrice {
-  id     Int @id @default(autoincrement())
-  cityId Int @map("city_id")
+  id            Int      @id @default(autoincrement())
+  cityId        Int      @map("city_id")
   landPrice     Int      @map("land_price")
   housePrice    Int      @map("house_price")
   buildingPrice Int      @map("building_price")
