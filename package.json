@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",
-    "db:generate": "turbo db:generate",
     "db:push": "turbo db:push",
     "prepare": "turbo prepare"
   },

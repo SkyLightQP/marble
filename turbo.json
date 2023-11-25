@@ -5,14 +5,11 @@
       "outputs": ["build/**", "dist/**"]
     },
     "prepare": {
-      "outputs": ["dist/**"]
-    },
+	  "cache": false
+	},
     "dev": {
       "cache": false,
       "persistent": true
-    },
-    "db:generate": {
-      "cache": false
     },
     "db:push": {
       "cache": false

@@ -6,7 +6,7 @@
   "scripts": {
     "db:generate": "prisma format && prisma generate",
     "db:push": "prisma db push --skip-generate",
-    "prepare": "vite build"
+    "prepare": "yarn db:generate && vite build"
   },
   "dependencies": {
     "@prisma/client": "^5.6.0"
