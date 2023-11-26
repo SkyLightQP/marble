@@ -17,7 +17,7 @@ export class CreateUserHandler implements ICommandHandler<CreateUserCommand> {
   async execute({ args: { id, password, nickname } }: CreateUserCommand): Promise<User> {
     const salt = Number(this.config.get('BCRYPT_SALT'));
 
-    const prevUser = await this.prisma.user.findFirst({
+    const prevUser = await this.prisma.user.findUnique({
       where: {
         id,
         nickname
