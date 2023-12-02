@@ -1,10 +1,10 @@
+import { AppModule } from '@app.module';
+import { ResponseInterceptor } from '@infrastructure/interceptors/response.interceptor';
+import { winstonLoggerConfig } from '@infrastructure/utils/logger.util';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import helmet from 'helmet';
-import { winstonLoggerConfig } from 'infrastructure/utils/logger.util';
-import { AppModule } from './app.module';
-import { ResponseInterceptor } from './infrastructure/interceptors/response.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {

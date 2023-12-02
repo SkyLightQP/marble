@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { SignupUserCommand } from '../commands/signup-user.command';
 import { SignupDto } from './dto/signup.dto';
+import { SignupUserCommand } from '../commands/signup-user.command';
 
 @Controller('auth')
 export class AuthController {

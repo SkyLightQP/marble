@@ -1,5 +1,5 @@
+import { DatabaseService } from '@infrastructure/database/database.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { DatabaseService } from 'infrastructure/database/database.service';
 import { GetUsersQuery } from '../queries/get-users.query';
 
 @QueryHandler(GetUsersQuery)

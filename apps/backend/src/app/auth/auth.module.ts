@@ -1,6 +1,6 @@
+import { DatabaseModule } from '@infrastructure/database/database.module';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { DatabaseModule } from 'infrastructure/database/database.module';
 import { AuthController } from './controllers/auth.controller';
 import { SignupUserHandler } from './handlers/signup-user.handler';
 import { AuthTokenService } from './services/auth-token.service';

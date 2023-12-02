@@ -1,10 +1,10 @@
+import { DatabaseService } from '@infrastructure/database/database.service';
+import { ErrorCode } from '@infrastructure/error/error-code';
+import { prismaExclude } from '@infrastructure/utils/database.util';
 import { ConflictException, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { hashSync } from 'bcrypt';
-import { DatabaseService } from 'infrastructure/database/database.service';
-import { ErrorCode } from 'infrastructure/error/error-code';
-import { prismaExclude } from 'infrastructure/utils/database.util';
 import { SignupUserCommand } from '../commands/signup-user.command';
 import { AuthTokenService } from '../services/auth-token.service';
 
