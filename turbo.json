@@ -5,8 +5,8 @@
       "outputs": ["build/**", "dist/**"]
     },
     "prepare": {
-	  "cache": false
-	},
+      "cache": false
+    },
     "dev": {
       "cache": false,
       "persistent": true
