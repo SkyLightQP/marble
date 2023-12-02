@@ -1,13 +1,24 @@
 import { CommandHandler, EventBus, ICommandHandler } from '@nestjs/cqrs';
+import { DatabaseService } from 'infrastructure/database/database.service';
 import { SignupUserCommand } from '../commands/signup-user.command';
-import { UserSignupEvent } from '../events/user-signup.event';
+import { AuthTokenService } from '../services/auth-token.service';
 
 @CommandHandler(SignupUserCommand)
 export class SignupUserHandler implements ICommandHandler<SignupUserCommand> {
-  constructor(private readonly eventBus: EventBus) {}
+  constructor(
+    private readonly eventBus: EventBus,
+    private readonly authTokenService: AuthTokenService,
+    private readonly prisma: DatabaseService
+  ) {}
 
   async execute({ args: { id, password, nickname } }: SignupUserCommand) {
-    // TODO: Generate the JWT.
-    this.eventBus.publish(new UserSignupEvent({ id, password, nickname }));
+    const user = await this.prisma.user.findUnique({ where: { id } });
+    const accessToken = this.authTokenService.generateAccessToken(user.userId, { id });
+    const refreshToken = this.authTokenService.generateRefreshToken(user.userId, { id });
+
+    return {
+      accessToken,
+      refreshToken
+    };
   }
 }
