@@ -1,14 +1,10 @@
+import { AuthTokenPayload } from '@infrastructure/common/types/auth.type';
 import { DatabaseService } from '@infrastructure/database/database.service';
 import { ErrorCode } from '@infrastructure/error/error-code';
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import dayjs from 'dayjs';
-
-export interface TokenPayload {
-  readonly sub: string;
-  readonly id: string;
-}
 
 @Injectable()
 export class AuthTokenService {
@@ -22,7 +18,7 @@ export class AuthTokenService {
 
   private REFRESH_TOKEN_EXPIRE_DAY = 14;
 
-  generateAccessToken(payload: TokenPayload): string {
+  generateAccessToken(payload: AuthTokenPayload): string {
     const secret = this.config.get('ACCESS_TOKEN_SECRET');
     const accessToken = this.jwtService.sign(
       {
@@ -37,7 +33,7 @@ export class AuthTokenService {
     return accessToken;
   }
 
-  async generateRefreshToken(payload: TokenPayload): Promise<string> {
+  async generateRefreshToken(payload: AuthTokenPayload): Promise<string> {
     const secret = this.config.get('REFRESH_TOKEN_SECRET');
     const refreshToken = this.jwtService.sign(
       {
@@ -59,7 +55,7 @@ export class AuthTokenService {
     return refreshToken;
   }
 
-  verifyAccessToken(token: string): TokenPayload {
+  verifyAccessToken(token: string): AuthTokenPayload {
     const secret = this.config.get('ACCESS_TOKEN_SECRET');
     const payload = this.jwtService.verify(token, {
       secret
@@ -68,7 +64,7 @@ export class AuthTokenService {
     return payload;
   }
 
-  verifyRefreshToken(token: string): TokenPayload {
+  verifyRefreshToken(token: string): AuthTokenPayload {
     const secret = this.config.get('REFRESH_TOKEN_SECRET');
     const payload = this.jwtService.verify(token, {
       secret
