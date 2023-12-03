@@ -4,6 +4,7 @@ import { winstonLoggerConfig } from '@infrastructure/utils/logger.util';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
+import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 
 async function bootstrap() {
@@ -29,6 +30,7 @@ async function bootstrap() {
       }
     })
   );
+  app.use(cookieParser());
 
   await app.listen(8080);
 }
