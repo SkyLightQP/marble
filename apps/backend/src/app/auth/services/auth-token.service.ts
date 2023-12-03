@@ -6,6 +6,11 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import dayjs from 'dayjs';
 
+export interface RefreshAccessTokenReturn {
+  readonly accessToken: string;
+  readonly sub: string;
+}
+
 @Injectable()
 export class AuthTokenService {
   constructor(
@@ -61,7 +66,7 @@ export class AuthTokenService {
       secret
     });
 
-    return payload;
+    return { sub: payload.sub, id: payload.id };
   }
 
   verifyRefreshToken(token: string): AuthTokenPayload {
@@ -70,7 +75,7 @@ export class AuthTokenService {
       secret
     });
 
-    return payload;
+    return { sub: payload.sub, id: payload.id };
   }
 
   async isRefreshTokenInWhiteList(token: string): Promise<boolean> {
@@ -78,7 +83,7 @@ export class AuthTokenService {
       where: {
         token,
         expiredAt: {
-          lte: new Date()
+          gte: new Date()
         }
       }
     });
@@ -86,7 +91,7 @@ export class AuthTokenService {
     return refreshToken !== null;
   }
 
-  async refreshAccessToken(refreshToken: string): Promise<string> {
+  async refreshAccessToken(refreshToken: string): Promise<RefreshAccessTokenReturn> {
     if (!(await this.isRefreshTokenInWhiteList(refreshToken))) {
       throw new ForbiddenException(ErrorCode.PERMISSION_DENIED);
     }
@@ -94,6 +99,9 @@ export class AuthTokenService {
     const payload = this.verifyRefreshToken(refreshToken);
     const accessToken = this.generateAccessToken(payload);
 
-    return accessToken;
+    return {
+      accessToken,
+      sub: payload.sub
+    };
   }
 }

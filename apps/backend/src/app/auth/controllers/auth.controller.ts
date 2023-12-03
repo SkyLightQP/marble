@@ -1,6 +1,7 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import { Body, Controller, Post, Req, Res } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import type { Response } from 'express';
+import type { Request, Response } from 'express';
+import { RefreshAccessTokenCommand } from '../commands/refresh-access-token.command';
 import { SigninUserCommand } from '../commands/signin-user.command';
 import { SignupUserCommand } from '../commands/signup-user.command';
 import { SignupUserReturn } from '../handlers/signup-user.handler';
@@ -31,5 +32,11 @@ export class AuthController {
       secure: true
     });
     return result;
+  }
+
+  @Post('/refresh')
+  async refresh(@Req() request: Request) {
+    const command = new RefreshAccessTokenCommand({ refreshToken: request.cookies.refreshToken });
+    return this.commandBus.execute(command);
   }
 }
