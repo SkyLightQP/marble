@@ -44,3 +44,13 @@ model CityPrice {
 
   @@map("city_prices")
 }
+
+model RefreshTokenWhiteList {
+  id        Int      @id @default(autoincrement())
+  token     String
+  expiredAt DateTime @map("expired_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("refresh_token_white_lists")
+}
