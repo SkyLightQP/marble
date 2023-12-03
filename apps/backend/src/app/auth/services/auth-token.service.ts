@@ -1,8 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { DatabaseService } from '@infrastructure/database/database.service';
+import { ErrorCode } from '@infrastructure/error/error-code';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import dayjs from 'dayjs';
 
-interface TokenPayload {
+export interface TokenPayload {
+  readonly sub: string;
   readonly id: string;
 }
 
@@ -10,38 +14,90 @@ interface TokenPayload {
 export class AuthTokenService {
   constructor(
     private readonly jwtService: JwtService,
-    private readonly config: ConfigService
+    private readonly config: ConfigService,
+    private readonly prisma: DatabaseService
   ) {}
 
-  generateAccessToken(sub: string, payload: TokenPayload) {
+  private ACCESS_TOKEN_EXPIRE_DAY = 1;
+
+  private REFRESH_TOKEN_EXPIRE_DAY = 14;
+
+  generateAccessToken(payload: TokenPayload): string {
     const secret = this.config.get('ACCESS_TOKEN_SECRET');
     const accessToken = this.jwtService.sign(
       {
-        sub,
         ...payload
       },
       {
         secret,
-        expiresIn: '1d'
+        expiresIn: `${this.ACCESS_TOKEN_EXPIRE_DAY}d`
       }
     );
 
     return accessToken;
   }
 
-  generateRefreshToken(sub: string, payload: TokenPayload) {
+  async generateRefreshToken(payload: TokenPayload): Promise<string> {
     const secret = this.config.get('REFRESH_TOKEN_SECRET');
     const refreshToken = this.jwtService.sign(
       {
-        sub,
         ...payload
       },
       {
         secret,
-        expiresIn: '14d'
+        expiresIn: `${this.REFRESH_TOKEN_EXPIRE_DAY}d`
       }
     );
 
+    await this.prisma.refreshTokenWhiteList.create({
+      data: {
+        token: refreshToken,
+        expiredAt: dayjs().add(this.REFRESH_TOKEN_EXPIRE_DAY, 'day').toDate()
+      }
+    });
+
     return refreshToken;
+  }
+
+  verifyAccessToken(token: string): TokenPayload {
+    const secret = this.config.get('ACCESS_TOKEN_SECRET');
+    const payload = this.jwtService.verify(token, {
+      secret
+    });
+
+    return payload;
+  }
+
+  verifyRefreshToken(token: string): TokenPayload {
+    const secret = this.config.get('REFRESH_TOKEN_SECRET');
+    const payload = this.jwtService.verify(token, {
+      secret
+    });
+
+    return payload;
+  }
+
+  async isRefreshTokenInWhiteList(token: string): Promise<boolean> {
+    const refreshToken = await this.prisma.refreshTokenWhiteList.findFirst({
+      where: {
+        token,
+        expiredAt: {
+          lte: new Date()
+        }
+      }
+    });
+
+    return refreshToken !== null;
+  }
+
+  async refreshAccessToken(refreshToken: string): Promise<string> {
+    if (!(await this.isRefreshTokenInWhiteList(refreshToken))) {
+      throw new ForbiddenException(ErrorCode.PERMISSION_DENIED);
+    }
+
+    const payload = this.verifyRefreshToken(refreshToken);
+    const accessToken = this.generateAccessToken(payload);
+
+    return accessToken;
   }
 }

@@ -11,5 +11,9 @@ export const ErrorCode: Record<Uppercase<string>, ErrorCodeType> = {
   USER_ALREADY_EXISTS: {
     code: 'USER_ALREADY_EXISTS',
     message: '이미 존재하는 사용자입니다.'
+  },
+  PERMISSION_DENIED: {
+    code: 'PERMISSION_DENIED',
+    message: '권한이 없습니다.'
   }
 } as const;

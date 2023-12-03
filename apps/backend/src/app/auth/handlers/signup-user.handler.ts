@@ -41,8 +41,8 @@ export class SignupUserHandler implements ICommandHandler<SignupUserCommand> {
 
     Logger.log({ message: '새로운 유저가 가입했습니다.', uid: result.userId, id: result.id });
 
-    const accessToken = this.authTokenService.generateAccessToken(result.userId, { id });
-    const refreshToken = this.authTokenService.generateRefreshToken(result.userId, { id });
+    const accessToken = this.authTokenService.generateAccessToken({ sub: result.userId, id });
+    const refreshToken = await this.authTokenService.generateRefreshToken({ sub: result.userId, id });
 
     return {
       accessToken,
