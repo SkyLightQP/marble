@@ -6,11 +6,13 @@ import { NotFoundException } from '@nestjs/common';
 import { ICommandHandler, QueryHandler } from '@nestjs/cqrs';
 import { GetUserByUidQuery } from '../queries/get-user-by-uid.query';
 
+export type GetUserByUidReturn = Omit<User, 'password'>;
+
 @QueryHandler(GetUserByUidQuery)
 export class GetUserByUidHandler implements ICommandHandler<GetUserByUidQuery> {
   constructor(readonly prisma: DatabaseService) {}
 
-  async execute({ args: { uid } }: GetUserByUidQuery): Promise<Omit<User, 'password'>> {
+  async execute({ args: { uid } }: GetUserByUidQuery): Promise<GetUserByUidReturn> {
     const user = await this.prisma.user.findUnique({
       where: {
         userId: uid

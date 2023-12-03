@@ -8,6 +8,11 @@ import { hashSync } from 'bcrypt';
 import { SignupUserCommand } from '../commands/signup-user.command';
 import { AuthTokenService } from '../services/auth-token.service';
 
+export interface SignupUserReturn {
+  readonly accessToken: string;
+  readonly refreshToken: string;
+}
+
 @CommandHandler(SignupUserCommand)
 export class SignupUserHandler implements ICommandHandler<SignupUserCommand> {
   constructor(
@@ -16,7 +21,7 @@ export class SignupUserHandler implements ICommandHandler<SignupUserCommand> {
     private readonly prisma: DatabaseService
   ) {}
 
-  async execute({ args: { id, password, nickname } }: SignupUserCommand) {
+  async execute({ args: { id, password, nickname } }: SignupUserCommand): Promise<SignupUserReturn> {
     const salt = Number(this.config.get('BCRYPT_SALT'));
 
     const prevUser = await this.prisma.user.findUnique({

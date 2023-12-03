@@ -6,6 +6,11 @@ import { compareSync } from 'bcrypt';
 import { SigninUserCommand } from '../commands/signin-user.command';
 import { AuthTokenService } from '../services/auth-token.service';
 
+export interface SigninUserReturn {
+  readonly accessToken: string;
+  readonly refreshToken: string;
+}
+
 @CommandHandler(SigninUserCommand)
 export class SigninUserHandler implements ICommandHandler<SigninUserCommand> {
   constructor(
@@ -13,7 +18,7 @@ export class SigninUserHandler implements ICommandHandler<SigninUserCommand> {
     private readonly authTokenService: AuthTokenService
   ) {}
 
-  async execute({ args: { id, password } }: SigninUserCommand) {
+  async execute({ args: { id, password } }: SigninUserCommand): Promise<SigninUserReturn> {
     const user = await this.prisma.user.findUnique({
       where: {
         id
