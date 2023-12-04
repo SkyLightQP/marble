@@ -1,10 +1,11 @@
 import { GetUserByUidQuery } from '@app/user/queries/get-user-by-uid.query';
 import { JwtGuard } from '@infrastructure/guards/jwt.guard';
-import { Body, Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import type { Request, Response } from 'express';
 import { RefreshAccessTokenCommand } from '../commands/refresh-access-token.command';
 import { SigninUserCommand } from '../commands/signin-user.command';
+import { SignoutUserCommand } from '../commands/signout-user.command';
 import { SignupUserCommand } from '../commands/signup-user.command';
 import { SignupUserReturn } from '../handlers/signup-user.handler';
 import { SigninUserDto } from './dto/signin-user.dto';
@@ -51,5 +52,14 @@ export class AuthController {
     const userId = request.user.sub;
     const query = new GetUserByUidQuery({ uid: userId });
     return this.queryBus.execute(query);
+  }
+
+  @Delete('/signout')
+  @UseGuards(JwtGuard)
+  async signout(@Req() request: Request, @Res({ passthrough: true }) response: Response) {
+    const command = new SignoutUserCommand({ refreshToken: request.cookies.refreshToken });
+    await this.commandBus.execute(command);
+    response.clearCookie('refreshToken');
+    return true;
   }
 }
