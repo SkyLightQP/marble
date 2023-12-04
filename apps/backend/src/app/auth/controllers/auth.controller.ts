@@ -1,5 +1,7 @@
-import { Body, Controller, Post, Req, Res } from '@nestjs/common';
-import { CommandBus } from '@nestjs/cqrs';
+import { GetUserByUidQuery } from '@app/user/queries/get-user-by-uid.query';
+import { JwtGuard } from '@infrastructure/guards/jwt.guard';
+import { Body, Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import type { Request, Response } from 'express';
 import { RefreshAccessTokenCommand } from '../commands/refresh-access-token.command';
 import { SigninUserCommand } from '../commands/signin-user.command';
@@ -10,7 +12,10 @@ import { SignupUserDto } from './dto/signup-user.dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly commandBus: CommandBus) {}
+  constructor(
+    private readonly commandBus: CommandBus,
+    private readonly queryBus: QueryBus
+  ) {}
 
   @Post('/signup')
   async signup(@Body() body: SignupUserDto, @Res({ passthrough: true }) response: Response) {
@@ -38,5 +43,13 @@ export class AuthController {
   async refresh(@Req() request: Request) {
     const command = new RefreshAccessTokenCommand({ refreshToken: request.cookies.refreshToken });
     return this.commandBus.execute(command);
+  }
+
+  @Get('/me')
+  @UseGuards(JwtGuard)
+  async me(@Req() request: Request) {
+    const userId = request.user.sub;
+    const query = new GetUserByUidQuery({ uid: userId });
+    return this.queryBus.execute(query);
   }
 }
