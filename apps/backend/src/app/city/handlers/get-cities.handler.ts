@@ -9,7 +9,10 @@ export class GetCitiesHandler implements IQueryHandler<GetCitiesQuery> {
   async execute({ args }: GetCitiesQuery) {
     return this.prisma.city.findMany({
       skip: args?.offset || undefined,
-      take: args?.limit || undefined
+      take: args?.limit || undefined,
+      include: {
+        cityPrices: true
+      }
     });
   }
 }
