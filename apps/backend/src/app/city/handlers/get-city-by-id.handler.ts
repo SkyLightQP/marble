@@ -1,4 +1,6 @@
 import { DatabaseService } from '@infrastructure/database/database.service';
+import { ErrorCode } from '@infrastructure/error/error-code';
+import { NotFoundException } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { GetCityByIdQuery } from '../queries/get-city-by-id.query';
 
@@ -7,7 +9,7 @@ export class GetCityByIdHandler implements IQueryHandler<GetCityByIdQuery> {
   constructor(private readonly prisma: DatabaseService) {}
 
   async execute({ args: { id } }: GetCityByIdQuery) {
-    return this.prisma.city.findUnique({
+    const city = await this.prisma.city.findUnique({
       where: {
         id
       },
@@ -15,5 +17,9 @@ export class GetCityByIdHandler implements IQueryHandler<GetCityByIdQuery> {
         cityPrices: true
       }
     });
+
+    if (city === null) throw new NotFoundException(ErrorCode.CITY_NOT_FOUND);
+
+    return city;
   }
 }
