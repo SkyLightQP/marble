@@ -1,10 +1,11 @@
 import React from 'react';
 import { GameBoard } from '../components/GameBoard';
+import { RootLayout } from '../layouts/RootLayout';
 
 export const MainPage: React.FC = () => {
   return (
-    <div className="w-screen h-screen bg-gray-50">
+    <RootLayout className="w-screen h-screen">
       <GameBoard />
-    </div>
+    </RootLayout>
   );
 };
