@@ -15,6 +15,12 @@ export class CreateCityHandler implements ICommandHandler<CreateCityCommand> {
         cityPrices: {
           create: price
         }
+      },
+      select: {
+        id: true,
+        name: true,
+        icon: true,
+        cityPrices: true
       }
     });
 
