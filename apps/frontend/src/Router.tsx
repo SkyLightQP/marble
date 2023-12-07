@@ -4,7 +4,7 @@ import { MainPage } from './pages/MainPage';
 
 export const Router: React.FC = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.REACT_APP_BASEPATH ?? '/'}>
       <Routes>
         <Route path="/" element={<MainPage />} />
       </Routes>
