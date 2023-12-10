@@ -17,13 +17,13 @@
     "react-scripts": "5.0.1"
   },
   "devDependencies": {
+    "@marble/tsconfig": "*",
     "@types/node": "^16.18.59",
     "@types/react": "^18.2.33",
     "@types/react-dom": "^18.2.14",
     "eslint-config-custom": "*",
     "tailwindcss": "^3.3.5",
-    "typescript": "^4.9.5",
-    "@marble/tsconfig": "*"
+    "typescript": "^4.9.5"
   },
   "browserslist": {
     "production": [
