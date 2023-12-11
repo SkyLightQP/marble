@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
+import { Label } from '../components/Label';
 import { RootLayout } from '../layouts/RootLayout';
 
 export const LoginPage: React.FC = () => {
@@ -13,13 +14,13 @@ export const LoginPage: React.FC = () => {
         </div>
 
         <div className="mb-3">
-          <p className="text-left text-sm text-gray-400 ml-1">아이디</p>
-          <Input type="text" placeholder="아이디" />
+          <Label htmlFor="loginPage-id">아이디</Label>
+          <Input id="loginPage-id" type="text" placeholder="아이디" />
         </div>
 
         <div className="mb-5">
-          <p className="text-left text-sm text-gray-400 ml-1">비밀번호</p>
-          <Input type="password" placeholder="비밀번호" autoComplete="off" />
+          <Label htmlFor="loginPage-password">비밀번호</Label>
+          <Input id="loginPage-password" type="password" placeholder="비밀번호" autoComplete="off" />
         </div>
 
         <div>
