@@ -1,4 +1,5 @@
 import { GetUserByUidQuery } from '@app/user/queries/get-user-by-uid.query';
+import { AuthTokenPayload } from '@infrastructure/common/types/auth.type';
 import { JwtGuard } from '@infrastructure/guards/jwt.guard';
 import { Body, Controller, Delete, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
@@ -48,7 +49,7 @@ export class AuthController {
 
   @Get('/me')
   @UseGuards(JwtGuard)
-  async me(@Req() request: Request) {
+  async me(@Req() request: Request & { user: AuthTokenPayload }) {
     const userId = request.user.sub;
     const query = new GetUserByUidQuery({ uid: userId });
     return this.queryBus.execute(query);
