@@ -2,7 +2,10 @@
 module.exports = {
   content: ['./src/**/*.{ts,tsx}'],
   theme: {
-    extend: {}
+    extend: {},
+    fontFamily: {
+      Lotteriachab: ['LOTTERIACHAB']
+    }
   },
   plugins: []
 };
