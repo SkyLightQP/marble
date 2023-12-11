@@ -3,25 +3,25 @@ import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 export class CreateCityDto {
   @IsString()
   @IsNotEmpty()
-  readonly name: string;
+  readonly name!: string;
 
   @IsString()
   @IsNotEmpty()
-  readonly icon: string;
+  readonly icon!: string;
 
   @IsNumber()
   @IsNotEmpty()
-  readonly landPrice: number;
+  readonly landPrice!: number;
 
   @IsNumber()
   @IsNotEmpty()
-  readonly housePrice: number;
+  readonly housePrice!: number;
 
   @IsNumber()
   @IsNotEmpty()
-  readonly buildingPrice: number;
+  readonly buildingPrice!: number;
 
   @IsNumber()
   @IsNotEmpty()
-  readonly hotelPrice: number;
+  readonly hotelPrice!: number;
 }
