@@ -6,7 +6,8 @@
     "dev": "turbo dev",
     "build": "turbo build",
     "db:push": "turbo db:push",
-    "prepare": "turbo prepare"
+    "prepare": "turbo prepare",
+    "predev": "turbo predev"
   },
   "private": true,
   "devDependencies": {
