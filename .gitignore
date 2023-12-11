@@ -30,3 +30,5 @@ yarn-error.log*
 .turbo
 
 logs
+
+apps/backend/src/api

@@ -5,15 +5,18 @@
       "outputs": ["build/**", "dist/**"],
       "env": ["REACT_APP_BASEPATH"]
     },
-    "prepare": {
-      "cache": false
-    },
     "dev": {
       "cache": false,
       "persistent": true,
       "env": ["REACT_APP_BASEPATH"]
     },
     "db:push": {
+      "cache": false
+    },
+    "prepare": {
+      "cache": false
+    },
+    "predev": {
       "cache": false
     }
   }

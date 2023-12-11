@@ -6,6 +6,16 @@
     "paths": {
       "@*": ["./*"]
     },
-    "typeRoots": ["./node_modules/@types", "./@types"]
-  }
+    "plugins": [
+      {
+        "transform": "@nestia/core/lib/transform",
+        "validate": "assert",
+        "stringify": "assert"
+      },
+      {
+        "transform": "typia/lib/transform"
+      }
+    ]
+  },
+  "exclude": ["node_modules", "dist"]
 }
