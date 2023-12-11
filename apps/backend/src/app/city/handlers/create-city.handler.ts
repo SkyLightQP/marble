@@ -1,13 +1,16 @@
 import { DatabaseService } from '@infrastructure/database/database.service';
+import { City, CityPrice } from '@marble/database';
 import { Logger } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateCityCommand } from '../commands/create-city.command';
+
+export type CreateCityReturn = City & { cityPrices: Array<CityPrice> };
 
 @CommandHandler(CreateCityCommand)
 export class CreateCityHandler implements ICommandHandler<CreateCityCommand> {
   constructor(private readonly prisma: DatabaseService) {}
 
-  async execute({ args: { name, icon, price } }: CreateCityCommand) {
+  async execute({ args: { name, icon, price } }: CreateCityCommand): Promise<CreateCityReturn> {
     const city = await this.prisma.city.create({
       data: {
         name,
@@ -20,6 +23,8 @@ export class CreateCityHandler implements ICommandHandler<CreateCityCommand> {
         id: true,
         name: true,
         icon: true,
+        createdAt: true,
+        updatedAt: true,
         cityPrices: true
       }
     });

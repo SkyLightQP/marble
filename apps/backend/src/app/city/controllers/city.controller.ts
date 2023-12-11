@@ -1,6 +1,9 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateCityCommand } from '../commands/create-city.command';
+import { CreateCityReturn } from '../handlers/create-city.handler';
+import { GetCitiesReturn } from '../handlers/get-cities.handler';
+import { GetCityByIdReturn } from '../handlers/get-city-by-id.handler';
 import { GetCitiesQuery } from '../queries/get-cities.query';
 import { GetCityByIdQuery } from '../queries/get-city-by-id.query';
 import { CreateCityDto } from './dto/create-city.dto';
@@ -13,7 +16,7 @@ export class CityController {
   ) {}
 
   @Post()
-  async createCity(@Body() body: CreateCityDto) {
+  async createCity(@Body() body: CreateCityDto): Promise<CreateCityReturn> {
     const command = new CreateCityCommand({
       name: body.name,
       icon: body.icon,
@@ -28,12 +31,12 @@ export class CityController {
   }
 
   @Get('/:id')
-  async getCityById(@Param('id') id: number) {
+  async getCityById(@Param('id') id: number): Promise<GetCityByIdReturn> {
     return this.queryBus.execute(new GetCityByIdQuery({ id }));
   }
 
   @Get()
-  async getCities() {
+  async getCities(): Promise<GetCitiesReturn> {
     return this.queryBus.execute(new GetCitiesQuery({}));
   }
 }
