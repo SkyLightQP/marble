@@ -13,7 +13,7 @@ export const LoginPage: React.FC = () => {
         </div>
 
         <div className="mb-3">
-          <p className="twext-left text-sm text-gray-400 ml-1">아이디</p>
+          <p className="text-left text-sm text-gray-400 ml-1">아이디</p>
           <Input type="text" placeholder="아이디" />
         </div>
 
