@@ -1,15 +1,7 @@
 import clsx from 'clsx';
 import React, { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 
-interface ButtonProps {
-  readonly className?: string;
-}
-
-export const Button: React.FC<PropsWithChildren<ButtonHTMLAttributes<ButtonProps>>> = ({
-  className,
-  children,
-  ...props
-}) => {
+export const Button: React.FC<PropsWithChildren<ButtonHTMLAttributes<never>>> = ({ className, children, ...props }) => {
   return (
     <button
       type="button"
