@@ -16,16 +16,9 @@
     "prepare": {
       "cache": false
     },
-    "@marble/backend#predev": {
-      "cache": false
-    },
-    "@marble/api#predev": {
-      "cache": false,
-      "dependsOn": ["@marble/backend#predev"]
-    },
     "predev": {
       "cache": false,
-      "dependsOn": ["prepare", "@marble/api#predev"]
+      "dependsOn": ["prepare"]
     }
   }
 }

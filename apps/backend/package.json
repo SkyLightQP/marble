@@ -10,8 +10,7 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "prepare": "ts-patch install && typia patch",
-    "predev": "nestia sdk"
+    "prepare": "ts-patch install && typia patch"
   },
   "dependencies": {
     "@marble/database": "*",
@@ -32,7 +31,7 @@
     "nest-winston": "^1.9.4",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
-    "typia": "^5.3.4",
+    "typia": "^5.3.5",
     "winston": "^3.11.0",
     "winston-daily-rotate-file": "^4.7.1"
   },
