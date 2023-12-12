@@ -32,3 +32,4 @@ yarn-error.log*
 logs
 
 apps/backend/src/api
+lib
