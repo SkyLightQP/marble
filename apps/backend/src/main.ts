@@ -12,12 +12,13 @@ async function bootstrap() {
     logger: winstonLoggerConfig
   });
   const config = app.get<ConfigService>(ConfigService);
-  const corsOrigins = JSON.stringify(config.get<string>('CORS_ORIGINS', '[]'));
+  const corsDevOrigin = config.get<string>('CORS_DEVELOPMENT_ORIGIN', '');
+  const corsProdOrigin = config.get<string>('CORS_PRODUCTION_ORIGIN', '');
 
   app.use(helmet());
   app.enableCors({
     credentials: true,
-    origin: corsOrigins,
+    origin: [corsDevOrigin, corsProdOrigin],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD']
   });
   app.useGlobalInterceptors(new ResponseInterceptor());
