@@ -3,12 +3,12 @@
   "pipeline": {
     "build": {
       "outputs": ["build/**", "dist/**"],
-      "env": ["REACT_APP_BASEPATH"]
+      "env": ["REACT_APP_BASEPATH", "REACT_APP_API_HOST"]
     },
     "dev": {
       "cache": false,
       "persistent": true,
-      "env": ["REACT_APP_BASEPATH"]
+      "env": ["REACT_APP_BASEPATH", "REACT_APP_API_HOST"]
     },
     "db:push": {
       "cache": false
