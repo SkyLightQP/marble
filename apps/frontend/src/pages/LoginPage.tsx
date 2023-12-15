@@ -2,6 +2,7 @@ import api from '@marble/api';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { Label } from '../components/Label';
@@ -17,12 +18,13 @@ interface LoginForm {
 
 export const LoginPage: React.FC = () => {
   const { register, handleSubmit } = useForm<LoginForm>();
+  const navigate = useNavigate();
 
   const onLoginButtonClick: SubmitHandler<LoginForm> = async (data) => {
     try {
       const result = await api.functional.auth.signin({ host: API_HOST }, { id: data.id, password: data.password });
       localStorage.setItem('accessToken', result.accessToken);
-      toast('로그인 성공!');
+      navigate('/');
     } catch (e) {
       const error = getCustomError(e);
       toast.error(getErrorMessage(error.message));
