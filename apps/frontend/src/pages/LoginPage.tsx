@@ -27,7 +27,7 @@ export const LoginPage: React.FC = () => {
       navigate('/');
     } catch (e) {
       const error = getCustomError(e);
-      toast.error(getErrorMessage(error.message));
+      toast.error(getErrorMessage(error.code));
     }
   };
 
