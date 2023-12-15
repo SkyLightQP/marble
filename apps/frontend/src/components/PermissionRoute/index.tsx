@@ -10,8 +10,8 @@ export const PermissionRoute: React.FC<PermissionRouteProps> = ({ success: Succe
   const user = useUser();
 
   if (user === undefined) {
-    return Success;
+    return Failure;
   }
 
-  return Failure;
+  return Success;
 };
