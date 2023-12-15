@@ -6,6 +6,7 @@ import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { Label } from '../components/Label';
 import { API_HOST } from '../constants/api';
+import { getErrorMessage } from '../constants/error-message';
 import { RootLayout } from '../layouts/RootLayout';
 import { getCustomError } from '../utils/error-util';
 
@@ -24,7 +25,7 @@ export const LoginPage: React.FC = () => {
       toast('로그인 성공!');
     } catch (e) {
       const error = getCustomError(e);
-      toast.error(error.message);
+      toast.error(getErrorMessage(error.message));
     }
   };
 
