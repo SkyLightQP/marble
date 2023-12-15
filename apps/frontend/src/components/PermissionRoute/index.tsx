@@ -6,7 +6,7 @@ interface PermissionRouteProps {
   failure: React.ReactNode;
 }
 
-export const PermissionRoute: React.FC<PermissionRouteProps> = ({ success: Success, failure: Failure }) => {
+export const PermissionRoute = ({ success: Success, failure: Failure }: PermissionRouteProps) => {
   const user = useUser();
 
   if (user === undefined) {
