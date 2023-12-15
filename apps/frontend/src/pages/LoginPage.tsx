@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
+import { InputError } from '../components/InputError';
 import { Label } from '../components/Label';
 import { API_HOST } from '../constants/api';
 import { getErrorMessage } from '../constants/error-message';
@@ -17,7 +18,11 @@ interface LoginForm {
 }
 
 export const LoginPage: React.FC = () => {
-  const { register, handleSubmit } = useForm<LoginForm>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<LoginForm>();
   const navigate = useNavigate();
 
   const onLoginButtonClick: SubmitHandler<LoginForm> = async (data) => {
@@ -42,6 +47,9 @@ export const LoginPage: React.FC = () => {
         <div className="mb-3">
           <Label htmlFor="loginPage-id">아이디</Label>
           <Input id="loginPage-id" type="text" placeholder="아이디" {...register('id', { required: true })} />
+          <InputError formError={errors.id} type="required">
+            아이디 칸이 비어있습니다.
+          </InputError>
         </div>
 
         <div className="mb-5">
@@ -51,8 +59,12 @@ export const LoginPage: React.FC = () => {
             type="password"
             placeholder="비밀번호"
             autoComplete="off"
+            onKeyDown={(e) => e.key === 'Enter' && handleSubmit(onLoginButtonClick)()}
             {...register('password', { required: true })}
           />
+          <InputError formError={errors.id} type="required">
+            비밀번호 칸이 비어있습니다.
+          </InputError>
         </div>
 
         <div>
