@@ -3,7 +3,6 @@ import { Module } from '@nestjs/common';
 import { GetUserByUidHandler } from './handlers/get-user-by-uid.handler';
 import { GetUsersHandler } from './handlers/get-users.handler';
 
-
 const commands = [];
 const queries = [GetUserByUidHandler, GetUsersHandler];
 
