@@ -31,6 +31,7 @@
     "dayjs": "^1.11.10",
     "helmet": "^7.1.0",
     "nest-winston": "^1.9.4",
+    "redis": "^4.6.12",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "typia": "^5.3.5",
