@@ -1,6 +1,7 @@
 import { AppController } from '@app.controller';
 import { AuthModule } from '@app/auth/auth.module';
 import { CityModule } from '@app/city/city.module';
+import { RoomModule } from '@app/room/room.module';
 import { UserModule } from '@app/user/user.module';
 import { DatabaseModule } from '@infrastructure/database/database.module';
 import { Module } from '@nestjs/common';
@@ -14,7 +15,8 @@ import { CqrsModule } from '@nestjs/cqrs';
     DatabaseModule,
     UserModule,
     AuthModule,
-    CityModule
+    CityModule,
+    RoomModule
   ],
   controllers: [AppController],
   providers: []
