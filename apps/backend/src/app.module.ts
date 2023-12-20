@@ -4,6 +4,7 @@ import { CityModule } from '@app/city/city.module';
 import { RoomModule } from '@app/room/room.module';
 import { UserModule } from '@app/user/user.module';
 import { DatabaseModule } from '@infrastructure/database/database.module';
+import { RedisModule } from '@infrastructure/redis/redis.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { CqrsModule } from '@nestjs/cqrs';
@@ -13,6 +14,7 @@ import { CqrsModule } from '@nestjs/cqrs';
     ConfigModule.forRoot({ isGlobal: true }),
     CqrsModule.forRoot(),
     DatabaseModule,
+    RedisModule,
     UserModule,
     AuthModule,
     CityModule,
