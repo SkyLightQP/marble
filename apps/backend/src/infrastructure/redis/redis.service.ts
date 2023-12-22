@@ -16,6 +16,7 @@ export const REDIS_PROVIDER = [
       });
       await client.connect();
       return client;
-    }
+    },
+    inject: [ConfigService]
   }
 ];
