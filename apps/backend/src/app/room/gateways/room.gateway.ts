@@ -2,7 +2,7 @@ import { Logger } from '@nestjs/common';
 import { MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
 import type { Server } from 'socket.io';
 
-@WebSocketGateway()
+@WebSocketGateway({ cors: true })
 export class RoomGateway {
   @WebSocketServer()
   private server!: Server;
