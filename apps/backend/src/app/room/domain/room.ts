@@ -1,5 +1,13 @@
 import { nanoid } from 'nanoid';
 import { RedisClientType } from 'redis';
+import { assertParse, assertStringify } from 'typia/lib/json';
+
+interface RoomFields {
+  readonly id: string;
+  name: string;
+  owner: string;
+  members: string[];
+}
 
 export class Room {
   private constructor(
@@ -21,7 +29,7 @@ export class Room {
     this.members = this.members.filter((member) => member !== uid);
   }
 
-  public toJSON(): Record<string, unknown> {
+  public toJSON(): RoomFields {
     return {
       id: this.id,
       name: this.name,
@@ -31,11 +39,11 @@ export class Room {
   }
 
   public toString(): string {
-    return JSON.stringify(this.toJSON());
+    return assertStringify<RoomFields>(this.toJSON());
   }
 
   public static fromJSON(json: string): Room {
-    const { id, name, owner, members } = JSON.parse(json);
+    const { id, name, owner, members } = assertParse<RoomFields>(json);
     return new Room(id, name, owner, members);
   }
 
