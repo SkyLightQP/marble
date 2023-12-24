@@ -1,3 +1,5 @@
+import { ErrorCode } from '@infrastructure/error/error-code';
+import { WsException } from '@nestjs/websockets';
 import { nanoid } from 'nanoid';
 import { RedisClientType } from 'redis';
 import { assertParse, assertStringify } from 'typia/lib/json';
@@ -22,10 +24,16 @@ export class Room {
   }
 
   public addPlayers(uid: string): void {
+    if (this.players.includes(uid)) {
+      throw new WsException(ErrorCode.PLAYER_ALREADY_EXISTS);
+    }
     this.players.push(uid);
   }
 
   public removePlayers(uid: string): void {
+    if (!this.players.includes(uid)) {
+      throw new WsException(ErrorCode.PLAYER_NOT_FOUND);
+    }
     this.players = this.players.filter((member) => member !== uid);
   }
 
