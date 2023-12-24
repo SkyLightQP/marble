@@ -21,7 +21,7 @@ export class JoinRoomHandler implements ICommandHandler<JoinRoomCommand> {
     }
 
     const room = Room.fromJSON(roomInRedis);
-    room.addMember(userId);
+    room.addPlayers(userId);
     await room.syncRedis(this.redis);
 
     return room;

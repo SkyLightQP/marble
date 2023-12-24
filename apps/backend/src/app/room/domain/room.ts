@@ -6,7 +6,7 @@ interface RoomFields {
   readonly id: string;
   name: string;
   owner: string;
-  members: string[];
+  players: string[];
 }
 
 export class Room {
@@ -14,19 +14,19 @@ export class Room {
     public readonly id: string,
     public name: string,
     public owner: string,
-    public members: string[]
+    public players: string[]
   ) {}
 
   public static create(name: string, owner: string): Room {
     return new Room(nanoid(), name, owner, [owner]);
   }
 
-  public addMember(uid: string): void {
-    this.members.push(uid);
+  public addPlayers(uid: string): void {
+    this.players.push(uid);
   }
 
-  public removeMember(uid: string): void {
-    this.members = this.members.filter((member) => member !== uid);
+  public removePlayers(uid: string): void {
+    this.players = this.players.filter((member) => member !== uid);
   }
 
   public toJSON(): RoomFields {
@@ -34,7 +34,7 @@ export class Room {
       id: this.id,
       name: this.name,
       owner: this.owner,
-      members: this.members
+      players: this.players
     };
   }
 
@@ -43,8 +43,8 @@ export class Room {
   }
 
   public static fromJSON(json: string): Room {
-    const { id, name, owner, members } = assertParse<RoomFields>(json);
-    return new Room(id, name, owner, members);
+    const { id, name, owner, players } = assertParse<RoomFields>(json);
+    return new Room(id, name, owner, players);
   }
 
   public async syncRedis(redis: RedisClientType): Promise<void> {
