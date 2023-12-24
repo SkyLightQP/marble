@@ -3,8 +3,9 @@ import { RedisModule } from '@infrastructure/redis/redis.module';
 import { Module } from '@nestjs/common';
 import { RoomGateway } from './gateways/room.gateway';
 import { JoinRoomHandler } from './handlers/join-room.handler';
+import { QuitRoomHandler } from './handlers/quit-room.handler';
 
-const commands = [JoinRoomHandler];
+const commands = [JoinRoomHandler, QuitRoomHandler];
 const queries = [];
 const gateways = [RoomGateway];
 
