@@ -11,7 +11,7 @@ export class JoinRoomHandler implements ICommandHandler<JoinRoomCommand> {
   constructor(@Inject('REDIS_CLIENT') private readonly redis: RedisClientType) {}
 
   async execute({ args: { roomId, userId } }: JoinRoomCommand): Promise<JoinRoomReturn> {
-    const roomInRedis = await this.redis.get(roomId);
+    const roomInRedis = await this.redis.get(`room:${roomId}`);
 
     if (roomInRedis === null) {
       const roomName = `${Math.floor(Math.random() * 1000)}번 방`;
