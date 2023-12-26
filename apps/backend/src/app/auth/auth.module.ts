@@ -1,5 +1,5 @@
 import { DatabaseModule } from '@infrastructure/database/database.module';
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './controllers/auth.controller';
 import { RefreshAccessTokenHandler } from './handlers/refresh-access-token.handler';
@@ -12,9 +12,11 @@ const commands = [SignupUserHandler, SigninUserHandler, RefreshAccessTokenHandle
 const queries = [];
 const services = [AuthTokenService];
 
+@Global()
 @Module({
   imports: [DatabaseModule, JwtModule.register({})],
   providers: [...commands, ...queries, ...services],
-  controllers: [AuthController]
+  controllers: [AuthController],
+  exports: [AuthTokenService]
 })
 export class AuthModule {}
