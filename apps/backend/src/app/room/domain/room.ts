@@ -37,6 +37,10 @@ export class Room extends SyncableToRedis {
     if (!this.players.includes(uid)) {
       throw new WsException(ErrorCode.PLAYER_NOT_FOUND);
     }
+    if (this.owner === uid) {
+      const newOwner = this.players[0];
+      this.owner = newOwner;
+    }
     this.players = this.players.filter((member) => member !== uid);
   }
 
