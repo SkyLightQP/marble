@@ -1,5 +1,5 @@
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { MessageBody, SubscribeMessage, WebSocketGateway } from '@nestjs/websockets';
+import { MessageBody, SubscribeMessage, WebSocketGateway, WsResponse } from '@nestjs/websockets';
 import { JoinRoomCommand } from '../commands/join-room.command';
 import { QuitRoomCommand } from '../commands/quit-room.command';
 import { GetRoomsReturn } from '../handlers/get-rooms.handler';
@@ -17,17 +17,20 @@ export class RoomGateway {
   ) {}
 
   @SubscribeMessage('join-room')
-  async handleJoinRoom(@MessageBody() message: JoinRoomDto): Promise<JoinRoomReturn> {
-    return this.commandBus.execute(new JoinRoomCommand(message));
+  async handleJoinRoom(@MessageBody() message: JoinRoomDto): Promise<WsResponse<JoinRoomReturn>> {
+    const data = await this.commandBus.execute(new JoinRoomCommand(message));
+    return { event: 'join-room', data };
   }
 
   @SubscribeMessage('quit-room')
-  async handleQuitRoom(@MessageBody() message: QuitRoomDto): Promise<QuitRoomReturn> {
-    return this.commandBus.execute(new QuitRoomCommand(message));
+  async handleQuitRoom(@MessageBody() message: QuitRoomDto): Promise<WsResponse<QuitRoomReturn>> {
+    const data = await this.commandBus.execute(new QuitRoomCommand(message));
+    return { event: 'quit-room', data };
   }
 
   @SubscribeMessage('get-rooms')
-  async handleGetRooms(): Promise<GetRoomsReturn> {
-    return this.queryBus.execute(new GetRoomsQuery());
+  async handleGetRooms(): Promise<WsResponse<GetRoomsReturn>> {
+    const data = await this.queryBus.execute(new GetRoomsQuery());
+    return { event: 'get-rooms', data };
   }
 }
