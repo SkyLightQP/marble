@@ -4,8 +4,8 @@ import { RankPlayerItem } from '../RankPlayerItem';
 
 export const RankView: React.FC = () => {
   return (
-    <div className="w-60 h-60 bg-white border-2 border-gray-300 rounded-xl p-4 ">
-      <h1 className="font-bold text-xl mb-2 flex items-center">
+    <div className="h-60 w-60 rounded-xl border-2 border-gray-300 bg-white p-4 ">
+      <h1 className="mb-2 flex items-center text-xl font-bold">
         <RiTrophyLine className="mr-1" />
         순위
       </h1>

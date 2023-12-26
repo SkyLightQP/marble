@@ -5,15 +5,15 @@ import { RoomPreviewCard } from '../components/Room/RoomPreviewCard';
 
 export const RoomListPage: React.FC = () => {
   return (
-    <RootLayout className="w-screen h-screen p-20">
-      <div className="flex items-center mb-5">
-        <h1 className="font-bold text-4xl mr-4">
-          방 목록<span className="font-normal text-gray-400 text-sm ml-1">(6)</span>
+    <RootLayout className="h-screen w-screen p-20">
+      <div className="mb-5 flex items-center">
+        <h1 className="mr-4 text-4xl font-bold">
+          방 목록<span className="ml-1 text-sm font-normal text-gray-400">(6)</span>
         </h1>
-        <Button className="w-8 h-8 text-2xl flex justify-center items-center mr-2">
+        <Button className="mr-2 flex h-8 w-8 items-center justify-center text-2xl">
           <RiAddFill />
         </Button>
-        <Button className="w-8 h-8 text-xl flex justify-center items-center">
+        <Button className="flex h-8 w-8 items-center justify-center text-xl">
           <RiRefreshLine />
         </Button>
       </div>

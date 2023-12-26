@@ -15,5 +15,5 @@ const COLOR_MAP: Record<DotColor, string> = {
 
 export const PlayerDot: React.FC<PlayerDotProps> = ({ color }) => {
   const colorStyle = COLOR_MAP[color];
-  return <div className={clsx('w-3.5 h-3.5 rounded-full', colorStyle)} />;
+  return <div className={clsx('h-3.5 w-3.5 rounded-full', colorStyle)} />;
 };

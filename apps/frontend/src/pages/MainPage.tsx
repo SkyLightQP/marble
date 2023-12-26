@@ -4,7 +4,7 @@ import { RootLayout } from '../layouts/RootLayout';
 
 export const MainPage: React.FC = () => {
   return (
-    <RootLayout className="w-screen h-screen">
+    <RootLayout className="h-screen w-screen">
       <GameBoard />
     </RootLayout>
   );

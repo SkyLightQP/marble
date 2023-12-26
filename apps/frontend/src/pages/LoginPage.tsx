@@ -38,10 +38,10 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <RootLayout className="w-screen h-screen">
-      <div className="h-full flex flex-col justify-center items-center text-center">
+    <RootLayout className="h-screen w-screen">
+      <div className="flex h-full flex-col items-center justify-center text-center">
         <div className="mb-5">
-          <h1 className="text-4xl font-Lotteriachab">Marble</h1>
+          <h1 className="font-Lotteriachab text-4xl">Marble</h1>
           <h2 className="text-lg">로그인하기</h2>
         </div>
 
@@ -69,7 +69,7 @@ export const LoginPage: React.FC = () => {
         </div>
 
         <div>
-          <Button className="w-56 h-10" onClick={handleSubmit(onLoginButtonClick)}>
+          <Button className="h-10 w-56" onClick={handleSubmit(onLoginButtonClick)}>
             로그인
           </Button>
         </div>

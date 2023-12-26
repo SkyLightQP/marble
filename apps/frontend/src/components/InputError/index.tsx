@@ -9,11 +9,11 @@ interface InputErrorProps {
 
 export const InputError: React.FC<PropsWithChildren<InputErrorProps>> = ({ formError, type, message, children }) => {
   if (type === 'validate' && formError?.message === message) {
-    return <p className="text-xs text-red-400 mt-1 ml-[6px] text-left">{children}</p>;
+    return <p className="ml-[6px] mt-1 text-left text-xs text-red-400">{children}</p>;
   }
   if (type === 'validate' && formError?.message !== message) {
     return <></>;
   }
 
-  return <>{formError?.type === type && <p className="text-xs text-red-400 mt-1 ml-[6px] text-left">{children}</p>}</>;
+  return <>{formError?.type === type && <p className="ml-[6px] mt-1 text-left text-xs text-red-400">{children}</p>}</>;
 };

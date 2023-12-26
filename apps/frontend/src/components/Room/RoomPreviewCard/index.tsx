@@ -16,17 +16,17 @@ export const RoomPreviewCard: React.FC<RoomPreviewCardProps> = ({ isPlaying, nam
   return (
     <div
       className={clsx(
-        'w-80 h-24 bg-white border-2 rounded-md border-gray-300 border-t-4 p-3 flex flex-col justify-center',
+        'flex h-24 w-80 flex-col justify-center rounded-md border-2 border-t-4 border-gray-300 bg-white p-3',
         playStyle
       )}
     >
       <div className="flex justify-between">
-        <h3 className="font-bold text-xl truncate">{name}</h3>
+        <h3 className="truncate text-xl font-bold">{name}</h3>
         <p className="text-gray-400">
           ({currentPlayer}/{maxPlayer})
         </p>
       </div>
-      <p className="font-bold text-2xl">{isPlaying ? '게임 중' : '게임 대기'}</p>
+      <p className="text-2xl font-bold">{isPlaying ? '게임 중' : '게임 대기'}</p>
     </div>
   );
 };

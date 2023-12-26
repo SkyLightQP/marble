@@ -14,7 +14,7 @@ export const CityCard: React.FC<CityCardProps> = ({ icon: Icon, nameKo, price, c
   return (
     <div
       className={clsx(
-        'w-32 h-32 border-2 border-black text-center flex flex-col items-center justify-around p-2',
+        'flex h-32 w-32 flex-col items-center justify-around border-2 border-black p-2 text-center',
         className
       )}
     >
@@ -25,7 +25,7 @@ export const CityCard: React.FC<CityCardProps> = ({ icon: Icon, nameKo, price, c
         <p className="text-[1.1rem] font-bold">{nameKo}</p>
         <p className="text-sm text-gray-400">{price.toLocaleString('ko-KR')} 원</p>
       </div>
-      <div className="flex space-x-1 mt-1">
+      <div className="mt-1 flex space-x-1">
         <PlayerDot color="blue" />
         <PlayerDot color="yellow" />
         <PlayerDot color="green" />

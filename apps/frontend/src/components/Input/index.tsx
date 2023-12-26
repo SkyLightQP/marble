@@ -5,7 +5,7 @@ export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<never>>(({
   return (
     <input
       ref={ref}
-      className={clsx('w-56 h-10 bg-white border-2 border-gray-300 rounded-md p-3', className)}
+      className={clsx('h-10 w-56 rounded-md border-2 border-gray-300 bg-white p-3', className)}
       {...props}
     />
   );

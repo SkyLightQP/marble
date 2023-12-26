@@ -5,7 +5,7 @@ export const Button: React.FC<PropsWithChildren<ButtonHTMLAttributes<never>>> = 
   return (
     <button
       type="button"
-      className={clsx('block bg-blue-600 text-white rounded-md hover:bg-blue-700', className)}
+      className={clsx('block rounded-md bg-blue-600 text-white hover:bg-blue-700', className)}
       {...props}
     >
       {children}

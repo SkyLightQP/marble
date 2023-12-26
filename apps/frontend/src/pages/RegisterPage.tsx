@@ -42,11 +42,11 @@ export const RegisterPage: React.FC = () => {
   };
 
   return (
-    <RootLayout className="w-screen h-screen">
-      <div className="h-full flex flex-col justify-center items-center text-center">
+    <RootLayout className="h-screen w-screen">
+      <div className="flex h-full flex-col items-center justify-center text-center">
         <div className="mb-5">
           <div className="mb-3">
-            <h1 className="text-4xl font-Lotteriachab">Marble</h1>
+            <h1 className="font-Lotteriachab text-4xl">Marble</h1>
             <h3 className="text-sm">🎲 웹기반 도시건설 보드게임 🎲</h3>
           </div>
           <h2 className="text-lg">회원가입하기</h2>
@@ -112,7 +112,7 @@ export const RegisterPage: React.FC = () => {
         </div>
 
         <div>
-          <Button className="w-56 h-10" onClick={handleSubmit(onRegisterButtonClick)}>
+          <Button className="h-10 w-56" onClick={handleSubmit(onRegisterButtonClick)}>
             회원가입
           </Button>
         </div>
