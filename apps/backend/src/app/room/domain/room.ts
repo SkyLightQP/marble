@@ -3,6 +3,7 @@ import { WsException } from '@nestjs/websockets';
 import { nanoid } from 'nanoid';
 import { RedisClientType } from 'redis';
 import { assertParse, assertStringify } from 'typia/lib/json';
+import { SyncableToRedis } from '@infrastructure/common/abstract/syncable-to-redis';
 
 interface RoomFields {
   readonly id: string;
@@ -11,13 +12,15 @@ interface RoomFields {
   players: string[];
 }
 
-export class Room {
+export class Room extends SyncableToRedis {
   private constructor(
     public readonly id: string,
     public name: string,
     public owner: string,
     public players: string[]
-  ) {}
+  ) {
+    super();
+  }
 
   public static create(name: string, owner: string): Room {
     return new Room(nanoid(), name, owner, [owner]);
@@ -56,6 +59,6 @@ export class Room {
   }
 
   public async syncRedis(redis: RedisClientType): Promise<void> {
-    await redis.hSet('room', this.id, this.toString());
+    await super.syncRedis(redis, 'room', this.id);
   }
 }
