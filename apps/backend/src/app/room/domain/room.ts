@@ -56,6 +56,6 @@ export class Room {
   }
 
   public async syncRedis(redis: RedisClientType): Promise<void> {
-    await redis.set(`room:${this.id}`, this.toString());
+    await redis.hSet('room', this.id, this.toString());
   }
 }

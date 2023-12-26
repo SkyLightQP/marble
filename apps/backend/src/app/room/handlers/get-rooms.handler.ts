@@ -11,8 +11,7 @@ export class GetRoomsHandler implements IQueryHandler<GetRoomsQuery> {
   constructor(@Inject('REDIS_CLIENT') private readonly redis: RedisClientType) {}
 
   async execute(): Promise<GetRoomsReturn> {
-    const roomIds = await this.redis.keys('room:*');
-    const rooms = await Promise.all(roomIds.map((roomId) => this.redis.get(roomId)));
-    return rooms.filter((room) => room !== null).map((room) => Room.fromJSON(room as string));
+    const roomsInRedis = await this.redis.hGetAll('room');
+    return Object.values(roomsInRedis).map((roomInRedis) => Room.fromJSON(roomInRedis));
   }
 }

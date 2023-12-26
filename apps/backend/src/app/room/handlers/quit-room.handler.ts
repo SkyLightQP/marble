@@ -13,9 +13,9 @@ export class QuitRoomHandler implements ICommandHandler<QuitRoomCommand> {
   constructor(@Inject('REDIS_CLIENT') private readonly redis: RedisClientType) {}
 
   async execute({ args: { roomId, userId } }: QuitRoomCommand): Promise<QuitRoomReturn> {
-    const roomInRedis = await this.redis.get(`room:${roomId}`);
+    const roomInRedis = await this.redis.hGet('room', roomId);
 
-    if (roomInRedis === null) {
+    if (roomInRedis === null || roomInRedis === undefined) {
       throw new WsException(ErrorCode.ROOM_NOT_FOUND);
     }
 
@@ -24,7 +24,7 @@ export class QuitRoomHandler implements ICommandHandler<QuitRoomCommand> {
     await room.syncRedis(this.redis);
 
     if (room.players.length <= 0) {
-      await this.redis.del(roomId);
+      await this.redis.hDel('room', roomId);
       return null;
     }
 
