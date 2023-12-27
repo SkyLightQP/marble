@@ -10,6 +10,8 @@ interface RoomFields {
   name: string;
   owner: string;
   players: string[];
+  maxPlayer: number;
+  isPlaying: boolean;
 }
 
 export class Room extends SyncableToRedis {
@@ -17,13 +19,15 @@ export class Room extends SyncableToRedis {
     public readonly id: string,
     public name: string,
     public owner: string,
-    public players: string[]
+    public players: string[],
+    public maxPlayer: number,
+    public isPlaying: boolean
   ) {
     super();
   }
 
-  public static create(name: string, owner: string): Room {
-    return new Room(nanoid(), name, owner, [owner]);
+  public static create(name: string, owner: string, maxPlayer: number): Room {
+    return new Room(nanoid(), name, owner, [owner], maxPlayer, false);
   }
 
   public addPlayers(uid: string): void {
@@ -49,7 +53,9 @@ export class Room extends SyncableToRedis {
       id: this.id,
       name: this.name,
       owner: this.owner,
-      players: this.players
+      players: this.players,
+      maxPlayer: this.maxPlayer,
+      isPlaying: this.isPlaying
     };
   }
 
@@ -58,8 +64,8 @@ export class Room extends SyncableToRedis {
   }
 
   public static fromJSON(json: string): Room {
-    const { id, name, owner, players } = assertParse<RoomFields>(json);
-    return new Room(id, name, owner, players);
+    const { id, name, owner, players, maxPlayer, isPlaying } = assertParse<RoomFields>(json);
+    return new Room(id, name, owner, players, maxPlayer, isPlaying);
   }
 
   public async syncRedis(redis: RedisClientType): Promise<void> {
