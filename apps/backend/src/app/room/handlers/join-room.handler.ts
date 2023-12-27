@@ -1,6 +1,8 @@
 import { Inject, Logger } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { RedisClientType } from 'redis';
+import { WsException } from '@nestjs/websockets';
+import { ErrorCode } from '@infrastructure/error/error-code';
 import { JoinRoomCommand } from '../commands/join-room.command';
 import { Room } from '../domain/room';
 
@@ -14,11 +16,7 @@ export class JoinRoomHandler implements ICommandHandler<JoinRoomCommand> {
     const roomInRedis = await this.redis.hGet('room', roomId);
 
     if (roomInRedis === null || roomInRedis === undefined) {
-      const roomName = `${Math.floor(Math.random() * 1000)}번 방`;
-      const room = Room.create(roomName, userId, 4);
-      await room.syncRedis(this.redis);
-      Logger.log({ message: '새로운 방을 만들었습니다.', room });
-      return room;
+      throw new WsException(ErrorCode.ROOM_NOT_FOUND);
     }
 
     const room = Room.fromJSON(roomInRedis);
