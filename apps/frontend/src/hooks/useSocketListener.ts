@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSocket } from './useSocket';
 
-export const useSocketListener = (event: string, callback: (data: unknown) => void) => {
+export const useSocketListener = <T = unknown>(event: string, callback: (data: T) => void) => {
   const socket = useSocket();
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
