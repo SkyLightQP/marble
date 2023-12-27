@@ -1,7 +1,12 @@
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { MessageBody, SubscribeMessage, WebSocketGateway, WsResponse } from '@nestjs/websockets';
+import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WsResponse } from '@nestjs/websockets';
 import { UseGuards } from '@nestjs/common';
 import { SocketJwtGuard } from '@infrastructure/guards/socket-jwt.guard';
+import { CreateRoomReturn } from '@app/room/handlers/create-room.handler';
+import { CreateRoomCommand } from '@app/room/commands/create-room.command';
+import type { Socket } from 'socket.io';
+import { CreateRoomDto } from '@app/room/gateways/dto/create-room.dto';
+import { AuthTokenPayload } from '@infrastructure/common/types/auth.type';
 import { JoinRoomCommand } from '../commands/join-room.command';
 import { QuitRoomCommand } from '../commands/quit-room.command';
 import { GetRoomsReturn } from '../handlers/get-rooms.handler';
@@ -37,5 +42,21 @@ export class RoomGateway {
   async handleGetRooms(): Promise<WsResponse<GetRoomsReturn>> {
     const data = await this.queryBus.execute(new GetRoomsQuery());
     return { event: 'get-rooms', data };
+  }
+
+  @UseGuards(SocketJwtGuard)
+  @SubscribeMessage('create-room')
+  async handleCreateRoom(
+    @MessageBody() message: CreateRoomDto,
+    @ConnectedSocket() socket: Socket & { user: AuthTokenPayload }
+  ): Promise<WsResponse<CreateRoomReturn>> {
+    const data = await this.commandBus.execute(
+      new CreateRoomCommand({
+        name: message.name,
+        maxPlayer: message.maxPlayer,
+        userId: socket.user.sub
+      })
+    );
+    return { event: 'create-room', data };
   }
 }
