@@ -25,15 +25,31 @@ export class RoomGateway {
 
   @UseGuards(SocketJwtGuard)
   @SubscribeMessage('join-room')
-  async handleJoinRoom(@MessageBody() message: JoinRoomDto): Promise<WsResponse<JoinRoomReturn>> {
-    const data = await this.commandBus.execute(new JoinRoomCommand(message));
+  async handleJoinRoom(
+    @MessageBody() message: JoinRoomDto,
+    @ConnectedSocket() socket: Socket & { user: AuthTokenPayload }
+  ): Promise<WsResponse<JoinRoomReturn>> {
+    const data = await this.commandBus.execute(
+      new JoinRoomCommand({
+        roomId: message.roomId,
+        userId: socket.user.sub
+      })
+    );
     return { event: 'join-room', data };
   }
 
   @UseGuards(SocketJwtGuard)
   @SubscribeMessage('quit-room')
-  async handleQuitRoom(@MessageBody() message: QuitRoomDto): Promise<WsResponse<QuitRoomReturn>> {
-    const data = await this.commandBus.execute(new QuitRoomCommand(message));
+  async handleQuitRoom(
+    @MessageBody() message: QuitRoomDto,
+    @ConnectedSocket() socket: Socket & { user: AuthTokenPayload }
+  ): Promise<WsResponse<QuitRoomReturn>> {
+    const data = await this.commandBus.execute(
+      new QuitRoomCommand({
+        roomId: message.roomId,
+        userId: socket.user.sub
+      })
+    );
     return { event: 'quit-room', data };
   }
 
