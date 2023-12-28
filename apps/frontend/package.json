@@ -16,6 +16,7 @@
     "react-hook-form": "^7.49.2",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",
+    "react-modal": "^3.16.1",
     "react-router-dom": "^6.18.0",
     "react-scripts": "5.0.1",
     "socket.io-client": "^4.7.2"
@@ -25,6 +26,7 @@
     "@types/node": "^16.18.59",
     "@types/react": "^18.2.33",
     "@types/react-dom": "^18.2.14",
+    "@types/react-modal": "^3.16.3",
     "eslint-config-custom": "*",
     "tailwindcss": "^3.3.5",
     "typescript": "^4.9.5"
