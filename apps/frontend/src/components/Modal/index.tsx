@@ -1,6 +1,6 @@
 import React, { Dispatch, PropsWithChildren, SetStateAction } from 'react';
 import { RiCloseFill } from 'react-icons/ri';
-import ReactModal from 'react-modal';
+import ReactModal, { Styles } from 'react-modal';
 
 interface ModalProps {
   readonly isOpen: boolean;
@@ -10,7 +10,7 @@ interface ModalProps {
   readonly height: string;
 }
 
-const style = {
+const style: Styles = {
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0.3)'
   },
@@ -18,7 +18,10 @@ const style = {
     backgroundColor: '#fff',
     borderRadius: '8px',
     padding: '1.3rem 1.5rem',
-    margin: 'auto'
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)'
   }
 };
 
@@ -34,7 +37,7 @@ export const Modal: React.FC<PropsWithChildren<ModalProps>> = ({
     <ReactModal
       isOpen={isOpen}
       onRequestClose={() => setIsOpen(false)}
-      style={{ ...style, content: { width, height } }}
+      style={{ overlay: { ...style.overlay }, content: { ...style.content, width, height } }}
     >
       <div>
         <div className="flex items-center justify-between">
