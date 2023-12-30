@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
+import { TypedBody, TypedParam, TypedRoute } from '@nestia/core';
 import { CreateCityCommand } from '../commands/create-city.command';
 import { CreateCityReturn } from '../handlers/create-city.handler';
 import { GetCitiesReturn } from '../handlers/get-cities.handler';
@@ -15,8 +16,8 @@ export class CityController {
     private readonly queryBus: QueryBus
   ) {}
 
-  @Post()
-  async createCity(@Body() body: CreateCityDto): Promise<CreateCityReturn> {
+  @TypedRoute.Post()
+  async createCity(@TypedBody() body: CreateCityDto): Promise<CreateCityReturn> {
     const command = new CreateCityCommand({
       name: body.name,
       icon: body.icon,
@@ -30,12 +31,12 @@ export class CityController {
     return this.commandBus.execute(command);
   }
 
-  @Get('/:id')
-  async getCityById(@Param('id') id: number): Promise<GetCityByIdReturn> {
+  @TypedRoute.Get('/:id')
+  async getCityById(@TypedParam('id') id: number): Promise<GetCityByIdReturn> {
     return this.queryBus.execute(new GetCityByIdQuery({ id }));
   }
 
-  @Get()
+  @TypedRoute.Get()
   async getCities(): Promise<GetCitiesReturn> {
     return this.queryBus.execute(new GetCitiesQuery({}));
   }
