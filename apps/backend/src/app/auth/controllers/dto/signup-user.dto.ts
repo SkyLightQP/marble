@@ -1,15 +1,9 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { tags } from 'typia';
 
 export class SignupUserDto {
-  @IsString()
-  @IsNotEmpty()
   id!: string;
 
-  @IsString()
-  @IsNotEmpty()
-  password!: string;
+  password!: string & tags.Minimum<6>;
 
-  @IsString()
-  @IsNotEmpty()
   nickname!: string;
 }
