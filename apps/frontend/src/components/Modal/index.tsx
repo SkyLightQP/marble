@@ -8,6 +8,7 @@ interface ModalProps {
   readonly title: string;
   readonly width: string;
   readonly height: string;
+  readonly onClose?: () => void;
 }
 
 const style: Styles = {
@@ -31,18 +32,30 @@ export const Modal: React.FC<PropsWithChildren<ModalProps>> = ({
   title,
   width,
   height,
+  onClose,
   children
 }) => {
   return (
     <ReactModal
       isOpen={isOpen}
-      onRequestClose={() => setIsOpen(false)}
+      onRequestClose={() => {
+        setIsOpen(false);
+        if (onClose !== undefined) onClose();
+      }}
       style={{ overlay: { ...style.overlay }, content: { ...style.content, width, height } }}
     >
       <div>
         <div className="flex items-center justify-between">
           <h3 className="text-2xl font-bold">{title}</h3>
-          <button type="button" className="text-2xl" aria-label="닫기" onClick={() => setIsOpen(false)}>
+          <button
+            type="button"
+            className="text-2xl"
+            aria-label="닫기"
+            onClick={() => {
+              setIsOpen(false);
+              if (onClose !== undefined) onClose();
+            }}
+          >
             <RiCloseFill />
           </button>
         </div>
