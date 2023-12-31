@@ -3,14 +3,14 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../components/Button';
-import { Input } from '../components/Input';
-import { InputError } from '../components/InputError';
-import { Label } from '../components/Label';
-import { apiConnection } from '../api';
-import { getErrorMessage } from '../error/ErrorMessage';
-import { RootLayout } from '../layouts/RootLayout';
-import { getCustomError } from '../error/ErrorUtil';
+import { Button } from '@/components/Button';
+import { Input } from '@/components/Input';
+import { InputError } from '@/components/InputError';
+import { Label } from '@/components/Label';
+import { apiConnection } from '@/api';
+import { getErrorMessage } from '@/error/ErrorMessage';
+import { RootLayout } from '@/layouts/RootLayout';
+import { getCustomError } from '@/error/ErrorUtil';
 
 interface LoginForm {
   readonly id: string;

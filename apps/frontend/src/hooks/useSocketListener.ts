@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSocket } from './useSocket';
+import { useSocket } from '@/hooks/useSocket';
 
 export const useSocketListener = <T = unknown>(event: string, callback: (data: T) => void) => {
   const socket = useSocket();

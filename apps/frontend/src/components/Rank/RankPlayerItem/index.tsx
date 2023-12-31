@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
-import { PlayerDot } from '../../PlayerDot';
-import { DotColor } from '../../../types/DotColor';
+import { PlayerDot } from '@/components/PlayerDot';
+import { DotColor } from '@/types/DotColor';
 
 interface RankPlayerItemProps {
   readonly rank: number;

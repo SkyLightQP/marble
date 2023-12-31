@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { DotColor } from '../../types/DotColor';
+import { DotColor } from '@/types/DotColor';
 
 interface PlayerDotProps {
   readonly color: DotColor;

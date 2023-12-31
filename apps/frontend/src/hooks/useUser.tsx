@@ -1,6 +1,6 @@
 import api from '@marble/api';
 import React, { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
-import { apiConnection } from '../api';
+import { apiConnection } from '@/api';
 
 type UUID = string;
 

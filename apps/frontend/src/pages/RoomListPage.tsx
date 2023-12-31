@@ -1,13 +1,13 @@
 import { RiAddFill, RiRefreshLine } from 'react-icons/ri';
 import React, { useCallback, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { RootLayout } from '../layouts/RootLayout';
-import { Button } from '../components/Button';
-import { RoomPreviewCard } from '../components/Room/RoomPreviewCard';
-import { useSocket } from '../hooks/useSocket';
-import { useSocketListener } from '../hooks/useSocketListener';
-import { GetRoomsResponse } from '../api/SocketResponse';
-import { CreateRoomForm, CreateRoomModal } from '../components/Room/CreateRoomModal';
+import { Button } from '@/components/Button';
+import { RoomPreviewCard } from '@/components/Room/RoomPreviewCard';
+import { useSocket } from '@/hooks/useSocket';
+import { useSocketListener } from '@/hooks/useSocketListener';
+import { GetRoomsResponse } from '@/api/SocketResponse';
+import { CreateRoomForm, CreateRoomModal } from '@/components/Room/CreateRoomModal';
+import { RootLayout } from '@/layouts/RootLayout';
 
 export const RoomListPage: React.FC = () => {
   const [rooms, setRooms] = React.useState<GetRoomsResponse>([]);

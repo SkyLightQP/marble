@@ -1,9 +1,9 @@
 import React from 'react';
 import { SubmitHandler, UseFormHandleSubmit, UseFormRegister, UseFormReset } from 'react-hook-form';
-import { Modal } from '../../Modal';
-import { Label } from '../../Label';
-import { Input } from '../../Input';
-import { Button } from '../../Button';
+import { Modal } from '@/components/Modal';
+import { Label } from '@/components/Label';
+import { Input } from '@/components/Input';
+import { Button } from '@/components/Button';
 
 export interface CreateRoomForm {
   readonly name: string;

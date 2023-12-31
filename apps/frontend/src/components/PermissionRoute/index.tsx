@@ -1,4 +1,4 @@
-import { useUser } from '../../hooks/useUser';
+import { useUser } from '@/hooks/useUser';
 
 interface PermissionRouteProps {
   success: JSX.Element;

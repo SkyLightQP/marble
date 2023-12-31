@@ -1,6 +1,6 @@
 import React from 'react';
 import { RiTrophyLine } from 'react-icons/ri';
-import { RankPlayerItem } from '../RankPlayerItem';
+import { RankPlayerItem } from '@/components/Rank/RankPlayerItem';
 
 export const RankView: React.FC = () => {
   return (

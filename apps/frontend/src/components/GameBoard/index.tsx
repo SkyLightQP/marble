@@ -1,11 +1,11 @@
 import React from 'react';
 import { RiBuildingLine, RiFlagLine, RiQuestionLine } from 'react-icons/ri';
 import { SpecialCard } from '../SpecialCard';
-import { DUMMY_CITY_LIST, DUMMY_CITY_LIST_FOR_VERTICAL } from '../../constants/dummy-data';
-import { CityCard } from '../CityCard';
-import { RankView } from '../Rank/RankView';
-import { BalanceInformationView } from '../BalanceInformation/BalanceInformationView';
-import { DiceView } from '../Dice/DiceView';
+import { DUMMY_CITY_LIST, DUMMY_CITY_LIST_FOR_VERTICAL } from '@/constants/dummy-data';
+import { CityCard } from '@/components/CityCard';
+import { RankView } from '@/components/Rank/RankView';
+import { BalanceInformationView } from '@/components/BalanceInformation/BalanceInformationView';
+import { DiceView } from '@/components/Dice/DiceView';
 
 export const GameBoard: React.FC = () => {
   return (

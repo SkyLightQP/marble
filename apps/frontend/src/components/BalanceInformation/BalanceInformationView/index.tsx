@@ -7,7 +7,7 @@ import {
   RiMoneyDollarCircleLine,
   RiSquareLine
 } from 'react-icons/ri';
-import { BalanceInformationItem } from '../BalanceInformationItem';
+import { BalanceInformationItem } from '@/components/BalanceInformation/BalanceInformationItem';
 
 export const BalanceInformationView: React.FC = () => {
   return (

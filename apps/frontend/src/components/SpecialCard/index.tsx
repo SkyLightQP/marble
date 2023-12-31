@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { PlayerDot } from '../PlayerDot';
+import { PlayerDot } from '@/components/PlayerDot';
 
 export const SpecialCard: React.FC<PropsWithChildren> = ({ children }) => {
   return (

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 import { IconType } from 'react-icons';
-import { PlayerDot } from '../PlayerDot';
+import { PlayerDot } from '@/components/PlayerDot';
 
 interface CityCardProps {
   readonly icon: IconType;
