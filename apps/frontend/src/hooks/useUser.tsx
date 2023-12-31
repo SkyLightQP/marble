@@ -1,6 +1,6 @@
 import api from '@marble/api';
-import React, { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
-import { API_HOST } from '../constants/api';
+import React, { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
+import { API_HOST } from '../api';
 
 type UUID = string;
 

@@ -6,7 +6,7 @@ import { Button } from '../components/Button';
 import { RoomPreviewCard } from '../components/Room/RoomPreviewCard';
 import { useSocket } from '../hooks/useSocket';
 import { useSocketListener } from '../hooks/useSocketListener';
-import { GetRoomsResponse } from '../types/SocketResponse';
+import { GetRoomsResponse } from '../api/SocketResponse';
 import { CreateRoomForm, CreateRoomModal } from '../components/Room/CreateRoomModal';
 
 export const RoomListPage: React.FC = () => {

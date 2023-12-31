@@ -7,8 +7,8 @@ import { MainPage } from './pages/MainPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { RoomListPage } from './pages/RoomListPage';
 import { useSocketListener } from './hooks/useSocketListener';
-import { getErrorMessage } from './constants/error-message';
-import { WebSocketError } from './types/SocketResponse';
+import { getErrorMessage } from './error/ErrorMessage';
+import { WebSocketError } from './api/SocketResponse';
 
 export const Router: React.FC = () => {
   useSocketListener<WebSocketError>('exception', (error) => {

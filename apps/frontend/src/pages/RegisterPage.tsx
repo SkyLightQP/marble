@@ -6,10 +6,10 @@ import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { InputError } from '../components/InputError';
 import { Label } from '../components/Label';
-import { API_HOST } from '../constants/api';
-import { getErrorMessage } from '../constants/error-message';
+import { API_HOST } from '../api';
+import { getErrorMessage } from '../error/ErrorMessage';
 import { RootLayout } from '../layouts/RootLayout';
-import { getCustomError } from '../utils/error-util';
+import { getCustomError } from '../error/ErrorUtil';
 
 interface RegisterForm {
   readonly id: string;

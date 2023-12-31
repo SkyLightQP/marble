@@ -1,6 +1,6 @@
 import React, { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
-import { API_HOST } from '../constants/api';
+import { API_HOST } from '../api';
 
 const context = createContext<Socket | undefined>(undefined);
 const accessToken = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : '';
