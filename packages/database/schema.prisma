@@ -11,7 +11,7 @@ model User {
   userId    String   @id @default(dbgenerated("gen_random_uuid()")) @map("user_id") @db.Uuid
   id        String   @unique
   password  String
-  nickname  String?  @unique
+  nickname  String   @unique
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
