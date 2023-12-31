@@ -9,6 +9,9 @@ import { CreateRoomDto } from '@app/room/gateways/dto/create-room.dto';
 import { AuthTokenPayload } from '@infrastructure/common/types/auth.type';
 import { WebsocketExceptionFilter } from '@infrastructure/filters/websocket-exception.filter';
 import { ErrorCode } from '@infrastructure/error/error-code';
+import { GetRoomReturn } from '@app/room/handlers/get-room.handler';
+import { GetRoomQuery } from '@app/room/queries/get-room.query';
+import { GetRoomDto } from '@app/room/gateways/dto/get-room.dto';
 import { JoinRoomCommand } from '../commands/join-room.command';
 import { QuitRoomCommand } from '../commands/quit-room.command';
 import { GetRoomsReturn } from '../handlers/get-rooms.handler';
@@ -88,5 +91,12 @@ export class RoomGateway {
       })
     );
     return { event: 'create-room', data };
+  }
+
+  @UseGuards(SocketJwtGuard)
+  @SubscribeMessage('get-room')
+  async handleGetRoom(@MessageBody() message: GetRoomDto): Promise<WsResponse<GetRoomReturn>> {
+    const data = await this.queryBus.execute(new GetRoomQuery({ roomId: message.roomId }));
+    return { event: 'get-room', data };
   }
 }
