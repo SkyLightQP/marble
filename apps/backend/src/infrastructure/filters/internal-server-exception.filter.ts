@@ -3,7 +3,7 @@ import { Response } from 'express';
 import { ErrorCode } from '@infrastructure/error/error-code';
 
 @Catch()
-export class InternalErrorFilter implements ExceptionFilter {
+export class InternalServerExceptionFilter implements ExceptionFilter {
   catch(exception: Error, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const res = ctx.getResponse<Response>();
