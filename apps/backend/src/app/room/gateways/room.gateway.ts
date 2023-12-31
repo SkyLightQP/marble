@@ -1,12 +1,14 @@
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WsResponse } from '@nestjs/websockets';
-import { UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { BadRequestException, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { SocketJwtGuard } from '@infrastructure/guards/socket-jwt.guard';
 import { CreateRoomReturn } from '@app/room/handlers/create-room.handler';
 import { CreateRoomCommand } from '@app/room/commands/create-room.command';
 import type { Socket } from 'socket.io';
 import { CreateRoomDto } from '@app/room/gateways/dto/create-room.dto';
 import { AuthTokenPayload } from '@infrastructure/common/types/auth.type';
+import { WebsocketExceptionFilter } from '@infrastructure/filters/websocket-exception.filter';
+import { ErrorCode } from '@infrastructure/error/error-code';
 import { JoinRoomCommand } from '../commands/join-room.command';
 import { QuitRoomCommand } from '../commands/quit-room.command';
 import { GetRoomsReturn } from '../handlers/get-rooms.handler';
@@ -23,9 +25,11 @@ import { QuitRoomDto } from './dto/quit-room.dto';
     transform: true,
     transformOptions: {
       enableImplicitConversion: true
-    }
+    },
+    exceptionFactory: () => new BadRequestException(ErrorCode.BAD_REQUEST)
   })
 )
+@UseFilters(new WebsocketExceptionFilter())
 export class RoomGateway {
   constructor(
     private readonly commandBus: CommandBus,
