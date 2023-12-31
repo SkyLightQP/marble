@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test"
   },
   "dependencies": {
     "@marble/api": "*",
@@ -27,7 +26,9 @@
     "@types/react": "^18.2.33",
     "@types/react-dom": "^18.2.14",
     "@types/react-modal": "^3.16.3",
+    "customize-cra": "^1.0.0",
     "eslint-config-custom": "*",
+    "react-app-rewired": "^2.2.1",
     "tailwindcss": "^3.3.5",
     "typescript": "^4.9.5"
   },
