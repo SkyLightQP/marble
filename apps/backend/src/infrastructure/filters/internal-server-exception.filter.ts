@@ -11,6 +11,8 @@ export class InternalServerExceptionFilter implements ExceptionFilter {
     if (!(exception instanceof HttpException)) {
       res.status(500).json(ErrorCode.INTERNAL_SERVER_ERROR);
       throw exception;
+    } else {
+      res.status(exception.getStatus()).json(exception.getResponse());
     }
   }
 }
