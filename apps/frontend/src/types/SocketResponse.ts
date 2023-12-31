@@ -8,3 +8,8 @@ export interface GetRoomResponse {
 }
 
 export type GetRoomsResponse = GetRoomResponse[];
+
+export interface WebSocketError {
+  readonly code: string;
+  readonly message: string;
+}

@@ -1,12 +1,20 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { PermissionRoute } from './components/PermissionRoute';
 import { LoginPage } from './pages/LoginPage';
 import { MainPage } from './pages/MainPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { RoomListPage } from './pages/RoomListPage';
+import { useSocketListener } from './hooks/useSocketListener';
+import { getErrorMessage } from './constants/error-message';
+import { WebSocketError } from './types/SocketResponse';
 
 export const Router: React.FC = () => {
+  useSocketListener<WebSocketError>('exception', (error) => {
+    toast.error(getErrorMessage(error.code));
+  });
+
   return (
     <BrowserRouter basename={process.env.REACT_APP_BASEPATH ?? '/'}>
       <Routes>
