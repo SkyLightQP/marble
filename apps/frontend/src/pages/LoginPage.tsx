@@ -7,7 +7,7 @@ import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { InputError } from '../components/InputError';
 import { Label } from '../components/Label';
-import { API_HOST } from '../api';
+import { apiConnection } from '../api';
 import { getErrorMessage } from '../error/ErrorMessage';
 import { RootLayout } from '../layouts/RootLayout';
 import { getCustomError } from '../error/ErrorUtil';
@@ -27,7 +27,7 @@ export const LoginPage: React.FC = () => {
 
   const onLoginButtonClick: SubmitHandler<LoginForm> = async (data) => {
     try {
-      const result = await api.functional.auth.signin({ host: API_HOST }, { id: data.id, password: data.password });
+      const result = await api.functional.auth.signin(apiConnection, { id: data.id, password: data.password });
       localStorage.setItem('accessToken', result.accessToken);
       navigate('/');
       window.location.reload();

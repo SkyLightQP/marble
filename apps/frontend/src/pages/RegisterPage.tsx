@@ -6,7 +6,7 @@ import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { InputError } from '../components/InputError';
 import { Label } from '../components/Label';
-import { API_HOST } from '../api';
+import { apiConnection } from '../api';
 import { getErrorMessage } from '../error/ErrorMessage';
 import { RootLayout } from '../layouts/RootLayout';
 import { getCustomError } from '../error/ErrorUtil';
@@ -29,10 +29,11 @@ export const RegisterPage: React.FC = () => {
 
   const onRegisterButtonClick: SubmitHandler<RegisterForm> = async (data) => {
     try {
-      await api.functional.auth.signup(
-        { host: API_HOST },
-        { id: data.id, password: data.password, nickname: data.nickname }
-      );
+      await api.functional.auth.signup(apiConnection, {
+        id: data.id,
+        password: data.password,
+        nickname: data.nickname
+      });
       toast.success('회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.');
       navigate('/login');
     } catch (e) {
