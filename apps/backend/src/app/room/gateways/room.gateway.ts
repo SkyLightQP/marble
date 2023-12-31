@@ -1,6 +1,6 @@
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WsResponse } from '@nestjs/websockets';
-import { UseGuards } from '@nestjs/common';
+import { UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { SocketJwtGuard } from '@infrastructure/guards/socket-jwt.guard';
 import { CreateRoomReturn } from '@app/room/handlers/create-room.handler';
 import { CreateRoomCommand } from '@app/room/commands/create-room.command';
@@ -17,6 +17,15 @@ import { JoinRoomDto } from './dto/join-room.dto';
 import { QuitRoomDto } from './dto/quit-room.dto';
 
 @WebSocketGateway({ cors: true })
+@UsePipes(
+  new ValidationPipe({
+    whitelist: true,
+    transform: true,
+    transformOptions: {
+      enableImplicitConversion: true
+    }
+  })
+)
 export class RoomGateway {
   constructor(
     private readonly commandBus: CommandBus,
@@ -61,6 +70,7 @@ export class RoomGateway {
   }
 
   @UseGuards(SocketJwtGuard)
+  @UsePipes()
   @SubscribeMessage('create-room')
   async handleCreateRoom(
     @MessageBody() message: CreateRoomDto,
