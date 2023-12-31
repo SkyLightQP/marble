@@ -31,5 +31,9 @@ export const ErrorCode: Record<Uppercase<string>, ErrorCodeType> = {
   PERMISSION_DENIED: {
     code: 'PERMISSION_DENIED',
     message: '권한이 없습니다.'
+  },
+  INTERNAL_SERVER_ERROR: {
+    code: 'INTERNAL_SERVER_ERROR',
+    message: '알 수 없는 오류입니다.'
   }
 } as const;

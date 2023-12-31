@@ -5,6 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
+import { InternalErrorFilter } from '@infrastructure/filters/internal-error-filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -31,6 +32,7 @@ async function bootstrap() {
       }
     })
   );
+  app.useGlobalFilters(new InternalErrorFilter());
   app.use(cookieParser());
 
   await app.listen(8080);
