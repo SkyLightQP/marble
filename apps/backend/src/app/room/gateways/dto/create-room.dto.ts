@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, Max, Min } from 'class-validator';
 
 export class CreateRoomDto {
   @IsNotEmpty()
@@ -7,5 +7,7 @@ export class CreateRoomDto {
 
   @IsNotEmpty()
   @IsNumber()
+  @Min(1)
+  @Max(4)
   maxPlayer!: number;
 }
