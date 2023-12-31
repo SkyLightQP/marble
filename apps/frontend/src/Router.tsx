@@ -9,6 +9,7 @@ import { RoomListPage } from '@/pages/RoomListPage';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { getErrorMessage } from '@/error/ErrorMessage';
 import { WebSocketError } from '@/api/SocketResponse';
+import { RoomPage } from '@/pages/RoomPage';
 
 export const Router: React.FC = () => {
   useSocketListener<WebSocketError>('exception', (error) => {
@@ -20,6 +21,7 @@ export const Router: React.FC = () => {
       <Routes>
         <Route path="/" element={<PermissionRoute success={<MainPage />} failure={<LoginPage />} />} />
         <Route path="/rooms" element={<PermissionRoute success={<RoomListPage />} failure={<LoginPage />} />} />
+        <Route path="/room/:roomId" element={<PermissionRoute success={<RoomPage />} failure={<LoginPage />} />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
