@@ -27,7 +27,12 @@ export const RoomListPage: React.FC = () => {
 
   useEffect(() => {
     refreshRooms();
-  }, [refreshRooms]);
+    socket?.emit('util:join-lobby');
+
+    return () => {
+      socket?.emit('util:leave-lobby');
+    };
+  }, [refreshRooms, socket]);
 
   useSocketListener<GetRoomsResponse>('get-rooms', setRooms);
 
