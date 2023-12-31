@@ -28,6 +28,10 @@ export const ErrorCode: Record<Uppercase<string>, ErrorCodeType> = {
     code: 'USER_ALREADY_EXISTS',
     message: '이미 존재하는 사용자입니다.'
   },
+  BAD_REQUEST: {
+    code: 'BAD_REQUEST',
+    message: '잘못된 요청입니다.'
+  },
   PERMISSION_DENIED: {
     code: 'PERMISSION_DENIED',
     message: '권한이 없습니다.'
