@@ -27,7 +27,7 @@ export class Room extends SyncableToRedis {
   }
 
   public static create(name: string, owner: string, maxPlayer: number): Room {
-    return new Room(nanoid(), name, owner, [owner], maxPlayer, false);
+    return new Room(nanoid(), name, owner, [], maxPlayer, false);
   }
 
   public addPlayers(uid: string): void {
@@ -41,7 +41,7 @@ export class Room extends SyncableToRedis {
     if (!this.players.includes(uid)) {
       throw new WsException(ErrorCode.PLAYER_NOT_FOUND);
     }
-    if (this.owner === uid) {
+    if (this.players.length > 1 && this.owner === uid) {
       const newOwner = this.players[0];
       this.owner = newOwner;
     }
