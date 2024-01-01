@@ -1,8 +1,6 @@
-import api from '@marble/backend/dist/src/api';
 import React, { useEffect, useState } from 'react';
 import { RiCheckFill, RiDoorOpenLine, RiGamepadFill, RiSettings2Fill } from 'react-icons/ri';
 import { useParams } from 'react-router-dom';
-import { apiConnection } from '@/api';
 import { GetRoomResponse } from '@/api/SocketResponse';
 import { Button } from '@/components/Button';
 import { useSocket } from '@/hooks/useSocket';
@@ -11,26 +9,18 @@ import { RootLayout } from '@/layouts/RootLayout';
 
 export const RoomPage: React.FC = () => {
   const [room, setRoom] = useState<GetRoomResponse>();
-  const [nicknames, setNicknames] = useState<{ nickname: string; isOwner: boolean }[]>([]);
   const socket = useSocket();
   const { roomId } = useParams();
 
   useEffect(() => {
-    if (socket === undefined) return;
-    socket.emit('get-room', { roomId });
+    socket?.emit('join-room', { roomId });
+
+    return () => {
+      socket?.emit('quit-room', { roomId });
+    };
   }, [socket, roomId]);
 
-  useSocketListener<GetRoomResponse>('get-room', (data) => {
-    setRoom(data);
-    setNicknames([]);
-
-    const temp: { nickname: string; isOwner: boolean }[] = [];
-    const getNicknames = data.players.map(async (uid) => {
-      const user = await api.functional.user.getUserByUid(apiConnection, uid);
-      temp.push({ nickname: user.nickname, isOwner: data.owner === uid });
-    });
-    Promise.all(getNicknames).then(() => setNicknames(temp));
-  });
+  useSocketListener<GetRoomResponse>('join-room', setRoom);
 
   return (
     <RootLayout className="h-screen w-screen p-20">
@@ -59,10 +49,10 @@ export const RoomPage: React.FC = () => {
       </div>
 
       <div>
-        {nicknames.map(({ nickname, isOwner }) => (
+        {room?.players.map(({ userId, nickname }) => (
           <h3 key={nickname} className="text-2xl font-bold">
             {nickname}
-            {isOwner && <span className="ml-1 font-normal text-gray-400">(방장)</span>}
+            {room.owner === userId && <span className="ml-1 font-normal text-gray-400">(방장)</span>}
           </h3>
         ))}
       </div>
