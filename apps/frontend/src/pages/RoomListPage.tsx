@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { RiAddFill, RiRefreshLine } from 'react-icons/ri';
-import { GetRoomsResponse } from '@/api/SocketResponse';
+import { useNavigate } from 'react-router-dom';
+import { CreateRoomResponse, GetRoomsResponse } from '@/api/SocketResponse';
 import { Button } from '@/components/Button';
 import { CreateRoomForm, CreateRoomModal } from '@/components/Room/CreateRoomModal';
 import { RoomPreviewCard } from '@/components/Room/RoomPreviewCard';
@@ -19,26 +20,24 @@ export const RoomListPage: React.FC = () => {
       maxPeople: 1
     }
   });
-
-  const refreshRooms = useCallback(() => {
-    if (socket === undefined) return;
-    socket.emit('get-rooms');
-  }, [socket]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    refreshRooms();
+    socket?.emit('get-rooms');
     socket?.emit('util:join-lobby');
 
     return () => {
       socket?.emit('util:leave-lobby');
     };
-  }, [refreshRooms, socket]);
+  }, [socket]);
 
   useSocketListener<GetRoomsResponse>('get-rooms', setRooms);
+  useSocketListener<CreateRoomResponse>('create-room', ({ id }) => {
+    navigate(`/room/${id}`);
+  });
 
   const onCreateRoomClick: SubmitHandler<CreateRoomForm> = async (data) => {
-    if (socket === undefined) return;
-    socket.emit('create-room', {
+    socket?.emit('create-room', {
       name: data.name,
       maxPlayer: Number(data.maxPeople)
     });
@@ -47,8 +46,6 @@ export const RoomListPage: React.FC = () => {
       maxPeople: 1
     });
     setIsOpen(false);
-
-    // TODO: Join a room.
   };
 
   return (
@@ -61,10 +58,14 @@ export const RoomListPage: React.FC = () => {
           <Button className="mr-2 flex h-8 w-8 items-center justify-center text-2xl" onClick={() => setIsOpen(true)}>
             <RiAddFill />
           </Button>
-          <Button className="flex h-8 w-8 items-center justify-center text-xl" onClick={refreshRooms}>
+          <Button
+            className="flex h-8 w-8 items-center justify-center text-xl"
+            onClick={() => socket?.emit('get-rooms')}
+          >
             <RiRefreshLine />
           </Button>
         </div>
+
         <div className="grid grid-cols-4 gap-4">
           {rooms.map((room) => (
             <RoomPreviewCard
@@ -73,10 +74,12 @@ export const RoomListPage: React.FC = () => {
               currentPlayer={room.players.length}
               maxPlayer={room.maxPlayer}
               isPlaying={room.isPlaying}
+              onClick={() => navigate(`/room/${room.id}`)}
             />
           ))}
         </div>
       </RootLayout>
+
       <CreateRoomModal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
