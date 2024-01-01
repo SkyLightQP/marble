@@ -1,14 +1,14 @@
 import { Controller, UseGuards } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { TypedBody, TypedParam, TypedRoute } from '@nestia/core';
-import { JwtGuard } from '@infrastructure/guards/jwt.guard';
-import { CreateCityCommand } from '../commands/create-city.command';
-import { CreateCityReturn } from '../handlers/create-city.handler';
-import { GetCitiesReturn } from '../handlers/get-cities.handler';
-import { GetCityByIdReturn } from '../handlers/get-city-by-id.handler';
-import { GetCitiesQuery } from '../queries/get-cities.query';
-import { GetCityByIdQuery } from '../queries/get-city-by-id.query';
-import { CreateCityDto } from './dto/create-city.dto';
+import { JwtGuard } from '@/infrastructure/guards/jwt.guard';
+import { CreateCityCommand } from '@/app/city/commands/create-city.command';
+import { CreateCityReturn } from '@/app/city/handlers/create-city.handler';
+import { GetCitiesReturn } from '@/app/city/handlers/get-cities.handler';
+import { GetCityByIdReturn } from '@/app/city/handlers/get-city-by-id.handler';
+import { GetCitiesQuery } from '@/app/city/queries/get-cities.query';
+import { GetCityByIdQuery } from '@/app/city/queries/get-city-by-id.query';
+import { CreateCityDto } from '@/app/city/controllers/dto/create-city.dto';
 
 @Controller('city')
 export class CityController {

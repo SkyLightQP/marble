@@ -1,10 +1,10 @@
-import { DatabaseService } from '@infrastructure/database/database.service';
-import { ErrorCode } from '@infrastructure/error/error-code';
 import { Logger, NotFoundException } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { compareSync } from 'bcrypt';
-import { SigninUserCommand } from '../commands/signin-user.command';
-import { AuthTokenService } from '../services/auth-token.service';
+import { ErrorCode } from '@/infrastructure/error/error-code';
+import { DatabaseService } from '@/infrastructure/database/database.service';
+import { SigninUserCommand } from '@/app/auth/commands/signin-user.command';
+import { AuthTokenService } from '@/app/auth/services/auth-token.service';
 
 export interface SigninUserReturn {
   readonly accessToken: string;

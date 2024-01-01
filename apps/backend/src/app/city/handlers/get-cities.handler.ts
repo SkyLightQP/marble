@@ -1,7 +1,7 @@
-import { DatabaseService } from '@infrastructure/database/database.service';
 import { City, CityPrice } from '@marble/database';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { GetCitiesQuery } from '../queries/get-cities.query';
+import { DatabaseService } from '@/infrastructure/database/database.service';
+import { GetCitiesQuery } from '@/app/city/queries/get-cities.query';
 
 export type GetCitiesReturn = Array<City & { cityPrices: Array<CityPrice> }>;
 

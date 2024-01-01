@@ -1,12 +1,12 @@
-import { DatabaseModule } from '@infrastructure/database/database.module';
-import { RedisModule } from '@infrastructure/redis/redis.module';
 import { Module } from '@nestjs/common';
-import { GetRoomHandler } from '@app/room/handlers/get-room.handler';
-import { CreateRoomHandler } from './handlers/create-room.handler';
-import { RoomGateway } from './gateways/room.gateway';
-import { GetRoomsHandler } from './handlers/get-rooms.handler';
-import { JoinRoomHandler } from './handlers/join-room.handler';
-import { QuitRoomHandler } from './handlers/quit-room.handler';
+import { DatabaseModule } from '@/infrastructure/database/database.module';
+import { RedisModule } from '@/infrastructure/redis/redis.module';
+import { GetRoomHandler } from '@/app/room/handlers/get-room.handler';
+import { CreateRoomHandler } from '@/app/room/handlers/create-room.handler';
+import { RoomGateway } from '@/app/room/gateways/room.gateway';
+import { GetRoomsHandler } from '@/app/room/handlers/get-rooms.handler';
+import { JoinRoomHandler } from '@/app/room/handlers/join-room.handler';
+import { QuitRoomHandler } from '@/app/room/handlers/quit-room.handler';
 
 const commands = [JoinRoomHandler, QuitRoomHandler, CreateRoomHandler];
 const queries = [GetRoomsHandler, GetRoomHandler];

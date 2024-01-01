@@ -1,12 +1,12 @@
-import { DatabaseService } from '@infrastructure/database/database.service';
-import { ErrorCode } from '@infrastructure/error/error-code';
-import { prismaExclude } from '@infrastructure/utils/database.util';
 import { ConflictException, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { hashSync } from 'bcrypt';
-import { SignupUserCommand } from '../commands/signup-user.command';
-import { AuthTokenService } from '../services/auth-token.service';
+import { prismaExclude } from '@/infrastructure/utils/database.util';
+import { ErrorCode } from '@/infrastructure/error/error-code';
+import { DatabaseService } from '@/infrastructure/database/database.service';
+import { SignupUserCommand } from '@/app/auth/commands/signup-user.command';
+import { AuthTokenService } from '@/app/auth/services/auth-token.service';
 
 export interface SignupUserReturn {
   readonly accessToken: string;

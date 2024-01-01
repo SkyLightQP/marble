@@ -1,8 +1,8 @@
 import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { RedisClientType } from 'redis';
-import { Room } from '../domain/room';
-import { GetRoomsQuery } from '../queries/get-rooms.query';
+import { Room } from '@/app/room/domain/room';
+import { GetRoomsQuery } from '@/app/room/queries/get-rooms.query';
 
 export type GetRoomsReturn = Room[];
 

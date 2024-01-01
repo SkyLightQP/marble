@@ -1,9 +1,9 @@
-import { ErrorCode } from '@infrastructure/error/error-code';
 import { ForbiddenException, Logger } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { JsonWebTokenError } from '@nestjs/jwt';
-import { RefreshAccessTokenCommand } from '../commands/refresh-access-token.command';
-import { AuthTokenService } from '../services/auth-token.service';
+import { ErrorCode } from '@/infrastructure/error/error-code';
+import { RefreshAccessTokenCommand } from '@/app/auth/commands/refresh-access-token.command';
+import { AuthTokenService } from '@/app/auth/services/auth-token.service';
 
 @CommandHandler(RefreshAccessTokenCommand)
 export class RefreshAccessTokenHandler implements ICommandHandler<RefreshAccessTokenCommand> {

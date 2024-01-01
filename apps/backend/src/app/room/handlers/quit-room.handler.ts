@@ -1,10 +1,10 @@
-import { ErrorCode } from '@infrastructure/error/error-code';
 import { Inject, Logger } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { WsException } from '@nestjs/websockets';
 import { RedisClientType } from 'redis';
-import { QuitRoomCommand } from '../commands/quit-room.command';
-import { Room } from '../domain/room';
+import { ErrorCode } from '@/infrastructure/error/error-code';
+import { QuitRoomCommand } from '@/app/room/commands/quit-room.command';
+import { Room } from '@/app/room/domain/room';
 
 export type QuitRoomReturn = Room | null;
 

@@ -1,9 +1,9 @@
-import { DatabaseService } from '@infrastructure/database/database.service';
-import { ErrorCode } from '@infrastructure/error/error-code';
 import { City, CityPrice } from '@marble/database';
 import { NotFoundException } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { GetCityByIdQuery } from '../queries/get-city-by-id.query';
+import { ErrorCode } from '@/infrastructure/error/error-code';
+import { DatabaseService } from '@/infrastructure/database/database.service';
+import { GetCityByIdQuery } from '@/app/city/queries/get-city-by-id.query';
 
 export type GetCityByIdReturn = City & { cityPrices: Array<CityPrice> };
 

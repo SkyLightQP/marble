@@ -18,10 +18,10 @@
       }
     ],
     "strictNullChecks": true,
-    "baseUrl": "../../apps/backend/src",
-    "paths": {
-      "@*": ["./*"]
-    },
+    "baseUrl": "../../apps/backend",
+	"paths": {
+	  "@/*": ["./src/*"]
+	},
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },

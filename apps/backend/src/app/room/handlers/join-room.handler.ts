@@ -2,9 +2,9 @@ import { Inject, Logger } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { RedisClientType } from 'redis';
 import { WsException } from '@nestjs/websockets';
-import { ErrorCode } from '@infrastructure/error/error-code';
-import { JoinRoomCommand } from '../commands/join-room.command';
-import { Room } from '../domain/room';
+import { ErrorCode } from '@/infrastructure/error/error-code';
+import { JoinRoomCommand } from '@/app/room/commands/join-room.command';
+import { Room } from '@/app/room/domain/room';
 
 export type JoinRoomReturn = Room;
 

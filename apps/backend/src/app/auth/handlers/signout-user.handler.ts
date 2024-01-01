@@ -1,8 +1,8 @@
-import { DatabaseService } from '@infrastructure/database/database.service';
-import { ErrorCode } from '@infrastructure/error/error-code';
 import { ForbiddenException, Logger } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { SignoutUserCommand } from '../commands/signout-user.command';
+import { DatabaseService } from '@/infrastructure/database/database.service';
+import { ErrorCode } from '@/infrastructure/error/error-code';
+import { SignoutUserCommand } from '@/app/auth/commands/signout-user.command';
 
 @CommandHandler(SignoutUserCommand)
 export class SignoutUserHandler implements ICommandHandler<SignoutUserCommand> {
