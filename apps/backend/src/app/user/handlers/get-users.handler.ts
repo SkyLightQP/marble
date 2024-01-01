@@ -1,7 +1,7 @@
 import { User } from '@marble/database';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { DatabaseService } from '@/infrastructure/database/database.service';
 import { GetUsersQuery } from '@/app/user/queries/get-users.query';
+import { DatabaseService } from '@/infrastructure/database/database.service';
 
 type GetUsersReturn = Array<User>;
 

@@ -1,13 +1,13 @@
+import api from '@marble/backend/dist/src/api';
 import React, { useEffect, useState } from 'react';
 import { RiCheckFill, RiDoorOpenLine, RiGamepadFill, RiSettings2Fill } from 'react-icons/ri';
 import { useParams } from 'react-router-dom';
-import api from '@marble/backend/dist/src/api';
-import { RootLayout } from '@/layouts/RootLayout';
-import { Button } from '@/components/Button';
+import { apiConnection } from '@/api';
 import { GetRoomResponse } from '@/api/SocketResponse';
+import { Button } from '@/components/Button';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
-import { apiConnection } from '@/api';
+import { RootLayout } from '@/layouts/RootLayout';
 
 export const RoomPage: React.FC = () => {
   const [room, setRoom] = useState<GetRoomResponse>();

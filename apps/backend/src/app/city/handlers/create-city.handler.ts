@@ -1,8 +1,8 @@
 import { City, CityPrice } from '@marble/database';
 import { Logger } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { DatabaseService } from '@/infrastructure/database/database.service';
 import { CreateCityCommand } from '@/app/city/commands/create-city.command';
+import { DatabaseService } from '@/infrastructure/database/database.service';
 
 export type CreateCityReturn = City & { cityPrices: Array<CityPrice> };
 

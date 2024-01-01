@@ -1,8 +1,8 @@
 import { CanActivate, ExecutionContext, Injectable, Logger } from '@nestjs/common';
 import { JsonWebTokenError } from '@nestjs/jwt';
 import { WsException } from '@nestjs/websockets';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 import { AuthTokenService } from '@/app/auth/services/auth-token.service';
+import { ErrorCode } from '@/infrastructure/error/error-code';
 
 @Injectable()
 export class SocketJwtGuard implements CanActivate {

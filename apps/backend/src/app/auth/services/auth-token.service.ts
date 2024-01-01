@@ -2,9 +2,9 @@ import { ForbiddenException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import dayjs from 'dayjs';
-import { ErrorCode } from '@/infrastructure/error/error-code';
-import { DatabaseService } from '@/infrastructure/database/database.service';
 import { AuthTokenPayload } from '@/infrastructure/common/types/auth.type';
+import { DatabaseService } from '@/infrastructure/database/database.service';
+import { ErrorCode } from '@/infrastructure/error/error-code';
 
 export interface RefreshAccessTokenReturn {
   readonly accessToken: string;

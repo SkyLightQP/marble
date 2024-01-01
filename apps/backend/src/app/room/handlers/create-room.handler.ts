@@ -1,8 +1,8 @@
+import { Inject, Logger } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { RedisClientType } from 'redis';
-import { Inject, Logger } from '@nestjs/common';
-import { Room } from '@/app/room/domain/room';
 import { CreateRoomCommand } from '@/app/room/commands/create-room.command';
+import { Room } from '@/app/room/domain/room';
 
 export type CreateRoomReturn = Room;
 

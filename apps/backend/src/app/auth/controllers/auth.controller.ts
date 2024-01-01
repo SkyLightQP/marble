@@ -1,20 +1,20 @@
+import { TypedBody, TypedRoute } from '@nestia/core';
 import { Controller, Req, Res, UseGuards } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import type { Request, Response } from 'express';
-import { TypedBody, TypedRoute } from '@nestia/core';
-import { GetUserByUidReturn } from '@/app/user/handlers/get-user-by-uid.handler';
-import { GetUserByUidQuery } from '@/app/user/queries/get-user-by-uid.query';
-import { AuthTokenPayload } from '@/infrastructure/common/types/auth.type';
-import { JwtGuard } from '@/infrastructure/guards/jwt.guard';
 import { RefreshAccessTokenCommand } from '@/app/auth/commands/refresh-access-token.command';
 import { SigninUserCommand } from '@/app/auth/commands/signin-user.command';
 import { SignoutUserCommand } from '@/app/auth/commands/signout-user.command';
 import { SignupUserCommand } from '@/app/auth/commands/signup-user.command';
+import { SigninUserDto } from '@/app/auth/controllers/dto/signin-user.dto';
+import { SignupUserDto } from '@/app/auth/controllers/dto/signup-user.dto';
 import { SigninUserReturn } from '@/app/auth/handlers/signin-user.handler';
 import { SignupUserReturn } from '@/app/auth/handlers/signup-user.handler';
 import { RefreshAccessTokenReturn } from '@/app/auth/services/auth-token.service';
-import { SigninUserDto } from '@/app/auth/controllers/dto/signin-user.dto';
-import { SignupUserDto } from '@/app/auth/controllers/dto/signup-user.dto';
+import { GetUserByUidReturn } from '@/app/user/handlers/get-user-by-uid.handler';
+import { GetUserByUidQuery } from '@/app/user/queries/get-user-by-uid.query';
+import { AuthTokenPayload } from '@/infrastructure/common/types/auth.type';
+import { JwtGuard } from '@/infrastructure/guards/jwt.guard';
 
 @Controller('auth')
 export class AuthController {

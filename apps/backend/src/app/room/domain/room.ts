@@ -2,8 +2,8 @@ import { WsException } from '@nestjs/websockets';
 import { nanoid } from 'nanoid';
 import { RedisClientType } from 'redis';
 import { assertParse, assertStringify } from 'typia/lib/json';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 import { SyncableToRedis } from '@/infrastructure/common/abstract/syncable-to-redis';
+import { ErrorCode } from '@/infrastructure/error/error-code';
 
 interface RoomFields {
   readonly id: string;

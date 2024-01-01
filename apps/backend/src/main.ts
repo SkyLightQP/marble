@@ -3,9 +3,9 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
-import { winstonLoggerConfig } from '@/infrastructure/utils/logger.util';
 import { AppModule } from '@/app.module';
 import { InternalServerExceptionFilter } from '@/infrastructure/filters/internal-server-exception.filter';
+import { winstonLoggerConfig } from '@/infrastructure/utils/logger.util';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {

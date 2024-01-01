@@ -1,9 +1,9 @@
+import { TypedParam, TypedRoute } from '@nestia/core';
 import { Controller, UseGuards } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
-import { TypedParam, TypedRoute } from '@nestia/core';
-import { JwtGuard } from '@/infrastructure/guards/jwt.guard';
 import { GetUserByUidReturn } from '@/app/user/handlers/get-user-by-uid.handler';
 import { GetUserByUidQuery } from '@/app/user/queries/get-user-by-uid.query';
+import { JwtGuard } from '@/infrastructure/guards/jwt.guard';
 
 @Controller('user')
 export class UserController {

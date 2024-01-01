@@ -1,25 +1,25 @@
+import { BadRequestException, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WsResponse } from '@nestjs/websockets';
-import { BadRequestException, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import type { Socket } from 'socket.io';
-import { SocketJwtGuard } from '@/infrastructure/guards/socket-jwt.guard';
-import { CreateRoomReturn } from '@/app/room/handlers/create-room.handler';
 import { CreateRoomCommand } from '@/app/room/commands/create-room.command';
-import { CreateRoomDto } from '@/app/room/gateways/dto/create-room.dto';
-import { AuthTokenPayload } from '@/infrastructure/common/types/auth.type';
-import { WebsocketExceptionFilter } from '@/infrastructure/filters/websocket-exception.filter';
-import { ErrorCode } from '@/infrastructure/error/error-code';
-import { GetRoomReturn } from '@/app/room/handlers/get-room.handler';
-import { GetRoomQuery } from '@/app/room/queries/get-room.query';
-import { GetRoomDto } from '@/app/room/gateways/dto/get-room.dto';
 import { JoinRoomCommand } from '@/app/room/commands/join-room.command';
 import { QuitRoomCommand } from '@/app/room/commands/quit-room.command';
+import { CreateRoomDto } from '@/app/room/gateways/dto/create-room.dto';
+import { GetRoomDto } from '@/app/room/gateways/dto/get-room.dto';
+import { JoinRoomDto } from '@/app/room/gateways/dto/join-room.dto';
+import { QuitRoomDto } from '@/app/room/gateways/dto/quit-room.dto';
+import { CreateRoomReturn } from '@/app/room/handlers/create-room.handler';
+import { GetRoomReturn } from '@/app/room/handlers/get-room.handler';
 import { GetRoomsReturn } from '@/app/room/handlers/get-rooms.handler';
 import { JoinRoomReturn } from '@/app/room/handlers/join-room.handler';
 import { QuitRoomReturn } from '@/app/room/handlers/quit-room.handler';
+import { GetRoomQuery } from '@/app/room/queries/get-room.query';
 import { GetRoomsQuery } from '@/app/room/queries/get-rooms.query';
-import { JoinRoomDto } from '@/app/room/gateways/dto/join-room.dto';
-import { QuitRoomDto } from '@/app/room/gateways/dto/quit-room.dto';
+import { AuthTokenPayload } from '@/infrastructure/common/types/auth.type';
+import { ErrorCode } from '@/infrastructure/error/error-code';
+import { WebsocketExceptionFilter } from '@/infrastructure/filters/websocket-exception.filter';
+import { SocketJwtGuard } from '@/infrastructure/guards/socket-jwt.guard';
 
 @WebSocketGateway({ cors: true })
 @UsePipes(

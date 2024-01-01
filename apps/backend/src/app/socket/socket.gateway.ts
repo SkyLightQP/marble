@@ -1,9 +1,9 @@
-import { ConnectedSocket, SubscribeMessage, WebSocketGateway } from '@nestjs/websockets';
 import { BadRequestException, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { ConnectedSocket, SubscribeMessage, WebSocketGateway } from '@nestjs/websockets';
 import type { Socket } from 'socket.io';
-import { SocketJwtGuard } from '@/infrastructure/guards/socket-jwt.guard';
 import { ErrorCode } from '@/infrastructure/error/error-code';
 import { WebsocketExceptionFilter } from '@/infrastructure/filters/websocket-exception.filter';
+import { SocketJwtGuard } from '@/infrastructure/guards/socket-jwt.guard';
 
 @WebSocketGateway({ cors: true })
 @UsePipes(

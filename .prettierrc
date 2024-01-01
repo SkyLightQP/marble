@@ -1,9 +1,11 @@
 {
-  "plugins": ["prettier-plugin-tailwindcss"],
+  "plugins": ["prettier-plugin-tailwindcss", "@trivago/prettier-plugin-sort-imports"],
   "semi": true,
   "singleQuote": true,
   "tabWidth": 2,
   "arrowParens": "always",
   "printWidth": 120,
-  "trailingComma": "none"
+  "trailingComma": "none",
+  "importOrder": ["<THIRD_PARTY_MODULES>", "^@/(.*)$", "^[./]"],
+  "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"]
 }
