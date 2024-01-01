@@ -1,6 +1,6 @@
 module.exports = {
-  plugins: ['react', 'react-hooks'],
-  extends: ['custom', 'plugin:react/jsx-runtime'],
+  plugins: ['react'],
+  extends: ['custom', 'plugin:react-hooks/recommended', 'plugin:react/jsx-runtime'],
   rules: {
     'react/jsx-filename-extension': 'off',
     'react/no-unescaped-entities': 'off',
