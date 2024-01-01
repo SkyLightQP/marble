@@ -31,14 +31,14 @@ export class Room extends SyncableToRedis {
     return new Room(nanoid(), name, owner, [], maxPlayer, false);
   }
 
-  public addPlayers(player: Player): void {
+  public addPlayer(player: Player): void {
     if (this.players.includes(player)) {
       throw new WsException(ErrorCode.PLAYER_ALREADY_EXISTS);
     }
     this.players.push(player);
   }
 
-  public removePlayers(userId: string): void {
+  public removePlayer(userId: string): void {
     const player = this.players.find((member) => member.userId === userId);
     if (player === undefined) {
       throw new WsException(ErrorCode.PLAYER_NOT_FOUND);

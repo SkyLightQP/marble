@@ -20,7 +20,7 @@ export class QuitRoomHandler implements ICommandHandler<QuitRoomCommand> {
     }
 
     const room = Room.fromJSON(roomInRedis);
-    room.removePlayers(userId);
+    room.removePlayer(userId);
     await room.syncRedis(this.redis);
     Logger.log({ message: '방에서 플레이어가 퇴장했습니다.', room, userId });
 
