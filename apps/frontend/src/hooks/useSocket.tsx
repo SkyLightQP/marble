@@ -20,7 +20,7 @@ export const SocketProvider: React.FC<PropsWithChildren> = ({ children }) => {
     return () => {
       client.disconnect();
     };
-  }, [accessToken]);
+  }, []);
 
   return <context.Provider value={socket}>{children}</context.Provider>;
 };
