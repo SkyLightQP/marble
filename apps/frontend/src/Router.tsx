@@ -1,6 +1,6 @@
 import React from 'react';
 import toast from 'react-hot-toast';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { WebSocketError } from '@/api/SocketResponse';
 import { PermissionRoute } from '@/components/PermissionRoute';
 import { getErrorMessage } from '@/error/ErrorMessage';
@@ -21,6 +21,7 @@ export const Router: React.FC = () => {
       <Routes>
         <Route path="/" element={<PermissionRoute success={<MainPage />} failure={<LoginPage />} />} />
         <Route path="/rooms" element={<PermissionRoute success={<RoomListPage />} failure={<LoginPage />} />} />
+        <Route path="/room" element={<PermissionRoute success={<Navigate to="/rooms" />} failure={<LoginPage />} />} />
         <Route path="/room/:roomId" element={<PermissionRoute success={<RoomPage />} failure={<LoginPage />} />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
