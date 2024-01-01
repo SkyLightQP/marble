@@ -3,6 +3,7 @@ import { SocketGateway } from '@/app/socket/socket.gateway';
 
 @Module({
   providers: [SocketGateway],
-  controllers: []
+  controllers: [],
+  exports: [SocketGateway]
 })
 export class SocketModule {}
