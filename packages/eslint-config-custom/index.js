@@ -1,6 +1,6 @@
 module.exports = {
-  plugins: ['@typescript-eslint', 'prettier'],
-  extends: ['airbnb', 'plugin:@typescript-eslint/recommended', 'prettier', 'turbo'],
+  plugins: ['@typescript-eslint'],
+  extends: ['airbnb', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended', 'turbo'],
   parser: '@typescript-eslint/parser',
   globals: {
     JSX: true
