@@ -1,8 +1,14 @@
+export interface PlayerResponse {
+  readonly userId: string;
+  readonly id: string;
+  readonly nickname: string;
+}
+
 export interface GetRoomResponse {
   readonly id: string;
   readonly name: string;
   readonly owner: string;
-  readonly players: string[];
+  readonly players: PlayerResponse[];
   readonly maxPlayer: number;
   readonly isPlaying: boolean;
 }
@@ -18,7 +24,7 @@ export interface CreateRoomResponse {
   readonly id: string;
   readonly name: string;
   readonly owner: string;
-  readonly players: string[];
+  readonly players: PlayerResponse[];
   readonly maxPlayer: number;
   readonly isPlaying: boolean;
 }
