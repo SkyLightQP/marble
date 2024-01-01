@@ -2,6 +2,7 @@ import { WsException } from '@nestjs/websockets';
 import { nanoid } from 'nanoid';
 import { RedisClientType } from 'redis';
 import { assertParse, assertStringify } from 'typia/lib/json';
+import { Player } from '@/app/player/domain/player';
 import { SyncableToRedis } from '@/infrastructure/common/abstract/syncable-to-redis';
 import { ErrorCode } from '@/infrastructure/error/error-code';
 
@@ -9,7 +10,7 @@ interface RoomFields {
   readonly id: string;
   name: string;
   owner: string;
-  players: string[];
+  players: Player[];
   maxPlayer: number;
   isPlaying: boolean;
 }
@@ -19,7 +20,7 @@ export class Room extends SyncableToRedis {
     public readonly id: string,
     public name: string,
     public owner: string,
-    public players: string[],
+    public players: Player[],
     public maxPlayer: number,
     public isPlaying: boolean
   ) {
@@ -30,22 +31,23 @@ export class Room extends SyncableToRedis {
     return new Room(nanoid(), name, owner, [], maxPlayer, false);
   }
 
-  public addPlayers(uid: string): void {
-    if (this.players.includes(uid)) {
+  public addPlayers(player: Player): void {
+    if (this.players.includes(player)) {
       throw new WsException(ErrorCode.PLAYER_ALREADY_EXISTS);
     }
-    this.players.push(uid);
+    this.players.push(player);
   }
 
-  public removePlayers(uid: string): void {
-    if (!this.players.includes(uid)) {
+  public removePlayers(userId: string): void {
+    const player = this.players.find((member) => member.userId === userId);
+    if (player === undefined) {
       throw new WsException(ErrorCode.PLAYER_NOT_FOUND);
     }
-    if (this.players.length > 1 && this.owner === uid) {
+    if (this.players.length > 1 && this.owner === userId) {
       const newOwner = this.players[0];
-      this.owner = newOwner;
+      this.owner = newOwner.userId;
     }
-    this.players = this.players.filter((member) => member !== uid);
+    this.players = this.players.filter((p) => p.userId !== userId);
   }
 
   public toJSON(): RoomFields {
