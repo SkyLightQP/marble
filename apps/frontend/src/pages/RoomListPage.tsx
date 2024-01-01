@@ -32,6 +32,7 @@ export const RoomListPage: React.FC = () => {
   }, [socket]);
 
   useSocketListener<GetRoomsResponse>('get-rooms', setRooms);
+  useSocketListener('quit-room', () => socket?.emit('get-rooms'));
   useSocketListener<CreateRoomResponse>('create-room', ({ id }) => {
     navigate(`/room/${id}`);
   });
