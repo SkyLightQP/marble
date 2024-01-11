@@ -12,6 +12,6 @@ export class CreatedRoomListener implements IEventHandler<CreatedRoomEvent> {
 
   async handle() {
     const rooms = await this.queryBus.execute(new GetRoomsQuery());
-    this.socketGateway.server.emit('get-rooms', rooms);
+    this.socketGateway.server.in('lobby').emit('get-rooms', rooms);
   }
 }
