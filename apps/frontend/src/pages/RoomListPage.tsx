@@ -11,8 +11,7 @@ import { useSocketListener } from '@/hooks/useSocketListener';
 import { RootLayout } from '@/layouts/RootLayout';
 
 export const RoomListPage: React.FC = () => {
-  const [rooms, setRooms] = React.useState<GetRoomsResponse>([]);
-  const socket = useSocket();
+  const [rooms, setRooms] = useState<GetRoomsResponse>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { register, handleSubmit, reset } = useForm<CreateRoomForm>({
     defaultValues: {
@@ -21,13 +20,19 @@ export const RoomListPage: React.FC = () => {
     }
   });
   const navigate = useNavigate();
+  const socket = useSocket();
 
   useEffect(() => {
     socket?.emit('get-rooms');
     socket?.emit('util:join-lobby');
 
+    const refreshRoom = setInterval(() => {
+      socket?.emit('get-rooms');
+    }, 1000 * 5);
+
     return () => {
       socket?.emit('util:leave-lobby');
+      clearInterval(refreshRoom);
     };
   }, [socket]);
 
