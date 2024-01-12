@@ -32,7 +32,7 @@ export class Room extends SyncableToRedis {
   }
 
   public addPlayer(player: Player): void {
-    if (this.players.includes(player)) {
+    if (this.players.map(({ userId }) => userId).find((userId) => userId === player.userId)) {
       throw new WsException(ErrorCode.PLAYER_ALREADY_EXISTS);
     }
     this.players.push(player);
