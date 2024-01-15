@@ -35,6 +35,9 @@ export class Room extends SyncableToRedis {
     if (this.players.map(({ userId }) => userId).find((userId) => userId === player.userId)) {
       throw new WsException(ErrorCode.PLAYER_ALREADY_EXISTS);
     }
+    if (this.players.length >= this.maxPlayer) {
+      throw new WsException(ErrorCode.ROOM_IS_FULL);
+    }
     this.players.push(player);
   }
 
