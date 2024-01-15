@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { RiCheckFill, RiDoorOpenLine, RiGamepadFill, RiSettings2Fill } from 'react-icons/ri';
-import { useParams } from 'react-router-dom';
-import { GetRoomResponse } from '@/api/SocketResponse';
+import { useNavigate, useParams } from 'react-router-dom';
+import { GetRoomResponse, WebSocketError } from '@/api/SocketResponse';
 import { Button } from '@/components/Button';
+import { getErrorMessage } from '@/error/ErrorMessage';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { RootLayout } from '@/layouts/RootLayout';
@@ -11,6 +13,7 @@ export const RoomPage: React.FC = () => {
   const [room, setRoom] = useState<GetRoomResponse>();
   const socket = useSocket();
   const { roomId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     socket?.emit('join-room', { roomId });
@@ -21,6 +24,10 @@ export const RoomPage: React.FC = () => {
   }, [socket, roomId]);
 
   useSocketListener<GetRoomResponse>('join-room', setRoom);
+  useSocketListener<WebSocketError>('exception', (error) => {
+    toast.error(getErrorMessage(error.code));
+    navigate(-1);
+  });
 
   return (
     <RootLayout className="h-screen w-screen p-20">

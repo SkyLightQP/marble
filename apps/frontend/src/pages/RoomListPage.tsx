@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { RiAddFill, RiRefreshLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
-import { CreateRoomResponse, GetRoomsResponse } from '@/api/SocketResponse';
+import { CreateRoomResponse, GetRoomsResponse, WebSocketError } from '@/api/SocketResponse';
 import { Button } from '@/components/Button';
 import { CreateRoomForm, CreateRoomModal } from '@/components/Room/CreateRoomModal';
 import { RoomPreviewCard } from '@/components/Room/RoomPreviewCard';
+import { getErrorMessage } from '@/error/ErrorMessage';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { RootLayout } from '@/layouts/RootLayout';
@@ -40,6 +42,10 @@ export const RoomListPage: React.FC = () => {
   useSocketListener('quit-room', () => socket?.emit('get-rooms'));
   useSocketListener<CreateRoomResponse>('create-room', ({ id }) => {
     navigate(`/room/${id}`);
+  });
+  useSocketListener<WebSocketError>('exception', (error) => {
+    if (error.code === 'PLAYER_NOT_FOUND') return;
+    toast.error(getErrorMessage(error.code));
   });
 
   const onCreateRoomClick: SubmitHandler<CreateRoomForm> = async (data) => {
