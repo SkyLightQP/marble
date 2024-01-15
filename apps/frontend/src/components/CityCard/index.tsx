@@ -2,15 +2,20 @@ import clsx from 'clsx';
 import React from 'react';
 import { IconType } from 'react-icons';
 import { PlayerDot } from '@/components/PlayerDot';
+import { DotColor } from '@/types/DotColor';
 
 interface CityCardProps {
   readonly icon: IconType;
   readonly nameKo: string;
   readonly price: number;
   readonly className?: string;
+  readonly currentPlayers: {
+    readonly userId: string;
+    readonly color: DotColor;
+  }[];
 }
 
-export const CityCard: React.FC<CityCardProps> = ({ icon: Icon, nameKo, price, className }) => {
+export const CityCard: React.FC<CityCardProps> = ({ icon: Icon, nameKo, price, className, currentPlayers }) => {
   return (
     <div
       className={clsx(
@@ -26,10 +31,9 @@ export const CityCard: React.FC<CityCardProps> = ({ icon: Icon, nameKo, price, c
         <p className="text-sm text-gray-400">{price.toLocaleString('ko-KR')} 원</p>
       </div>
       <div className="mt-1 flex space-x-1">
-        <PlayerDot color="blue" />
-        <PlayerDot color="yellow" />
-        <PlayerDot color="green" />
-        <PlayerDot color="red" />
+        {currentPlayers.map((player) => (
+          <PlayerDot key={`${nameKo}-${player.userId.slice(8)}`} color={player.color} />
+        ))}
       </div>
     </div>
   );
