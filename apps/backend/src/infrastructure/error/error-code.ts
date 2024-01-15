@@ -1,9 +1,8 @@
-interface ErrorCodeType {
-  readonly code: Uppercase<string>;
-  readonly message: string;
-}
-
-export const ErrorCode: Record<Uppercase<string>, ErrorCodeType> = {
+export const ErrorCode = {
+  ROOM_IS_FULL: {
+    code: 'ROOM_IS_FULL',
+    message: '방이 꽉 찼습니다.'
+  },
   PLAYER_ALREADY_EXISTS: {
     code: 'PLAYER_ALREADY_EXISTS',
     message: '이미 존재하는 플레이어입니다.'
