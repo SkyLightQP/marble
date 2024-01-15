@@ -1,4 +1,5 @@
 const errorMessages: Record<string, string> = {
+  ROOM_IS_FULL: '방이 꽉 찼습니다.',
   PLAYER_ALREADY_EXISTS: '이미 존재하는 플레이어입니다.',
   PLAYER_NOT_FOUND: '플레이어를 찾을 수 없습니다.',
   ROOM_NOT_FOUND: '방을 찾을 수 없습니다.',
