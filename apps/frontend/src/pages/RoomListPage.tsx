@@ -31,7 +31,7 @@ export const RoomListPage: React.FC = () => {
     }, 1000 * 5);
 
     return () => {
-      socket?.emit('util:leave-lobby');
+      socket?.emit('util:quit-lobby');
       clearInterval(refreshRoom);
     };
   }, [socket]);
