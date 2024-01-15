@@ -6,7 +6,7 @@ import { BalanceInformationView } from '@/components/BalanceInformation/BalanceI
 import { CityCard } from '@/components/CityCard';
 import { DiceView } from '@/components/Dice/DiceView';
 import { RankView } from '@/components/Rank/RankView';
-import { SpecialCard } from '../SpecialCard';
+import { SpecialCard } from '@/components/SpecialCard';
 
 export const GameBoard: React.FC = () => {
   const [cities, setCities] = useState<Awaited<ReturnType<typeof api.functional.city.getCities>>>([]);
