@@ -1,7 +1,9 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import api from '@marble/api';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import * as yup from 'yup';
 import { apiConnection } from '@/api';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
@@ -18,13 +20,23 @@ interface RegisterForm {
   readonly nickname: string;
 }
 
+const registerFormSchema = yup.object().shape({
+  id: yup.string().required(),
+  password: yup.string().required().length(6),
+  passwordConfirm: yup
+    .string()
+    .required()
+    .length(6)
+    .oneOf([yup.ref('password')], 'password_not_match'),
+  nickname: yup.string().required()
+});
+
 export const RegisterPage: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    watch
-  } = useForm<RegisterForm>();
+    formState: { errors }
+  } = useForm<RegisterForm>({ resolver: yupResolver(registerFormSchema) });
   const navigate = useNavigate();
 
   const onRegisterButtonClick: SubmitHandler<RegisterForm> = async (data) => {
@@ -55,7 +67,7 @@ export const RegisterPage: React.FC = () => {
 
         <div className="mb-3">
           <Label htmlFor="registerPage-id">아이디</Label>
-          <Input id="registerPage-id" type="text" placeholder="아이디" {...register('id', { required: true })} />
+          <Input id="registerPage-id" type="text" placeholder="아이디" {...register('id')} />
           <InputError formError={errors.id} type="required">
             아이디 칸이 비어있습니다.
           </InputError>
@@ -68,7 +80,7 @@ export const RegisterPage: React.FC = () => {
             type="password"
             placeholder="비밀번호"
             autoComplete="off"
-            {...register('password', { required: true })}
+            {...register('password')}
           />
           <InputError formError={errors.password} type="required">
             비밀번호 칸이 비어있습니다.
@@ -82,13 +94,7 @@ export const RegisterPage: React.FC = () => {
             type="password"
             placeholder="비밀번호 재확인"
             autoComplete="off"
-            {...register('passwordConfirm', {
-              required: true,
-              validate: (s: string) => {
-                if (watch('password') !== s) return 'password_not_match';
-                return undefined;
-              }
-            })}
+            {...register('passwordConfirm')}
           />
           <InputError formError={errors.passwordConfirm} type="required">
             비밀번호 재확인 칸이 비어있습니다.
@@ -104,8 +110,8 @@ export const RegisterPage: React.FC = () => {
             id="registerPage-nickname"
             type="text"
             placeholder="닉네임"
-            {...register('nickname', { required: true })}
             onKeyDown={(e) => e.key === 'Enter' && handleSubmit(onRegisterButtonClick)()}
+            {...register('nickname')}
           />
           <InputError formError={errors.nickname} type="required">
             닉네임 칸이 비어있습니다.

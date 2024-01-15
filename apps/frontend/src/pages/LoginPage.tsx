@@ -1,8 +1,10 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import api from '@marble/api';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import * as yup from 'yup';
 import { apiConnection } from '@/api';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
@@ -17,12 +19,17 @@ interface LoginForm {
   readonly password: string;
 }
 
+const loginFormSchema = yup.object().shape({
+  id: yup.string().required(),
+  password: yup.string().required()
+});
+
 export const LoginPage: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<LoginForm>();
+  } = useForm<LoginForm>({ resolver: yupResolver(loginFormSchema) });
   const navigate = useNavigate();
 
   const onLoginButtonClick: SubmitHandler<LoginForm> = async (data) => {
@@ -47,7 +54,7 @@ export const LoginPage: React.FC = () => {
 
         <div className="mb-3">
           <Label htmlFor="loginPage-id">아이디</Label>
-          <Input id="loginPage-id" type="text" placeholder="아이디" {...register('id', { required: true })} />
+          <Input id="loginPage-id" type="text" placeholder="아이디" {...register('id')} />
           <InputError formError={errors.id} type="required">
             아이디 칸이 비어있습니다.
           </InputError>
@@ -61,7 +68,7 @@ export const LoginPage: React.FC = () => {
             placeholder="비밀번호"
             autoComplete="off"
             onKeyDown={(e) => e.key === 'Enter' && handleSubmit(onLoginButtonClick)()}
-            {...register('password', { required: true })}
+            {...register('password')}
           />
           <InputError formError={errors.id} type="required">
             비밀번호 칸이 비어있습니다.
