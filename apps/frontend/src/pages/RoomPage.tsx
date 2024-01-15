@@ -16,10 +16,17 @@ export const RoomPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const beforeUnloadListener = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = '';
+    };
+
     socket?.emit('join-room', { roomId });
+    window.addEventListener('beforeunload', beforeUnloadListener);
 
     return () => {
       socket?.emit('quit-room', { roomId });
+      window.removeEventListener('beforeunload', beforeUnloadListener);
     };
   }, [socket, roomId]);
 
@@ -28,6 +35,10 @@ export const RoomPage: React.FC = () => {
     toast.error(getErrorMessage(error.code));
     navigate(-1);
   });
+
+  const quitRoom = () => {
+    navigate(-1);
+  };
 
   return (
     <RootLayout className="h-screen w-screen p-20">
@@ -49,7 +60,10 @@ export const RoomPage: React.FC = () => {
           <RiSettings2Fill />
           <span className="ml-1 text-base">방 설정</span>
         </Button>
-        <Button className="flex h-8 w-28 items-center justify-center bg-red-500 text-2xl hover:bg-red-600">
+        <Button
+          className="flex h-8 w-28 items-center justify-center bg-red-500 text-2xl hover:bg-red-600"
+          onClick={quitRoom}
+        >
           <RiDoorOpenLine />
           <span className="ml-1 text-base">방 나가기</span>
         </Button>
