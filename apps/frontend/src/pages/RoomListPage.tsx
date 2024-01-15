@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -5,7 +6,7 @@ import { RiAddFill, RiRefreshLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import { CreateRoomResponse, GetRoomsResponse, WebSocketError } from '@/api/SocketResponse';
 import { Button } from '@/components/Button';
-import { CreateRoomForm, CreateRoomModal } from '@/components/Room/CreateRoomModal';
+import { CreateRoomForm, createRoomFormSchema, CreateRoomModal } from '@/components/Room/CreateRoomModal';
 import { RoomPreviewCard } from '@/components/Room/RoomPreviewCard';
 import { getErrorMessage } from '@/error/ErrorMessage';
 import { useSocket } from '@/hooks/useSocket';
@@ -15,11 +16,17 @@ import { RootLayout } from '@/layouts/RootLayout';
 export const RoomListPage: React.FC = () => {
   const [rooms, setRooms] = useState<GetRoomsResponse>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { register, handleSubmit, reset } = useForm<CreateRoomForm>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm<CreateRoomForm>({
     defaultValues: {
       name: '',
       maxPeople: 1
-    }
+    },
+    resolver: yupResolver(createRoomFormSchema)
   });
   const navigate = useNavigate();
   const socket = useSocket();
@@ -96,7 +103,7 @@ export const RoomListPage: React.FC = () => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         onCreateRoomClick={onCreateRoomClick}
-        form={{ register, handleSubmit, reset }}
+        form={{ register, handleSubmit, reset, errors }}
       />
     </>
   );
