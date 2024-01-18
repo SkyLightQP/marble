@@ -1,6 +1,6 @@
 import api from '@marble/api';
 import React, { useEffect, useMemo, useState } from 'react';
-import { RiBuildingLine, RiFlagLine, RiQuestionLine } from 'react-icons/ri';
+import { RiBuildingLine, RiFlagLine } from 'react-icons/ri';
 import { apiConnection } from '@/api';
 import { BalanceInformationView } from '@/components/BalanceInformation/BalanceInformationView';
 import { CityCard } from '@/components/CityCard';
@@ -25,24 +25,37 @@ export const GameBoard: React.FC = () => {
   return (
     <div>
       <div className="flex flex-row justify-center space-x-1">
-        <SpecialCard>
+        <SpecialCard
+          currentPlayers={[
+            { color: 'red', userId: 'dummy' },
+            { color: 'blue', userId: 'dummy' }
+          ]}
+        >
           <h1 className="flex items-center text-2xl font-bold">
             <RiFlagLine className="mr-1" /> 출발
           </h1>
         </SpecialCard>
         {topLine.map((city) => (
-          <CityCard key={city.id} icon={RiBuildingLine} nameKo={city.name} price={city.cityPrices[0].landPrice} />
+          <CityCard
+            key={city.id}
+            icon={RiBuildingLine}
+            nameKo={city.name}
+            price={city.cityPrices[0].landPrice}
+            currentPlayers={[]}
+          />
         ))}
-        <SpecialCard>
-          <h1 className="flex items-center text-2xl font-bold">
-            <RiQuestionLine className="mr-1" /> ?
-          </h1>
-        </SpecialCard>
+        <SpecialCard currentPlayers={[]} />
       </div>
       <div className="mb-1 mt-1 flex flex-row justify-center">
         <div className="flex flex-col space-y-1">
           {leftLine.map((city) => (
-            <CityCard key={city.id} icon={RiBuildingLine} nameKo={city.name} price={city.cityPrices[0].landPrice} />
+            <CityCard
+              key={city.id}
+              icon={RiBuildingLine}
+              nameKo={city.name}
+              price={city.cityPrices[0].landPrice}
+              currentPlayers={[]}
+            />
           ))}
         </div>
         <div className="flex h-full w-[1060px] justify-center space-x-4 p-10">
@@ -52,24 +65,28 @@ export const GameBoard: React.FC = () => {
         </div>
         <div className="flex flex-col space-y-1">
           {rightLine.map((city) => (
-            <CityCard key={city.id} icon={RiBuildingLine} nameKo={city.name} price={city.cityPrices[0].landPrice} />
+            <CityCard
+              key={city.id}
+              icon={RiBuildingLine}
+              nameKo={city.name}
+              price={city.cityPrices[0].landPrice}
+              currentPlayers={[]}
+            />
           ))}
         </div>
       </div>
       <div className="flex flex-row justify-center space-x-1">
-        <SpecialCard>
-          <h1 className="flex items-center text-2xl font-bold">
-            <RiQuestionLine className="mr-1" /> ?
-          </h1>
-        </SpecialCard>
+        <SpecialCard currentPlayers={[]} />
         {bottomLine.map((city) => (
-          <CityCard key={city.id} icon={RiBuildingLine} nameKo={city.name} price={city.cityPrices[0].landPrice} />
+          <CityCard
+            key={city.id}
+            icon={RiBuildingLine}
+            nameKo={city.name}
+            price={city.cityPrices[0].landPrice}
+            currentPlayers={[]}
+          />
         ))}
-        <SpecialCard>
-          <h1 className="flex items-center text-2xl font-bold">
-            <RiQuestionLine className="mr-1" /> ?
-          </h1>
-        </SpecialCard>
+        <SpecialCard currentPlayers={[]} />
       </div>
     </div>
   );
