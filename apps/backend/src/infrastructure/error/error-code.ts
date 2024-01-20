@@ -1,4 +1,12 @@
 export const ErrorCode = {
+  ROOM_IS_PLAYING: {
+    code: 'ROOM_IS_PLAYING',
+    message: '게임이 시작된 방입니다.'
+  },
+  IS_NOT_OWNER: {
+    code: 'IS_NOT_OWNER',
+    message: '방장이 아닙니다.'
+  },
   ROOM_IS_FULL: {
     code: 'ROOM_IS_FULL',
     message: '방이 꽉 찼습니다.'
