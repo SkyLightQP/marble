@@ -3,7 +3,7 @@ import { assertParse, assertStringify } from 'typia/lib/json';
 import { SyncableToRedis } from '@/infrastructure/common/abstract/syncable-to-redis';
 import { shuffle } from '@/infrastructure/utils/random.util';
 
-interface GameStatus {
+export interface GameStatus {
   readonly money: number;
   readonly land: number;
   readonly house: number;
@@ -13,7 +13,7 @@ interface GameStatus {
   readonly haveCities: string[];
 }
 
-interface GameFields {
+export interface GameFields {
   roomId: string;
   turn: number;
   playerOrder: string[];
