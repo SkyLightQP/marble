@@ -24,6 +24,11 @@ export class QuitRoomHandler implements ICommandHandler<QuitRoomCommand> {
     }
 
     const room = Room.fromJSON(roomInRedis);
+
+    if (room.isPlaying) {
+      throw new WsException(ErrorCode.ROOM_IS_PLAYING);
+    }
+
     room.removePlayer(userId);
     await room.syncRedis(this.redis);
     Logger.log({ message: '방에서 플레이어가 퇴장했습니다.', room, userId });

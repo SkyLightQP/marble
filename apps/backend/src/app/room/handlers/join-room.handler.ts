@@ -25,6 +25,11 @@ export class JoinRoomHandler implements ICommandHandler<JoinRoomCommand> {
     }
 
     const room = Room.fromJSON(roomInRedis);
+
+    if (room.isPlaying) {
+      throw new WsException(ErrorCode.ROOM_IS_PLAYING);
+    }
+
     const user = await this.queryBus.execute(new GetUserByUidQuery({ uid: userId }));
     const player = Player.create(user.userId, user.id, user.nickname);
     room.addPlayer(player);
