@@ -11,9 +11,10 @@ export const Router: React.FC = () => {
   return (
     <BrowserRouter basename={process.env.REACT_APP_BASEPATH ?? '/'}>
       <Routes>
+        <Route path="/" element={<Navigate to="/rooms" />} />
         <Route path="/game" element={<PermissionRoute success={<MainPage />} failure={<LoginPage />} />} />
         <Route path="/rooms" element={<PermissionRoute success={<RoomListPage />} failure={<LoginPage />} />} />
-        <Route path="/room" element={<PermissionRoute success={<Navigate to="/rooms" />} failure={<LoginPage />} />} />
+        <Route path="/room" element={<Navigate to="/rooms" />} />
         <Route path="/room/:roomId" element={<PermissionRoute success={<RoomPage />} failure={<LoginPage />} />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
