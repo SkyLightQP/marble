@@ -3,10 +3,12 @@ import { CommandHandler, ICommandHandler, QueryBus } from '@nestjs/cqrs';
 import { WsException } from '@nestjs/websockets';
 import { RedisClientType } from 'redis';
 import { StartGameCommand } from '@/app/game/commands/start-game.command';
-import { Game } from '@/app/game/domain/game';
+import { Game, GameFields } from '@/app/game/domain/game';
 import { GetRoomReturn } from '@/app/room/handlers/get-room.handler';
 import { GetRoomQuery } from '@/app/room/queries/get-room.query';
 import { ErrorCode } from '@/infrastructure/error/error-code';
+
+export type StartGameReturn = GameFields;
 
 @CommandHandler(StartGameCommand)
 export class StartGameHandler implements ICommandHandler<StartGameCommand> {
@@ -15,7 +17,7 @@ export class StartGameHandler implements ICommandHandler<StartGameCommand> {
     private readonly queryBus: QueryBus
   ) {}
 
-  async execute({ args: { roomId, executor } }: StartGameCommand): Promise<void> {
+  async execute({ args: { roomId, executor } }: StartGameCommand): Promise<StartGameReturn> {
     const room = await this.queryBus.execute<GetRoomQuery, GetRoomReturn>(new GetRoomQuery({ roomId }));
 
     if (room.owner !== executor) {
@@ -35,5 +37,7 @@ export class StartGameHandler implements ICommandHandler<StartGameCommand> {
     await game.syncRedis(this.redis);
 
     Logger.log({ message: '게임을 시작했습니다.', roomId, executor });
+
+    return game.toJSON();
   }
 }
