@@ -1,12 +1,9 @@
 import React, { PropsWithChildren } from 'react';
 import { PlayerDot } from '@/components/PlayerDot';
-import { DotColor } from '@/types/DotColor';
+import { DotItem } from '@/types/DotItem';
 
 interface SpecialCardProps {
-  readonly currentPlayers: {
-    readonly userId: string;
-    readonly color: DotColor;
-  }[];
+  readonly currentPlayers: DotItem[];
 }
 
 export const SpecialCard: React.FC<PropsWithChildren<SpecialCardProps>> = ({ children, currentPlayers }) => {
