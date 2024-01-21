@@ -1,0 +1,39 @@
+import { BadRequestException, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { CommandBus } from '@nestjs/cqrs';
+import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WsResponse } from '@nestjs/websockets';
+import type { Socket } from 'socket.io';
+import { StartGameCommand } from '@/app/game/commands/start-game.command';
+import { StartGameDto } from '@/app/game/gateways/dto/start-game.dto';
+import { StartGameReturn } from '@/app/game/handlers/start-game.handler';
+import { AuthTokenPayload } from '@/infrastructure/common/types/auth.type';
+import { ErrorCode } from '@/infrastructure/error/error-code';
+import { WebsocketExceptionFilter } from '@/infrastructure/filters/websocket-exception.filter';
+import { SocketJwtGuard } from '@/infrastructure/guards/socket-jwt.guard';
+
+@WebSocketGateway({ cors: true })
+@UsePipes(
+  new ValidationPipe({
+    whitelist: true,
+    transform: true,
+    transformOptions: {
+      enableImplicitConversion: true
+    },
+    exceptionFactory: () => new BadRequestException(ErrorCode.BAD_REQUEST)
+  })
+)
+@UseFilters(new WebsocketExceptionFilter())
+export class GameGateway {
+  constructor(private readonly commandBus: CommandBus) {}
+
+  @UseGuards(SocketJwtGuard)
+  @SubscribeMessage('start-game')
+  async handleStartGame(
+    @MessageBody() message: StartGameDto,
+    @ConnectedSocket() socket: Socket & { user: AuthTokenPayload }
+  ): Promise<WsResponse<StartGameReturn>> {
+    const data = await this.commandBus.execute(
+      new StartGameCommand({ roomId: message.roomId, executor: socket.user.sub })
+    );
+    return { event: 'start-game', data };
+  }
+}
