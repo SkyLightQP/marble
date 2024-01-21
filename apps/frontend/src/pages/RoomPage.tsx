@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { RiCheckFill, RiDoorOpenLine, RiGamepadFill, RiSettings2Fill } from 'react-icons/ri';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GetRoomResponse, WebSocketError } from '@/api/SocketResponse';
-import { Button } from '@/components/Button';
+import { RoomMenu } from '@/components/Room/RoomMenu';
 import { getErrorMessage } from '@/error/ErrorMessage';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
@@ -36,6 +35,11 @@ export const RoomPage: React.FC = () => {
     navigate(-1);
   });
 
+  const startGame = () => {
+    socket?.emit('start-game', { roomId });
+    navigate('/game');
+  };
+
   const quitRoom = () => {
     navigate(-1);
   };
@@ -47,27 +51,7 @@ export const RoomPage: React.FC = () => {
           {room?.name} ({room?.players.length}/{room?.maxPlayer})
         </h1>
       </div>
-      <div className="mb-8 flex items-center space-x-2">
-        <Button className="flex h-8 w-28 items-center justify-center text-2xl">
-          <RiGamepadFill />
-          <span className="ml-1 text-base">게임 시작</span>
-        </Button>
-        <Button className="flex h-8 w-28 items-center justify-center text-2xl">
-          <RiCheckFill />
-          <span className="ml-1 text-base">게임 준비</span>
-        </Button>
-        <Button className="flex h-8 w-28 items-center justify-center text-xl">
-          <RiSettings2Fill />
-          <span className="ml-1 text-base">방 설정</span>
-        </Button>
-        <Button
-          className="flex h-8 w-28 items-center justify-center bg-red-500 text-2xl hover:bg-red-600"
-          onClick={quitRoom}
-        >
-          <RiDoorOpenLine />
-          <span className="ml-1 text-base">방 나가기</span>
-        </Button>
-      </div>
+      <RoomMenu onStartClick={startGame} onQuitClick={quitRoom} />
 
       <div>
         {room?.players.map(({ userId, nickname }) => (
