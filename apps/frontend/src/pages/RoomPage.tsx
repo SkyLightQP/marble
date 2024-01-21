@@ -37,7 +37,7 @@ export const RoomPage: React.FC = () => {
 
   const startGame = () => {
     socket?.emit('start-game', { roomId });
-    navigate('/game');
+    navigate(`/game/${roomId}`);
   };
 
   const quitRoom = () => {
