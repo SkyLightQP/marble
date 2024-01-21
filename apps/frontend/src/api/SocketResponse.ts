@@ -28,3 +28,21 @@ export interface CreateRoomResponse {
   readonly maxPlayer: number;
   readonly isPlaying: boolean;
 }
+
+export interface GameStatusResponse {
+  readonly money: number;
+  readonly land: number;
+  readonly house: number;
+  readonly building: number;
+  readonly hotel: number;
+  readonly position: number;
+  readonly haveCities: string[];
+}
+
+export interface GameResponse {
+  readonly roomId: string;
+  readonly turn: number;
+  readonly playerOrder: string[];
+  readonly currentTurnPlayer: string;
+  readonly playerStatus: Record<string, GameStatusResponse>;
+}
