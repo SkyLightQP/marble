@@ -5,6 +5,7 @@ export class CreateCityCommand implements ICommand {
     readonly args: {
       readonly name: string;
       readonly icon: string;
+      readonly position: number;
       readonly price: {
         readonly landPrice: number;
         readonly housePrice: number;

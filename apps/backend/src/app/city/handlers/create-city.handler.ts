@@ -10,11 +10,12 @@ export type CreateCityReturn = City & { cityPrices: Array<CityPrice> };
 export class CreateCityHandler implements ICommandHandler<CreateCityCommand> {
   constructor(private readonly prisma: DatabaseService) {}
 
-  async execute({ args: { name, icon, price } }: CreateCityCommand): Promise<CreateCityReturn> {
+  async execute({ args: { name, icon, position, price } }: CreateCityCommand): Promise<CreateCityReturn> {
     const city = await this.prisma.city.create({
       data: {
         name,
         icon,
+        position,
         cityPrices: {
           create: price
         }
@@ -23,6 +24,7 @@ export class CreateCityHandler implements ICommandHandler<CreateCityCommand> {
         id: true,
         name: true,
         icon: true,
+        position: true,
         createdAt: true,
         updatedAt: true,
         cityPrices: true

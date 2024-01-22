@@ -23,6 +23,7 @@ export class CityController {
     const command = new CreateCityCommand({
       name: body.name,
       icon: body.icon,
+      position: body.position,
       price: {
         landPrice: body.landPrice,
         housePrice: body.housePrice,

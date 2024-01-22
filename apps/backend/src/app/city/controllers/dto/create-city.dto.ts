@@ -3,6 +3,8 @@ export class CreateCityDto {
 
   readonly icon!: string;
 
+  readonly position!: number;
+
   readonly landPrice!: number;
 
   readonly housePrice!: number;
