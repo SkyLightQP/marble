@@ -2,17 +2,14 @@ import clsx from 'clsx';
 import React from 'react';
 import { IconType } from 'react-icons';
 import { PlayerDot } from '@/components/PlayerDot';
-import { DotColor } from '@/types/DotColor';
+import { DotItem } from '@/types/DotItem';
 
 interface CityCardProps {
   readonly icon: IconType;
   readonly nameKo: string;
   readonly price: number;
   readonly className?: string;
-  readonly currentPlayers: {
-    readonly userId: string;
-    readonly color: DotColor;
-  }[];
+  readonly currentPlayers: DotItem[];
 }
 
 export const CityCard: React.FC<CityCardProps> = ({ icon: Icon, nameKo, price, className, currentPlayers }) => {
