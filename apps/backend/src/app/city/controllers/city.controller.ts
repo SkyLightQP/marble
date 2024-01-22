@@ -4,8 +4,10 @@ import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateCityCommand } from '@/app/city/commands/create-city.command';
 import { CreateCityDto } from '@/app/city/controllers/dto/create-city.dto';
 import { CreateCityReturn } from '@/app/city/handlers/create-city.handler';
+import { GetCitiesGroupByPositionReturn } from '@/app/city/handlers/get-cities-group-by-position.handler';
 import { GetCitiesReturn } from '@/app/city/handlers/get-cities.handler';
 import { GetCityByIdReturn } from '@/app/city/handlers/get-city-by-id.handler';
+import { GetCitiesGroupByPositionQuery } from '@/app/city/queries/get-cities-group-by-position.query';
 import { GetCitiesQuery } from '@/app/city/queries/get-cities.query';
 import { GetCityByIdQuery } from '@/app/city/queries/get-city-by-id.query';
 import { JwtGuard } from '@/infrastructure/guards/jwt.guard';
@@ -44,5 +46,11 @@ export class CityController {
   @TypedRoute.Get()
   async getCities(): Promise<GetCitiesReturn> {
     return this.queryBus.execute(new GetCitiesQuery({}));
+  }
+
+  @UseGuards(JwtGuard)
+  @TypedRoute.Get('/group/position')
+  async getCitiesGroupByPosition(): Promise<GetCitiesGroupByPositionReturn> {
+    return this.queryBus.execute(new GetCitiesGroupByPositionQuery({}));
   }
 }
