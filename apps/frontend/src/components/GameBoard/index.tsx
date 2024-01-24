@@ -1,5 +1,5 @@
 import api from '@marble/api';
-import React, { useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { RiBuildingLine, RiFlagLine } from 'react-icons/ri';
 import { apiConnection } from '@/api';
 import { BalanceInformationView } from '@/components/BalanceInformation/BalanceInformationView';
@@ -7,86 +7,99 @@ import { CityCard } from '@/components/CityCard';
 import { DiceView } from '@/components/Dice/DiceView';
 import { RankView } from '@/components/Rank/RankView';
 import { SpecialCard } from '@/components/SpecialCard';
+import { DotItem } from '@/types/DotItem';
+import { range } from '@/utils/Range';
 
-export const GameBoard: React.FC = () => {
-  const [cities, setCities] = useState<Awaited<ReturnType<typeof api.functional.city.getCities>>>([]);
+interface GameBoardProps {
+  readonly playerPositions: Record<string, DotItem[]>;
+  readonly isMyTurn: boolean;
+}
+
+export const GameBoard: FC<GameBoardProps> = ({ playerPositions, isMyTurn }) => {
+  const [cities, setCities] = useState<
+    Awaited<ReturnType<typeof api.functional.city.group.position.getCitiesGroupByPosition>>
+  >({});
 
   useEffect(() => {
-    api.functional.city.getCities(apiConnection).then((res) => {
+    api.functional.city.group.position.getCitiesGroupByPosition(apiConnection).then((res) => {
       setCities(res);
     });
   }, []);
 
-  const topLine = useMemo(() => cities.slice(0, 8), [cities]);
-  const leftLine = useMemo(() => cities.slice(8, 13), [cities]);
-  const rightLine = useMemo(() => cities.slice(13, 18), [cities]);
-  const bottomLine = useMemo(() => cities.slice(18, 26), [cities]);
+  if (cities === undefined || cities[1] === undefined) {
+    return (
+      <div>
+        <h1>도시를 가져오는 중...</h1>
+      </div>
+    );
+  }
 
   return (
     <div>
       <div className="flex flex-row justify-center space-x-1">
-        <SpecialCard
-          currentPlayers={[
-            { color: 'red', userId: 'dummy' },
-            { color: 'blue', userId: 'dummy' }
-          ]}
-        >
+        <SpecialCard currentPlayers={playerPositions[0] ?? []}>
           <h1 className="flex items-center text-2xl font-bold">
             <RiFlagLine className="mr-1" /> 출발
           </h1>
         </SpecialCard>
-        {topLine.map((city) => (
+        {range(1, 9).map((i) => (
           <CityCard
-            key={city.id}
+            key={cities[i][0].id}
             icon={RiBuildingLine}
-            nameKo={city.name}
-            price={city.cityPrices[0].landPrice}
-            currentPlayers={[]}
+            nameKo={cities[i][0].name}
+            price={cities[i][0].cityPrices[0].landPrice}
+            currentPlayers={playerPositions[i] ?? []}
           />
         ))}
-        <SpecialCard currentPlayers={[]} />
+        <SpecialCard currentPlayers={playerPositions[9] ?? []} />
       </div>
       <div className="mb-1 mt-1 flex flex-row justify-center">
         <div className="flex flex-col space-y-1">
-          {leftLine.map((city) => (
-            <CityCard
-              key={city.id}
-              icon={RiBuildingLine}
-              nameKo={city.name}
-              price={city.cityPrices[0].landPrice}
-              currentPlayers={[]}
-            />
-          ))}
+          {range(25, 30)
+            .slice()
+            .reverse()
+            .map((i) => (
+              <CityCard
+                key={cities[i][0].id}
+                icon={RiBuildingLine}
+                nameKo={cities[i][0].name}
+                price={cities[i][0].cityPrices[0].landPrice}
+                currentPlayers={playerPositions[i] ?? []}
+              />
+            ))}
         </div>
         <div className="flex h-full w-[1060px] justify-center space-x-4 p-10">
           <RankView />
           <BalanceInformationView />
-          <DiceView />
+          <DiceView isMyTurn={isMyTurn} />
         </div>
         <div className="flex flex-col space-y-1">
-          {rightLine.map((city) => (
+          {range(10, 15).map((i) => (
             <CityCard
-              key={city.id}
+              key={cities[i][0].id}
               icon={RiBuildingLine}
-              nameKo={city.name}
-              price={city.cityPrices[0].landPrice}
-              currentPlayers={[]}
+              nameKo={cities[i][0].name}
+              price={cities[i][0].cityPrices[0].landPrice}
+              currentPlayers={playerPositions[i] ?? []}
             />
           ))}
         </div>
       </div>
       <div className="flex flex-row justify-center space-x-1">
-        <SpecialCard currentPlayers={[]} />
-        {bottomLine.map((city) => (
-          <CityCard
-            key={city.id}
-            icon={RiBuildingLine}
-            nameKo={city.name}
-            price={city.cityPrices[0].landPrice}
-            currentPlayers={[]}
-          />
-        ))}
-        <SpecialCard currentPlayers={[]} />
+        <SpecialCard currentPlayers={playerPositions[24] ?? []} />
+        {range(16, 24)
+          .slice()
+          .reverse()
+          .map((i) => (
+            <CityCard
+              key={cities[i][0].id}
+              icon={RiBuildingLine}
+              nameKo={cities[i][0].name}
+              price={cities[i][0].cityPrices[0].landPrice}
+              currentPlayers={playerPositions[i] ?? []}
+            />
+          ))}
+        <SpecialCard currentPlayers={playerPositions[15] ?? []} />
       </div>
     </div>
   );
