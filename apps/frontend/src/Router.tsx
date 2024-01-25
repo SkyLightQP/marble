@@ -13,7 +13,7 @@ export const Router: React.FC = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/rooms" />} />
         <Route path="/game" element={<Navigate to="/rooms" />} />
-        <Route path="/game/:id" element={<PermissionRoute success={<GamePage />} failure={<LoginPage />} />} />
+        <Route path="/game/:roomId" element={<PermissionRoute success={<GamePage />} failure={<LoginPage />} />} />
         <Route path="/room" element={<Navigate to="/rooms" />} />
         <Route path="/room/:roomId" element={<PermissionRoute success={<RoomPage />} failure={<LoginPage />} />} />
         <Route path="/rooms" element={<PermissionRoute success={<RoomListPage />} failure={<LoginPage />} />} />
