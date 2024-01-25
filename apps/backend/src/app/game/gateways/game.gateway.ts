@@ -1,10 +1,13 @@
 import { BadRequestException, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
-import { CommandBus } from '@nestjs/cqrs';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WsResponse } from '@nestjs/websockets';
 import type { Socket } from 'socket.io';
 import { StartGameCommand } from '@/app/game/commands/start-game.command';
+import { GetGameDto } from '@/app/game/gateways/dto/get-game.dto';
 import { StartGameDto } from '@/app/game/gateways/dto/start-game.dto';
+import { GetGameReturn } from '@/app/game/handlers/get-game.handler';
 import { StartGameReturn } from '@/app/game/handlers/start-game.handler';
+import { GetGameQuery } from '@/app/game/queries/get-game.query';
 import { AuthTokenPayload } from '@/infrastructure/common/types/auth.type';
 import { ErrorCode } from '@/infrastructure/error/error-code';
 import { WebsocketExceptionFilter } from '@/infrastructure/filters/websocket-exception.filter';
@@ -23,7 +26,10 @@ import { SocketJwtGuard } from '@/infrastructure/guards/socket-jwt.guard';
 )
 @UseFilters(new WebsocketExceptionFilter())
 export class GameGateway {
-  constructor(private readonly commandBus: CommandBus) {}
+  constructor(
+    private readonly commandBus: CommandBus,
+    private readonly queryBus: QueryBus
+  ) {}
 
   @UseGuards(SocketJwtGuard)
   @SubscribeMessage('start-game')
@@ -35,5 +41,12 @@ export class GameGateway {
       new StartGameCommand({ roomId: message.roomId, executor: socket.user.sub })
     );
     return { event: 'start-game', data };
+  }
+
+  @UseGuards(SocketJwtGuard)
+  @SubscribeMessage('get-game')
+  async handleGetGame(@MessageBody() message: GetGameDto): Promise<WsResponse<GetGameReturn>> {
+    const data = await this.queryBus.execute(new GetGameQuery({ roomId: message.roomId }));
+    return { event: 'get-game', data };
   }
 }
