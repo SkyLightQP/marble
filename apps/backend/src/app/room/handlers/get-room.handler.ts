@@ -13,12 +13,12 @@ export class GetRoomHandler implements IQueryHandler<GetRoomQuery> {
   constructor(@Inject('REDIS_CLIENT') private readonly redis: RedisClientType) {}
 
   async execute({ args: { roomId } }: GetRoomQuery): Promise<GetRoomReturn> {
-    const roomsInRedis = await this.redis.hGetAll('room');
+    const roomsInRedis = await this.redis.hGet('room', roomId);
 
-    if (roomsInRedis[roomId] === undefined) {
+    if (roomsInRedis === undefined) {
       throw new WsException(ErrorCode.ROOM_NOT_FOUND);
     }
 
-    return Room.fromJSON(roomsInRedis[roomId]);
+    return Room.fromJSON(roomsInRedis);
   }
 }
