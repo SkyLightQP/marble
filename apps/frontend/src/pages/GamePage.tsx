@@ -1,6 +1,9 @@
-import { FC, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
+import toast from 'react-hot-toast';
+import { useNavigate, useParams } from 'react-router-dom';
 import { GameResponse } from '@/api/SocketResponse';
 import { GameBoard } from '@/components/GameBoard';
+import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { useUser } from '@/hooks/useUser';
 import { RootLayout } from '@/layouts/RootLayout';
@@ -8,7 +11,10 @@ import { DotItem } from '@/types/DotItem';
 
 export const GamePage: FC = () => {
   const user = useUser();
+  const socket = useSocket();
   const [game, setGame] = useState<GameResponse>();
+  const navigate = useNavigate();
+  const { roomId } = useParams();
 
   const playerColors = useMemo(() => {
     const uuids = Object.keys(game?.playerStatus ?? {});
@@ -37,6 +43,20 @@ export const GamePage: FC = () => {
   );
 
   useSocketListener<GameResponse>('start-game', setGame);
+  useSocketListener<GameResponse>('get-game', (data) => {
+    setGame(data);
+
+    const players = data.playerOrder;
+    const isJoinWhilePlaying = user === undefined || !players.includes(user);
+    if (isJoinWhilePlaying) {
+      navigate('/rooms');
+      toast.error('이미 게임이 진행 중입니다.');
+    }
+  });
+
+  useEffect(() => {
+    socket?.emit('get-game', { roomId });
+  }, [socket, roomId]);
 
   return (
     <RootLayout className="h-screen w-screen">
