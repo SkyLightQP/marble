@@ -8,14 +8,16 @@ import { DiceView } from '@/components/Dice/DiceView';
 import { RankView } from '@/components/Rank/RankView';
 import { SpecialCard } from '@/components/SpecialCard';
 import { DotItem } from '@/types/DotItem';
+import { RankItem } from '@/types/Rank';
 import { range } from '@/utils/Range';
 
 interface GameBoardProps {
   readonly playerPositions: Record<string, DotItem[]>;
   readonly isMyTurn: boolean;
+  readonly ranks: RankItem[];
 }
 
-export const GameBoard: FC<GameBoardProps> = ({ playerPositions, isMyTurn }) => {
+export const GameBoard: FC<GameBoardProps> = ({ playerPositions, isMyTurn, ranks }) => {
   const [cities, setCities] = useState<
     Awaited<ReturnType<typeof api.functional.city.group.position.getCitiesGroupByPosition>>
   >({});
@@ -69,7 +71,7 @@ export const GameBoard: FC<GameBoardProps> = ({ playerPositions, isMyTurn }) => 
             ))}
         </div>
         <div className="flex h-full w-[1060px] justify-center space-x-4 p-10">
-          <RankView />
+          <RankView ranks={ranks} />
           <BalanceInformationView />
           <DiceView isMyTurn={isMyTurn} />
         </div>
