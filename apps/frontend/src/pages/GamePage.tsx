@@ -7,7 +7,9 @@ import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { useUser } from '@/hooks/useUser';
 import { RootLayout } from '@/layouts/RootLayout';
+import { DotColor } from '@/types/DotColor';
 import { DotItem } from '@/types/DotItem';
+import { RankItem } from '@/types/Rank';
 
 export const GamePage: FC = () => {
   const user = useUser();
@@ -15,6 +17,8 @@ export const GamePage: FC = () => {
   const [game, setGame] = useState<GameResponse>();
   const navigate = useNavigate();
   const { roomId } = useParams();
+
+  // TODO: Create hooks to process business logic.
 
   const playerColors = useMemo(() => {
     const uuids = Object.keys(game?.playerStatus ?? {});
@@ -41,13 +45,21 @@ export const GamePage: FC = () => {
       ),
     [game, playerColors]
   );
+  const playerRanks: RankItem[] = useMemo(() => {
+    return Object.entries(game?.playerStatus ?? {}).map(([userId, status]) => ({
+      name: status.nickname,
+      color: playerColors[userId] as DotColor,
+      price: status.money,
+      isMe: userId === user
+    }));
+  }, [game, playerColors, user]);
 
   useSocketListener<GameResponse>('start-game', setGame);
   useSocketListener<GameResponse>('get-game', (data) => {
     setGame(data);
 
     const players = data.playerOrder;
-    const isJoinWhilePlaying = user === undefined || !players.includes(user);
+    const isJoinWhilePlaying = user === undefined || !players.map(({ userId }) => userId).includes(user);
     if (isJoinWhilePlaying) {
       navigate('/rooms');
       toast.error('이미 게임이 진행 중입니다.');
@@ -64,7 +76,7 @@ export const GamePage: FC = () => {
 
   return (
     <RootLayout className="h-screen w-screen">
-      <GameBoard playerPositions={playerPositions} isMyTurn={game?.currentTurnPlayer === user} />
+      <GameBoard playerPositions={playerPositions} isMyTurn={game?.currentTurnPlayer === user} ranks={playerRanks} />
     </RootLayout>
   );
 };
