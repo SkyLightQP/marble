@@ -27,10 +27,7 @@ export class StartGameHandler implements ICommandHandler<StartGameCommand> {
       throw new WsException(ErrorCode.ROOM_IS_PLAYING);
     }
 
-    const game = Game.create(
-      room.id,
-      room.players.map(({ userId }) => userId)
-    );
+    const game = Game.create(room.id, room.players);
     room.isPlaying = true;
 
     await room.syncRedis(this.redis);

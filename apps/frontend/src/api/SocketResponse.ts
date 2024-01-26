@@ -30,6 +30,7 @@ export interface CreateRoomResponse {
 }
 
 export interface GameStatusResponse {
+  readonly nickname: string;
   readonly money: number;
   readonly land: number;
   readonly house: number;
@@ -42,7 +43,7 @@ export interface GameStatusResponse {
 export interface GameResponse {
   readonly roomId: string;
   readonly turn: number;
-  readonly playerOrder: string[];
+  readonly playerOrder: PlayerResponse[];
   readonly currentTurnPlayer: string;
   readonly playerStatus: Record<string, GameStatusResponse>;
 }
