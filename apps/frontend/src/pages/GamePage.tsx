@@ -56,6 +56,10 @@ export const GamePage: FC = () => {
 
   useEffect(() => {
     socket?.emit('get-game', { roomId });
+
+    return () => {
+      socket?.emit('dropout-game', { roomId });
+    };
   }, [socket, roomId]);
 
   return (
