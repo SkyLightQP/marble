@@ -26,6 +26,7 @@ export class DropoutGameHandler implements ICommandHandler<DropoutGameCommand> {
 
     if (room.players.length <= 0) {
       await this.redis.hDel('room', roomId);
+      await this.redis.hDel('game', roomId);
       this.eventBus.publish(new DestroyedRoomEvent({ room }));
       Logger.log({ message: '플레이어가 아무도 없어 게임을 종료하고 방을 삭제합니다.', roomId });
       return null;
