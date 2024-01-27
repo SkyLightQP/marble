@@ -9,7 +9,6 @@ import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { InputError } from '@/components/InputError';
 import { Label } from '@/components/Label';
-import { getErrorMessage } from '@/error/ErrorMessage';
 import { getCustomError } from '@/error/ErrorUtil';
 import { RootLayout } from '@/layouts/RootLayout';
 
@@ -50,7 +49,7 @@ export const RegisterPage: React.FC = () => {
       navigate('/login');
     } catch (e) {
       const error = getCustomError(e);
-      toast.error(getErrorMessage(error.code));
+      toast.error(error.message);
     }
   };
 

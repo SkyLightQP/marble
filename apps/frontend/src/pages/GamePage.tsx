@@ -3,7 +3,6 @@ import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GameResponse, WebSocketError } from '@/api/SocketResponse';
 import { GameBoard } from '@/components/GameBoard';
-import { getErrorMessage } from '@/error/ErrorMessage';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { useUser } from '@/hooks/useUser';
@@ -67,7 +66,7 @@ export const GamePage: FC = () => {
     }
   });
   useSocketListener<WebSocketError>('exception', (error) => {
-    toast.error(getErrorMessage(error.code));
+    toast.error(error.message);
     navigate(-1);
   });
 

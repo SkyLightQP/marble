@@ -8,7 +8,6 @@ import { CreateRoomResponse, GetRoomsResponse, WebSocketError } from '@/api/Sock
 import { Button } from '@/components/Button';
 import { CreateRoomForm, createRoomFormSchema, CreateRoomModal } from '@/components/Room/CreateRoomModal';
 import { RoomPreviewCard } from '@/components/Room/RoomPreviewCard';
-import { getErrorMessage } from '@/error/ErrorMessage';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { RootLayout } from '@/layouts/RootLayout';
@@ -52,7 +51,7 @@ export const RoomListPage: React.FC = () => {
   });
   useSocketListener<WebSocketError>('exception', (error) => {
     if (error.code === 'PLAYER_NOT_FOUND') return;
-    toast.error(getErrorMessage(error.code));
+    toast.error(error.message);
   });
 
   const onCreateRoomClick: SubmitHandler<CreateRoomForm> = async (data) => {

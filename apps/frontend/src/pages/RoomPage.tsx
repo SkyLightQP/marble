@@ -3,7 +3,6 @@ import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GetRoomResponse, WebSocketError } from '@/api/SocketResponse';
 import { RoomMenu } from '@/components/Room/RoomMenu';
-import { getErrorMessage } from '@/error/ErrorMessage';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { RootLayout } from '@/layouts/RootLayout';
@@ -35,7 +34,7 @@ export const RoomPage: React.FC = () => {
 
   useSocketListener<GetRoomResponse>('join-room', setRoom);
   useSocketListener<WebSocketError>('exception', (error) => {
-    toast.error(getErrorMessage(error.code));
+    toast.error(error.message);
     navigate(-1);
   });
 
