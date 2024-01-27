@@ -6,6 +6,7 @@ import { Input } from '@/components/Input';
 import { InputError } from '@/components/InputError';
 import { Label } from '@/components/Label';
 import { Modal } from '@/components/Modal';
+import { useRandomRoomName } from '@/hooks/useRandomRoomName';
 
 export interface CreateRoomForm {
   readonly name: string;
@@ -35,6 +36,8 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
   onCreateRoomClick,
   form: { register, handleSubmit, reset, errors }
 }) => {
+  const name = useRandomRoomName();
+
   return (
     <Modal
       isOpen={isOpen}
@@ -44,7 +47,7 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
       height="260px"
       onClose={() =>
         reset({
-          name: '',
+          name,
           maxPeople: 1
         })
       }

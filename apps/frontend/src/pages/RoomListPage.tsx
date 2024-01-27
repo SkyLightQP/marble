@@ -8,11 +8,13 @@ import { CreateRoomResponse, GetRoomsResponse, WebSocketError } from '@/api/Sock
 import { Button } from '@/components/Button';
 import { CreateRoomForm, createRoomFormSchema, CreateRoomModal } from '@/components/Room/CreateRoomModal';
 import { RoomPreviewCard } from '@/components/Room/RoomPreviewCard';
+import { useRandomRoomName } from '@/hooks/useRandomRoomName';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { RootLayout } from '@/layouts/RootLayout';
 
 export const RoomListPage: React.FC = () => {
+  const roomName = useRandomRoomName();
   const [rooms, setRooms] = useState<GetRoomsResponse>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const {
@@ -22,7 +24,7 @@ export const RoomListPage: React.FC = () => {
     formState: { errors }
   } = useForm<CreateRoomForm>({
     defaultValues: {
-      name: '',
+      name: roomName,
       maxPeople: 1
     },
     resolver: yupResolver(createRoomFormSchema)
