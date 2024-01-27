@@ -15,7 +15,7 @@ export class GetGameHandler implements IQueryHandler<GetGameQuery> {
   async execute({ args: { roomId } }: GetGameQuery): Promise<GetGameReturn> {
     const gameInRedis = await this.redis.hGet('game', roomId);
 
-    if (gameInRedis === undefined) {
+    if (gameInRedis === undefined || gameInRedis === null) {
       throw new WsException(ErrorCode.ROOM_NOT_FOUND);
     }
 

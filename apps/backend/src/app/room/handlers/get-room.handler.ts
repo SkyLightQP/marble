@@ -15,7 +15,7 @@ export class GetRoomHandler implements IQueryHandler<GetRoomQuery> {
   async execute({ args: { roomId } }: GetRoomQuery): Promise<GetRoomReturn> {
     const roomsInRedis = await this.redis.hGet('room', roomId);
 
-    if (roomsInRedis === undefined) {
+    if (roomsInRedis === undefined || roomsInRedis === null) {
       throw new WsException(ErrorCode.ROOM_NOT_FOUND);
     }
 
