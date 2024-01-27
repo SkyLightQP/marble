@@ -5,6 +5,7 @@ import { RedisClientType } from 'redis';
 import { QuitRoomCommand } from '@/app/room/commands/quit-room.command';
 import { Room } from '@/app/room/domain/room';
 import { DestroyedRoomEvent } from '@/app/room/events/destroyed-room-event';
+import { QuitRoomEvent } from '@/app/room/events/quit-room.event';
 import { ErrorCode } from '@/infrastructure/error/error-code';
 
 export type QuitRoomReturn = Room | null;
@@ -29,6 +30,7 @@ export class QuitRoomHandler implements ICommandHandler<QuitRoomCommand> {
 
     room.removePlayer(userId);
     await room.syncRedis(this.redis);
+    this.eventBus.publish(new QuitRoomEvent({ room, userId }));
     Logger.log({ message: '방에서 플레이어가 퇴장했습니다.', room, userId });
 
     if (room.players.length <= 0) {
