@@ -1,7 +1,7 @@
 export const ErrorCode = {
   ROOM_IS_PLAYING: {
     code: 'ROOM_IS_PLAYING',
-    message: '게임이 시작된 방입니다.'
+    message: '이미 게임이 시작된 방입니다.'
   },
   IS_NOT_OWNER: {
     code: 'IS_NOT_OWNER',
