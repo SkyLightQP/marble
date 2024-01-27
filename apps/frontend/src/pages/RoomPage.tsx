@@ -19,13 +19,17 @@ export const RoomPage: React.FC = () => {
       e.preventDefault();
       e.returnValue = '';
     };
+    const unloadListener = () => {
+      socket?.emit('quit-room', { roomId });
+    };
 
     socket?.emit('join-room', { roomId });
     window.addEventListener('beforeunload', beforeUnloadListener);
+    window.addEventListener('unload', unloadListener);
 
     return () => {
-      socket?.emit('quit-room', { roomId });
       window.removeEventListener('beforeunload', beforeUnloadListener);
+      window.removeEventListener('unload', unloadListener);
     };
   }, [socket, roomId]);
 

@@ -1,8 +1,9 @@
 import { FC, useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
-import { GameResponse } from '@/api/SocketResponse';
+import { GameResponse, WebSocketError } from '@/api/SocketResponse';
 import { GameBoard } from '@/components/GameBoard';
+import { getErrorMessage } from '@/error/ErrorMessage';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { useUser } from '@/hooks/useUser';
@@ -65,12 +66,27 @@ export const GamePage: FC = () => {
       toast.error('이미 게임이 진행 중입니다.');
     }
   });
+  useSocketListener<WebSocketError>('exception', (error) => {
+    toast.error(getErrorMessage(error.code));
+    navigate(-1);
+  });
 
   useEffect(() => {
+    const beforeUnloadListener = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = '';
+    };
+    const unloadListener = () => {
+      socket?.emit('dropout-game', { roomId });
+    };
+
     socket?.emit('get-game', { roomId });
+    window.addEventListener('beforeunload', beforeUnloadListener);
+    window.addEventListener('unload', unloadListener);
 
     return () => {
-      socket?.emit('dropout-game', { roomId });
+      window.removeEventListener('beforeunload', beforeUnloadListener);
+      window.removeEventListener('unload', unloadListener);
     };
   }, [socket, roomId]);
 
