@@ -44,6 +44,7 @@ export const RoomPage: React.FC = () => {
   };
 
   const quitRoom = () => {
+    socket?.emit('quit-room', { roomId });
     navigate(-1);
   };
 
