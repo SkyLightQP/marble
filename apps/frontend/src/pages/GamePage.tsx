@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GameResponse, WebSocketError } from '@/api/SocketResponse';
 import { GameBoard } from '@/components/GameBoard';
+import { useBackListener } from '@/hooks/useBackListener';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { useUser } from '@/hooks/useUser';
@@ -51,6 +52,10 @@ export const GamePage: FC = () => {
       window.removeEventListener('unload', unloadListener);
     };
   }, [socket, roomId]);
+
+  useBackListener(() => {
+    socket?.emit('dropout-game', { roomId });
+  });
 
   return (
     <RootLayout className="h-screen w-screen">

@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GetRoomResponse, WebSocketError } from '@/api/SocketResponse';
 import { RoomMenu } from '@/components/Room/RoomMenu';
+import { useBackListener } from '@/hooks/useBackListener';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { RootLayout } from '@/layouts/RootLayout';
@@ -32,7 +33,12 @@ export const RoomPage: React.FC = () => {
     };
   }, [socket, roomId]);
 
+  useBackListener(() => {
+    socket?.emit('quit-room', { roomId });
+  });
+
   useSocketListener<GetRoomResponse>('join-room', setRoom);
+  useSocketListener<GetRoomResponse>('get-room', setRoom);
   useSocketListener<WebSocketError>('exception', (error) => {
     toast.error(error.message);
     navigate(-1);
