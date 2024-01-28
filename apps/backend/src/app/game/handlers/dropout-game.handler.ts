@@ -27,8 +27,8 @@ export class DropoutGameHandler implements ICommandHandler<DropoutGameCommand> {
     room.removePlayer(userId);
     game.removePlayer(userId);
     await room.syncRedis(this.redis);
-    this.eventBus.publish(new DropoutGameEvent({ userId, room }));
     await game.syncRedis(this.redis);
+    this.eventBus.publish(new DropoutGameEvent({ userId, room, game }));
     Logger.log({ message: '플레이어가 중퇴했습니다.', room, userId });
 
     if (room.players.length <= 0) {
