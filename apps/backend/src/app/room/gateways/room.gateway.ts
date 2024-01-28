@@ -45,12 +45,13 @@ export class RoomGateway {
     @MessageBody() message: JoinRoomDto,
     @ConnectedSocket() socket: Socket & { user: AuthTokenPayload }
   ): Promise<WsResponse<JoinRoomReturn>> {
-    const data = await this.commandBus.execute(
+    const data = await this.commandBus.execute<JoinRoomCommand, JoinRoomReturn>(
       new JoinRoomCommand({
         roomId: message.roomId,
         userId: socket.user.sub
       })
     );
+    socket.join(`room:${data.id}`);
     return { event: 'join-room', data };
   }
 
@@ -60,20 +61,14 @@ export class RoomGateway {
     @MessageBody() message: QuitRoomDto,
     @ConnectedSocket() socket: Socket & { user: AuthTokenPayload }
   ): Promise<WsResponse<QuitRoomReturn>> {
-    const data = await this.commandBus.execute(
+    const data = await this.commandBus.execute<QuitRoomCommand, QuitRoomReturn>(
       new QuitRoomCommand({
         roomId: message.roomId,
         userId: socket.user.sub
       })
     );
+    socket.leave(`room:${data.id}`);
     return { event: 'quit-room', data };
-  }
-
-  @UseGuards(SocketJwtGuard)
-  @SubscribeMessage('get-rooms')
-  async handleGetRooms(): Promise<WsResponse<GetRoomsReturn>> {
-    const data = await this.queryBus.execute(new GetRoomsQuery());
-    return { event: 'get-rooms', data };
   }
 
   @UseGuards(SocketJwtGuard)
@@ -83,14 +78,22 @@ export class RoomGateway {
     @MessageBody() message: CreateRoomDto,
     @ConnectedSocket() socket: Socket & { user: AuthTokenPayload }
   ): Promise<WsResponse<CreateRoomReturn>> {
-    const data = await this.commandBus.execute(
+    const data = await this.commandBus.execute<CreateRoomCommand, CreateRoomReturn>(
       new CreateRoomCommand({
         name: message.name,
         maxPlayer: message.maxPlayer,
         userId: socket.user.sub
       })
     );
+    socket.join(`room:${data.id}`);
     return { event: 'create-room', data };
+  }
+
+  @UseGuards(SocketJwtGuard)
+  @SubscribeMessage('get-rooms')
+  async handleGetRooms(): Promise<WsResponse<GetRoomsReturn>> {
+    const data = await this.queryBus.execute(new GetRoomsQuery());
+    return { event: 'get-rooms', data };
   }
 
   @UseGuards(SocketJwtGuard)
