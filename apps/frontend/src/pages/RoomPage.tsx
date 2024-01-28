@@ -3,10 +3,10 @@ import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GetRoomResponse, WebSocketError } from '@/api/SocketResponse';
 import { RoomMenu } from '@/components/Room/RoomMenu';
-import { useBackListener } from '@/hooks/useBackListener';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { RootLayout } from '@/layouts/RootLayout';
+import { useQuitListener } from '@/services/useQuitListener';
 
 export const RoomPage: React.FC = () => {
   const [room, setRoom] = useState<GetRoomResponse>();
@@ -15,28 +15,10 @@ export const RoomPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const beforeUnloadListener = (e: BeforeUnloadEvent) => {
-      e.preventDefault();
-      e.returnValue = '';
-    };
-    const unloadListener = () => {
-      socket?.emit('quit-room', { roomId });
-    };
-
     socket?.emit('join-room', { roomId });
-    window.addEventListener('beforeunload', beforeUnloadListener);
-    window.addEventListener('unload', unloadListener);
-
-    return () => {
-      window.removeEventListener('beforeunload', beforeUnloadListener);
-      window.removeEventListener('unload', unloadListener);
-    };
   }, [socket, roomId]);
 
-  useBackListener(() => {
-    socket?.emit('quit-room', { roomId });
-  });
-
+  useQuitListener({ quitSocket: 'quit-room', roomId: roomId ?? 'loading' });
   useSocketListener<GetRoomResponse>('join-room', setRoom);
   useSocketListener<GetRoomResponse>('get-room', setRoom);
   useSocketListener<WebSocketError>('exception', (error) => {

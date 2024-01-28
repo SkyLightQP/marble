@@ -3,12 +3,12 @@ import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GameResponse, WebSocketError } from '@/api/SocketResponse';
 import { GameBoard } from '@/components/GameBoard';
-import { useBackListener } from '@/hooks/useBackListener';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { useUser } from '@/hooks/useUser';
 import { RootLayout } from '@/layouts/RootLayout';
 import { useGamePlayer } from '@/services/useGamePlayer';
+import { useQuitListener } from '@/services/useQuitListener';
 
 export const GamePage: FC = () => {
   const [game, setGame] = useState<GameResponse>();
@@ -18,6 +18,11 @@ export const GamePage: FC = () => {
   const socket = useSocket();
   const { playerPositions, playerRanks } = useGamePlayer({ game, user });
 
+  useEffect(() => {
+    socket?.emit('get-game', { roomId });
+  }, [socket, roomId]);
+
+  useQuitListener({ quitSocket: 'dropout-game', roomId: roomId ?? 'loading' });
   useSocketListener<GameResponse>('start-game', setGame);
   useSocketListener<GameResponse>('get-game', (data) => {
     setGame(data);
@@ -32,29 +37,6 @@ export const GamePage: FC = () => {
   useSocketListener<WebSocketError>('exception', (error) => {
     toast.error(error.message);
     navigate(-1);
-  });
-
-  useEffect(() => {
-    const beforeUnloadListener = (e: BeforeUnloadEvent) => {
-      e.preventDefault();
-      e.returnValue = '';
-    };
-    const unloadListener = () => {
-      socket?.emit('dropout-game', { roomId });
-    };
-
-    socket?.emit('get-game', { roomId });
-    window.addEventListener('beforeunload', beforeUnloadListener);
-    window.addEventListener('unload', unloadListener);
-
-    return () => {
-      window.removeEventListener('beforeunload', beforeUnloadListener);
-      window.removeEventListener('unload', unloadListener);
-    };
-  }, [socket, roomId]);
-
-  useBackListener(() => {
-    socket?.emit('dropout-game', { roomId });
   });
 
   return (
