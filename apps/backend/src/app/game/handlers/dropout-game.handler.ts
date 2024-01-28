@@ -7,7 +7,7 @@ import { DestroyedRoomEvent } from '@/app/room/events/destroyed-room-event';
 import { GetRoomReturn } from '@/app/room/handlers/get-room.handler';
 import { GetRoomQuery } from '@/app/room/queries/get-room.query';
 
-export type DropoutGameReturn = Room | null;
+export type DropoutGameReturn = Room;
 
 @CommandHandler(DropoutGameCommand)
 export class DropoutGameHandler implements ICommandHandler<DropoutGameCommand> {
@@ -29,7 +29,7 @@ export class DropoutGameHandler implements ICommandHandler<DropoutGameCommand> {
       await this.redis.hDel('game', roomId);
       this.eventBus.publish(new DestroyedRoomEvent({ room }));
       Logger.log({ message: '플레이어가 아무도 없어 게임을 종료하고 방을 삭제합니다.', roomId });
-      return null;
+      return room;
     }
 
     return room;

@@ -8,7 +8,7 @@ import { DestroyedRoomEvent } from '@/app/room/events/destroyed-room-event';
 import { QuitRoomEvent } from '@/app/room/events/quit-room.event';
 import { ErrorCode } from '@/infrastructure/error/error-code';
 
-export type QuitRoomReturn = Room | null;
+export type QuitRoomReturn = Room;
 
 @CommandHandler(QuitRoomCommand)
 export class QuitRoomHandler implements ICommandHandler<QuitRoomCommand> {
@@ -26,7 +26,7 @@ export class QuitRoomHandler implements ICommandHandler<QuitRoomCommand> {
 
     const room = Room.fromJSON(roomInRedis);
 
-    if (room.isPlaying) return null;
+    if (room.isPlaying) return room;
 
     room.removePlayer(userId);
     await room.syncRedis(this.redis);
@@ -37,7 +37,7 @@ export class QuitRoomHandler implements ICommandHandler<QuitRoomCommand> {
       await this.redis.hDel('room', roomId);
       this.eventBus.publish(new DestroyedRoomEvent({ room }));
       Logger.log({ message: '플레이어가 아무도 없어 방이 삭제되었습니다.', roomId });
-      return null;
+      return room;
     }
 
     return room;
