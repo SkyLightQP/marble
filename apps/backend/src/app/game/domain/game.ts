@@ -55,6 +55,11 @@ export class Game extends SyncableToRedis {
     return new Game(roomId, 1, currentPlayer, currentPlayer[0].userId, defaultStatus);
   }
 
+  public removePlayer(userId: string): void {
+    this.playerOrder = this.playerOrder.filter((player) => player.userId !== userId);
+    delete this.playerStatus[userId];
+  }
+
   public toJSON(): GameFields {
     return {
       roomId: this.roomId,
