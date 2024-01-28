@@ -1,9 +1,10 @@
 import { Inject, Logger } from '@nestjs/common';
-import { CommandHandler, ICommandHandler, QueryBus } from '@nestjs/cqrs';
+import { CommandHandler, EventBus, ICommandHandler, QueryBus } from '@nestjs/cqrs';
 import { WsException } from '@nestjs/websockets';
 import { RedisClientType } from 'redis';
 import { StartGameCommand } from '@/app/game/commands/start-game.command';
 import { Game, GameFields } from '@/app/game/domain/game';
+import { StartedGameEvent } from '@/app/game/events/started-game.event';
 import { GetRoomReturn } from '@/app/room/handlers/get-room.handler';
 import { GetRoomQuery } from '@/app/room/queries/get-room.query';
 import { ErrorCode } from '@/infrastructure/error/error-code';
@@ -14,7 +15,8 @@ export type StartGameReturn = GameFields;
 export class StartGameHandler implements ICommandHandler<StartGameCommand> {
   constructor(
     @Inject('REDIS_CLIENT') private readonly redis: RedisClientType,
-    private readonly queryBus: QueryBus
+    private readonly queryBus: QueryBus,
+    private readonly eventBus: EventBus
   ) {}
 
   async execute({ args: { roomId, executor } }: StartGameCommand): Promise<StartGameReturn> {
@@ -32,6 +34,8 @@ export class StartGameHandler implements ICommandHandler<StartGameCommand> {
 
     await room.syncRedis(this.redis);
     await game.syncRedis(this.redis);
+
+    this.eventBus.publish(new StartedGameEvent({ room, game }));
 
     Logger.log({ message: '게임을 시작했습니다.', roomId, executor });
 
