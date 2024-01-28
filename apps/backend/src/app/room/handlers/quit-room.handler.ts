@@ -4,7 +4,7 @@ import { WsException } from '@nestjs/websockets';
 import { RedisClientType } from 'redis';
 import { QuitRoomCommand } from '@/app/room/commands/quit-room.command';
 import { Room } from '@/app/room/domain/room';
-import { DestroyedRoomEvent } from '@/app/room/events/destroyed-room-event';
+import { DestroyedRoomEvent } from '@/app/room/events/destroyed-room.event';
 import { QuitRoomEvent } from '@/app/room/events/quit-room.event';
 import { ErrorCode } from '@/infrastructure/error/error-code';
 

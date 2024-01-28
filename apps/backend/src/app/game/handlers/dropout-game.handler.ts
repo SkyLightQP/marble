@@ -3,7 +3,7 @@ import { CommandHandler, EventBus, ICommandHandler, QueryBus } from '@nestjs/cqr
 import { RedisClientType } from 'redis';
 import { DropoutGameCommand } from '@/app/game/commands/dropout-game.command';
 import { Room } from '@/app/room/domain/room';
-import { DestroyedRoomEvent } from '@/app/room/events/destroyed-room-event';
+import { DestroyedRoomEvent } from '@/app/room/events/destroyed-room.event';
 import { GetRoomReturn } from '@/app/room/handlers/get-room.handler';
 import { GetRoomQuery } from '@/app/room/queries/get-room.query';
 
