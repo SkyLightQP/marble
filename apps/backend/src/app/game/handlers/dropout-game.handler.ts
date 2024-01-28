@@ -2,6 +2,7 @@ import { Inject, Logger } from '@nestjs/common';
 import { CommandHandler, EventBus, ICommandHandler, QueryBus } from '@nestjs/cqrs';
 import { RedisClientType } from 'redis';
 import { DropoutGameCommand } from '@/app/game/commands/dropout-game.command';
+import { DropoutGameEvent } from '@/app/game/events/dropout-game.event';
 import { Room } from '@/app/room/domain/room';
 import { DestroyedRoomEvent } from '@/app/room/events/destroyed-room.event';
 import { GetRoomReturn } from '@/app/room/handlers/get-room.handler';
@@ -22,6 +23,7 @@ export class DropoutGameHandler implements ICommandHandler<DropoutGameCommand> {
 
     room.removePlayer(userId);
     await room.syncRedis(this.redis);
+    this.eventBus.publish(new DropoutGameEvent({ userId, room }));
     Logger.log({ message: '플레이어가 중퇴했습니다.', room, userId });
 
     if (room.players.length <= 0) {
