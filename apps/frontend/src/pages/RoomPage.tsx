@@ -21,6 +21,9 @@ export const RoomPage: React.FC = () => {
   useQuitListener({ quitSocket: 'quit-room', roomId: roomId ?? 'loading' });
   useSocketListener<GetRoomResponse>('join-room', setRoom);
   useSocketListener<GetRoomResponse>('get-room', setRoom);
+  useSocketListener('start-game', () => {
+    navigate(`/game/${roomId}`);
+  });
   useSocketListener<WebSocketError>('exception', (error) => {
     toast.error(error.message);
     navigate(-1);
@@ -28,7 +31,6 @@ export const RoomPage: React.FC = () => {
 
   const startGame = () => {
     socket?.emit('start-game', { roomId });
-    navigate(`/game/${roomId}`);
   };
 
   const quitRoom = () => {
