@@ -11,7 +11,7 @@ export const useGamePlayer = (args: { game: GameResponse | undefined; user: stri
 
   const playerColors: Record<string, DotColor> = useMemo(() => {
     const uuids = Object.keys(game?.playerStatus ?? {});
-    const randomColors = COLOR_LIST.toSorted(() => Math.random() - 0.5);
+    const randomColors = [...COLOR_LIST].sort(() => Math.random() - 0.5);
     return uuids.reduce(
       (prev, uuid, index) => ({ ...prev, [uuid]: randomColors[index] }),
       {} as Record<string, DotColor>
