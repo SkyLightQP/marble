@@ -1,3 +1,5 @@
+import { DotColor } from '@/types/DotColor';
+
 export interface PlayerResponse {
   readonly userId: string;
   readonly id: string;
@@ -31,6 +33,7 @@ export interface CreateRoomResponse {
 
 export interface GameStatusResponse {
   readonly nickname: string;
+  readonly color: DotColor;
   readonly money: number;
   readonly land: number;
   readonly house: number;
