@@ -1,11 +1,13 @@
 import { RedisClientType } from 'redis';
 import { assertParse, assertStringify } from 'typia/lib/json';
 import { Player } from '@/app/player/domain/player';
+import { DotColor, DotColorTuple } from '@/app/player/types/dot-color';
 import { SyncableToRedis } from '@/infrastructure/common/abstract/syncable-to-redis';
 import { shuffle } from '@/infrastructure/utils/random.util';
 
 export interface GameStatus {
   readonly nickname: string;
+  readonly color: DotColor;
   readonly money: number;
   readonly land: number;
   readonly house: number;
@@ -36,11 +38,14 @@ export class Game extends SyncableToRedis {
 
   public static create(roomId: string, players: Player[]): Game {
     const currentPlayer = shuffle(players);
+    const colors: DotColorTuple = ['red', 'blue', 'green', 'yellow'];
+    const randomColors = [...colors].sort(() => Math.random() - 0.5);
     const defaultStatus = players.reduce(
-      (prev, player) => ({
+      (prev, player, currentIndex) => ({
         ...prev,
         [player.userId]: {
           nickname: player.nickname,
+          color: randomColors[currentIndex],
           money: 0,
           land: 0,
           house: 0,
