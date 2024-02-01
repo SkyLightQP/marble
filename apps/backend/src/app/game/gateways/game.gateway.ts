@@ -3,12 +3,15 @@ import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WsResponse } from '@nestjs/websockets';
 import type { Socket } from 'socket.io';
 import { DropoutGameCommand } from '@/app/game/commands/dropout-game.command';
+import { RollDiceCommand } from '@/app/game/commands/roll-dice.command';
 import { StartGameCommand } from '@/app/game/commands/start-game.command';
 import { DropoutGameDto } from '@/app/game/gateways/dto/dropout-game.dto';
 import { GetGameDto } from '@/app/game/gateways/dto/get-game.dto';
+import { RollDiceDto } from '@/app/game/gateways/dto/roll-dice.dto';
 import { StartGameDto } from '@/app/game/gateways/dto/start-game.dto';
 import { DropoutGameReturn } from '@/app/game/handlers/dropout-game.handler';
 import { GetGameReturn } from '@/app/game/handlers/get-game.handler';
+import { RollDiceReturn } from '@/app/game/handlers/roll-dice.handler';
 import { StartGameReturn } from '@/app/game/handlers/start-game.handler';
 import { GetGameQuery } from '@/app/game/queries/get-game.query';
 import { AuthTokenPayload } from '@/infrastructure/common/types/auth.type';
@@ -63,5 +66,17 @@ export class GameGateway {
       new DropoutGameCommand({ roomId: message.roomId, userId: socket.user.sub })
     );
     return { event: 'dropout-game', data };
+  }
+
+  @UseGuards(SocketJwtGuard)
+  @SubscribeMessage('roll-dice')
+  async handleRollDice(
+    @MessageBody() message: RollDiceDto,
+    @ConnectedSocket() socket: Socket & { user: AuthTokenPayload }
+  ): Promise<WsResponse<RollDiceReturn>> {
+    const data = await this.commandBus.execute(
+      new RollDiceCommand({ roomId: message.roomId, executor: socket.user.sub })
+    );
+    return { event: 'roll-dice', data };
   }
 }
