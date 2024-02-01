@@ -47,6 +47,6 @@ export interface GameResponse {
   readonly roomId: string;
   readonly turn: number;
   readonly playerOrder: PlayerResponse[];
-  readonly currentTurnPlayer: string;
+  readonly currentOrderPlayerIndex: number;
   readonly playerStatus: Record<string, GameStatusResponse>;
 }
