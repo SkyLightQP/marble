@@ -8,13 +8,13 @@ import { shuffle } from '@/infrastructure/utils/random.util';
 export interface GameStatus {
   readonly nickname: string;
   readonly color: DotColor;
-  readonly money: number;
-  readonly land: number;
-  readonly house: number;
-  readonly building: number;
-  readonly hotel: number;
-  readonly position: number;
-  readonly haveCities: string[];
+  money: number;
+  land: number;
+  house: number;
+  building: number;
+  hotel: number;
+  position: number;
+  haveCities: string[];
 }
 
 export interface GameFields {
