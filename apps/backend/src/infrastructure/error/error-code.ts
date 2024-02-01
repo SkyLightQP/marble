@@ -1,4 +1,8 @@
 export const ErrorCode = {
+  PLAYER_IS_NOT_TURN: {
+    code: 'PLAYER_IS_NOT_TURN',
+    message: '자신의 턴이 아닙니다.'
+  },
   ROOM_IS_PLAYING: {
     code: 'ROOM_IS_PLAYING',
     message: '이미 게임이 시작된 방입니다.'
