@@ -41,7 +41,11 @@ export const GamePage: FC = () => {
 
   return (
     <RootLayout className="h-screen w-screen">
-      <GameBoard playerPositions={playerPositions} isMyTurn={game?.currentTurnPlayer === user} ranks={playerRanks} />
+      <GameBoard
+        playerPositions={playerPositions}
+        isMyTurn={game?.playerOrder[game?.currentOrderPlayerIndex].userId === user ?? false}
+        ranks={playerRanks}
+      />
     </RootLayout>
   );
 };
