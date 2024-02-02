@@ -31,7 +31,9 @@ export const DiceView: React.FC<DiceViewProps> = ({ isMyTurn, onClick }) => {
         </div>
       </div>
       {isMyTurn ? (
-        <p className="mt-2 text-gray-400">주사위를 눌러 턴을 시작하세요.</p>
+        <p className={clsx('mt-2', isMyTurn ? 'text-black font-bold' : 'text-gray-400 font-normal')}>
+          주사위를 눌러 턴을 시작하세요.
+        </p>
       ) : (
         <p className="mt-2 text-gray-400">내 턴을 기다리는 중...</p>
       )}
