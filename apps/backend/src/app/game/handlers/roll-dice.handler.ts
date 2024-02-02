@@ -37,8 +37,7 @@ export class RollDiceHandler implements ICommandHandler<RollDiceCommand> {
     // TODO: implement double dice.
 
     game.playerStatus[executor].position = (game.playerStatus[executor].position + dice1 + dice2) % GAME_CARD_AMOUNT;
-    game.currentOrderPlayerIndex = (game.currentOrderPlayerIndex + 1) % game.playerOrder.length;
-
+    game.increaseCurrentOrderPlayerIndex();
     await game.syncRedis(this.redis);
 
     Logger.log({ message: '주사위를 굴렸습니다.', roomId, executor, dice1, dice2 });
