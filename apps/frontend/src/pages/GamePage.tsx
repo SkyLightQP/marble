@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GameResponse, WebSocketError } from '@/api/SocketResponse';
@@ -17,10 +17,20 @@ export const GamePage: FC = () => {
   const user = useUser();
   const socket = useSocket();
   const { playerPositions, playerRanks } = useGamePlayer({ game, user });
+  const isMyTurn = useMemo(() => {
+    if (game === undefined || user === undefined) return false;
+    return game.playerOrder[game.currentOrderPlayerIndex].userId === user;
+  }, [game, user]);
 
   useEffect(() => {
     socket?.emit('get-game', { roomId });
   }, [socket, roomId]);
+
+  useEffect(() => {
+    if (isMyTurn) {
+      toast('당신의 차례입니다!');
+    }
+  }, [isMyTurn]);
 
   useQuitListener({ quitSocket: 'dropout-game', roomId: roomId ?? 'loading' });
   useSocketListener<GameResponse>('start-game', setGame);
@@ -41,11 +51,7 @@ export const GamePage: FC = () => {
 
   return (
     <RootLayout className="h-screen w-screen">
-      <GameBoard
-        playerPositions={playerPositions}
-        isMyTurn={game?.playerOrder[game?.currentOrderPlayerIndex].userId === user ?? false}
-        ranks={playerRanks}
-      />
+      <GameBoard playerPositions={playerPositions} isMyTurn={isMyTurn} ranks={playerRanks} />
     </RootLayout>
   );
 };
