@@ -49,9 +49,28 @@ export const GamePage: FC = () => {
     navigate(-1);
   });
 
+  if (game === undefined || user === undefined) {
+    return (
+      <RootLayout className="h-screen w-screen">
+        <h1>Loading</h1>
+      </RootLayout>
+    );
+  }
+
   return (
     <RootLayout className="h-screen w-screen">
-      <GameBoard playerPositions={playerPositions} isMyTurn={isMyTurn} ranks={playerRanks} />
+      <GameBoard
+        playerPositions={playerPositions}
+        isMyTurn={isMyTurn}
+        ranks={playerRanks}
+        balanceInfo={{
+          money: game.playerStatus[user].money ?? 0,
+          land: game.playerStatus[user].land ?? 0,
+          house: game.playerStatus[user].house ?? 0,
+          building: game.playerStatus[user].building ?? 0,
+          hotel: game.playerStatus[user].hotel ?? 0
+        }}
+      />
     </RootLayout>
   );
 };

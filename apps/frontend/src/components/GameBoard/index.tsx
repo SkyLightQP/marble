@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { RiBuildingLine, RiFlagLine } from 'react-icons/ri';
 import { useParams } from 'react-router-dom';
 import { apiConnection } from '@/api';
-import { BalanceInformationView } from '@/components/BalanceInformation/BalanceInformationView';
+import { BalanceInfo, BalanceInformationView } from '@/components/BalanceInformation/BalanceInformationView';
 import { CityCard } from '@/components/CityCard';
 import { DiceView } from '@/components/Dice/DiceView';
 import { RankView } from '@/components/Rank/RankView';
@@ -19,9 +19,10 @@ interface GameBoardProps {
   readonly playerPositions: Record<string, DotItem[]>;
   readonly isMyTurn: boolean;
   readonly ranks: RankItem[];
+  readonly balanceInfo: BalanceInfo;
 }
 
-export const GameBoard: FC<GameBoardProps> = ({ playerPositions, isMyTurn, ranks }) => {
+export const GameBoard: FC<GameBoardProps> = ({ playerPositions, isMyTurn, ranks, balanceInfo }) => {
   const [cities, setCities] = useState<
     Awaited<ReturnType<typeof api.functional.city.group.position.getCitiesGroupByPosition>>
   >({});
@@ -87,7 +88,7 @@ export const GameBoard: FC<GameBoardProps> = ({ playerPositions, isMyTurn, ranks
         </div>
         <div className="flex h-full w-[1060px] justify-center space-x-4 p-10">
           <RankView ranks={ranks} />
-          <BalanceInformationView />
+          <BalanceInformationView balanceInfo={balanceInfo} />
           <DiceView isMyTurn={isMyTurn} onClick={onDiceClick} />
         </div>
         <div className="flex flex-col space-y-1">
