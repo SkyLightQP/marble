@@ -1,12 +1,16 @@
 import api from '@marble/api';
 import { FC, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { RiBuildingLine, RiFlagLine } from 'react-icons/ri';
+import { useParams } from 'react-router-dom';
 import { apiConnection } from '@/api';
 import { BalanceInformationView } from '@/components/BalanceInformation/BalanceInformationView';
 import { CityCard } from '@/components/CityCard';
 import { DiceView } from '@/components/Dice/DiceView';
 import { RankView } from '@/components/Rank/RankView';
 import { SpecialCard } from '@/components/SpecialCard';
+import { useSocket } from '@/hooks/useSocket';
+import { useSocketListener } from '@/hooks/useSocketListener';
 import { DotItem } from '@/types/DotItem';
 import { RankItem } from '@/types/Rank';
 import { range } from '@/utils/Range';
@@ -21,12 +25,23 @@ export const GameBoard: FC<GameBoardProps> = ({ playerPositions, isMyTurn, ranks
   const [cities, setCities] = useState<
     Awaited<ReturnType<typeof api.functional.city.group.position.getCitiesGroupByPosition>>
   >({});
+  const { roomId } = useParams();
+  const socket = useSocket();
 
   useEffect(() => {
     api.functional.city.group.position.getCitiesGroupByPosition(apiConnection).then((res) => {
       setCities(res);
     });
   }, []);
+
+  const onDiceClick = () => {
+    if (!isMyTurn) return;
+    socket?.emit('roll-dice', { roomId });
+  };
+
+  useSocketListener<number[]>('roll-dice', (data) => {
+    toast(`🎲 ${data[0] + data[1]}칸 이동합니다!`);
+  });
 
   if (cities === undefined || cities[1] === undefined) {
     return (
@@ -73,7 +88,7 @@ export const GameBoard: FC<GameBoardProps> = ({ playerPositions, isMyTurn, ranks
         <div className="flex h-full w-[1060px] justify-center space-x-4 p-10">
           <RankView ranks={ranks} />
           <BalanceInformationView />
-          <DiceView isMyTurn={isMyTurn} />
+          <DiceView isMyTurn={isMyTurn} onClick={onDiceClick} />
         </div>
         <div className="flex flex-col space-y-1">
           {range(10, 15).map((i) => (
