@@ -9,7 +9,7 @@ interface RankViewProps {
 
 export const RankView: FC<RankViewProps> = ({ ranks }) => {
   return (
-    <div className="h-60 w-60 rounded-xl border-2 border-gray-300 bg-white p-4 ">
+    <div className="h-60 w-60 rounded-xl border-2 border-gray-300 bg-white p-4">
       <h1 className="mb-2 flex items-center text-xl font-bold">
         <RiTrophyLine className="mr-1" />
         순위
