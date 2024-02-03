@@ -58,7 +58,7 @@ export const GamePage: FC = () => {
   }
 
   return (
-    <RootLayout className="h-screen w-screen">
+    <RootLayout className="h-screen w-screen select-none flex justify-center items-center">
       <GameBoard
         playerPositions={playerPositions}
         isMyTurn={isMyTurn}
