@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { apiConnection } from '@/api';
 import { BalanceInfo, BalanceInformationView } from '@/components/BalanceInformation/BalanceInformationView';
 import { CityCard } from '@/components/CityCard';
+import { CityInformationView } from '@/components/CityInformation/CityInformationView';
 import { DiceView } from '@/components/Dice/DiceView';
 import { RankView } from '@/components/Rank/RankView';
 import { SpecialCard } from '@/components/SpecialCard';
@@ -88,10 +89,18 @@ export const GameBoard: FC<GameBoardProps> = ({ playerPositions, isMyTurn, ranks
               />
             ))}
         </div>
-        <div className="flex h-full w-[1060px] justify-center space-x-4 p-10">
-          <RankView ranks={ranks} />
-          <BalanceInformationView balanceInfo={balanceInfo} />
-          <DiceView isMyTurn={isMyTurn} onClick={onDiceClick} firstDice={dice[0]} secondDice={dice[1]} />
+        <div className="flex flex-col h-full w-[1060px] justify-center p-10 space-y-4">
+          <div className="flex justify-center space-x-4">
+            <RankView ranks={ranks} />
+            <BalanceInformationView balanceInfo={balanceInfo} />
+            <DiceView isMyTurn={isMyTurn} onClick={onDiceClick} firstDice={dice[0]} secondDice={dice[1]} />
+          </div>
+          <div className="flex justify-center space-x-4">
+            <CityInformationView />
+            <div className="h-60 w-[31rem] rounded-xl border-2 border-gray-300 bg-white p-4">
+              <p>채팅</p>
+            </div>
+          </div>
         </div>
         <div className="flex flex-col space-y-1">
           {range(10, 15).map((i) => (
