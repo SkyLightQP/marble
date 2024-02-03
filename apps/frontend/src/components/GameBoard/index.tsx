@@ -26,6 +26,7 @@ export const GameBoard: FC<GameBoardProps> = ({ playerPositions, isMyTurn, ranks
   const [cities, setCities] = useState<
     Awaited<ReturnType<typeof api.functional.city.group.position.getCitiesGroupByPosition>>
   >({});
+  const [dice, setDice] = useState<number[]>([1, 1]);
   const { roomId } = useParams();
   const socket = useSocket();
 
@@ -42,6 +43,7 @@ export const GameBoard: FC<GameBoardProps> = ({ playerPositions, isMyTurn, ranks
 
   useSocketListener<number[]>('roll-dice', (data) => {
     toast(`🎲 ${data[0] + data[1]}칸 이동합니다!`);
+    setDice(data);
   });
 
   if (cities === undefined || cities[1] === undefined) {
@@ -89,7 +91,7 @@ export const GameBoard: FC<GameBoardProps> = ({ playerPositions, isMyTurn, ranks
         <div className="flex h-full w-[1060px] justify-center space-x-4 p-10">
           <RankView ranks={ranks} />
           <BalanceInformationView balanceInfo={balanceInfo} />
-          <DiceView isMyTurn={isMyTurn} onClick={onDiceClick} />
+          <DiceView isMyTurn={isMyTurn} onClick={onDiceClick} firstDice={dice[0]} secondDice={dice[1]} />
         </div>
         <div className="flex flex-col space-y-1">
           {range(10, 15).map((i) => (
