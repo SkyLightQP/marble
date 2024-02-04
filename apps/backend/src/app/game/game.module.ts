@@ -4,21 +4,16 @@ import { DropoutGameHandler } from '@/app/game/handlers/dropout-game.handler';
 import { GetGameHandler } from '@/app/game/handlers/get-game.handler';
 import { RollDiceHandler } from '@/app/game/handlers/roll-dice.handler';
 import { StartGameHandler } from '@/app/game/handlers/start-game.handler';
-import { DropoutGameListener } from '@/app/game/listeners/dropout-game.listener';
-import { RolledDiceListener } from '@/app/game/listeners/rolled-dice.listener';
-import { StartedGameListener } from '@/app/game/listeners/started-game.listener';
-import { SocketModule } from '@/app/socket/socket.module';
 import { DatabaseModule } from '@/infrastructure/database/database.module';
 import { RedisModule } from '@/infrastructure/redis/redis.module';
 
 const commands = [StartGameHandler, DropoutGameHandler, RollDiceHandler];
 const queries = [GetGameHandler];
-const listeners = [StartedGameListener, DropoutGameListener, RolledDiceListener];
 const gateways = [GameGateway];
 
 @Module({
-  imports: [DatabaseModule, RedisModule, SocketModule],
-  providers: [...commands, ...queries, ...listeners, ...gateways],
+  imports: [DatabaseModule, RedisModule],
+  providers: [...commands, ...queries, ...gateways],
   controllers: []
 })
 export class GameModule {}
