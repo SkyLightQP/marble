@@ -91,12 +91,12 @@ export const GameBoard: FC<GameBoardProps> = ({ playerPositions, isMyTurn, ranks
         </div>
         <div className="flex flex-col h-full w-[1060px] justify-center p-10 space-y-4">
           <div className="flex justify-center space-x-4">
-            <RankView ranks={ranks} />
+            <CityInformationView />
             <BalanceInformationView balanceInfo={balanceInfo} />
             <DiceView isMyTurn={isMyTurn} onClick={onDiceClick} firstDice={dice[0]} secondDice={dice[1]} />
           </div>
           <div className="flex justify-center space-x-4">
-            <CityInformationView />
+            <RankView ranks={ranks} />
             <div className="h-60 w-[31rem] rounded-xl border-2 border-gray-300 bg-white p-4">
               <p>채팅</p>
             </div>
