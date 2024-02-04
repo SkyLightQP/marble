@@ -1,5 +1,6 @@
 import { RedisClientType } from 'redis';
 import { assertParse, assertStringify } from 'typia/lib/json';
+import { City } from '@/app/city/domain/City';
 import { Player } from '@/app/player/domain/player';
 import { DotColor, DotColorTuple } from '@/app/player/types/dot-color';
 import { SyncableToRedis } from '@/infrastructure/common/abstract/syncable-to-redis';
@@ -14,7 +15,7 @@ export interface GameStatus {
   building: number;
   hotel: number;
   position: number;
-  haveCities: string[];
+  haveCities: Record<number, City>;
 }
 
 export interface GameFields {
@@ -54,8 +55,8 @@ export class Game extends SyncableToRedis {
           building: 0,
           hotel: 0,
           position: 0,
-          haveCities: []
-        }
+          haveCities: {}
+        } as GameStatus
       }),
       {}
     );
