@@ -65,6 +65,10 @@ export class Game extends SyncableToRedis {
     delete this.playerStatus[userId];
   }
 
+  public getPlayerStatus(userId: string): GameStatus {
+    return this.playerStatus[userId];
+  }
+
   public increaseCurrentOrderPlayerIndex(): void {
     this.currentOrderPlayerIndex = (this.currentOrderPlayerIndex + 1) % this.playerOrder.length;
   }
