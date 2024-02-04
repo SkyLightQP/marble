@@ -6,6 +6,10 @@ import { DotColor, DotColorTuple } from '@/app/player/types/dot-color';
 import { SyncableToRedis } from '@/infrastructure/common/abstract/syncable-to-redis';
 import { shuffle } from '@/infrastructure/utils/random.util';
 
+type Position = number;
+type CityId = number;
+type UserId = string;
+
 export interface GameStatus {
   readonly nickname: string;
   readonly color: DotColor;
@@ -15,7 +19,7 @@ export interface GameStatus {
   building: number;
   hotel: number;
   position: number;
-  haveCities: Record<number, City>;
+  haveCities: Record<CityId, City>;
 }
 
 export interface GameFields {
@@ -23,8 +27,8 @@ export interface GameFields {
   turn: number;
   playerOrder: Player[];
   currentOrderPlayerIndex: number;
-  playerStatus: Record<string, GameStatus>;
-  cityWhoHave: Record<number, string>;
+  playerStatus: Record<UserId, GameStatus>;
+  cityWhoHave: Record<Position, UserId>;
 }
 
 export class Game extends SyncableToRedis {
@@ -33,8 +37,8 @@ export class Game extends SyncableToRedis {
     public turn: number,
     public playerOrder: Player[],
     public currentOrderPlayerIndex: number,
-    public playerStatus: Record<string, GameStatus>,
-    public cityWhoHave: Record<number, string>
+    public playerStatus: Record<UserId, GameStatus>,
+    public cityWhoHave: Record<Position, UserId>
   ) {
     super();
   }
