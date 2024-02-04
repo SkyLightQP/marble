@@ -23,6 +23,7 @@ export interface GameFields {
   playerOrder: Player[];
   currentOrderPlayerIndex: number;
   playerStatus: Record<string, GameStatus>;
+  cityWhoHave: Record<number, string>;
 }
 
 export class Game extends SyncableToRedis {
@@ -31,7 +32,8 @@ export class Game extends SyncableToRedis {
     public turn: number,
     public playerOrder: Player[],
     public currentOrderPlayerIndex: number,
-    public playerStatus: Record<string, GameStatus>
+    public playerStatus: Record<string, GameStatus>,
+    public cityWhoHave: Record<number, string>
   ) {
     super();
   }
@@ -57,7 +59,7 @@ export class Game extends SyncableToRedis {
       }),
       {}
     );
-    return new Game(roomId, 1, currentPlayer, 0, defaultStatus);
+    return new Game(roomId, 1, currentPlayer, 0, defaultStatus, {});
   }
 
   public removePlayer(userId: string): void {
@@ -79,7 +81,8 @@ export class Game extends SyncableToRedis {
       turn: this.turn,
       playerOrder: this.playerOrder,
       currentOrderPlayerIndex: this.currentOrderPlayerIndex,
-      playerStatus: this.playerStatus
+      playerStatus: this.playerStatus,
+      cityWhoHave: this.cityWhoHave
     };
   }
 
@@ -88,8 +91,9 @@ export class Game extends SyncableToRedis {
   }
 
   public static fromJSON(json: string): Game {
-    const { roomId, turn, playerOrder, currentOrderPlayerIndex, playerStatus } = assertParse<GameFields>(json);
-    return new Game(roomId, turn, playerOrder, currentOrderPlayerIndex, playerStatus);
+    const { roomId, turn, playerOrder, currentOrderPlayerIndex, playerStatus, cityWhoHave } =
+      assertParse<GameFields>(json);
+    return new Game(roomId, turn, playerOrder, currentOrderPlayerIndex, playerStatus, cityWhoHave);
   }
 
   public async syncRedis(redis: RedisClientType): Promise<void> {
