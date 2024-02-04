@@ -50,7 +50,7 @@ export class RollDiceHandler implements ICommandHandler<RollDiceCommand> {
 
     Logger.log({ message: '주사위를 굴렸습니다.', roomId, executor, dice1, dice2 });
 
-    this.eventBus.publish(new RolledDiceEvent({ game, executor }));
+    this.eventBus.publish(new RolledDiceEvent({ game, position: playerStatus.position, executor }));
 
     return [dice1, dice2];
   }

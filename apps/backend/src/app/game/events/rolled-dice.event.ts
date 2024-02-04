@@ -5,6 +5,7 @@ export class RolledDiceEvent implements IEvent {
   constructor(
     readonly args: {
       readonly game: Game;
+      readonly position: number;
       readonly executor: string;
     }
   ) {}
