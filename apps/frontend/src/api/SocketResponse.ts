@@ -1,3 +1,5 @@
+import { City } from '@marble/backend/dist/src/app/city/domain/City';
+import { GameStatus } from '@marble/backend/dist/src/app/game/domain/game';
 import { DotColor } from '@/types/DotColor';
 
 export interface PlayerResponse {
@@ -31,6 +33,14 @@ export interface CreateRoomResponse {
   readonly isPlaying: boolean;
 }
 
+export interface CityResponse {
+  readonly cityId: number;
+  readonly land: number;
+  readonly house: number | -1;
+  readonly building: number | -1;
+  readonly hotel: number | -1;
+}
+
 export interface GameStatusResponse {
   readonly nickname: string;
   readonly color: DotColor;
@@ -40,7 +50,7 @@ export interface GameStatusResponse {
   readonly building: number;
   readonly hotel: number;
   readonly position: number;
-  readonly haveCities: string[];
+  readonly haveCities: Record<number, City>;
 }
 
 export interface GameResponse {
@@ -48,5 +58,6 @@ export interface GameResponse {
   readonly turn: number;
   readonly playerOrder: PlayerResponse[];
   readonly currentOrderPlayerIndex: number;
-  readonly playerStatus: Record<string, GameStatusResponse>;
+  playerStatus: Record<string, GameStatus>;
+  cityWhoHave: Record<number, string>;
 }
