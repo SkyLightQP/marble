@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { GameStatusResponse, PlayerResponse } from '@/api/SocketResponse';
 
 interface GameStoreState {
+  isLoading: boolean;
   roomId: string | undefined;
   turn: number;
   playerOrder: PlayerResponse[];
@@ -12,11 +13,12 @@ interface GameStoreState {
 
 interface GameStoreAction {
   giveCityToPlayer: (cityId: number, userId: string) => void;
-  setState: (newState: GameStoreState) => void;
+  setState: (newState: Omit<GameStoreState, 'isLoading'>) => void;
 }
 
 export const useGameStore = create<GameStoreState & GameStoreAction>((set) => ({
-  roomId: undefined,
+  isLoading: false,
+  roomId: '',
   turn: 0,
   playerOrder: [],
   currentOrderPlayerIndex: 0,
@@ -30,5 +32,5 @@ export const useGameStore = create<GameStoreState & GameStoreAction>((set) => ({
       }
     }));
   },
-  setState: (newState: GameStoreState) => set(newState)
+  setState: (newState: Omit<GameStoreState, 'isLoading'>) => set({ isLoading: true, ...newState })
 }));
