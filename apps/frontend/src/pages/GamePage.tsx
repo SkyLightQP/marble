@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GameResponse, WebSocketError } from '@/api/SocketResponse';
@@ -9,16 +9,17 @@ import { useUser } from '@/hooks/useUser';
 import { RootLayout } from '@/layouts/RootLayout';
 import { useGamePlayer } from '@/services/useGamePlayer';
 import { useQuitListener } from '@/services/useQuitListener';
+import { useGameStore } from '@/stores/useGameStore';
 
 export const GamePage: FC = () => {
-  const [game, setGame] = useState<GameResponse>();
+  const game = useGameStore();
   const navigate = useNavigate();
   const { roomId } = useParams();
   const user = useUser();
   const socket = useSocket();
-  const { playerPositions, playerRanks } = useGamePlayer({ game, user });
+  const { playerPositions, playerRanks } = useGamePlayer({ user });
   const isMyTurn = useMemo(() => {
-    if (game === undefined || user === undefined) return false;
+    if (!game.isLoading || user === undefined) return false;
     return game.playerOrder[game.currentOrderPlayerIndex].userId === user;
   }, [game, user]);
 
@@ -33,9 +34,9 @@ export const GamePage: FC = () => {
   }, [isMyTurn]);
 
   useQuitListener({ quitSocket: 'dropout-game', roomId: roomId ?? 'loading' });
-  useSocketListener<GameResponse>('start-game', setGame);
+  useSocketListener<GameResponse>('start-game', game.setState);
   useSocketListener<GameResponse>('get-game', (data) => {
-    setGame(data);
+    game.setState(data);
 
     const players = data.playerOrder;
     const isJoinWhilePlaying = user === undefined || !players.map(({ userId }) => userId).includes(user);
@@ -49,7 +50,7 @@ export const GamePage: FC = () => {
     navigate(-1);
   });
 
-  if (game === undefined || user === undefined) {
+  if (!game.isLoading || user === undefined) {
     return (
       <RootLayout className="h-screen w-screen">
         <h1>Loading</h1>
@@ -59,18 +60,7 @@ export const GamePage: FC = () => {
 
   return (
     <RootLayout className="h-screen w-screen select-none flex justify-center items-center">
-      <GameBoard
-        playerPositions={playerPositions}
-        isMyTurn={isMyTurn}
-        ranks={playerRanks}
-        balanceInfo={{
-          money: game.playerStatus[user].money ?? 0,
-          land: game.playerStatus[user].land ?? 0,
-          house: game.playerStatus[user].house ?? 0,
-          building: game.playerStatus[user].building ?? 0,
-          hotel: game.playerStatus[user].hotel ?? 0
-        }}
-      />
+      <GameBoard positions={playerPositions} isMyTurn={isMyTurn} ranks={playerRanks} />
     </RootLayout>
   );
 };
