@@ -5,6 +5,7 @@ import { RiBuildingLine, RiFlagLine } from 'react-icons/ri';
 import { useParams } from 'react-router-dom';
 import { apiConnection } from '@/api';
 import { BalanceInfo, BalanceInformationView } from '@/components/BalanceInformation/BalanceInformationView';
+import { CityBuyModal } from '@/components/CityBuyModal';
 import { CityCard } from '@/components/CityCard';
 import { CityInformationView } from '@/components/CityInformation/CityInformationView';
 import { DiceView } from '@/components/Dice/DiceView';
@@ -28,6 +29,7 @@ export const GameBoard: FC<GameBoardProps> = ({ playerPositions, isMyTurn, ranks
     Awaited<ReturnType<typeof api.functional.city.group.position.getCitiesGroupByPosition>>
   >({});
   const [dice, setDice] = useState<number[]>([1, 1]);
+  const [isCityBuyModalOpen, setIsCityBuyModalOpen] = useState(false);
   const { roomId } = useParams();
   const socket = useSocket();
 
@@ -130,6 +132,24 @@ export const GameBoard: FC<GameBoardProps> = ({ playerPositions, isMyTurn, ranks
           ))}
         <SpecialCard currentPlayers={playerPositions[15] ?? []} />
       </div>
+
+      <CityBuyModal
+        isOpen={isCityBuyModalOpen}
+        setIsOpen={setIsCityBuyModalOpen}
+        cityName="서울"
+        money={10000}
+        price={{
+          land: 1000,
+          house: 5000,
+          building: 10000,
+          hotel: 100000
+        }}
+        canBuyBuilding
+        onBuyLand={() => {}}
+        onBuyHouse={() => {}}
+        onBuyBuilding={() => {}}
+        onBuyHotel={() => {}}
+      />
     </div>
   );
 };
