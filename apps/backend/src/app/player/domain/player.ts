@@ -7,10 +7,10 @@ interface PlayerFields {
 
 export class Player {
   private constructor(
-    public readonly userId: string,
-    public readonly id: string,
-    public readonly nickname: string,
-    public readonly socketClientId: string
+    public userId: string,
+    public id: string,
+    public nickname: string,
+    public socketClientId: string
   ) {}
 
   public static create(userId: string, id: string, nickname: string, socketClientId: string): Player {
