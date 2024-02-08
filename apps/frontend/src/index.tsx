@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Toaster } from 'react-hot-toast';
 import ReactModal from 'react-modal';
@@ -11,7 +11,7 @@ import './styles/global.css';
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 ReactModal.setAppElement('#root');
 root.render(
-  <React.StrictMode>
+  <StrictMode>
     <UserProvider>
       <SocketProvider>
         <Router />
@@ -19,5 +19,5 @@ root.render(
       </SocketProvider>
     </UserProvider>
     <Toaster />
-  </React.StrictMode>
+  </StrictMode>
 );

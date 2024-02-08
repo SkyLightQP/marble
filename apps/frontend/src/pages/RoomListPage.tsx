@@ -57,7 +57,7 @@ export const RoomListPage: React.FC = () => {
     toast.error(error.message);
   });
 
-  const onCreateRoomInModalClick: SubmitHandler<CreateRoomForm> = async (data) => {
+  const onCreateRoomClick: SubmitHandler<CreateRoomForm> = async (data) => {
     socket?.emit('create-room', {
       name: data.name,
       maxPlayer: Number(data.maxPeople)
@@ -69,13 +69,6 @@ export const RoomListPage: React.FC = () => {
     closeModal(CreateRoomModal);
   };
 
-  const onCreateRoomButtonClick = () => {
-    openModal(CreateRoomModal, {
-      onCreateRoomInModalClick,
-      form: { register, handleSubmit, reset, errors }
-    });
-  };
-
   return (
     <>
       <RootLayout className="h-screen w-screen p-20">
@@ -83,7 +76,15 @@ export const RoomListPage: React.FC = () => {
           <h1 className="mr-4 text-4xl font-bold">
             방 목록<span className="ml-1 text-sm font-normal text-gray-400">({rooms.length})</span>
           </h1>
-          <Button className="mr-2 flex h-8 w-8 items-center justify-center text-2xl" onClick={onCreateRoomButtonClick}>
+          <Button
+            className="mr-2 flex h-8 w-8 items-center justify-center text-2xl"
+            onClick={() => {
+              openModal(CreateRoomModal, {
+                onCreateRoomClick,
+                form: { register, handleSubmit, reset, errors }
+              });
+            }}
+          >
             <RiAddFill />
           </Button>
           <Button
