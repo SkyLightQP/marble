@@ -32,13 +32,7 @@ export interface CreateRoomResponse {
   readonly isPlaying: boolean;
 }
 
-export interface CityResponse {
-  readonly cityId: number;
-  readonly land: number;
-  readonly house: number | -1;
-  readonly building: number | -1;
-  readonly hotel: number | -1;
-}
+type CityType = 'land' | 'house' | 'building' | 'hotel';
 
 export interface GameStatusResponse {
   readonly nickname: string;
@@ -49,7 +43,7 @@ export interface GameStatusResponse {
   readonly building: number;
   readonly hotel: number;
   readonly position: number;
-  readonly haveCities: Record<number, CityResponse>;
+  readonly haveCities: Record<number, CityType[]>;
 }
 
 export interface GameResponse {
