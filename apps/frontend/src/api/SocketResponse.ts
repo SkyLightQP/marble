@@ -62,4 +62,5 @@ export interface RequestBuyCityResponse {
 export interface PenaltyResponse {
   city: Awaited<ReturnType<typeof api.functional.city.getCityById>>;
   ownerNickname: string;
+  penalty: number;
 }
