@@ -1,3 +1,4 @@
+import api from '@marble/api';
 import { DotColor } from '@/types/DotColor';
 
 export interface PlayerResponse {
@@ -58,4 +59,13 @@ export interface GameResponse {
   readonly currentOrderPlayerIndex: number;
   playerStatus: Record<string, GameStatusResponse>;
   cityWhoHave: Record<number, string>;
+}
+
+export interface RequestBuyCityResponse {
+  city: Awaited<ReturnType<typeof api.functional.city.getCityById>>;
+}
+
+export interface PenaltyResponse {
+  city: Awaited<ReturnType<typeof api.functional.city.getCityById>>;
+  ownerNickname: string;
 }
