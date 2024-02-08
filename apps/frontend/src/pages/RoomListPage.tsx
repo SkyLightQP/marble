@@ -12,11 +12,11 @@ import { useRandomRoomName } from '@/hooks/useRandomRoomName';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { RootLayout } from '@/layouts/RootLayout';
+import { useModalStore } from '@/stores/useModalStore';
 
 export const RoomListPage: React.FC = () => {
   const roomName = useRandomRoomName();
   const [rooms, setRooms] = useState<GetRoomsResponse>([]);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -31,6 +31,7 @@ export const RoomListPage: React.FC = () => {
   });
   const navigate = useNavigate();
   const socket = useSocket();
+  const { openModal, closeModal } = useModalStore();
 
   useEffect(() => {
     socket?.emit('get-rooms');
@@ -56,7 +57,7 @@ export const RoomListPage: React.FC = () => {
     toast.error(error.message);
   });
 
-  const onCreateRoomClick: SubmitHandler<CreateRoomForm> = async (data) => {
+  const onCreateRoomInModalClick: SubmitHandler<CreateRoomForm> = async (data) => {
     socket?.emit('create-room', {
       name: data.name,
       maxPlayer: Number(data.maxPeople)
@@ -65,7 +66,14 @@ export const RoomListPage: React.FC = () => {
       name: '',
       maxPeople: 1
     });
-    setIsOpen(false);
+    closeModal(CreateRoomModal);
+  };
+
+  const onCreateRoomButtonClick = () => {
+    openModal(CreateRoomModal, {
+      onCreateRoomInModalClick,
+      form: { register, handleSubmit, reset, errors }
+    });
   };
 
   return (
@@ -75,7 +83,7 @@ export const RoomListPage: React.FC = () => {
           <h1 className="mr-4 text-4xl font-bold">
             방 목록<span className="ml-1 text-sm font-normal text-gray-400">({rooms.length})</span>
           </h1>
-          <Button className="mr-2 flex h-8 w-8 items-center justify-center text-2xl" onClick={() => setIsOpen(true)}>
+          <Button className="mr-2 flex h-8 w-8 items-center justify-center text-2xl" onClick={onCreateRoomButtonClick}>
             <RiAddFill />
           </Button>
           <Button
@@ -99,13 +107,6 @@ export const RoomListPage: React.FC = () => {
           ))}
         </div>
       </RootLayout>
-
-      <CreateRoomModal
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        onCreateRoomClick={onCreateRoomClick}
-        form={{ register, handleSubmit, reset, errors }}
-      />
     </>
   );
 };
