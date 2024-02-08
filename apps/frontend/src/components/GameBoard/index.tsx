@@ -19,6 +19,8 @@ import { DotItem } from '@/types/DotItem';
 import { RankItem } from '@/types/Rank';
 import { range } from '@/utils/Range';
 
+type CityStateType = Awaited<ReturnType<typeof api.functional.city.group.position.getCitiesGroupByPosition>>;
+
 interface GameBoardProps {
   readonly isMyTurn: boolean;
   readonly ranks: RankItem[];
@@ -26,9 +28,7 @@ interface GameBoardProps {
 }
 
 export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) => {
-  const [cities, setCities] = useState<
-    Awaited<ReturnType<typeof api.functional.city.group.position.getCitiesGroupByPosition>>
-  >({});
+  const [cities, setCities] = useState<CityStateType>({});
   const [dice, setDice] = useState<number[]>([1, 1]);
   const [isCityBuyModalOpen, setIsCityBuyModalOpen] = useState(false);
   const game = useGameStore();
@@ -40,6 +40,7 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
     api.functional.city.group.position.getCitiesGroupByPosition(apiConnection).then((res) => {
       setCities(res);
     });
+    api.functional.city.group.position.getCitiesGroupByPosition(apiConnection).then(setCities);
   }, []);
 
   const onDiceClick = () => {
