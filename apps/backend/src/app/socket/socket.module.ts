@@ -16,6 +16,7 @@ const listeners = [
 
 @Module({
   providers: [SocketGateway, ...listeners],
-  controllers: []
+  controllers: [],
+  exports: [SocketGateway]
 })
 export class SocketModule {}
