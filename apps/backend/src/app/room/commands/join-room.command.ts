@@ -5,6 +5,7 @@ export class JoinRoomCommand implements ICommand {
     readonly args: {
       readonly roomId: string;
       readonly userId: string;
+      readonly socketClientId: string;
     }
   ) {}
 }

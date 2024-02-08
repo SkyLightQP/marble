@@ -19,7 +19,7 @@ export class JoinRoomHandler implements ICommandHandler<JoinRoomCommand> {
     private readonly eventBus: EventBus
   ) {}
 
-  async execute({ args: { roomId, userId } }: JoinRoomCommand): Promise<JoinRoomReturn> {
+  async execute({ args: { roomId, userId, socketClientId } }: JoinRoomCommand): Promise<JoinRoomReturn> {
     const roomInRedis = await this.redis.hGet('room', roomId);
 
     if (roomInRedis === null || roomInRedis === undefined) {
@@ -33,7 +33,7 @@ export class JoinRoomHandler implements ICommandHandler<JoinRoomCommand> {
     }
 
     const user = await this.queryBus.execute(new GetUserByUidQuery({ uid: userId }));
-    const player = Player.create(user.userId, user.id, user.nickname);
+    const player = Player.create(user.userId, user.id, user.nickname, socketClientId);
     room.addPlayer(player);
     await room.syncRedis(this.redis);
     this.eventBus.publish(new JoinedRoomEvent({ room, userId }));

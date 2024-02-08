@@ -48,7 +48,8 @@ export class RoomGateway {
     const data = await this.commandBus.execute<JoinRoomCommand, JoinRoomReturn>(
       new JoinRoomCommand({
         roomId: message.roomId,
-        userId: socket.user.sub
+        userId: socket.user.sub,
+        socketClientId: socket.id
       })
     );
     socket.join(`room:${data.id}`);
