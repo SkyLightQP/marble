@@ -26,7 +26,8 @@ export class RollDiceHandler implements ICommandHandler<RollDiceCommand> {
       throw new WsException(ErrorCode.PLAYER_IS_NOT_TURN);
     }
 
-    const isLastOrderPlayer = executor === game.playerOrder[game.playerOrder.length - 1].userId;
+    const player = game.playerOrder[game.playerOrder.length - 1];
+    const isLastOrderPlayer = executor === player.userId;
     if (isLastOrderPlayer) {
       game.turn += 1;
     }
@@ -50,7 +51,7 @@ export class RollDiceHandler implements ICommandHandler<RollDiceCommand> {
 
     Logger.log({ message: '주사위를 굴렸습니다.', roomId, executor, dice1, dice2 });
 
-    this.eventBus.publish(new RolledDiceEvent({ game, position: playerStatus.position, executor }));
+    this.eventBus.publish(new RolledDiceEvent({ game, position: playerStatus.position, executePlayer: player }));
 
     return [dice1, dice2];
   }
