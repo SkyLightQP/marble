@@ -15,7 +15,7 @@ export interface CreateRoomForm {
 
 interface CreateRoomModalProps {
   readonly isOpen: boolean;
-  readonly setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  readonly close: () => void;
   readonly onCreateRoomClick: SubmitHandler<CreateRoomForm>;
   readonly form: {
     readonly register: UseFormRegister<CreateRoomForm>;
@@ -32,7 +32,7 @@ export const createRoomFormSchema = yup.object().shape({
 
 export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
   isOpen,
-  setIsOpen,
+  close,
   onCreateRoomClick,
   form: { register, handleSubmit, reset, errors }
 }) => {
@@ -41,7 +41,7 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
   return (
     <Modal
       isOpen={isOpen}
-      setIsOpen={setIsOpen}
+      close={close}
       title="방 만들기"
       width="500px"
       height="260px"

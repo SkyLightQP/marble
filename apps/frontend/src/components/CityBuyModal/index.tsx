@@ -1,11 +1,11 @@
 import clsx from 'clsx';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Button } from '@/components/Button';
 import { Modal } from '@/components/Modal';
 
 interface CityBuyModalProps {
   readonly isOpen: boolean;
-  readonly setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  readonly close: () => void;
   readonly cityName: string;
   readonly money: number;
   readonly price: {
@@ -23,7 +23,7 @@ interface CityBuyModalProps {
 
 export const CityBuyModal: FC<CityBuyModalProps> = ({
   isOpen,
-  setIsOpen,
+  close,
   cityName,
   money,
   price,
@@ -36,7 +36,7 @@ export const CityBuyModal: FC<CityBuyModalProps> = ({
   const disableStyle = 'cursor-no-drop bg-gray-500 hover:bg-gray-500';
 
   return (
-    <Modal isOpen={isOpen} setIsOpen={setIsOpen} title={`${cityName} 구입하기`} width="700px" height="320px">
+    <Modal isOpen={isOpen} close={close} title={`${cityName} 구입하기`} width="700px" height="320px">
       <h2 className="text-lg">땅만 구입하거나 건물(별장, 빌딩, 호텔)을 함께 구입할 수 있습니다.</h2>
       <div className="mt-6 space-y-2">
         <p className="text-lg">보유 중인 현금: {money.toLocaleString('ko-KR')} 원</p>

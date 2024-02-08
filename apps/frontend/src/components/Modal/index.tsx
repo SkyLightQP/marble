@@ -1,10 +1,10 @@
-import React, { Dispatch, PropsWithChildren, SetStateAction } from 'react';
+import React, { PropsWithChildren } from 'react';
 import { RiCloseFill } from 'react-icons/ri';
 import ReactModal, { Styles } from 'react-modal';
 
 interface ModalProps {
   readonly isOpen: boolean;
-  readonly setIsOpen: Dispatch<SetStateAction<boolean>>;
+  readonly close: () => void;
   readonly title: string;
   readonly width: string;
   readonly height: string;
@@ -28,7 +28,7 @@ const style: Styles = {
 
 export const Modal: React.FC<PropsWithChildren<ModalProps>> = ({
   isOpen,
-  setIsOpen,
+  close,
   title,
   width,
   height,
@@ -39,7 +39,7 @@ export const Modal: React.FC<PropsWithChildren<ModalProps>> = ({
     <ReactModal
       isOpen={isOpen}
       onRequestClose={() => {
-        setIsOpen(false);
+        close();
         if (onClose !== undefined) onClose();
       }}
       style={{ overlay: { ...style.overlay }, content: { ...style.content, width, height } }}
@@ -52,7 +52,7 @@ export const Modal: React.FC<PropsWithChildren<ModalProps>> = ({
             className="text-2xl"
             aria-label="닫기"
             onClick={() => {
-              setIsOpen(false);
+              close();
               if (onClose !== undefined) onClose();
             }}
           >
