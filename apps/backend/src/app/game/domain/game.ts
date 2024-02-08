@@ -1,9 +1,9 @@
 import { RedisClientType } from 'redis';
 import { assertParse, assertStringify } from 'typia/lib/json';
-import { City } from '@/app/city/domain/City';
 import { Player } from '@/app/player/domain/player';
 import { DotColor, DotColorTuple } from '@/app/player/types/dot-color';
 import { SyncableToRedis } from '@/infrastructure/common/abstract/syncable-to-redis';
+import { CityType } from '@/infrastructure/common/types/city-type.type';
 import { shuffle } from '@/infrastructure/utils/random.util';
 
 type Position = number;
@@ -19,7 +19,7 @@ export interface GameStatus {
   building: number;
   hotel: number;
   position: number;
-  haveCities: Record<CityId, City>;
+  haveCities: Record<CityId, CityType[]>;
 }
 
 export interface GameFields {
