@@ -26,6 +26,7 @@ export const useModalStore = create<ModalStoreState & ModalStoreAction>((set) =>
         return { modals: [{ isOpen: true, component, context }] };
       }
       state.modals[modalIndex].isOpen = true;
+      state.modals[modalIndex].context = context;
       return { modals: state.modals };
     }),
   closeModal: (component) =>
