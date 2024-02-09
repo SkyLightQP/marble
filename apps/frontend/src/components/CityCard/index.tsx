@@ -1,18 +1,20 @@
 import clsx from 'clsx';
 import React from 'react';
 import { IconType } from 'react-icons';
+import { RiBuildingLine, RiHome3Line, RiHotelLine, RiSquareLine } from 'react-icons/ri';
+import { CityType } from '@/api/SocketResponse';
 import { PlayerDot } from '@/components/PlayerDot';
 import { DotItem } from '@/types/DotItem';
 
 interface CityCardProps {
   readonly icon: IconType;
   readonly nameKo: string;
-  readonly price: number;
   readonly className?: string;
   readonly currentPlayers: DotItem[];
+  readonly haveCities?: CityType[];
 }
 
-export const CityCard: React.FC<CityCardProps> = ({ icon: Icon, nameKo, price, className, currentPlayers }) => {
+export const CityCard: React.FC<CityCardProps> = ({ icon: Icon, nameKo, className, currentPlayers, haveCities }) => {
   return (
     <div
       className={clsx(
@@ -20,12 +22,20 @@ export const CityCard: React.FC<CityCardProps> = ({ icon: Icon, nameKo, price, c
         className
       )}
     >
-      <div>
-        <Icon size={48} />
+      <div className="mb-1 flex space-x-1">
+        {(haveCities ?? []).map((cityType) => {
+          if (cityType === 'land') return <RiSquareLine size={16} />;
+          if (cityType === 'house') return <RiHome3Line size={16} />;
+          if (cityType === 'building') return <RiBuildingLine size={16} />;
+          if (cityType === 'hotel') return <RiHotelLine size={16} />;
+          return <></>;
+        })}
       </div>
       <div>
-        <p className="text-[1.1rem] font-bold">{nameKo}</p>
-        <p className="text-sm text-gray-400">{price.toLocaleString('ko-KR')} 원</p>
+        <Icon size={38} />
+      </div>
+      <div className="flex items-center">
+        <p className="text-[1.2rem] font-bold">{nameKo}</p>
       </div>
       <div className="mt-1 flex space-x-1">
         {currentPlayers.map((player) => (
