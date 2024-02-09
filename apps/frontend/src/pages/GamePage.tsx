@@ -47,7 +47,7 @@ export const GamePage: FC = () => {
   });
   useSocketListener<WebSocketError>('exception', (error) => {
     toast.error(error.message);
-    if (error.code === 'ROOM_NOT_FOUND') navigate(-1);
+    if (error.code === 'ROOM_NOT_FOUND') navigate('/rooms');
   });
 
   if (!game.isLoading || user === undefined) {
