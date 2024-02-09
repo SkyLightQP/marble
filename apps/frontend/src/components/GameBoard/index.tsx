@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { RiBuildingLine, RiFlagLine } from 'react-icons/ri';
 import { useParams } from 'react-router-dom';
 import { apiConnection } from '@/api';
+import { BuyCityResponse, PenaltyResponse, RequestBuyCityResponse } from '@/api/SocketResponse';
 import { BalanceInformationView } from '@/components/BalanceInformation/BalanceInformationView';
 import { CityBuyModal } from '@/components/CityBuyModal';
 import { CityCard } from '@/components/CityCard';
@@ -15,6 +16,7 @@ import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { useUser } from '@/hooks/useUser';
 import { useGameStore } from '@/stores/useGameStore';
+import { useModalStore } from '@/stores/useModalStore';
 import { DotItem } from '@/types/DotItem';
 import { RankItem } from '@/types/Rank';
 import { range } from '@/utils/Range';
@@ -30,16 +32,13 @@ interface GameBoardProps {
 export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) => {
   const [cities, setCities] = useState<CityStateType>({});
   const [dice, setDice] = useState<number[]>([1, 1]);
-  const [isCityBuyModalOpen, setIsCityBuyModalOpen] = useState(false);
   const game = useGameStore();
+  const { openModal, updateContext } = useModalStore();
   const userId = useUser();
-  const { roomId } = useParams();
   const socket = useSocket();
+  const { roomId } = useParams();
 
   useEffect(() => {
-    api.functional.city.group.position.getCitiesGroupByPosition(apiConnection).then((res) => {
-      setCities(res);
-    });
     api.functional.city.group.position.getCitiesGroupByPosition(apiConnection).then(setCities);
   }, []);
 
@@ -51,6 +50,39 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
   useSocketListener<number[]>('roll-dice', (data) => {
     toast(`🎲 ${data[0] + data[1]}칸 이동합니다!`);
     setDice(data);
+  });
+  useSocketListener<RequestBuyCityResponse>('request-buy-city', (data) => {
+    if (userId === undefined) return;
+    const { id: cityId, name, cityPrices } = data.city;
+    const { landPrice, housePrice, buildingPrice, hotelPrice } = cityPrices[0];
+    const playerHaveCities = game.playerStatus[userId].haveCities;
+    const canBuyBuilding = playerHaveCities[cityId] && playerHaveCities[cityId].includes('land');
+    openModal(CityBuyModal, {
+      cityName: name,
+      money: game.playerStatus[userId].money ?? 0,
+      price: {
+        land: landPrice,
+        house: housePrice,
+        building: buildingPrice,
+        hotel: hotelPrice
+      },
+      canBuyBuilding,
+      onBuyLand: () => socket?.emit('buy-city', { roomId, cityId, cityType: 'land' }),
+      onBuyHouse: () => socket?.emit('buy-city', { roomId, cityId, cityType: 'house' }),
+      onBuyBuilding: () => socket?.emit('buy-city', { roomId, cityId, cityType: 'building' }),
+      onBuyHotel: () => socket?.emit('buy-city', { roomId, cityId, cityType: 'hotel' })
+    });
+  });
+  useSocketListener<BuyCityResponse>('buy-city', (data) => {
+    game.setState(data.game);
+    if (userId === undefined) return;
+    updateContext(CityBuyModal, {
+      money: data.game.playerStatus[userId].money,
+      canBuyBuilding: data.game.playerStatus[userId].haveCities[data.city.id].includes('land')
+    });
+  });
+  useSocketListener<PenaltyResponse>('penalty', () => {
+    // TODO: implement the PenaltyModal.
   });
 
   if (!game.isLoading || userId === undefined || cities === undefined || cities[1] === undefined) {
@@ -74,7 +106,7 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
             key={cities[i][0].id}
             icon={RiBuildingLine}
             nameKo={cities[i][0].name}
-            price={cities[i][0].cityPrices[0].landPrice}
+            haveCities={game.playerStatus[userId].haveCities[cities[i][0].id]}
             currentPlayers={positions[i] ?? []}
           />
         ))}
@@ -90,7 +122,7 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
                 key={cities[i][0].id}
                 icon={RiBuildingLine}
                 nameKo={cities[i][0].name}
-                price={cities[i][0].cityPrices[0].landPrice}
+                haveCities={game.playerStatus[userId].haveCities[cities[i][0].id]}
                 currentPlayers={positions[i] ?? []}
               />
             ))}
@@ -122,7 +154,7 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
               key={cities[i][0].id}
               icon={RiBuildingLine}
               nameKo={cities[i][0].name}
-              price={cities[i][0].cityPrices[0].landPrice}
+              haveCities={game.playerStatus[userId].haveCities[cities[i][0].id]}
               currentPlayers={positions[i] ?? []}
             />
           ))}
@@ -138,30 +170,12 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
               key={cities[i][0].id}
               icon={RiBuildingLine}
               nameKo={cities[i][0].name}
-              price={cities[i][0].cityPrices[0].landPrice}
+              haveCities={game.playerStatus[userId].haveCities[cities[i][0].id]}
               currentPlayers={positions[i] ?? []}
             />
           ))}
         <SpecialCard currentPlayers={positions[15] ?? []} />
       </div>
-
-      <CityBuyModal
-        isOpen={isCityBuyModalOpen}
-        setIsOpen={setIsCityBuyModalOpen}
-        cityName="서울"
-        money={10000}
-        price={{
-          land: 1000,
-          house: 5000,
-          building: 10000,
-          hotel: 100000
-        }}
-        canBuyBuilding
-        onBuyLand={() => {}}
-        onBuyHouse={() => {}}
-        onBuyBuilding={() => {}}
-        onBuyHotel={() => {}}
-      />
     </div>
   );
 };
