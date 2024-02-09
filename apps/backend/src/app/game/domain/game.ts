@@ -53,7 +53,7 @@ export class Game extends SyncableToRedis {
         [player.userId]: {
           nickname: player.nickname,
           color: randomColors[currentIndex],
-          money: 0,
+          money: 10000,
           land: 0,
           house: 0,
           building: 0,
