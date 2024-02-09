@@ -1,4 +1,4 @@
-import { CityPrice } from '@marble/database';
+import { City, CityPrice } from '@marble/database';
 import { Inject, Logger } from '@nestjs/common';
 import { CommandHandler, ICommandHandler, QueryBus } from '@nestjs/cqrs';
 import { WsException } from '@nestjs/websockets';
@@ -12,7 +12,7 @@ import { GetGameQuery } from '@/app/game/queries/get-game.query';
 import { CityType } from '@/infrastructure/common/types/city-type.type';
 import { ErrorCode } from '@/infrastructure/error/error-code';
 
-export type BuyCityReturn = Game;
+export type BuyCityReturn = { game: Game; city: City & { cityPrices: Array<CityPrice> } };
 
 @CommandHandler(BuyCityCommand)
 export class BuyCityHandler implements ICommandHandler<BuyCityCommand> {
@@ -46,7 +46,7 @@ export class BuyCityHandler implements ICommandHandler<BuyCityCommand> {
 
     Logger.log({ message: '도시를 구매했습니다.', roomId, cityId, cityType, executor });
 
-    return game;
+    return { game, city };
   }
 
   private getCityPrice(cityPrice: CityPrice, cityType: CityType) {

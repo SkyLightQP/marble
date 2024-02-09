@@ -64,3 +64,8 @@ export interface PenaltyResponse {
   ownerNickname: string;
   penalty: number;
 }
+
+export interface BuyCityResponse {
+  game: GameResponse;
+  city: Awaited<ReturnType<typeof api.functional.city.getCityById>>;
+}
