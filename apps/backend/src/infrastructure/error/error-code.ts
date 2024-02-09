@@ -1,4 +1,8 @@
 export const ErrorCode = {
+  CITY_IS_ALREADY_BOUGHT: {
+    code: 'CITY_IS_ALREADY_BOUGHT',
+    message: '도시가 이미 팔렸습니다.'
+  },
   PLAYER_IS_NOT_TURN: {
     code: 'PLAYER_IS_NOT_TURN',
     message: '자신의 턴이 아닙니다.'
