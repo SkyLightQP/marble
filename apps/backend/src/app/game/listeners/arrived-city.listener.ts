@@ -23,22 +23,7 @@ export class ArrivedCityListener implements IEventHandler<RolledDiceEvent> {
     const cityOwnerId = game.cityWhoHave[position];
     const playerStatus = game.playerStatus[executePlayer.id];
 
-    const canUpgradeCity =
-      cityOwnerId === executePlayer.userId &&
-      playerStatus.haveCities[city.id].includes('land') &&
-      playerStatus.haveCities[city.id].length < 4;
-    if (canUpgradeCity) {
-      const haveCities = playerStatus.haveCities[city.id];
-      this.socketGateway.server.to(socketId).emit('request-upgrade-city', {
-        city,
-        haveCities
-      });
-      Logger.log({
-        message: '도시 업그레이드 요청을 보냈습니다.',
-        cityId: city.id,
-        haveCities,
-        executor: executePlayer.userId
-      });
+    if (cityOwnerId === executePlayer.userId) {
       return;
     }
 
