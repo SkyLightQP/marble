@@ -25,7 +25,7 @@ export class BuyCityHandler implements ICommandHandler<BuyCityCommand> {
     const city = await this.queryBus.execute<GetCityByIdQuery, GetCityByIdReturn>(new GetCityByIdQuery({ id: cityId }));
     const game = await this.queryBus.execute<GetGameQuery, GetGameReturn>(new GetGameQuery({ roomId }));
 
-    if (game.cityWhoHave[cityId] !== undefined) {
+    if (game.cityWhoHave[cityId] !== undefined && game.playerStatus[executor].haveCities[cityId]?.includes(cityType)) {
       throw new WsException(ErrorCode.CITY_IS_ALREADY_BOUGHT);
     }
 
