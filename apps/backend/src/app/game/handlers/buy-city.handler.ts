@@ -33,8 +33,14 @@ export class BuyCityHandler implements ICommandHandler<BuyCityCommand> {
       throw new WsException(ErrorCode.PLAYER_IS_NOT_TURN);
     }
 
+    const price = this.getCityPrice(city.cityPrices[0], cityType);
+
+    if (game.playerStatus[executor].money < price) {
+      throw new WsException(ErrorCode.NOT_ENOUGH_MONEY);
+    }
+
     const playerStatus = game.playerStatus[executor];
-    playerStatus.money -= this.getCityPrice(city.cityPrices[0], cityType);
+    playerStatus.money -= price;
     playerStatus.haveCities[cityId] = [...(playerStatus.haveCities[cityId] ?? []), cityType];
     game.cityWhoHave[cityId] = executor;
     if (cityType === 'land') playerStatus.land += 1;

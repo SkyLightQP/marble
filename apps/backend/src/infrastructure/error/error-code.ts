@@ -1,4 +1,8 @@
 export const ErrorCode = {
+  NOT_ENOUGH_MONEY: {
+    code: 'NOT_ENOUGH_MONEY',
+    message: '돈이 부족합니다.'
+  },
   CITY_IS_ALREADY_BOUGHT: {
     code: 'CITY_IS_ALREADY_BOUGHT',
     message: '도시가 이미 팔렸습니다.'
