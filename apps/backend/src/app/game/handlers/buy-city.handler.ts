@@ -12,7 +12,7 @@ import { GetGameQuery } from '@/app/game/queries/get-game.query';
 import { CityType } from '@/infrastructure/common/types/city-type.type';
 import { ErrorCode } from '@/infrastructure/error/error-code';
 
-export type BuyCityCommandReturn = Game;
+export type BuyCityReturn = Game;
 
 @CommandHandler(BuyCityCommand)
 export class BuyCityHandler implements ICommandHandler<BuyCityCommand> {
@@ -21,7 +21,7 @@ export class BuyCityHandler implements ICommandHandler<BuyCityCommand> {
     @Inject('REDIS_CLIENT') private readonly redis: RedisClientType
   ) {}
 
-  async execute({ args: { roomId, cityId, cityType, executor } }: BuyCityCommand): Promise<BuyCityCommandReturn> {
+  async execute({ args: { roomId, cityId, cityType, executor } }: BuyCityCommand): Promise<BuyCityReturn> {
     const city = await this.queryBus.execute<GetCityByIdQuery, GetCityByIdReturn>(new GetCityByIdQuery({ id: cityId }));
     const game = await this.queryBus.execute<GetGameQuery, GetGameReturn>(new GetGameQuery({ roomId }));
 
@@ -34,9 +34,13 @@ export class BuyCityHandler implements ICommandHandler<BuyCityCommand> {
     }
 
     const playerStatus = game.playerStatus[executor];
-    playerStatus.money -= this.getCityPrice(city.cityPrices[9], cityType);
-    playerStatus.haveCities[cityId] = [...playerStatus.haveCities[cityId], cityType];
+    playerStatus.money -= this.getCityPrice(city.cityPrices[0], cityType);
+    playerStatus.haveCities[cityId] = [...(playerStatus.haveCities[cityId] ?? []), cityType];
     game.cityWhoHave[cityId] = executor;
+    if (cityType === 'land') playerStatus.land += 1;
+    if (cityType === 'house') playerStatus.house += 1;
+    if (cityType === 'building') playerStatus.building += 1;
+    if (cityType === 'hotel') playerStatus.hotel += 1;
 
     await game.syncRedis(this.redis);
 
