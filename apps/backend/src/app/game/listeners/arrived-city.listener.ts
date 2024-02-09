@@ -4,6 +4,7 @@ import { RedisClientType } from 'redis';
 import { GetCityByPositionReturn } from '@/app/city/handlers/get-city-by-position.handler';
 import { GetCityByPositionQuery } from '@/app/city/queries/get-city-by-position.query';
 import { CITY_PENALTY_RATIO } from '@/app/game/constants/city-penalty.constant';
+import { SPECIAL_CARD_POSITIONS } from '@/app/game/constants/game-board.constant';
 import { RolledDiceEvent } from '@/app/game/events/rolled-dice.event';
 import { SocketGateway } from '@/app/socket/socket.gateway';
 
@@ -16,6 +17,8 @@ export class ArrivedCityListener implements IEventHandler<RolledDiceEvent> {
   ) {}
 
   async handle({ args: { game, position, executePlayer } }: RolledDiceEvent) {
+    if (SPECIAL_CARD_POSITIONS.includes(position)) return;
+
     const city = await this.queryBus.execute<GetCityByPositionQuery, GetCityByPositionReturn>(
       new GetCityByPositionQuery({ position })
     );
