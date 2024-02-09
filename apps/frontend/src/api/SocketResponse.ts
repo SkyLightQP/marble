@@ -32,7 +32,7 @@ export interface CreateRoomResponse {
   readonly isPlaying: boolean;
 }
 
-type CityType = 'land' | 'house' | 'building' | 'hotel';
+export type CityType = 'land' | 'house' | 'building' | 'hotel';
 
 export interface GameStatusResponse {
   readonly nickname: string;
