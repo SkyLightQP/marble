@@ -6,7 +6,6 @@ import { SyncableToRedis } from '@/infrastructure/common/abstract/syncable-to-re
 import { CityType } from '@/infrastructure/common/types/city-type.type';
 import { shuffle } from '@/infrastructure/utils/random.util';
 
-type Position = number;
 type CityId = number;
 type UserId = string;
 
@@ -28,7 +27,7 @@ export interface GameFields {
   playerOrder: Player[];
   currentOrderPlayerIndex: number;
   playerStatus: Record<UserId, GameStatus>;
-  cityWhoHave: Record<Position, UserId>;
+  cityWhoHave: Record<CityId, UserId>;
 }
 
 export class Game extends SyncableToRedis {
@@ -38,7 +37,7 @@ export class Game extends SyncableToRedis {
     public playerOrder: Player[],
     public currentOrderPlayerIndex: number,
     public playerStatus: Record<UserId, GameStatus>,
-    public cityWhoHave: Record<Position, UserId>
+    public cityWhoHave: Record<CityId, UserId>
   ) {
     super();
   }

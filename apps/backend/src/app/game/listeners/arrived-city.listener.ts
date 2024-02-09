@@ -20,15 +20,14 @@ export class ArrivedCityListener implements IEventHandler<RolledDiceEvent> {
       new GetCityByPositionQuery({ position })
     );
     const socketId = executePlayer.socketClientId;
-    const cityOwnerId = game.cityWhoHave[position];
+    const cityOwnerId = game.cityWhoHave[city.id];
     const playerStatus = game.playerStatus[executePlayer.id];
 
     if (cityOwnerId === executePlayer.userId) {
       return;
     }
 
-    const isCityOwnerOtherPlayer =
-      game.cityWhoHave[position] !== undefined && game.cityWhoHave[position] !== executePlayer.userId;
+    const isCityOwnerOtherPlayer = cityOwnerId !== undefined && cityOwnerId !== executePlayer.userId;
     if (isCityOwnerOtherPlayer) {
       const ownerHaveCities = game.playerStatus[cityOwnerId].haveCities;
       let penalty = 0;
