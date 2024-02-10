@@ -13,7 +13,8 @@ interface ModalProps {
 
 const style: Styles = {
   overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.3)'
+    backgroundColor: 'rgba(0, 0, 0, 0.25)',
+    cursor: 'no-drop'
   },
   content: {
     backgroundColor: '#fff',
@@ -22,7 +23,8 @@ const style: Styles = {
     position: 'absolute',
     top: '50%',
     left: '50%',
-    transform: 'translate(-50%, -50%)'
+    transform: 'translate(-50%, -50%)',
+    cursor: 'auto'
   }
 };
 
@@ -36,20 +38,13 @@ export const Modal: React.FC<PropsWithChildren<ModalProps>> = ({
   children
 }) => {
   return (
-    <ReactModal
-      isOpen={isOpen}
-      onRequestClose={() => {
-        close();
-        if (onClose !== undefined) onClose();
-      }}
-      style={{ overlay: { ...style.overlay }, content: { ...style.content, width, height } }}
-    >
+    <ReactModal isOpen={isOpen} style={{ overlay: { ...style.overlay }, content: { ...style.content, width, height } }}>
       <div>
         <div className="flex items-center justify-between">
           <h3 className="text-2xl font-bold">{title}</h3>
           <button
             type="button"
-            className="text-2xl"
+            className="text-3xl"
             aria-label="닫기"
             onClick={() => {
               close();
