@@ -1,8 +1,9 @@
 import { Inject, Logger } from '@nestjs/common';
-import { CommandHandler, ICommandHandler, QueryBus } from '@nestjs/cqrs';
+import { CommandHandler, EventBus, ICommandHandler, QueryBus } from '@nestjs/cqrs';
 import { WsException } from '@nestjs/websockets';
 import { RedisClientType } from 'redis';
 import { EndTurnCommand } from '@/app/game/commands/end-turn.command';
+import { EndedTurnEvent } from '@/app/game/events/ended-turn.event';
 import { GetGameReturn } from '@/app/game/handlers/get-game.handler';
 import { GetGameQuery } from '@/app/game/queries/get-game.query';
 import { ErrorCode } from '@/infrastructure/error/error-code';
@@ -11,6 +12,7 @@ import { ErrorCode } from '@/infrastructure/error/error-code';
 export class EndTurnHandler implements ICommandHandler<EndTurnCommand> {
   constructor(
     private readonly queryBus: QueryBus,
+    private readonly eventBus: EventBus,
     @Inject('REDIS_CLIENT') private readonly redis: RedisClientType
   ) {}
 
@@ -23,6 +25,8 @@ export class EndTurnHandler implements ICommandHandler<EndTurnCommand> {
 
     game.increaseCurrentOrderPlayerIndex();
     await game.syncRedis(this.redis);
+
+    this.eventBus.publish(new EndedTurnEvent({ game }));
 
     Logger.log({ message: '턴을 종료했습니다.', roomId, executor });
   }
