@@ -24,10 +24,10 @@ export const CityCard: React.FC<CityCardProps> = ({ icon: Icon, nameKo, classNam
     >
       <div className="mb-1 flex space-x-1">
         {(haveCities ?? []).map((cityType) => {
-          if (cityType === 'land') return <RiSquareLine size={16} />;
-          if (cityType === 'house') return <RiHome3Line size={16} />;
-          if (cityType === 'building') return <RiBuildingLine size={16} />;
-          if (cityType === 'hotel') return <RiHotelLine size={16} />;
+          if (cityType === 'land') return <RiSquareLine key={`${nameKo}-${cityType}`} size={16} />;
+          if (cityType === 'house') return <RiHome3Line key={`${nameKo}-${cityType}`} size={16} />;
+          if (cityType === 'building') return <RiBuildingLine key={`${nameKo}-${cityType}`} size={16} />;
+          if (cityType === 'hotel') return <RiHotelLine key={`${nameKo}-${cityType}`} size={16} />;
           return <></>;
         })}
       </div>
