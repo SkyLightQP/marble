@@ -70,7 +70,8 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
       onBuyLand: () => socket?.emit('buy-city', { roomId, cityId, cityType: 'land' }),
       onBuyHouse: () => socket?.emit('buy-city', { roomId, cityId, cityType: 'house' }),
       onBuyBuilding: () => socket?.emit('buy-city', { roomId, cityId, cityType: 'building' }),
-      onBuyHotel: () => socket?.emit('buy-city', { roomId, cityId, cityType: 'hotel' })
+      onBuyHotel: () => socket?.emit('buy-city', { roomId, cityId, cityType: 'hotel' }),
+      onClose: () => socket?.emit('end-turn', { roomId })
     });
   });
   useSocketListener<BuyCityResponse>('buy-city', (data) => {
