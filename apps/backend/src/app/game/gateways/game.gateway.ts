@@ -4,6 +4,7 @@ import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WsRes
 import type { Socket } from 'socket.io';
 import { BuyCityCommand } from '@/app/game/commands/buy-city.command';
 import { DropoutGameCommand } from '@/app/game/commands/dropout-game.command';
+import { EndTurnCommand } from '@/app/game/commands/end-turn.command';
 import { RollDiceCommand } from '@/app/game/commands/roll-dice.command';
 import { StartGameCommand } from '@/app/game/commands/start-game.command';
 import { BuyCityDto } from '@/app/game/gateways/dto/buy-city.dto';
@@ -98,5 +99,14 @@ export class GameGateway {
       })
     );
     return { event: 'buy-city', data };
+  }
+
+  @UseGuards(SocketJwtGuard)
+  @SubscribeMessage('end-turn')
+  async handleEndTurn(
+    @MessageBody() message: { roomId: string },
+    @ConnectedSocket() socket: Socket & { user: AuthTokenPayload }
+  ): Promise<void> {
+    await this.commandBus.execute(new EndTurnCommand({ roomId: message.roomId, executor: socket.user.sub }));
   }
 }
