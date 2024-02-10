@@ -1,5 +1,5 @@
 import api from '@marble/api';
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { RiBuildingLine, RiFlagLine } from 'react-icons/ri';
 import { useParams } from 'react-router-dom';
@@ -10,6 +10,7 @@ import { CityBuyModal } from '@/components/CityBuyModal';
 import { CityCard } from '@/components/CityCard';
 import { CityInformationView } from '@/components/CityInformation/CityInformationView';
 import { DiceView } from '@/components/Dice/DiceView';
+import { PenaltyModal } from '@/components/PenaltyModal';
 import { RankView } from '@/components/Rank/RankView';
 import { SpecialCard } from '@/components/SpecialCard';
 import { useSocket } from '@/hooks/useSocket';
@@ -46,6 +47,15 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
     if (!isMyTurn) return;
     socket?.emit('roll-dice', { roomId });
   };
+
+  const getCityIconsByPosition = useCallback(
+    (position: number) => {
+      const cityId = cities[position][0].id;
+      if (game.playerStatus[game.cityWhoHave[cityId]] === undefined) return [];
+      return game.playerStatus[game.cityWhoHave[cityId]].haveCities[cityId] ?? [];
+    },
+    [game, cities]
+  );
 
   useSocketListener<number[]>('roll-dice', (data) => {
     toast(`🎲 ${data[0] + data[1]}칸 이동합니다!`);
@@ -107,7 +117,7 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
             key={cities[i][0].id}
             icon={RiBuildingLine}
             nameKo={cities[i][0].name}
-            haveCities={game.playerStatus[userId].haveCities[cities[i][0].id]}
+            haveCities={getCityIconsByPosition(i)}
             currentPlayers={positions[i] ?? []}
           />
         ))}
@@ -123,7 +133,7 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
                 key={cities[i][0].id}
                 icon={RiBuildingLine}
                 nameKo={cities[i][0].name}
-                haveCities={game.playerStatus[userId].haveCities[cities[i][0].id]}
+                haveCities={getCityIconsByPosition(i)}
                 currentPlayers={positions[i] ?? []}
               />
             ))}
@@ -155,7 +165,7 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
               key={cities[i][0].id}
               icon={RiBuildingLine}
               nameKo={cities[i][0].name}
-              haveCities={game.playerStatus[userId].haveCities[cities[i][0].id]}
+              haveCities={getCityIconsByPosition(i)}
               currentPlayers={positions[i] ?? []}
             />
           ))}
@@ -171,7 +181,7 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
               key={cities[i][0].id}
               icon={RiBuildingLine}
               nameKo={cities[i][0].name}
-              haveCities={game.playerStatus[userId].haveCities[cities[i][0].id]}
+              haveCities={getCityIconsByPosition(i)}
               currentPlayers={positions[i] ?? []}
             />
           ))}
