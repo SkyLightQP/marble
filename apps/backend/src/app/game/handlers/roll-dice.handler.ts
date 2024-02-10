@@ -21,13 +21,13 @@ export class RollDiceHandler implements ICommandHandler<RollDiceCommand> {
 
   async execute({ args: { roomId, executor } }: RollDiceCommand): Promise<RollDiceReturn> {
     const game = await this.queryBus.execute<GetGameQuery, GetGameReturn>(new GetGameQuery({ roomId }));
+    const player = game.playerOrder[game.currentOrderPlayerIndex];
 
-    if (game.playerOrder[game.currentOrderPlayerIndex].userId !== executor) {
+    if (player.userId !== executor) {
       throw new WsException(ErrorCode.PLAYER_IS_NOT_TURN);
     }
 
-    const player = game.playerOrder[game.playerOrder.length - 1];
-    const isLastOrderPlayer = executor === player.userId;
+    const isLastOrderPlayer = executor === game.playerOrder[game.playerOrder.length - 1].userId;
     if (isLastOrderPlayer) {
       game.turn += 1;
     }
