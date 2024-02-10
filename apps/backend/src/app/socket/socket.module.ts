@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { DropoutGameListener } from '@/app/socket/listeners/dropout-game.listener';
+import { EndedTurnListener } from '@/app/socket/listeners/ended-turn.listener';
 import { JoinOrQuitRoomListener } from '@/app/socket/listeners/join-or-quit-room.listener';
 import { RefreshRoomListener } from '@/app/socket/listeners/refresh-room.listener';
 import { RolledDiceListener } from '@/app/socket/listeners/rolled-dice.listener';
@@ -11,7 +12,8 @@ const listeners = [
   JoinOrQuitRoomListener,
   RefreshRoomListener,
   RolledDiceListener,
-  StartedGameListener
+  StartedGameListener,
+  EndedTurnListener
 ];
 
 @Module({
