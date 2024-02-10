@@ -40,7 +40,6 @@ export class RollDiceHandler implements ICommandHandler<RollDiceCommand> {
     const playerStatus = game.getPlayerStatus(executor);
     const prevPosition = playerStatus.position;
     playerStatus.position = (playerStatus.position + dice1 + dice2) % GAME_CARD_AMOUNT;
-    game.increaseCurrentOrderPlayerIndex();
 
     const isPassedStartPoint = prevPosition > playerStatus.position;
     if (isPassedStartPoint) {
