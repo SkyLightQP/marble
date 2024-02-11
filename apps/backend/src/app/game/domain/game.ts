@@ -82,6 +82,16 @@ export class Game extends SyncableToRedis {
     }
   }
 
+  public removeCitiesWhoHavePlayer(userId: string): void {
+    const deletedCity = Object.entries(this.cityWhoHave).find(([, id]) => id === userId) ?? [];
+    deletedCity.forEach(([cityId]) => {
+      delete this.cityWhoHave[cityId];
+    });
+    deletedCity.forEach(([cityId]) => {
+      delete this.getPlayerStatus(userId).haveCities[cityId];
+    });
+  }
+
   public toJSON(): GameFields {
     return {
       roomId: this.roomId,
