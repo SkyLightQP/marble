@@ -5,4 +5,5 @@ export interface RankItem {
   readonly color: DotColor;
   readonly price: number;
   readonly isMe?: boolean;
+  readonly isDisable?: boolean;
 }

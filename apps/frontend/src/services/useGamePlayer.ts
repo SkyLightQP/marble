@@ -29,7 +29,8 @@ export const useGamePlayer = (args: { user: string | undefined }) => {
       name: status.nickname,
       color: status.color,
       price: status.money,
-      isMe: userId === user
+      isMe: userId === user,
+      isDisable: game.playerOrder.filter(({ userId: id }) => id === userId)[0]?.isDisable ?? false
     }));
   }, [game, user]);
 

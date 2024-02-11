@@ -9,6 +9,7 @@ interface RankPlayerItemProps {
   readonly playerColor: DotColor;
   readonly currentPrice: number;
   readonly isMe?: boolean;
+  readonly isDisable?: boolean;
 }
 
 export const RankPlayerItem: React.FC<RankPlayerItemProps> = ({
@@ -16,13 +17,15 @@ export const RankPlayerItem: React.FC<RankPlayerItemProps> = ({
   name,
   playerColor,
   currentPrice,
-  isMe = false
+  isMe = false,
+  isDisable = false
 }) => {
   return (
-    <div className="flex items-center">
+    <div className={clsx('flex items-center', isDisable ? 'line-through' : '')}>
       <PlayerDot color={playerColor} />
       <p className={clsx('ml-2', isMe ? 'font-bold' : '')}>
-        #{rank} {name} <span className="text-sm">({currentPrice.toLocaleString('ko-KR')} 원)</span>
+        #{rank} {name}{' '}
+        <span className="text-sm">({isDisable ? '파산' : `${currentPrice.toLocaleString('ko-KR')} 원`})</span>
       </p>
     </div>
   );

@@ -25,6 +25,7 @@ export const RankView: FC<RankViewProps> = ({ ranks }) => {
               playerColor={rank.color}
               currentPrice={rank.price}
               isMe={rank.isMe}
+              isDisable={rank.isDisable}
             />
           ))}
       </div>
