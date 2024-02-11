@@ -57,6 +57,14 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
     [game, cities]
   );
 
+  const getCityOwnerColorByPosition = useCallback(
+    (position: number) => {
+      const cityId = cities[position][0].id;
+      return game.playerStatus[game.cityWhoHave[cityId]]?.color ?? undefined;
+    },
+    [game, cities]
+  );
+
   useSocketListener<number[]>('roll-dice', (data) => {
     toast(`🎲 ${data[0] + data[1]}칸 이동합니다!`);
     setDice(data);
@@ -123,6 +131,7 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
             key={cities[i][0].id}
             icon={RiBuildingLine}
             nameKo={cities[i][0].name}
+            cityOwnerColor={getCityOwnerColorByPosition(i)}
             haveCities={getCityIconsByPosition(i)}
             currentPlayers={positions[i] ?? []}
           />
@@ -139,6 +148,7 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
                 key={cities[i][0].id}
                 icon={RiBuildingLine}
                 nameKo={cities[i][0].name}
+                cityOwnerColor={getCityOwnerColorByPosition(i)}
                 haveCities={getCityIconsByPosition(i)}
                 currentPlayers={positions[i] ?? []}
               />
@@ -171,6 +181,7 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
               key={cities[i][0].id}
               icon={RiBuildingLine}
               nameKo={cities[i][0].name}
+              cityOwnerColor={getCityOwnerColorByPosition(i)}
               haveCities={getCityIconsByPosition(i)}
               currentPlayers={positions[i] ?? []}
             />
@@ -187,6 +198,7 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
               key={cities[i][0].id}
               icon={RiBuildingLine}
               nameKo={cities[i][0].name}
+              cityOwnerColor={getCityOwnerColorByPosition(i)}
               haveCities={getCityIconsByPosition(i)}
               currentPlayers={positions[i] ?? []}
             />

@@ -4,6 +4,7 @@ import { IconType } from 'react-icons';
 import { RiBuildingLine, RiHome3Line, RiHotelLine, RiSquareLine } from 'react-icons/ri';
 import { CityType } from '@/api/SocketResponse';
 import { PlayerDot } from '@/components/PlayerDot';
+import { DotColor } from '@/types/DotColor';
 import { DotItem } from '@/types/DotItem';
 
 interface CityCardProps {
@@ -11,10 +12,26 @@ interface CityCardProps {
   readonly nameKo: string;
   readonly className?: string;
   readonly currentPlayers: DotItem[];
+  readonly cityOwnerColor?: DotColor;
   readonly haveCities?: CityType[];
 }
 
-export const CityCard: React.FC<CityCardProps> = ({ icon: Icon, nameKo, className, currentPlayers, haveCities }) => {
+const COLOR_MAP: Record<DotColor | 'black', string> = {
+  red: 'text-red-500',
+  blue: 'text-blue-500',
+  green: 'text-green-500',
+  yellow: 'text-yellow-500',
+  black: 'text-black'
+};
+
+export const CityCard: React.FC<CityCardProps> = ({
+  icon: Icon,
+  nameKo,
+  className,
+  currentPlayers,
+  cityOwnerColor,
+  haveCities
+}) => {
   return (
     <div
       className={clsx(
@@ -24,10 +41,26 @@ export const CityCard: React.FC<CityCardProps> = ({ icon: Icon, nameKo, classNam
     >
       <div className="mb-1 flex space-x-1">
         {(haveCities ?? []).map((cityType) => {
-          if (cityType === 'land') return <RiSquareLine key={`${nameKo}-${cityType}`} size={16} />;
-          if (cityType === 'house') return <RiHome3Line key={`${nameKo}-${cityType}`} size={16} />;
-          if (cityType === 'building') return <RiBuildingLine key={`${nameKo}-${cityType}`} size={16} />;
-          if (cityType === 'hotel') return <RiHotelLine key={`${nameKo}-${cityType}`} size={16} />;
+          if (cityType === 'land')
+            return (
+              <RiSquareLine key={`${nameKo}-${cityType}`} size={16} className={COLOR_MAP[cityOwnerColor ?? 'black']} />
+            );
+          if (cityType === 'house')
+            return (
+              <RiHome3Line key={`${nameKo}-${cityType}`} size={16} className={COLOR_MAP[cityOwnerColor ?? 'black']} />
+            );
+          if (cityType === 'building')
+            return (
+              <RiBuildingLine
+                key={`${nameKo}-${cityType}`}
+                size={16}
+                className={COLOR_MAP[cityOwnerColor ?? 'black']}
+              />
+            );
+          if (cityType === 'hotel')
+            return (
+              <RiHotelLine key={`${nameKo}-${cityType}`} size={16} className={COLOR_MAP[cityOwnerColor ?? 'black']} />
+            );
           return <></>;
         })}
       </div>
