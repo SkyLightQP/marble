@@ -5,6 +5,8 @@ export interface PlayerResponse {
   readonly userId: string;
   readonly id: string;
   readonly nickname: string;
+  readonly socketClientId: string;
+  readonly isDisable: boolean;
 }
 
 export interface GetRoomResponse {
