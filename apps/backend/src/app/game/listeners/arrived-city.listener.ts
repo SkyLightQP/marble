@@ -24,7 +24,7 @@ export class ArrivedCityListener implements IEventHandler<RolledDiceEvent> {
     );
     const socketId = executePlayer.socketClientId;
     const cityOwnerId = game.cityWhoHave[city.id];
-    const playerStatus = game.playerStatus[executePlayer.id];
+    const playerStatus = game.playerStatus[executePlayer.userId];
 
     if (cityOwnerId === executePlayer.userId) {
       return;
@@ -60,8 +60,21 @@ export class ArrivedCityListener implements IEventHandler<RolledDiceEvent> {
       });
 
       if (playerStatus.money < penalty) {
-        // TODO: 파산 요청
-        Logger.log({ message: '파산 요청을 보냈습니다.', target: executePlayer.userId, penalty });
+        const currentPlayer = game.playerOrder[game.currentOrderPlayerIndex];
+        currentPlayer.isDisable = true;
+
+        game.removeCitiesWhoHavePlayer(executePlayer.userId);
+
+        playerStatus.money = -1;
+        playerStatus.land = 0;
+        playerStatus.house = 0;
+        playerStatus.building = 0;
+        playerStatus.hotel = 0;
+
+        await game.syncRedis(this.redis);
+
+        Logger.log({ message: '플레이어를 파산 처리합니다.', target: executePlayer.userId, penalty });
+        return;
       }
 
       playerStatus.money -= penalty;
