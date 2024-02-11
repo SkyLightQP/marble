@@ -77,6 +77,9 @@ export class Game extends SyncableToRedis {
 
   public increaseCurrentOrderPlayerIndex(): void {
     this.currentOrderPlayerIndex = (this.currentOrderPlayerIndex + 1) % this.playerOrder.length;
+    if (this.playerOrder[this.currentOrderPlayerIndex].isDisable) {
+      this.increaseCurrentOrderPlayerIndex();
+    }
   }
 
   public toJSON(): GameFields {
