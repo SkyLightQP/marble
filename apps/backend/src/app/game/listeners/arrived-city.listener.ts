@@ -17,7 +17,11 @@ export class ArrivedCityListener implements IEventHandler<RolledDiceEvent> {
   ) {}
 
   async handle({ args: { game, position, executePlayer } }: RolledDiceEvent) {
-    if (SPECIAL_CARD_POSITIONS.includes(position)) return;
+    if (SPECIAL_CARD_POSITIONS.includes(position)) {
+      game.increaseCurrentOrderPlayerIndex();
+      await game.syncRedis(this.redis);
+      return;
+    }
 
     const city = await this.queryBus.execute<GetCityByPositionQuery, GetCityByPositionReturn>(
       new GetCityByPositionQuery({ position })
@@ -27,6 +31,8 @@ export class ArrivedCityListener implements IEventHandler<RolledDiceEvent> {
     const playerStatus = game.playerStatus[executePlayer.userId];
 
     if (cityOwnerId === executePlayer.userId) {
+      game.increaseCurrentOrderPlayerIndex();
+      await game.syncRedis(this.redis);
       return;
     }
 
