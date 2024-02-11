@@ -92,8 +92,14 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
       canBuyBuilding: data.game.playerStatus[userId].haveCities[data.city.id].includes('land')
     });
   });
-  useSocketListener<PenaltyResponse>('penalty', () => {
-    // TODO: implement the PenaltyModal.
+  useSocketListener<PenaltyResponse>('penalty', (data) => {
+    if (userId === undefined) return;
+    openModal(PenaltyModal, {
+      ownerNickname: data.ownerNickname,
+      money: game.playerStatus[userId].money,
+      penalty: data.penalty,
+      onClose: () => socket?.emit('end-turn', { roomId })
+    });
   });
 
   if (!game.isLoading || userId === undefined || cities === undefined || cities[1] === undefined) {
