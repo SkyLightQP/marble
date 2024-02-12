@@ -2087,12 +2087,20 @@
     import2 "^1.0.3"
     node-fetch "^2.6.7"
 
-"@nestia/sdk@^2.4.3":
-  version "2.4.3"
-  resolved "https://registry.npmjs.org/@nestia/sdk/-/sdk-2.4.3.tgz"
-  integrity sha512-8I0A/W1LgkdElmadwiftvVx1sFkJQXJRgJVZ68KE3vla6oeu+pjGjDB6491hO9GPacIHmI1mb5mSVvn/JEiqyQ==
+"@nestia/fetcher@^2.5.4":
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/@nestia/fetcher/-/fetcher-2.5.4.tgz#ed77f5692ec20330210bd0b9129320881075244b"
+  integrity sha512-sp7J+6h1NtdgO3KIKIxsKLzz2ZH+SweBHT2TCEatpNBFfq0nrbceWauXJB6l4fdVlcA4E/sFF8szzzlwE3awyw==
   dependencies:
-    "@nestia/fetcher" "^2.4.3"
+    import2 "^1.0.3"
+    node-fetch "^2.6.7"
+
+"@nestia/sdk@^2.4.3":
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/@nestia/sdk/-/sdk-2.5.4.tgz#9810af5ae49304b63a523ffb6996da423383c130"
+  integrity sha512-ppSP5K94W0pkZm0W7c0XTNTpxWLdW8wWOIRfiksRJvAo8mng4cautnxLePQmU2R9W7QaNfCiHICEvx0vWTyHmg==
+  dependencies:
+    "@nestia/fetcher" "^2.5.4"
     cli "^1.0.1"
     get-function-location "^2.0.0"
     glob "^7.2.0"
@@ -2101,7 +2109,7 @@
     tsconfck "^2.0.1"
     tsconfig-paths "^4.1.1"
     tstl "^2.5.13"
-    typia "^5.3.4"
+    typia "^5.4.5"
 
 "@nestjs/cli@^10.0.0":
   version "10.3.2"
@@ -12076,6 +12084,16 @@ typia@^5.3.4, typia@^5.3.5:
   version "5.3.5"
   resolved "https://registry.npmjs.org/typia/-/typia-5.3.5.tgz"
   integrity sha512-PaVie/NOgkQHlfK8q7SlEzjLWkbo6W2F+F39Jf5tdN16vP/GWd2uywlh/El4daJbHFGyfq/+gxK66NoNI1bubg==
+  dependencies:
+    commander "^10.0.0"
+    comment-json "^4.2.3"
+    inquirer "^8.2.5"
+    randexp "^0.5.3"
+
+typia@^5.4.5:
+  version "5.4.8"
+  resolved "https://registry.yarnpkg.com/typia/-/typia-5.4.8.tgz#b4911d0477ec882c93dfdd3327d89ce6923c81e4"
+  integrity sha512-4F2/w5SDMz7Gzyqhty3/7vs15IaAfO3PsDnmjpx4Bz75MpZORqdR8VX8scvkps/usziedhYcI1674xfqSYz2Pw==
   dependencies:
     commander "^10.0.0"
     comment-json "^4.2.3"
