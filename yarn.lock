@@ -2126,11 +2126,11 @@
     tslib "2.6.2"
 
 "@nestjs/cqrs@^10.2.6":
-  version "10.2.6"
-  resolved "https://registry.npmjs.org/@nestjs/cqrs/-/cqrs-10.2.6.tgz"
-  integrity sha512-QB5D4MnPybYK0y/Md9UoAMt5by/EleFiLVELYtSm2rzKtAcrcYbc8IrmootKs4cqonxskrcdZliqFgtQF+TdjQ==
+  version "10.2.7"
+  resolved "https://registry.yarnpkg.com/@nestjs/cqrs/-/cqrs-10.2.7.tgz#67e129d481c86a2b3153374af688abfd19819994"
+  integrity sha512-RXhgQOfuT+KzvkueR4S++SB6+6333PL71pOtCzbJAAU/DY3KY56yTCncWRsIdorKfDX5AEwTiQHHJi69XJWdkA==
   dependencies:
-    uuid "9.0.0"
+    uuid "9.0.1"
 
 "@nestjs/jwt@^10.2.0":
   version "10.2.0"
@@ -12163,6 +12163,11 @@ uuid@9.0.0:
   version "9.0.0"
   resolved "https://registry.npmjs.org/uuid/-/uuid-9.0.0.tgz"
   integrity sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==
+
+uuid@9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.1.tgz#e188d4c8853cc722220392c424cd637f32293f30"
+  integrity sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==
 
 uuid@^8.3.2:
   version "8.3.2"
