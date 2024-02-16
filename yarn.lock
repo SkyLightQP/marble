@@ -2087,25 +2087,26 @@
     import2 "^1.0.3"
     node-fetch "^2.6.7"
 
-"@nestia/fetcher@^2.5.4":
-  version "2.5.4"
-  resolved "https://registry.yarnpkg.com/@nestia/fetcher/-/fetcher-2.5.4.tgz#ed77f5692ec20330210bd0b9129320881075244b"
-  integrity sha512-sp7J+6h1NtdgO3KIKIxsKLzz2ZH+SweBHT2TCEatpNBFfq0nrbceWauXJB6l4fdVlcA4E/sFF8szzzlwE3awyw==
+"@nestia/fetcher@^2.5.8":
+  version "2.5.8"
+  resolved "https://registry.yarnpkg.com/@nestia/fetcher/-/fetcher-2.5.8.tgz#314b0ce676d0c3c70d20f26dcaeb62f2ecf91eac"
+  integrity sha512-Zoze+OCf49k+EUdaYXKI3OgsL7B8/E/1Rk2+goXRNeJUi4trSDBRZWc6uwFMrbPh6imleODkiFt3L/dHtJAY7w==
   dependencies:
     import2 "^1.0.3"
     node-fetch "^2.6.7"
 
 "@nestia/sdk@^2.4.3":
-  version "2.5.4"
-  resolved "https://registry.yarnpkg.com/@nestia/sdk/-/sdk-2.5.4.tgz#9810af5ae49304b63a523ffb6996da423383c130"
-  integrity sha512-ppSP5K94W0pkZm0W7c0XTNTpxWLdW8wWOIRfiksRJvAo8mng4cautnxLePQmU2R9W7QaNfCiHICEvx0vWTyHmg==
+  version "2.5.8"
+  resolved "https://registry.yarnpkg.com/@nestia/sdk/-/sdk-2.5.8.tgz#ac45789acecf8465f7d74dd30e35c6bff6b89c02"
+  integrity sha512-2RxoA4pt30oqHNy+cOQ7AdIn7JRGQdV2NIafHpJLdTGICeWtZqxJtn3NcRr6fympF48JuBmhgxko8A3+3/AdXQ==
   dependencies:
-    "@nestia/fetcher" "^2.5.4"
+    "@nestia/fetcher" "^2.5.8"
     cli "^1.0.1"
     get-function-location "^2.0.0"
     glob "^7.2.0"
     path-to-regexp "^6.2.1"
-    reflect-metadata ">=0.1.12"
+    prettier "^3.2.5"
+    ts-node ">=10.6.0"
     tsconfck "^2.0.1"
     tsconfig-paths "^4.1.1"
     tstl "^2.5.13"
@@ -10014,6 +10015,11 @@ prettier@^3.0.3:
   resolved "https://registry.npmjs.org/prettier/-/prettier-3.1.0.tgz"
   integrity sha512-TQLvXjq5IAibjh8EpBIkNKxO749UEWABoiIZehEPiY4GNpVdhaFKqSTu+QrlU6D2dPAfubRmtJTi4K4YkQ5eXw==
 
+prettier@^3.2.5:
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.2.5.tgz#e52bc3090586e824964a8813b09aba6233b28368"
+  integrity sha512-3/GWa9aOC0YeD7LUfvOG2NiDyhOWRvt1k+rcKhOuYnMY24iiCphgneUfJDyFXd6rZCAnuLBv6UeAULtrhT/F4A==
+
 pretty-bytes@^5.3.0, pretty-bytes@^5.4.1:
   version "5.6.0"
   resolved "https://registry.npmjs.org/pretty-bytes/-/pretty-bytes-5.6.0.tgz"
@@ -11849,7 +11855,7 @@ ts-loader@^9.4.3:
     semver "^7.3.4"
     source-map "^0.7.4"
 
-ts-node@^10.9.2:
+ts-node@>=10.6.0, ts-node@^10.9.2:
   version "10.9.2"
   resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-10.9.2.tgz#70f021c9e185bccdca820e26dc413805c101c71f"
   integrity sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==
