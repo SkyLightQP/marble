@@ -12,6 +12,7 @@ import { useRandomRoomName } from '@/hooks/useRandomRoomName';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { RootLayout } from '@/layouts/RootLayout';
+import { useRefreshToken } from '@/services/useRefreshToken';
 import { useModalStore } from '@/stores/useModalStore';
 
 export const RoomListPage: React.FC = () => {
@@ -32,6 +33,8 @@ export const RoomListPage: React.FC = () => {
   const navigate = useNavigate();
   const socket = useSocket();
   const { openModal, closeModal } = useModalStore();
+
+  useRefreshToken();
 
   useEffect(() => {
     socket?.emit('get-rooms');
