@@ -4,6 +4,7 @@ import { IconType } from 'react-icons';
 import { RiBuildingLine, RiHome3Line, RiHotelLine, RiSquareLine } from 'react-icons/ri';
 import { CityType } from '@/api/SocketResponse';
 import { PlayerDot } from '@/components/PlayerDot';
+import { COLOR_MAP } from '@/styles/DotColorStyle';
 import { DotColor } from '@/types/DotColor';
 import { DotItem } from '@/types/DotItem';
 
@@ -15,14 +16,6 @@ interface CityCardProps {
   readonly cityOwnerColor?: DotColor;
   readonly haveCities?: CityType[];
 }
-
-const COLOR_MAP: Record<DotColor | 'black', string> = {
-  red: 'text-red-500',
-  blue: 'text-blue-500',
-  green: 'text-green-500',
-  yellow: 'text-yellow-500',
-  black: 'text-black'
-};
 
 export const CityCard: React.FC<CityCardProps> = ({
   icon: Icon,
