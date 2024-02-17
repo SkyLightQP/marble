@@ -153,7 +153,7 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
         </div>
         <div className="flex flex-col min-h-full w-[1060px] justify-center items-center p-10 space-y-4">
           <div className="flex justify-center space-x-4">
-            <CityInformationView />
+            <CityInformationView haveCities={game.playerStatus[userId].haveCities} cities={cities} />
             <BalanceInformationView
               balanceInfo={{
                 money: game.playerStatus[userId].money,
