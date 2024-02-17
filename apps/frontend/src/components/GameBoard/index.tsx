@@ -10,6 +10,7 @@ import { CityBuyModal } from '@/components/CityBuyModal';
 import { CityCard } from '@/components/CityCard';
 import { CityInformationView } from '@/components/CityInformation/CityInformationView';
 import { DiceView } from '@/components/Dice/DiceView';
+import { Loading } from '@/components/Loading';
 import { PenaltyModal } from '@/components/PenaltyModal';
 import { RankView } from '@/components/Rank/RankView';
 import { SpecialCard } from '@/components/SpecialCard';
@@ -111,11 +112,7 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
   });
 
   if (!game.isLoading || userId === undefined || cities === undefined || cities[1] === undefined) {
-    return (
-      <div>
-        <h1>도시를 가져오는 중...</h1>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
@@ -154,7 +151,7 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
               />
             ))}
         </div>
-        <div className="flex flex-col h-full w-[1060px] justify-center p-10 space-y-4">
+        <div className="flex flex-col min-h-full w-[1060px] justify-center items-center p-10 space-y-4">
           <div className="flex justify-center space-x-4">
             <CityInformationView />
             <BalanceInformationView
