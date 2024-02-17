@@ -4,7 +4,7 @@ import { IconType } from 'react-icons';
 import { RiBuildingLine, RiHome3Line, RiHotelLine, RiSquareLine } from 'react-icons/ri';
 import { CityType } from '@/api/SocketResponse';
 import { PlayerDot } from '@/components/PlayerDot';
-import { COLOR_MAP } from '@/styles/DotColorStyle';
+import { TEXT_COLOR_MAP } from '@/styles/DotColorStyle';
 import { DotColor } from '@/types/DotColor';
 import { DotItem } from '@/types/DotItem';
 
@@ -36,23 +36,35 @@ export const CityCard: React.FC<CityCardProps> = ({
         {(haveCities ?? []).map((cityType) => {
           if (cityType === 'land')
             return (
-              <RiSquareLine key={`${nameKo}-${cityType}`} size={16} className={COLOR_MAP[cityOwnerColor ?? 'black']} />
+              <RiSquareLine
+                key={`${nameKo}-${cityType}`}
+                size={16}
+                className={TEXT_COLOR_MAP[cityOwnerColor ?? 'black']}
+              />
             );
           if (cityType === 'house')
             return (
-              <RiHome3Line key={`${nameKo}-${cityType}`} size={16} className={COLOR_MAP[cityOwnerColor ?? 'black']} />
+              <RiHome3Line
+                key={`${nameKo}-${cityType}`}
+                size={16}
+                className={TEXT_COLOR_MAP[cityOwnerColor ?? 'black']}
+              />
             );
           if (cityType === 'building')
             return (
               <RiBuildingLine
                 key={`${nameKo}-${cityType}`}
                 size={16}
-                className={COLOR_MAP[cityOwnerColor ?? 'black']}
+                className={TEXT_COLOR_MAP[cityOwnerColor ?? 'black']}
               />
             );
           if (cityType === 'hotel')
             return (
-              <RiHotelLine key={`${nameKo}-${cityType}`} size={16} className={COLOR_MAP[cityOwnerColor ?? 'black']} />
+              <RiHotelLine
+                key={`${nameKo}-${cityType}`}
+                size={16}
+                className={TEXT_COLOR_MAP[cityOwnerColor ?? 'black']}
+              />
             );
           return <></>;
         })}
