@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GameResponse, WebSocketError } from '@/api/SocketResponse';
 import { GameBoard } from '@/components/GameBoard';
+import { Loading } from '@/components/Loading';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { useUser } from '@/hooks/useUser';
@@ -51,11 +52,7 @@ export const GamePage: FC = () => {
   });
 
   if (!game.isLoading || user === undefined) {
-    return (
-      <RootLayout className="h-screen w-screen">
-        <h1>Loading</h1>
-      </RootLayout>
-    );
+    return <Loading />;
   }
 
   return (
