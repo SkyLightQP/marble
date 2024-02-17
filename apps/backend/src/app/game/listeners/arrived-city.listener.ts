@@ -22,6 +22,7 @@ export class ArrivedCityListener implements IEventHandler<RolledDiceEvent> {
       await game.syncRedis(this.redis);
       return;
     }
+    Logger.log({ message: '도시에 도착했습니다.', executor: executePlayer.userId, position });
 
     const city = await this.queryBus.execute<GetCityByPositionQuery, GetCityByPositionReturn>(
       new GetCityByPositionQuery({ position })
