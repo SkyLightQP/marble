@@ -9,7 +9,7 @@ import { RoomPage } from '@/pages/RoomPage';
 
 export const Router: React.FC = () => {
   return (
-    <BrowserRouter basename={process.env.REACT_APP_BASEPATH ?? '/'}>
+    <BrowserRouter basename={import.meta.env.BASEPATH ?? '/'}>
       <Routes>
         <Route path="/" element={<Navigate to="/rooms" />} />
         <Route path="/game" element={<Navigate to="/rooms" />} />
