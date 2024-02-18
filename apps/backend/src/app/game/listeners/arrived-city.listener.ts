@@ -34,7 +34,7 @@ export class ArrivedCityListener implements IEventHandler<RolledDiceEvent> {
     );
     const cityOwnerId = game.cityWhoHave[city.id];
     const socketId = executePlayer.socketClientId;
-    const playerStatus = game.playerStatus[executePlayer.userId];
+    const playerStatus = game.getPlayerStatus(executePlayer.userId);
 
     if (cityOwnerId === executePlayer.userId) {
       game.increaseCurrentOrderPlayerIndex();
@@ -46,7 +46,7 @@ export class ArrivedCityListener implements IEventHandler<RolledDiceEvent> {
 
     const isCityOwnerOtherPlayer = cityOwnerId !== undefined && cityOwnerId !== executePlayer.userId;
     if (isCityOwnerOtherPlayer) {
-      const ownerHaveCities = game.playerStatus[cityOwnerId].haveCities;
+      const ownerHaveCities = game.getPlayerStatus(cityOwnerId).haveCities;
       let penalty = 0;
 
       ownerHaveCities[city.id].forEach((cityType) => {
@@ -69,7 +69,7 @@ export class ArrivedCityListener implements IEventHandler<RolledDiceEvent> {
 
       this.socketGateway.server.to(socketId).emit('penalty', {
         city,
-        ownerNickname: game.playerStatus[cityOwnerId].nickname,
+        ownerNickname: game.getPlayerStatus(cityOwnerId).nickname,
         penalty
       });
 

@@ -36,7 +36,7 @@ export class Game extends SyncableToRedis {
     public turn: number,
     public playerOrder: Player[],
     public currentOrderPlayerIndex: number,
-    public playerStatus: Record<UserId, GameStatus>,
+    private playerStatus: Record<UserId, GameStatus>,
     public cityWhoHave: Record<CityId, UserId>
   ) {
     super();
