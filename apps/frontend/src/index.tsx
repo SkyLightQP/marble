@@ -18,6 +18,6 @@ root.render(
         <ModalManager />
       </SocketProvider>
     </UserProvider>
-    <Toaster />
+    <Toaster position="top-right" />
   </StrictMode>
 );

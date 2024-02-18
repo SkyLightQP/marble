@@ -30,7 +30,7 @@ export const GamePage: FC = () => {
 
   useEffect(() => {
     if (isMyTurn) {
-      toast('당신의 차례입니다!');
+      toast('🚗 당신의 차례입니다!');
     }
   }, [isMyTurn]);
 
