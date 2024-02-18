@@ -91,7 +91,8 @@ export class ArrivedCityListener implements IEventHandler<RolledDiceEvent> {
         return;
       }
 
-      playerStatus.money -= penalty;
+      game.takeMoney(executePlayer.userId, penalty);
+      game.giveMoney(cityOwnerId, penalty);
       await game.syncRedis(this.redis);
 
       Logger.log({ message: '벌금 부과를 했습니다.', executor: executePlayer.userId });
