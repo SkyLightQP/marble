@@ -43,7 +43,7 @@ export class RollDiceHandler implements ICommandHandler<RollDiceCommand> {
 
     const isPassedStartPoint = prevPosition > playerStatus.position;
     if (isPassedStartPoint) {
-      playerStatus.money += 1000;
+      game.giveMoney(executor, 1000);
     }
 
     await game.syncRedis(this.redis);

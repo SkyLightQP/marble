@@ -40,7 +40,7 @@ export class BuyCityHandler implements ICommandHandler<BuyCityCommand> {
     }
 
     const playerStatus = game.playerStatus[executor];
-    playerStatus.money -= price;
+    game.takeMoney(executor, price);
     playerStatus.haveCities[cityId] = [...(playerStatus.haveCities[cityId] ?? []), cityType];
     game.cityWhoHave[cityId] = executor;
     if (cityType === 'land') playerStatus.land += 1;
