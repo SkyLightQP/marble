@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
-      Lotteriachab: ['LOTTERIACHAB']
+      PartialSansKR: ['PartialSansKR-Regular']
     }
   },
   plugins: []

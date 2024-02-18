@@ -47,7 +47,7 @@ export const LoginPage: React.FC = () => {
     <RootLayout className="h-screen w-screen">
       <div className="flex h-full flex-col items-center justify-center text-center">
         <div className="mb-5">
-          <h1 className="font-Lotteriachab text-4xl">Marble</h1>
+          <h1 className="font-PartialSansKR text-4xl">Marble</h1>
           <h2 className="text-lg">로그인하기</h2>
         </div>
 

@@ -58,7 +58,7 @@ export const RegisterPage: React.FC = () => {
       <div className="flex h-full flex-col items-center justify-center text-center">
         <div className="mb-5">
           <div className="mb-3">
-            <h1 className="font-Lotteriachab text-4xl">Marble</h1>
+            <h1 className="font-PartialSansKR text-4xl">Marble</h1>
             <h3 className="text-sm">🎲 웹기반 도시건설 보드게임 🎲</h3>
           </div>
           <h2 className="text-lg">회원가입하기</h2>
