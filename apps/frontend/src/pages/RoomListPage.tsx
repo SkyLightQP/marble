@@ -6,6 +6,7 @@ import { RiAddFill, RiRefreshLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import { CreateRoomResponse, GetRoomsResponse, WebSocketError } from '@/api/SocketResponse';
 import { Button } from '@/components/Button';
+import { Logo } from '@/components/Logo';
 import { CreateRoomForm, createRoomFormSchema, CreateRoomModal } from '@/components/Room/CreateRoomModal';
 import { RoomPreviewCard } from '@/components/Room/RoomPreviewCard';
 import { useRandomRoomName } from '@/hooks/useRandomRoomName';
@@ -74,6 +75,7 @@ export const RoomListPage: React.FC = () => {
 
   return (
     <RootLayout className="h-screen w-screen p-20">
+      <Logo className="-ml-1 mb-3" />
       <div className="mb-5 flex items-center">
         <h1 className="mr-4 text-4xl font-bold">
           방 목록<span className="ml-1 text-sm font-normal text-gray-400">({rooms.length})</span>
