@@ -119,9 +119,12 @@ export const RegisterPage: React.FC = () => {
           </InputError>
         </div>
 
-        <div>
+        <div className="space-y-2">
           <Button className="h-10 w-56" onClick={handleSubmit(onRegisterButtonClick)}>
             회원가입
+          </Button>
+          <Button className="h-10 w-56" onClick={() => navigate(-1)}>
+            뒤로가기
           </Button>
         </div>
       </div>

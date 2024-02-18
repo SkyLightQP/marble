@@ -75,9 +75,12 @@ export const LoginPage: React.FC = () => {
           </InputError>
         </div>
 
-        <div>
+        <div className="space-y-2">
           <Button className="h-10 w-56" onClick={handleSubmit(onLoginButtonClick)}>
             로그인
+          </Button>
+          <Button className="h-10 w-56" onClick={() => navigate('/register')}>
+            회원가입
           </Button>
         </div>
       </div>
