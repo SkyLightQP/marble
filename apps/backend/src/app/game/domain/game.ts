@@ -22,7 +22,7 @@ export interface GameStatus {
 }
 
 export interface GameFields {
-  roomId: string;
+  readonly roomId: string;
   turn: number;
   playerOrder: Player[];
   currentOrderPlayerIndex: number;
@@ -32,7 +32,7 @@ export interface GameFields {
 
 export class Game extends SyncableToRedis {
   private constructor(
-    public roomId: string,
+    public readonly roomId: string,
     public turn: number,
     public playerOrder: Player[],
     public currentOrderPlayerIndex: number,

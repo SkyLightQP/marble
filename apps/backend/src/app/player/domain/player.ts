@@ -1,17 +1,9 @@
-interface PlayerFields {
-  readonly userId: string;
-  readonly id: string;
-  readonly nickname: string;
-  readonly socketClientId: string;
-  readonly isDisable: boolean;
-}
-
 export class Player {
   private constructor(
-    public userId: string,
-    public id: string,
-    public nickname: string,
-    public socketClientId: string,
+    public readonly userId: string,
+    public readonly id: string,
+    public readonly nickname: string,
+    public readonly socketClientId: string,
     public isDisable: boolean
   ) {}
 
