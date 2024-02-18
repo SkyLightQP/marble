@@ -92,6 +92,14 @@ export class Game extends SyncableToRedis {
     });
   }
 
+  public giveMoney(userId: string, money: number): void {
+    this.getPlayerStatus(userId).money += money;
+  }
+
+  public takeMoney(userId: string, money: number): void {
+    this.getPlayerStatus(userId).money -= money;
+  }
+
   public toJSON(): GameFields {
     return {
       roomId: this.roomId,
