@@ -10,6 +10,7 @@ import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { InputError } from '@/components/InputError';
 import { Label } from '@/components/Label';
+import { Logo } from '@/components/Logo';
 import { getCustomError } from '@/error/ErrorUtil';
 import { RootLayout } from '@/layouts/RootLayout';
 
@@ -47,7 +48,7 @@ export const LoginPage: React.FC = () => {
     <RootLayout className="h-screen w-screen">
       <div className="flex h-full flex-col items-center justify-center text-center">
         <div className="mb-5">
-          <h1 className="font-PartialSansKR text-4xl">Marble</h1>
+          <Logo />
           <h2 className="text-lg">로그인하기</h2>
         </div>
 

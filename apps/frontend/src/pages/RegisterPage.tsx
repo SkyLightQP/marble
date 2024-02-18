@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import api from '@marble/api';
+import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +10,7 @@ import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { InputError } from '@/components/InputError';
 import { Label } from '@/components/Label';
+import { Logo } from '@/components/Logo';
 import { getCustomError } from '@/error/ErrorUtil';
 import { RootLayout } from '@/layouts/RootLayout';
 
@@ -58,8 +60,8 @@ export const RegisterPage: React.FC = () => {
       <div className="flex h-full flex-col items-center justify-center text-center">
         <div className="mb-5">
           <div className="mb-3">
-            <h1 className="font-PartialSansKR text-4xl">Marble</h1>
-            <h3 className="text-sm">🎲 웹기반 도시건설 보드게임 🎲</h3>
+            <Logo />
+            <h3 className="text-md">웹기반 도시건설 보드게임</h3>
           </div>
           <h2 className="text-lg">회원가입하기</h2>
         </div>
