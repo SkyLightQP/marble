@@ -2,7 +2,7 @@ import api from '@marble/api';
 import { FC, useMemo } from 'react';
 import { RiBuildingLine } from 'react-icons/ri';
 import { CityType } from '@/api/SocketResponse';
-import { CityInformationModal } from '@/components/CityInformation/CityInformationModal';
+import { CityInformationModal } from '@/components/Game/CityInformation/CityInformationModal';
 import { useModalStore } from '@/stores/useModalStore';
 
 interface CityPriceType {

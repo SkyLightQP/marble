@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { RiTrophyLine } from 'react-icons/ri';
-import { RankPlayerItem } from '@/components/Rank/RankPlayerItem';
+import { RankPlayerItem } from '@/components/Game/Rank/RankPlayerItem';
 import { RankItem } from '@/types/Rank';
 
 interface RankViewProps {

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
-import { PlayerDot } from '@/components/PlayerDot';
+import { PlayerDot } from '@/components/Game/PlayerDot';
 import { DotColor } from '@/types/DotColor';
 
 interface RankPlayerItemProps {

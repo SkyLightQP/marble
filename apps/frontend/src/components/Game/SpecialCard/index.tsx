@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { PlayerDot } from '@/components/PlayerDot';
+import { PlayerDot } from '@/components/Game/PlayerDot';
 import { DotItem } from '@/types/DotItem';
 
 interface SpecialCardProps {

@@ -2,7 +2,7 @@ import { FC, useEffect, useMemo } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GameResponse, WebSocketError } from '@/api/SocketResponse';
-import { GameBoard } from '@/components/GameBoard';
+import { GameBoard } from '@/components/Game/GameBoard';
 import { Loading } from '@/components/Loading';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';

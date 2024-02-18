@@ -7,7 +7,7 @@ import {
   RiMoneyDollarCircleLine,
   RiSquareLine
 } from 'react-icons/ri';
-import { BalanceInformationItem } from '@/components/BalanceInformation/BalanceInformationItem';
+import { BalanceInformationItem } from '@/components/Game/BalanceInformation/BalanceInformationItem';
 
 export interface BalanceInfo {
   readonly money: number;

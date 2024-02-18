@@ -3,7 +3,7 @@ import React from 'react';
 import { IconType } from 'react-icons';
 import { RiBuildingLine, RiHome3Line, RiHotelLine, RiSquareLine } from 'react-icons/ri';
 import { CityType } from '@/api/SocketResponse';
-import { PlayerDot } from '@/components/PlayerDot';
+import { PlayerDot } from '@/components/Game/PlayerDot';
 import { TEXT_COLOR_MAP } from '@/styles/DotColorStyle';
 import { DotColor } from '@/types/DotColor';
 import { DotItem } from '@/types/DotItem';

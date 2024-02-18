@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
-import { DiceItem } from '@/components/Dice/DiceItem';
+import { DiceItem } from '@/components/Game/Dice/DiceItem';
 
 interface DiceViewProps {
   readonly isMyTurn?: boolean;
