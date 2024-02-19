@@ -96,7 +96,7 @@ export const RoomListPage: React.FC = () => {
         </Button>
       </div>
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(20rem,1fr))] gap-4">
         {rooms.map((room) => (
           <RoomPreviewCard
             key={room.id}
