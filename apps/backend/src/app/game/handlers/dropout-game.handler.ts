@@ -27,6 +27,11 @@ export class DropoutGameHandler implements ICommandHandler<DropoutGameCommand> {
     game.removePlayer(userId);
 
     if (room.players.length >= 1) game.increaseCurrentOrderPlayerIndex();
+
+    if (room.players.length >= 1 && room.owner === userId) {
+      room.owner = room.players[0].userId;
+    }
+
     await room.syncRedis(this.redis);
     await game.syncRedis(this.redis);
 
