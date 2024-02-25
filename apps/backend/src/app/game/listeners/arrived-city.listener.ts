@@ -8,6 +8,8 @@ import { EndedGameEvent } from '@/app/game/events/ended-game.event';
 import { EndedTurnEvent } from '@/app/game/events/ended-turn.event';
 import { RolledDiceEvent } from '@/app/game/events/rolled-dice.event';
 import { CalculatePenaltyService } from '@/app/game/services/calculate-penalty.service';
+import { GetRoomReturn } from '@/app/room/handlers/get-room.handler';
+import { GetRoomQuery } from '@/app/room/queries/get-room.query';
 import { SocketGateway } from '@/app/socket/socket.gateway';
 
 @EventsHandler(RolledDiceEvent)
@@ -79,7 +81,10 @@ export class ArrivedCityListener implements IEventHandler<RolledDiceEvent> {
         Logger.log({ message: '플레이어를 파산 처리합니다.', target: executePlayer.userId, penalty });
 
         if (game.getPlayersNotDisable().length <= 1) {
-          this.eventBus.publish(new EndedGameEvent({ game }));
+          const room = await this.queryBus.execute<GetRoomQuery, GetRoomReturn>(
+            new GetRoomQuery({ roomId: game.roomId })
+          );
+          this.eventBus.publish(new EndedGameEvent({ game, room }));
         }
 
         return;

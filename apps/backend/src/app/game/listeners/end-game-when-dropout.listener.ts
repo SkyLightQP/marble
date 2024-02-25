@@ -6,9 +6,9 @@ import { EndedGameEvent } from '@/app/game/events/ended-game.event';
 export class EndGameWhenDropoutListener implements IEventHandler<DropoutGameEvent> {
   constructor(private readonly eventBus: EventBus) {}
 
-  handle({ args: { game } }: DropoutGameEvent) {
+  handle({ args: { game, room } }: DropoutGameEvent) {
     if (game.getPlayersNotDisable().length <= 1) {
-      this.eventBus.publish(new EndedGameEvent({ game }));
+      this.eventBus.publish(new EndedGameEvent({ game, room }));
     }
   }
 }
