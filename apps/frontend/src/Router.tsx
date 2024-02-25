@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { PermissionRoute } from '@/components/PermissionRoute';
 import { GamePage } from '@/pages/GamePage';
+import { LandingPage } from '@/pages/LandingPage';
 import { LoginPage } from '@/pages/LoginPage';
 import { RegisterPage } from '@/pages/RegisterPage';
 import { RoomListPage } from '@/pages/RoomListPage';
@@ -13,7 +14,7 @@ export const Router: React.FC = () => {
   return (
     <BrowserRouter basename={import.meta.env.BASEPATH ?? '/'}>
       <Routes>
-        <Route path="/" element={<Navigate to="/rooms" />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/game" element={<Navigate to="/rooms" />} />
         <Route
           path="/game/:roomId"
