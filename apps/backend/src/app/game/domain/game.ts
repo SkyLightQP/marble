@@ -100,6 +100,10 @@ export class Game extends SyncableToRedis {
     this.getPlayerStatus(userId).money -= money;
   }
 
+  public getPlayersNotDisable(): Player[] {
+    return this.playerOrder.filter((player) => !player.isDisable);
+  }
+
   public toJSON(): GameFields {
     return {
       roomId: this.roomId,
