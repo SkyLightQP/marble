@@ -27,7 +27,7 @@ export const RoomPage: React.FC = () => {
   useSocketListener<WebSocketError>('exception', (error) => {
     toast.error(error.message);
     if (error.code === 'IS_NOT_OWNER') return;
-    navigate(-1);
+    navigate('/');
   });
 
   const startGame = () => {
