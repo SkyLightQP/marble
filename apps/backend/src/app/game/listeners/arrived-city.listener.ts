@@ -4,6 +4,7 @@ import { RedisClientType } from 'redis';
 import { GetCityByPositionReturn } from '@/app/city/handlers/get-city-by-position.handler';
 import { GetCityByPositionQuery } from '@/app/city/queries/get-city-by-position.query';
 import { SPECIAL_CARD_POSITIONS } from '@/app/game/constants/game-board.constant';
+import { EndedGameEvent } from '@/app/game/events/ended-game.event';
 import { EndedTurnEvent } from '@/app/game/events/ended-turn.event';
 import { RolledDiceEvent } from '@/app/game/events/rolled-dice.event';
 import { CalculatePenaltyService } from '@/app/game/services/calculate-penalty.service';
@@ -76,6 +77,11 @@ export class ArrivedCityListener implements IEventHandler<RolledDiceEvent> {
         await game.syncRedis(this.redis);
 
         Logger.log({ message: '플레이어를 파산 처리합니다.', target: executePlayer.userId, penalty });
+
+        if (game.getPlayersNotDisable().length <= 1) {
+          this.eventBus.publish(new EndedGameEvent({ game }));
+        }
+
         return;
       }
 

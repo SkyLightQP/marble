@@ -27,8 +27,6 @@ export class DropoutGameHandler implements ICommandHandler<DropoutGameCommand> {
     room.removePlayer(userId);
     game.removePlayer(userId);
 
-    // TODO: If the player length is one, the game is over.
-
     if (room.players.length > 1) game.increaseCurrentOrderPlayerIndex();
     await room.syncRedis(this.redis);
     await game.syncRedis(this.redis);

@@ -7,6 +7,7 @@ import { GetGameHandler } from '@/app/game/handlers/get-game.handler';
 import { RollDiceHandler } from '@/app/game/handlers/roll-dice.handler';
 import { StartGameHandler } from '@/app/game/handlers/start-game.handler';
 import { ArrivedCityListener } from '@/app/game/listeners/arrived-city.listener';
+import { EndGameWhenDropoutListener } from '@/app/game/listeners/end-game-when-dropout.listener';
 import { CalculatePenaltyService } from '@/app/game/services/calculate-penalty.service';
 import { SocketModule } from '@/app/socket/socket.module';
 import { DatabaseModule } from '@/infrastructure/database/database.module';
@@ -15,7 +16,7 @@ import { RedisModule } from '@/infrastructure/redis/redis.module';
 const commands = [StartGameHandler, DropoutGameHandler, RollDiceHandler, BuyCityHandler, EndTurnHandler];
 const queries = [GetGameHandler];
 const gateways = [GameGateway];
-const listeners = [ArrivedCityListener];
+const listeners = [ArrivedCityListener, EndGameWhenDropoutListener];
 const services = [CalculatePenaltyService];
 
 @Module({
