@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { GetRoomResponse, WebSocketError } from '@/api/SocketResponse';
 import { RoomMenu } from '@/components/Room/RoomMenu';
 import { useSocket } from '@/hooks/useSocket';
@@ -13,10 +13,15 @@ export const RoomPage: React.FC = () => {
   const socket = useSocket();
   const { roomId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    socket?.emit('join-room', { roomId });
-  }, [socket, roomId]);
+    const isEnterUsingURL = location.key === 'default';
+    if (isEnterUsingURL) {
+      socket?.emit('join-room', { roomId });
+    }
+    socket?.emit('get-room', { roomId });
+  }, [socket, roomId, location]);
 
   useQuitListener({ quitSocket: 'quit-room', roomId: roomId ?? 'loading' });
   useSocketListener<GetRoomResponse>('join-room', setRoom);

@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GameResponse, WebSocketError } from '@/api/SocketResponse';
 import { GameBoard } from '@/components/Game/GameBoard';
+import { GameEndModal } from '@/components/Game/GameEndModal';
 import { Loading } from '@/components/Loading';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
@@ -11,9 +12,11 @@ import { RootLayout } from '@/layouts/RootLayout';
 import { useGamePlayer } from '@/services/useGamePlayer';
 import { useQuitListener } from '@/services/useQuitListener';
 import { useGameStore } from '@/stores/useGameStore';
+import { useModalStore } from '@/stores/useModalStore';
 
 export const GamePage: FC = () => {
   const game = useGameStore();
+  const { openModal } = useModalStore();
   const navigate = useNavigate();
   const { roomId } = useParams();
   const user = useUser();
@@ -29,9 +32,7 @@ export const GamePage: FC = () => {
   }, [socket, roomId]);
 
   useEffect(() => {
-    if (isMyTurn) {
-      toast('🚗 당신의 차례입니다!');
-    }
+    if (isMyTurn) toast('🚗 당신의 차례입니다!');
   }, [isMyTurn]);
 
   useQuitListener({ quitSocket: 'dropout-game', roomId: roomId ?? 'loading' });
@@ -45,6 +46,12 @@ export const GamePage: FC = () => {
       navigate('/rooms');
       toast.error('이미 게임이 진행 중입니다.');
     }
+  });
+  useSocketListener('end-game', () => {
+    openModal(GameEndModal, {
+      ranks: playerRanks.map((rank, index) => ({ rank: index + 1, nickname: rank.name, money: rank.price })),
+      onClose: () => navigate(`/room/${roomId}`)
+    });
   });
   useSocketListener<WebSocketError>('exception', (error) => {
     toast.error(error.message);

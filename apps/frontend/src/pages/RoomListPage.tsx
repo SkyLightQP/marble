@@ -55,6 +55,7 @@ export const RoomListPage: React.FC = () => {
   useSocketListener('quit-room', () => socket?.emit('get-rooms'));
   useSocketListener<CreateRoomResponse>('create-room', ({ id }) => {
     navigate(`/room/${id}`);
+    socket?.emit('join-room', { roomId: id });
   });
   useSocketListener<WebSocketError>('exception', (error) => {
     if (error.code === 'PLAYER_NOT_FOUND') return;
@@ -104,7 +105,10 @@ export const RoomListPage: React.FC = () => {
             currentPlayer={room.players.length}
             maxPlayer={room.maxPlayer}
             isPlaying={room.isPlaying}
-            onClick={() => navigate(`/room/${room.id}`)}
+            onClick={() => {
+              navigate(`/room/${room.id}`);
+              socket?.emit('join-room', { roomId: room.id });
+            }}
           />
         ))}
       </div>
