@@ -12,7 +12,7 @@ export const LandingPage: FC = () => {
     <>
       <div className="mb-20 pt-20 px-40 flex justify-between items-center">
         <div>
-          <Logo className="text-4xl" />
+          <Logo className="text-4xl -ml-1" />
           <p className="text-2xl font-bold">웹에서 주사위 보드게임을 플레이 해보세요!</p>
         </div>
         <div>
@@ -25,8 +25,9 @@ export const LandingPage: FC = () => {
         </div>
       </div>
 
-      <div className="flex flex-col items-center">
-        <img src={Image} width={960} alt="게임화면 미리보기" className="border-2" />
+      <div className="flex flex-col items-center relative">
+        <div className="absolute bg-cover w-full h-full -z-50 blur-md" style={{ backgroundImage: `url(${Image})` }} />
+        <img src={Image} width={960} alt="게임화면 미리보기" />
       </div>
     </>
   );
