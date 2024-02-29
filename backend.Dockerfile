@@ -11,6 +11,8 @@ COPY ./apps/backend/package.json ./apps/backend/package.json
 COPY ./apps/backend ./apps/backend
 COPY ./packages ./packages
 
+ARG DATABASE_URL
+
 RUN yarn install && yarn prepare && yarn predev && yarn turbo run build --filter=backend
 
 FROM base AS runner
