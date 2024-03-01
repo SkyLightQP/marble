@@ -1,5 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalDotEnv": [".env"],
   "pipeline": {
     "db:push": {
       "cache": false
@@ -19,6 +20,8 @@
       "outputs": ["build/**", "dist/**"],
       "dependsOn": ["prepare", "predev"]
     },
-    "start": {}
+    "start": {
+	  "cache": false
+	}
   }
 }
