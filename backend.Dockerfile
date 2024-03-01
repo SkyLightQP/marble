@@ -24,7 +24,9 @@ USER node
 COPY --from=builder --chown=node:node /workspace/ ./
 
 ENV TZ Asia/Seoul
-EXPOSE 8080
 ENV NODE_ENV production
+EXPOSE 8080
+
+VOLUME ["./apps/backend/logs"]
 
 CMD cd ./apps/backend && yarn start --filter=backend
