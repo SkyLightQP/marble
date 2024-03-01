@@ -5,6 +5,7 @@ module.exports = {
   globals: {
     JSX: true
   },
+  ignorePatterns: ['node_modules/', 'dist/', 'build/', 'api/', 'lib/'],
   rules: {
     'arrow-body-style': 'off',
     'jsx-quotes': 'off',

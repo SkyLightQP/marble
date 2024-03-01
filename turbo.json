@@ -1,6 +1,8 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDotEnv": [".env"],
+  "globalDependencies": [".eslintrc.js", ".prettierrc"],
+  "globalEnv": ["NODE_ENV"],
   "pipeline": {
     "db:push": {
       "cache": false
@@ -21,6 +23,9 @@
       "dependsOn": ["prepare", "predev"]
     },
     "start": {
+	  "cache": false
+	},
+	"lint": {
 	  "cache": false
 	}
   }
