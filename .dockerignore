@@ -1,4 +1,3 @@
 node_modules
-dist
-build
 packages/api/lib
+apps/backend/src/api

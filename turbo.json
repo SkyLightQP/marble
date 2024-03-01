@@ -1,15 +1,9 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalDotEnv": [".env"],
+  "globalDependencies": [".eslintrc.js", ".prettierrc"],
+  "globalEnv": ["NODE_ENV"],
   "pipeline": {
-    "build": {
-      "outputs": ["build/**", "dist/**"],
-      "env": ["REACT_APP_BASEPATH", "REACT_APP_API_HOST"]
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true,
-      "env": ["REACT_APP_BASEPATH", "REACT_APP_API_HOST"]
-    },
     "db:push": {
       "cache": false
     },
@@ -19,6 +13,20 @@
     "predev": {
       "cache": false,
       "dependsOn": ["prepare"]
-    }
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "build": {
+      "outputs": ["build/**", "dist/**"],
+      "dependsOn": ["prepare", "predev"]
+    },
+    "start": {
+	  "cache": false
+	},
+	"lint": {
+	  "cache": false
+	}
   }
 }

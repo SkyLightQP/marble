@@ -1,0 +1,19 @@
+name: lint
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - release
+
+jobs:
+  check-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the source code.
+        uses: actions/checkout@master
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run eslint
+        run: yarn run lint

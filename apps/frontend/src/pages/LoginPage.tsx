@@ -36,7 +36,7 @@ export const LoginPage: React.FC = () => {
     try {
       const result = await api.functional.auth.signin(apiConnection, { id: data.id, password: data.password });
       localStorage.setItem('accessToken', result.accessToken);
-      navigate('/');
+      navigate('/rooms');
       window.location.reload();
     } catch (e) {
       const error = getCustomError(e);

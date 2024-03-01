@@ -4,7 +4,7 @@
 
 ![Thumbnail](./docs/thumb.png)
 
-> 웹으로 구현한 도시건설 보드게임
+> 웹으로 만든 도시건설 보드게임
 
 ## 시작하기
 
@@ -43,6 +43,31 @@ yarn dev
 
 ```shell
 yarn build
+```
+
+## 환경변수
+- [.env.example](./.env.example) 참고
+```dotenv
+# 프론트엔드에서 사용합니다.
+VITE_BASEPATH=
+VITE_API_HOST=
+
+# 백엔드에서 사용합니다.
+TZ=
+
+CORS_DEVELOPMENT_ORIGIN=
+CORS_PRODUCTION_ORIGIN=
+BCRYPT_SALT=12
+
+ACCESS_TOKEN_SECRET=
+REFRESH_TOKEN_SECRET=
+
+REDIS_HOST=
+REDIS_PORT=
+
+# Prisma 빌드 시 사용합니다.
+DATABASE_URL="postgresql://user:password@host:port/database?schema="
+
 ```
 
 ## 프로젝트 구조
