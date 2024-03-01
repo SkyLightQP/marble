@@ -8,9 +8,9 @@ import { RegisterPage } from '@/pages/RegisterPage';
 import { RoomListPage } from '@/pages/RoomListPage';
 import { RoomPage } from '@/pages/RoomPage';
 
-export const Router: React.FC = () => {
-  const NavigateToLogin = () => <Navigate to="/login" />;
+const NavigateToLogin = () => <Navigate to="/login" />;
 
+export const Router: React.FC = () => {
   return (
     <BrowserRouter basename={import.meta.env.BASEPATH ?? '/'}>
       <Routes>
