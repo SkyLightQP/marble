@@ -27,7 +27,7 @@ export const RoomListPage: React.FC = () => {
   } = useForm<CreateRoomForm>({
     defaultValues: {
       name: roomName,
-      maxPeople: 1
+      maxPeople: 2
     },
     resolver: yupResolver(createRoomFormSchema)
   });
@@ -69,7 +69,7 @@ export const RoomListPage: React.FC = () => {
     });
     reset({
       name: '',
-      maxPeople: 1
+      maxPeople: 2
     });
     closeModal(CreateRoomModal);
   };

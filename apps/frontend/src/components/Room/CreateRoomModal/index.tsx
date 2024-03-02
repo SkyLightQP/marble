@@ -27,7 +27,7 @@ interface CreateRoomModalProps {
 
 export const createRoomFormSchema = yup.object().shape({
   name: yup.string().required(),
-  maxPeople: yup.number().required().min(1).max(4)
+  maxPeople: yup.number().required().min(2).max(4)
 });
 
 export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
@@ -48,7 +48,7 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
       onClose={() =>
         reset({
           name,
-          maxPeople: 1
+          maxPeople: 2
         })
       }
     >
@@ -59,6 +59,7 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
               방 이름
             </Label>
             <Input
+              className="w-60"
               id="roomsPage-roomName"
               type="text"
               placeholder="방 이름"
@@ -67,14 +68,15 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
           </div>
           <div className="mb-3 flex items-center">
             <Label className="mr-2 w-14 text-center" htmlFor="roomsPage-maxPeople">
-              최대 인원
+              최대 인원 (2~4)
             </Label>
             <Input
+              className="w-60"
               id="roomsPage-maxPeople"
               type="number"
-              min={1}
+              min={2}
               max={4}
-              placeholder="최대 인원"
+              placeholder="최대 인원 (2~4)"
               {...register('maxPeople', { required: true })}
             />
           </div>
