@@ -1,5 +1,4 @@
-import clsx from 'clsx';
-import React from 'react';
+import { FC } from 'react';
 import { IconType } from 'react-icons';
 import { RiBuildingLine, RiHome3Line, RiHotelLine, RiSquareLine } from 'react-icons/ri';
 import { CityType } from '@/api/SocketResponse';
@@ -7,6 +6,7 @@ import { PlayerDot } from '@/components/Game/PlayerDot';
 import { TEXT_COLOR_MAP } from '@/styles/DotColorStyle';
 import { DotColor } from '@/types/DotColor';
 import { DotItem } from '@/types/DotItem';
+import { cn } from '@/utils/cn';
 
 interface CityCardProps {
   readonly icon: IconType;
@@ -17,7 +17,7 @@ interface CityCardProps {
   readonly haveCities?: CityType[];
 }
 
-export const CityCard: React.FC<CityCardProps> = ({
+export const CityCard: FC<CityCardProps> = ({
   icon: Icon,
   nameKo,
   className,
@@ -27,7 +27,7 @@ export const CityCard: React.FC<CityCardProps> = ({
 }) => {
   return (
     <div
-      className={clsx(
+      className={cn(
         'flex h-32 w-32 flex-col items-center justify-around border-2 border-black p-2 text-center',
         className
       )}

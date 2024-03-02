@@ -1,6 +1,6 @@
-import clsx from 'clsx';
-import React from 'react';
+import { FC } from 'react';
 import { DiceItem } from '@/components/Game/Dice/DiceItem';
+import { cn } from '@/utils/cn';
 
 interface DiceViewProps {
   readonly isMyTurn?: boolean;
@@ -9,7 +9,7 @@ interface DiceViewProps {
   readonly secondDice: number;
 }
 
-export const DiceView: React.FC<DiceViewProps> = ({ isMyTurn, onClick, firstDice, secondDice }) => {
+export const DiceView: FC<DiceViewProps> = ({ isMyTurn, onClick, firstDice, secondDice }) => {
   return (
     <div
       className="flex h-60 w-60 flex-col items-center justify-center rounded-xl border-2 border-gray-300 bg-white p-4"
@@ -18,7 +18,7 @@ export const DiceView: React.FC<DiceViewProps> = ({ isMyTurn, onClick, firstDice
       onKeyDown={(e) => e.key === 'Enter' && onClick?.()}
       tabIndex={0}
     >
-      <div className={clsx('flex space-x-2', isMyTurn ? 'cursor-pointer' : 'cursor-no-drop')}>
+      <div className={cn('flex space-x-2', isMyTurn ? 'cursor-pointer' : 'cursor-no-drop')}>
         <DiceItem keyPrefix="first-dice" amount={firstDice} />
         <DiceItem keyPrefix="second-dice" amount={secondDice} />
       </div>

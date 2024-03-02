@@ -1,7 +1,7 @@
-import clsx from 'clsx';
 import { FC } from 'react';
 import { RiCheckFill, RiDoorOpenLine, RiGamepadFill, RiSettings2Fill } from 'react-icons/ri';
 import { Button } from '@/components/Button';
+import { cn } from '@/utils/cn';
 
 interface RoomMenuProps {
   readonly onStartClick?: () => void;
@@ -20,14 +20,14 @@ export const RoomMenu: FC<RoomMenuProps> = ({ onStartClick, onReadyClick, onSett
         <span className="ml-1 text-base">게임 시작</span>
       </Button>
       <Button
-        className={clsx('flex h-8 w-28 items-center justify-center text-2xl', disableButton)}
+        className={cn('flex h-8 w-28 items-center justify-center text-2xl', disableButton)}
         onClick={onReadyClick}
       >
         <RiCheckFill />
         <span className="ml-1 text-base">게임 준비</span>
       </Button>
       <Button
-        className={clsx('flex h-8 w-28 items-center justify-center text-xl', disableButton)}
+        className={cn('flex h-8 w-28 items-center justify-center text-xl', disableButton)}
         onClick={onSettingClick}
       >
         <RiSettings2Fill />

@@ -1,5 +1,5 @@
-import clsx from 'clsx';
-import React from 'react';
+import { FC } from 'react';
+import { cn } from '@/utils/cn';
 
 interface RoomPreviewCardProps {
   readonly isPlaying?: boolean;
@@ -9,20 +9,14 @@ interface RoomPreviewCardProps {
   readonly onClick?: () => void;
 }
 
-export const RoomPreviewCard: React.FC<RoomPreviewCardProps> = ({
-  isPlaying,
-  name,
-  currentPlayer,
-  maxPlayer,
-  onClick
-}) => {
+export const RoomPreviewCard: FC<RoomPreviewCardProps> = ({ isPlaying, name, currentPlayer, maxPlayer, onClick }) => {
   const playStyle = isPlaying
     ? 'border-t-red-500 cursor-no-drop'
     : 'border-t-blue-500 cursor-pointer hover:bg-gray-100';
 
   return (
     <div
-      className={clsx(
+      className={cn(
         'flex h-24 w-80 flex-col justify-center rounded-md border-2 border-t-4 border-gray-300 bg-white p-3',
         playStyle
       )}
