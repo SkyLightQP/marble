@@ -47,8 +47,15 @@ export const RoomPage: React.FC = () => {
   });
   useSocketListener<WebSocketError>('exception', (error) => {
     toast.error(error.message);
-    if (error.code === 'IS_NOT_OWNER') return;
-    navigate(Constants.INGAME_MAIN_PAGE);
+    const needToQuit = [
+      'ROOM_NOT_FOUND',
+      'PLAYER_NOT_FOUND',
+      'PLAYER_ALREADY_EXISTS',
+      'ROOM_IS_FULL',
+      'ROOM_IS_PLAYING',
+      'PERMISSION_DENIED'
+    ];
+    if (needToQuit.includes(error.code)) navigate(Constants.INGAME_MAIN_PAGE);
   });
 
   const onUpdateRoomClick: SubmitHandler<UpdateRoomForm> = async (data) => {
