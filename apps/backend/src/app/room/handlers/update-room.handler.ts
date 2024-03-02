@@ -26,6 +26,10 @@ export class UpdateRoomHandler implements ICommandHandler<UpdateRoomCommand> {
       throw new WsException(ErrorCode.IS_NOT_OWNER);
     }
 
+    if (maxPlayer < room.players.length) {
+      throw new WsException(ErrorCode.INVALID_ROOM_PEOPLE);
+    }
+
     room.name = name;
     room.maxPlayer = maxPlayer;
 
