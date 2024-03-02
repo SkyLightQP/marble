@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { GetRoomResponse, WebSocketError } from '@/api/SocketResponse';
 import { RoomMenu } from '@/components/Room/RoomMenu';
+import { Constants } from '@/constants';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { RootLayout } from '@/layouts/RootLayout';
@@ -32,7 +33,7 @@ export const RoomPage: React.FC = () => {
   useSocketListener<WebSocketError>('exception', (error) => {
     toast.error(error.message);
     if (error.code === 'IS_NOT_OWNER') return;
-    navigate('/');
+    navigate(Constants.INGAME_MAIN_PAGE);
   });
 
   const startGame = () => {
@@ -41,7 +42,7 @@ export const RoomPage: React.FC = () => {
 
   const quitRoom = () => {
     socket?.emit('quit-room', { roomId });
-    navigate(-1);
+    navigate(Constants.INGAME_MAIN_PAGE);
   };
 
   return (
