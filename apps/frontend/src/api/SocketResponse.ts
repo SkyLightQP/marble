@@ -25,14 +25,9 @@ export interface WebSocketError {
   readonly message: string;
 }
 
-export interface CreateRoomResponse {
-  readonly id: string;
-  readonly name: string;
-  readonly owner: string;
-  readonly players: PlayerResponse[];
-  readonly maxPlayer: number;
-  readonly isPlaying: boolean;
-}
+export type CreateRoomResponse = GetRoomResponse;
+
+export type UpdateRoomResponse = GetRoomResponse;
 
 export type CityType = 'land' | 'house' | 'building' | 'hotel';
 

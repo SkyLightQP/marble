@@ -65,6 +65,10 @@ REFRESH_TOKEN_SECRET=
 REDIS_HOST=
 REDIS_PORT=
 
+# Backend Optional
+REDIS_PASSWORD=
+API_PREFIX=/
+
 # Prisma 빌드 시 사용합니다.
 DATABASE_URL="postgresql://user:password@host:port/database?schema="
 

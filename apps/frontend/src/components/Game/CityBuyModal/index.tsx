@@ -1,7 +1,7 @@
-import clsx from 'clsx';
 import { FC } from 'react';
 import { Button } from '@/components/Button';
 import { Modal } from '@/components/Modal';
+import { cn } from '@/utils/cn';
 
 interface CityBuyModalProps {
   readonly isOpen: boolean;
@@ -43,25 +43,25 @@ export const CityBuyModal: FC<CityBuyModalProps> = ({
       <div className="mt-6 space-y-2">
         <p className="text-lg">보유 중인 현금: {money.toLocaleString('ko-KR')} 원</p>
         <div>
-          <Button className={clsx('w-52 h-12', money < price.land ? disableStyle : '')} onClick={onBuyLand}>
+          <Button className={cn('w-52 h-12', money < price.land ? disableStyle : '')} onClick={onBuyLand}>
             땅 구입하기 ({price.land.toLocaleString('ko-KR')} 원)
           </Button>
         </div>
         <div className="flex space-x-2">
           <Button
-            className={clsx('w-52 h-12', money < price.house || !canBuyBuilding ? disableStyle : '')}
+            className={cn('w-52 h-12', money < price.house || !canBuyBuilding ? disableStyle : '')}
             onClick={onBuyHouse}
           >
             별장 구입하기 ({price.house.toLocaleString('ko-KR')} 원)
           </Button>
           <Button
-            className={clsx('w-52 h-12', money < price.building || !canBuyBuilding ? disableStyle : '')}
+            className={cn('w-52 h-12', money < price.building || !canBuyBuilding ? disableStyle : '')}
             onClick={onBuyBuilding}
           >
             빌딩 구입하기 ({price.building.toLocaleString('ko-KR')} 원)
           </Button>
           <Button
-            className={clsx('w-52 h-12', money < price.hotel || !canBuyBuilding ? disableStyle : '')}
+            className={cn('w-52 h-12', money < price.hotel || !canBuyBuilding ? disableStyle : '')}
             onClick={onBuyHotel}
           >
             호텔 구입하기 ({price.hotel.toLocaleString('ko-KR')} 원)

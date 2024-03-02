@@ -1,6 +1,10 @@
 import { IsNotEmpty, IsNumber, IsString, Max, Min } from 'class-validator';
 
-export class CreateRoomDto {
+export class UpdateRoomDto {
+  @IsNotEmpty()
+  @IsString()
+  roomId!: string;
+
   @IsNotEmpty()
   @IsString()
   name!: string;

@@ -1,33 +1,37 @@
-import clsx from 'clsx';
 import { FC } from 'react';
 import { RiCheckFill, RiDoorOpenLine, RiGamepadFill, RiSettings2Fill } from 'react-icons/ri';
 import { Button } from '@/components/Button';
+import { cn } from '@/utils/cn';
 
 interface RoomMenuProps {
   readonly onStartClick?: () => void;
   readonly onReadyClick?: () => void;
   readonly onSettingClick?: () => void;
   readonly onQuitClick?: () => void;
+  readonly isOwner?: boolean;
 }
 
 const disableButton = 'bg-gray-500 cursor-no-drop hover:bg-gray-600';
 
-export const RoomMenu: FC<RoomMenuProps> = ({ onStartClick, onReadyClick, onSettingClick, onQuitClick }) => {
+export const RoomMenu: FC<RoomMenuProps> = ({ onStartClick, onReadyClick, onSettingClick, onQuitClick, isOwner }) => {
   return (
     <div className="mb-8 flex items-center space-x-2">
-      <Button className="flex h-8 w-28 items-center justify-center text-2xl" onClick={onStartClick}>
+      <Button
+        className={cn('flex h-8 w-28 items-center justify-center text-2xl', !isOwner && 'hidden')}
+        onClick={onStartClick}
+      >
         <RiGamepadFill />
         <span className="ml-1 text-base">게임 시작</span>
       </Button>
       <Button
-        className={clsx('flex h-8 w-28 items-center justify-center text-2xl', disableButton)}
+        className={cn('flex h-8 w-28 items-center justify-center text-2xl', disableButton)}
         onClick={onReadyClick}
       >
         <RiCheckFill />
         <span className="ml-1 text-base">게임 준비</span>
       </Button>
       <Button
-        className={clsx('flex h-8 w-28 items-center justify-center text-xl', disableButton)}
+        className={cn('flex h-8 w-28 items-center justify-center text-xl', !isOwner && 'hidden')}
         onClick={onSettingClick}
       >
         <RiSettings2Fill />

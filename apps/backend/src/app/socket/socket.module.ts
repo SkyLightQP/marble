@@ -6,6 +6,7 @@ import { RefreshRoomListener } from '@/app/socket/listeners/refresh-room.listene
 import { RolledDiceListener } from '@/app/socket/listeners/rolled-dice.listener';
 import { SendClientWhenGameEndListener } from '@/app/socket/listeners/send-client-when-game-end.listener';
 import { StartedGameListener } from '@/app/socket/listeners/started-game.listener';
+import { UpdatedRoomListener } from '@/app/socket/listeners/updated-room.listener';
 import { SocketGateway } from '@/app/socket/socket.gateway';
 
 const listeners = [
@@ -15,7 +16,8 @@ const listeners = [
   RolledDiceListener,
   StartedGameListener,
   EndedTurnListener,
-  SendClientWhenGameEndListener
+  SendClientWhenGameEndListener,
+  UpdatedRoomListener
 ];
 
 @Module({

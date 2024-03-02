@@ -5,15 +5,18 @@ import type { Socket } from 'socket.io';
 import { CreateRoomCommand } from '@/app/room/commands/create-room.command';
 import { JoinRoomCommand } from '@/app/room/commands/join-room.command';
 import { QuitRoomCommand } from '@/app/room/commands/quit-room.command';
+import { UpdateRoomCommand } from '@/app/room/commands/update-room.command';
 import { CreateRoomDto } from '@/app/room/gateways/dto/create-room.dto';
 import { GetRoomDto } from '@/app/room/gateways/dto/get-room.dto';
 import { JoinRoomDto } from '@/app/room/gateways/dto/join-room.dto';
 import { QuitRoomDto } from '@/app/room/gateways/dto/quit-room.dto';
+import { UpdateRoomDto } from '@/app/room/gateways/dto/update-room.dto';
 import { CreateRoomReturn } from '@/app/room/handlers/create-room.handler';
 import { GetRoomReturn } from '@/app/room/handlers/get-room.handler';
 import { GetRoomsReturn } from '@/app/room/handlers/get-rooms.handler';
 import { JoinRoomReturn } from '@/app/room/handlers/join-room.handler';
 import { QuitRoomReturn } from '@/app/room/handlers/quit-room.handler';
+import { UpdateRoomReturn } from '@/app/room/handlers/update-room.handler';
 import { GetRoomQuery } from '@/app/room/queries/get-room.query';
 import { GetRoomsQuery } from '@/app/room/queries/get-rooms.query';
 import { AuthTokenPayload } from '@/infrastructure/common/types/auth.type';
@@ -73,7 +76,6 @@ export class RoomGateway {
   }
 
   @UseGuards(SocketJwtGuard)
-  @UsePipes()
   @SubscribeMessage('create-room')
   async handleCreateRoom(
     @MessageBody() message: CreateRoomDto,
@@ -102,5 +104,22 @@ export class RoomGateway {
   async handleGetRoom(@MessageBody() message: GetRoomDto): Promise<WsResponse<GetRoomReturn>> {
     const data = await this.queryBus.execute(new GetRoomQuery({ roomId: message.roomId }));
     return { event: 'get-room', data };
+  }
+
+  @UseGuards(SocketJwtGuard)
+  @SubscribeMessage('update-room')
+  async handleUpdateRoom(
+    @MessageBody() message: UpdateRoomDto,
+    @ConnectedSocket() socket: Socket & { user: AuthTokenPayload }
+  ): Promise<WsResponse<UpdateRoomReturn>> {
+    const data = await this.commandBus.execute<UpdateRoomCommand, UpdateRoomReturn>(
+      new UpdateRoomCommand({
+        roomId: message.roomId,
+        name: message.name,
+        maxPlayer: message.maxPlayer,
+        executor: socket.user.sub
+      })
+    );
+    return { event: 'update-room', data };
   }
 }

@@ -8,8 +8,6 @@ import { RegisterPage } from '@/pages/RegisterPage';
 import { RoomListPage } from '@/pages/RoomListPage';
 import { RoomPage } from '@/pages/RoomPage';
 
-const NavigateToLogin = () => <Navigate to="/login" />;
-
 export const Router: React.FC = () => {
   return (
     <BrowserRouter basename={import.meta.env.BASEPATH ?? '/'}>
@@ -18,15 +16,18 @@ export const Router: React.FC = () => {
         <Route path="/game" element={<Navigate to="/rooms" />} />
         <Route
           path="/game/:roomId"
-          element={<PermissionRoute success={<GamePage />} failure={<NavigateToLogin />} />}
+          element={<PermissionRoute success={<GamePage />} failure={<Navigate to="/login" />} />}
         />
         <Route path="/room" element={<Navigate to="/rooms" />} />
         <Route
           path="/room/:roomId"
-          element={<PermissionRoute success={<RoomPage />} failure={<NavigateToLogin />} />}
+          element={<PermissionRoute success={<RoomPage />} failure={<Navigate to="/login" />} />}
         />
-        <Route path="/rooms" element={<PermissionRoute success={<RoomListPage />} failure={<NavigateToLogin />} />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/rooms"
+          element={<PermissionRoute success={<RoomListPage />} failure={<Navigate to="/login" />} />}
+        />
+        <Route path="/login" element={<PermissionRoute success={<Navigate to="/rooms" />} failure={<LoginPage />} />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </BrowserRouter>

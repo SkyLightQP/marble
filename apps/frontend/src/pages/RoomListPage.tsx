@@ -27,7 +27,7 @@ export const RoomListPage: React.FC = () => {
   } = useForm<CreateRoomForm>({
     defaultValues: {
       name: roomName,
-      maxPeople: 1
+      maxPeople: 2
     },
     resolver: yupResolver(createRoomFormSchema)
   });
@@ -69,14 +69,14 @@ export const RoomListPage: React.FC = () => {
     });
     reset({
       name: '',
-      maxPeople: 1
+      maxPeople: 2
     });
     closeModal(CreateRoomModal);
   };
 
   return (
     <RootLayout className="h-screen w-screen p-20">
-      <Logo className="-ml-2 mb-3" />
+      <Logo className="-ml-1 mb-3" />
       <div className="mb-5 flex items-center">
         <h1 className="mr-4 text-4xl font-bold">
           방 목록<span className="ml-1 text-sm font-normal text-gray-400">({rooms.length})</span>

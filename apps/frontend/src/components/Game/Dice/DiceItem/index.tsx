@@ -1,7 +1,7 @@
-import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import { FC } from 'react';
 import { range } from '@/utils/Range';
+import { cn } from '@/utils/cn';
 
 const container = {
   visible: {
@@ -36,7 +36,7 @@ export const DiceItem: FC<DiceItemProps> = ({ keyPrefix, amount }) => {
     return (
       <motion.div
         key={`${keyPrefix}-${amount}-0`}
-        className={clsx('grid h-24 w-24 rounded-xl border-2 border-black p-1', amountStyleMap[amount] ?? 'grid-cols-2')}
+        className={cn('grid h-24 w-24 rounded-xl border-2 border-black p-1', amountStyleMap[amount] ?? 'grid-cols-2')}
         variants={container}
         initial="hidden"
         animate="visible"

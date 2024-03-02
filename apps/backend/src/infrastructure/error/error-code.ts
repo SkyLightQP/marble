@@ -1,4 +1,8 @@
 export const ErrorCode = {
+  INVALID_ROOM_PEOPLE: {
+    code: 'INVALID_ROOM_PEOPLE',
+    message: '설정할 방 인원이 올바르지 않습니다.'
+  },
   NOT_ENOUGH_MONEY: {
     code: 'NOT_ENOUGH_MONEY',
     message: '돈이 부족합니다.'
