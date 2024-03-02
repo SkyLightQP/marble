@@ -3,7 +3,6 @@ import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister, UseFo
 import * as yup from 'yup';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
-import { InputError } from '@/components/InputError';
 import { Label } from '@/components/Label';
 import { Modal } from '@/components/Modal';
 import { useRandomRoomName } from '@/hooks/useRandomRoomName';
@@ -44,7 +43,7 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
       close={close}
       title="방 만들기"
       width="500px"
-      height="260px"
+      height="250px"
       onClose={() =>
         reset({
           name,
@@ -79,11 +78,6 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
               placeholder="최대 인원 (2~4)"
               {...register('maxPeople', { required: true })}
             />
-          </div>
-          <div className="ml-16 -mt-3">
-            <InputError formError={errors.maxPeople} type="max">
-              최대 4명까지 가능합니다.
-            </InputError>
           </div>
         </div>
         <div className="flex justify-end">
