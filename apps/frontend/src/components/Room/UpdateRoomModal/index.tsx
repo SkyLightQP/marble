@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SubmitHandler, UseFormHandleSubmit, UseFormRegister, UseFormReset } from 'react-hook-form';
 import * as yup from 'yup';
 import { Button } from '@/components/Button';
@@ -35,6 +35,10 @@ export const UpdateRoomModal: React.FC<UpdateRoomModalProps> = ({
   initialValues,
   form: { register, handleSubmit, reset }
 }) => {
+  useEffect(() => {
+    reset(initialValues);
+  }, [reset, initialValues]);
+
   return (
     <Modal
       isOpen={isOpen}
