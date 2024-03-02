@@ -73,7 +73,6 @@ export class RoomGateway {
   }
 
   @UseGuards(SocketJwtGuard)
-  @UsePipes()
   @SubscribeMessage('create-room')
   async handleCreateRoom(
     @MessageBody() message: CreateRoomDto,

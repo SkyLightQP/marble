@@ -7,7 +7,7 @@ export class CreateRoomDto {
 
   @IsNotEmpty()
   @IsNumber()
-  @Min(1)
+  @Min(2)
   @Max(4)
   maxPlayer!: number;
 }
