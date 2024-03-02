@@ -1,10 +1,11 @@
 import { EventsHandler, IEventHandler, QueryBus } from '@nestjs/cqrs';
 import { CreatedRoomEvent } from '@/app/room/events/created-room.event';
 import { DestroyedRoomEvent } from '@/app/room/events/destroyed-room.event';
+import { UpdatedRoomEvent } from '@/app/room/events/updated-room.event';
 import { GetRoomsQuery } from '@/app/room/queries/get-rooms.query';
 import { SocketGateway } from '@/app/socket/socket.gateway';
 
-@EventsHandler(CreatedRoomEvent, DestroyedRoomEvent)
+@EventsHandler(CreatedRoomEvent, DestroyedRoomEvent, UpdatedRoomEvent)
 export class RefreshRoomListener implements IEventHandler<CreatedRoomEvent> {
   constructor(
     private readonly socketGateway: SocketGateway,
