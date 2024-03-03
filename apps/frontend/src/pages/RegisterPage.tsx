@@ -23,11 +23,11 @@ interface RegisterForm {
 
 const registerFormSchema = yup.object().shape({
   id: yup.string().required(),
-  password: yup.string().required().length(6),
+  password: yup.string().required().min(6),
   passwordConfirm: yup
     .string()
     .required()
-    .length(6)
+    .min(6)
     .oneOf([yup.ref('password')], 'password_not_match'),
   nickname: yup.string().required()
 });
@@ -51,6 +51,10 @@ export const RegisterPage: React.FC = () => {
       navigate('/login');
     } catch (e) {
       const error = getCustomError(e);
+      if (error.code === 'USER_ALREADY_EXISTS') {
+        toast.error('아이디 또는 닉네임이 이미 존재합니다.');
+        return;
+      }
       toast.error(error.message);
     }
   };
@@ -85,6 +89,9 @@ export const RegisterPage: React.FC = () => {
           />
           <InputError formError={errors.password} type="required">
             비밀번호 칸이 비어있습니다.
+          </InputError>
+          <InputError formError={errors.password} type="min">
+            비밀번호는 6자 이상이어야 합니다.
           </InputError>
         </div>
 

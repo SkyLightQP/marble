@@ -24,10 +24,16 @@ export class SignupUserHandler implements ICommandHandler<SignupUserCommand> {
   async execute({ args: { id, password, nickname } }: SignupUserCommand): Promise<SignupUserReturn> {
     const salt = Number(this.config.get('BCRYPT_SALT'));
 
-    const prevUser = await this.prisma.user.findUnique({
+    const prevUser = await this.prisma.user.findFirst({
       where: {
-        id,
-        nickname
+        OR: [
+          {
+            id
+          },
+          {
+            nickname
+          }
+        ]
       }
     });
 
