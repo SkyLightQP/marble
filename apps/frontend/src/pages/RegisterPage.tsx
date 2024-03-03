@@ -51,6 +51,10 @@ export const RegisterPage: React.FC = () => {
       navigate('/login');
     } catch (e) {
       const error = getCustomError(e);
+      if (error.code === 'USER_ALREADY_EXISTS') {
+        toast.error('아이디 또는 닉네임이 이미 존재합니다.');
+        return;
+      }
       toast.error(error.message);
     }
   };
