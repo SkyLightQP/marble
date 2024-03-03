@@ -1,6 +1,6 @@
 import { IConnection } from '@marble/api';
 
-export const API_HOST = import.meta.env.API_HOST || 'http://localhost:8080';
+export const API_HOST = import.meta.env.VITE_API_HOST || 'http://localhost:8080';
 
 export const apiConnection: IConnection = {
   host: API_HOST,

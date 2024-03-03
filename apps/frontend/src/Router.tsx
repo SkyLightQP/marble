@@ -10,7 +10,7 @@ import { RoomPage } from '@/pages/RoomPage';
 
 export const Router: React.FC = () => {
   return (
-    <BrowserRouter basename={import.meta.env.BASEPATH ?? '/'}>
+    <BrowserRouter basename={import.meta.env.VITE_BASEPATH ?? '/'}>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/game" element={<Navigate to="/rooms" />} />
