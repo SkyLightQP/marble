@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { apiConnection } from '@/api';
 import { Button } from '@/components/Button';
+import { DemoNotification } from '@/components/DemoNotification';
 import { Input } from '@/components/Input';
 import { InputError } from '@/components/InputError';
 import { Label } from '@/components/Label';
@@ -61,6 +62,7 @@ export const RegisterPage: React.FC = () => {
 
   return (
     <RootLayout className="h-screen w-screen">
+      <DemoNotification />
       <div className="flex h-full flex-col items-center justify-center text-center">
         <div className="mb-5">
           <div className="mb-3">
