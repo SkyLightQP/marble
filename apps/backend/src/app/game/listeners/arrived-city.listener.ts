@@ -4,12 +4,9 @@ import { RedisClientType } from 'redis';
 import { GetCityByPositionReturn } from '@/app/city/handlers/get-city-by-position.handler';
 import { GetCityByPositionQuery } from '@/app/city/queries/get-city-by-position.query';
 import { SPECIAL_CARD_POSITIONS } from '@/app/game/constants/game-board.constant';
-import { EndedGameEvent } from '@/app/game/events/ended-game.event';
 import { EndedTurnEvent } from '@/app/game/events/ended-turn.event';
 import { RolledDiceEvent } from '@/app/game/events/rolled-dice.event';
-import { CalculatePenaltyService } from '@/app/game/services/calculate-penalty.service';
-import { GetRoomReturn } from '@/app/room/handlers/get-room.handler';
-import { GetRoomQuery } from '@/app/room/queries/get-room.query';
+import { ProcessCityPenaltyService } from '@/app/game/services/process-city-penalty.service';
 import { SocketGateway } from '@/app/socket/socket.gateway';
 
 @EventsHandler(RolledDiceEvent)
@@ -19,7 +16,7 @@ export class ArrivedCityListener implements IEventHandler<RolledDiceEvent> {
     private readonly eventBus: EventBus,
     private readonly socketGateway: SocketGateway,
     @Inject('REDIS_CLIENT') private readonly redis: RedisClientType,
-    private readonly calculatePenaltyService: CalculatePenaltyService
+    private readonly processCityPenaltyService: ProcessCityPenaltyService
   ) {}
 
   async handle({ args: { game, position, executePlayer } }: RolledDiceEvent) {
@@ -50,51 +47,7 @@ export class ArrivedCityListener implements IEventHandler<RolledDiceEvent> {
 
     const isCityOwnerOtherPlayer = cityOwnerId !== undefined && cityOwnerId !== executePlayer.userId;
     if (isCityOwnerOtherPlayer) {
-      const ownerHaveCities = game.getPlayerStatus(cityOwnerId).haveCities;
-      const penalty = this.calculatePenaltyService.calculate(ownerHaveCities[city.id], {
-        land: city.cityPrices[0].landPrice,
-        house: city.cityPrices[0].housePrice,
-        building: city.cityPrices[0].buildingPrice,
-        hotel: city.cityPrices[0].hotelPrice
-      });
-
-      this.socketGateway.server.to(socketId).emit('penalty', {
-        city,
-        ownerNickname: game.getPlayerStatus(cityOwnerId).nickname,
-        penalty
-      });
-
-      if (playerStatus.money < penalty) {
-        const currentPlayer = game.playerOrder[game.currentOrderPlayerIndex];
-        currentPlayer.isDisable = true;
-
-        game.removeCitiesWhoHavePlayer(executePlayer.userId);
-
-        playerStatus.money = -1;
-        playerStatus.land = 0;
-        playerStatus.house = 0;
-        playerStatus.building = 0;
-        playerStatus.hotel = 0;
-
-        await game.syncRedis(this.redis);
-
-        Logger.log({ message: '플레이어를 파산 처리합니다.', target: executePlayer.userId, penalty });
-
-        if (game.getPlayersNotDisable().length <= 1) {
-          const room = await this.queryBus.execute<GetRoomQuery, GetRoomReturn>(
-            new GetRoomQuery({ roomId: game.roomId })
-          );
-          this.eventBus.publish(new EndedGameEvent({ game, room }));
-        }
-
-        return;
-      }
-
-      game.takeMoney(executePlayer.userId, penalty);
-      game.giveMoney(cityOwnerId, penalty);
-      await game.syncRedis(this.redis);
-
-      Logger.log({ message: '벌금 부과를 했습니다.', executor: executePlayer.userId });
+      await this.processCityPenaltyService.process(game, city, executePlayer.userId, cityOwnerId);
       return;
     }
 
