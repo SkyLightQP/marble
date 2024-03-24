@@ -7,7 +7,8 @@ interface SettingStoreState {
 }
 
 interface SettingStoreAction {
-  toggleBackgroundMute: () => void;
+  setBackgroundVolume: (volume: number) => void;
+  setBackgroundMute: (isMute: boolean) => void;
 }
 
 export const useSettingStore = create(
@@ -15,7 +16,8 @@ export const useSettingStore = create(
     (set, get) => ({
       backgroundVolume: 0.1,
       isBackgroundMute: false,
-      toggleBackgroundMute: () => set({ isBackgroundMute: !get().isBackgroundMute })
+      setBackgroundVolume: (volume) => set({ backgroundVolume: volume }),
+      setBackgroundMute: (isMute) => set({ isBackgroundMute: isMute })
     }),
     {
       name: 'marble-setting',
