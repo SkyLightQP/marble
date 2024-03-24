@@ -1753,14 +1753,6 @@
     import2 "^1.0.3"
     node-fetch "^2.6.7"
 
-"@nestia/fetcher@^2.5.16":
-  version "2.5.16"
-  resolved "https://registry.yarnpkg.com/@nestia/fetcher/-/fetcher-2.5.16.tgz#ab6e6d38a17e98b5da594dcbaed44b41d36f8dd8"
-  integrity sha512-wYHUl5LbbXxPNAcfn6/ofr+szE4/P487QXxtZ72XN4+JAEOHTlxSTS1YgG6TyM69syXAp+iFZb5kdoHMk02OPQ==
-  dependencies:
-    import2 "^1.0.3"
-    node-fetch "^2.6.7"
-
 "@nestia/sdk@^2.4.3":
   version "2.5.16"
   resolved "https://registry.yarnpkg.com/@nestia/sdk/-/sdk-2.5.16.tgz#8ec7e94eb78acfff2ea52eb73f1ea74870e8b077"
@@ -6449,16 +6441,7 @@ postcss@^8.4.23:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-postcss@^8.4.35:
-  version "8.4.35"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.35.tgz#60997775689ce09011edf083a549cea44aabe2f7"
-  integrity sha512-u5U8qYpBCpN13BsiEB0CbR1Hhh4Gc0zLFuedrHJKMctHCHAGrMdG0PRM/KErzAL3CU6/eckEtmHNB3x6e3c0vA==
-  dependencies:
-    nanoid "^3.3.7"
-    picocolors "^1.0.0"
-    source-map-js "^1.0.2"
-
-postcss@^8.4.36:
+postcss@^8.4.35, postcss@^8.4.36:
   version "8.4.38"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.38.tgz#b387d533baf2054288e337066d81c6bee9db9e0e"
   integrity sha512-Wglpdk03BSfXkHoQa3b/oulrotAkwrlLDRSOb9D0bN86FdRyE9lppSp33aHNPgBa0JKCoB+drFLZkQoRRYae5A==
@@ -7816,16 +7799,6 @@ typescript@^4.9.5:
   integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
 
 typia@^5.3.4, typia@^5.3.5, typia@^5.5.3:
-  version "5.5.7"
-  resolved "https://registry.yarnpkg.com/typia/-/typia-5.5.7.tgz#71f7126ece37b21ec11bfde9523340deb7f587a7"
-  integrity sha512-SwI1FPMbJz+XE0NGrPyWFn+azIjZ/+hbp0uxpqsfVBrvQlAAOFesuvUiOjm/SsSjgG/2TKcBUVgQkSmLRF3ZvA==
-  dependencies:
-    commander "^10.0.0"
-    comment-json "^4.2.3"
-    inquirer "^8.2.5"
-    randexp "^0.5.3"
-
-typia@^5.5.3:
   version "5.5.7"
   resolved "https://registry.yarnpkg.com/typia/-/typia-5.5.7.tgz#71f7126ece37b21ec11bfde9523340deb7f587a7"
   integrity sha512-SwI1FPMbJz+XE0NGrPyWFn+azIjZ/+hbp0uxpqsfVBrvQlAAOFesuvUiOjm/SsSjgG/2TKcBUVgQkSmLRF3ZvA==
