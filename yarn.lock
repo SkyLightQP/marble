@@ -7845,9 +7845,9 @@ typescript@^4.9.5:
   integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
 
 typia@^5.3.4, typia@^5.3.5:
-  version "5.3.5"
-  resolved "https://registry.npmjs.org/typia/-/typia-5.3.5.tgz"
-  integrity sha512-PaVie/NOgkQHlfK8q7SlEzjLWkbo6W2F+F39Jf5tdN16vP/GWd2uywlh/El4daJbHFGyfq/+gxK66NoNI1bubg==
+  version "5.5.7"
+  resolved "https://registry.yarnpkg.com/typia/-/typia-5.5.7.tgz#71f7126ece37b21ec11bfde9523340deb7f587a7"
+  integrity sha512-SwI1FPMbJz+XE0NGrPyWFn+azIjZ/+hbp0uxpqsfVBrvQlAAOFesuvUiOjm/SsSjgG/2TKcBUVgQkSmLRF3ZvA==
   dependencies:
     commander "^10.0.0"
     comment-json "^4.2.3"
