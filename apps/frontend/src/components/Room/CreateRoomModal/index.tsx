@@ -33,7 +33,7 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
   isOpen,
   close,
   onCreateRoomClick,
-  form: { register, handleSubmit, reset, errors }
+  form: { register, handleSubmit, reset }
 }) => {
   const name = useRandomRoomName();
 
