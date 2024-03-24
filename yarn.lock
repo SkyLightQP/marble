@@ -1780,15 +1780,7 @@
     cli "^1.0.1"
     tstl "^2.5.13"
 
-"@nestia/fetcher@^2.4.3":
-  version "2.5.16"
-  resolved "https://registry.yarnpkg.com/@nestia/fetcher/-/fetcher-2.5.16.tgz#ab6e6d38a17e98b5da594dcbaed44b41d36f8dd8"
-  integrity sha512-wYHUl5LbbXxPNAcfn6/ofr+szE4/P487QXxtZ72XN4+JAEOHTlxSTS1YgG6TyM69syXAp+iFZb5kdoHMk02OPQ==
-  dependencies:
-    import2 "^1.0.3"
-    node-fetch "^2.6.7"
-
-"@nestia/fetcher@^2.5.16":
+"@nestia/fetcher@^2.4.3", "@nestia/fetcher@^2.5.16":
   version "2.5.16"
   resolved "https://registry.yarnpkg.com/@nestia/fetcher/-/fetcher-2.5.16.tgz#ab6e6d38a17e98b5da594dcbaed44b41d36f8dd8"
   integrity sha512-wYHUl5LbbXxPNAcfn6/ofr+szE4/P487QXxtZ72XN4+JAEOHTlxSTS1YgG6TyM69syXAp+iFZb5kdoHMk02OPQ==
@@ -2375,14 +2367,14 @@
     undici-types "~5.26.4"
 
 "@types/node@^16.18.59":
-  version "16.18.86"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.86.tgz#87426ce3747a4c135229e15765cbf9c5a18d280c"
-  integrity sha512-QMvdZf+ZTSiv7gspwhqbfB7Y5DmbYgCsUnakS8Ul9uRbJQehDKaM7SL+GbcDS003Lh7VK4YlelHsRm9HCv26eA==
+  version "16.18.91"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.91.tgz#3e7b3b3d28f740e3e2d4ceb7ad9d16e6b9277c91"
+  integrity sha512-h8Q4klc8xzc9kJKr7UYNtJde5TU2qEePVyH3WyzJaUC+3ptyc5kPQbWOIUcn8ZsG5+KSkq+P0py0kC0VqxgAXw==
 
 "@types/node@^20.3.1":
-  version "20.11.24"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.24.tgz#cc207511104694e84e9fb17f9a0c4c42d4517792"
-  integrity sha512-Kza43ewS3xoLgCEpQrsT+xRo/EJej1y0kVYGiLFE1NEODXGzTfwiC6tXTLMQskn1X4/Rjlh0MQUvx9W+L9long==
+  version "20.11.30"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.30.tgz#9c33467fc23167a347e73834f788f4b9f399d66f"
+  integrity sha512-dHM6ZxwlmuZaRmUPfv1p+KrdD1Dci04FbdEm/9wEMouFqxYoFl5aMkt0VMAUtYRQDyYvD41WJLukhq/ha3YuTw==
   dependencies:
     undici-types "~5.26.4"
 
