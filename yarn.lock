@@ -1753,14 +1753,6 @@
     import2 "^1.0.3"
     node-fetch "^2.6.7"
 
-"@nestia/fetcher@^2.5.16":
-  version "2.5.16"
-  resolved "https://registry.yarnpkg.com/@nestia/fetcher/-/fetcher-2.5.16.tgz#ab6e6d38a17e98b5da594dcbaed44b41d36f8dd8"
-  integrity sha512-wYHUl5LbbXxPNAcfn6/ofr+szE4/P487QXxtZ72XN4+JAEOHTlxSTS1YgG6TyM69syXAp+iFZb5kdoHMk02OPQ==
-  dependencies:
-    import2 "^1.0.3"
-    node-fetch "^2.6.7"
-
 "@nestia/sdk@^2.4.3":
   version "2.5.16"
   resolved "https://registry.yarnpkg.com/@nestia/sdk/-/sdk-2.5.16.tgz#8ec7e94eb78acfff2ea52eb73f1ea74870e8b077"
@@ -2265,6 +2257,11 @@
     "@types/express-serve-static-core" "^4.17.33"
     "@types/qs" "*"
     "@types/serve-static" "*"
+
+"@types/howler@^2.2.11":
+  version "2.2.11"
+  resolved "https://registry.yarnpkg.com/@types/howler/-/howler-2.2.11.tgz#a75c4ab5666aee5fcfbd5de15d35dbaaa3d3f070"
+  integrity sha512-7aBoUL6RbSIrqKnpEgfa1wSNUBK06mn08siP2QI0zYk7MXfEJAaORc4tohamQYqCqVESoDyRWSdQn2BOKWj2Qw==
 
 "@types/http-errors@*":
   version "2.0.4"
@@ -5071,6 +5068,11 @@ history@^5.3.0:
   dependencies:
     "@babel/runtime" "^7.7.6"
 
+howler@^2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/howler/-/howler-2.2.4.tgz#bd3df4a4f68a0118a51e4bd84a2bfc2e93e6e5a1"
+  integrity sha512-iARIBPgcQrwtEr+tALF+rapJ8qSc+Set2GJQl7xT1MQzWaVkFebdJhR3alVlSiUf5U7nAANKuj3aWpwerocD5w==
+
 http-errors@2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/http-errors/-/http-errors-2.0.0.tgz"
@@ -7212,16 +7214,7 @@ string-natural-compare@^3.0.1:
   resolved "https://registry.npmjs.org/string-natural-compare/-/string-natural-compare-3.0.1.tgz"
   integrity sha512-n3sPwynL1nwKi3WJ6AIsClwBMa0zTi54fn2oLU6ndfTSIO05xaznjSf15PcBZU6FNWbmN5Q6cxT4V5hGvB4taw==
 
-"string-width-cjs@npm:string-width@^4.2.0":
-  version "4.2.3"
-  resolved "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"
-  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
-  dependencies:
-    emoji-regex "^8.0.0"
-    is-fullwidth-code-point "^3.0.0"
-    strip-ansi "^6.0.1"
-
-"string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
+"string-width-cjs@npm:string-width@^4.2.0", "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -7816,16 +7809,6 @@ typescript@^4.9.5:
   integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
 
 typia@^5.3.4, typia@^5.3.5, typia@^5.5.3:
-  version "5.5.7"
-  resolved "https://registry.yarnpkg.com/typia/-/typia-5.5.7.tgz#71f7126ece37b21ec11bfde9523340deb7f587a7"
-  integrity sha512-SwI1FPMbJz+XE0NGrPyWFn+azIjZ/+hbp0uxpqsfVBrvQlAAOFesuvUiOjm/SsSjgG/2TKcBUVgQkSmLRF3ZvA==
-  dependencies:
-    commander "^10.0.0"
-    comment-json "^4.2.3"
-    inquirer "^8.2.5"
-    randexp "^0.5.3"
-
-typia@^5.5.3:
   version "5.5.7"
   resolved "https://registry.yarnpkg.com/typia/-/typia-5.5.7.tgz#71f7126ece37b21ec11bfde9523340deb7f587a7"
   integrity sha512-SwI1FPMbJz+XE0NGrPyWFn+azIjZ/+hbp0uxpqsfVBrvQlAAOFesuvUiOjm/SsSjgG/2TKcBUVgQkSmLRF3ZvA==
