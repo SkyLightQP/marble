@@ -1737,9 +1737,9 @@
     typia "^5.5.3"
 
 "@nestia/e2e@^0.4.0":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@nestia/e2e/-/e2e-0.4.1.tgz#90a934bbf33032fa8e790d240c0fb9183611d50f"
-  integrity sha512-djyryucCySU6qrOqCsQ51c8rFtAPRHq9yHQxhc19JvdSWKNI6Q7OXRMIGEqMxfNDAI7O1dXcEqK/CLFV4OCV8g==
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@nestia/e2e/-/e2e-0.4.2.tgz#7a1d6df97a6afaf537ad63d0b119d7ed60122a93"
+  integrity sha512-Vc4P7P8Rq7YVexYbzZfPci5JEl9O5zQlmQvjmeWeGa184eZ1QSdxNO5USxOurp0ecRtoMx+U8N2sBFn2DvMOMw==
   dependencies:
     chalk "^4.1.2"
     cli "^1.0.1"
@@ -7214,7 +7214,16 @@ string-natural-compare@^3.0.1:
   resolved "https://registry.npmjs.org/string-natural-compare/-/string-natural-compare-3.0.1.tgz"
   integrity sha512-n3sPwynL1nwKi3WJ6AIsClwBMa0zTi54fn2oLU6ndfTSIO05xaznjSf15PcBZU6FNWbmN5Q6cxT4V5hGvB4taw==
 
-"string-width-cjs@npm:string-width@^4.2.0", "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
+"string-width-cjs@npm:string-width@^4.2.0":
+  version "4.2.3"
+  resolved "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"
+  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
+  dependencies:
+    emoji-regex "^8.0.0"
+    is-fullwidth-code-point "^3.0.0"
+    strip-ansi "^6.0.1"
+
+"string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
