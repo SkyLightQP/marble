@@ -1765,20 +1765,20 @@
     import2 "^1.0.3"
     node-fetch "^2.6.7"
 
-"@nestia/fetcher@^2.5.8":
-  version "2.5.8"
-  resolved "https://registry.yarnpkg.com/@nestia/fetcher/-/fetcher-2.5.8.tgz#314b0ce676d0c3c70d20f26dcaeb62f2ecf91eac"
-  integrity sha512-Zoze+OCf49k+EUdaYXKI3OgsL7B8/E/1Rk2+goXRNeJUi4trSDBRZWc6uwFMrbPh6imleODkiFt3L/dHtJAY7w==
+"@nestia/fetcher@^2.5.16":
+  version "2.5.16"
+  resolved "https://registry.yarnpkg.com/@nestia/fetcher/-/fetcher-2.5.16.tgz#ab6e6d38a17e98b5da594dcbaed44b41d36f8dd8"
+  integrity sha512-wYHUl5LbbXxPNAcfn6/ofr+szE4/P487QXxtZ72XN4+JAEOHTlxSTS1YgG6TyM69syXAp+iFZb5kdoHMk02OPQ==
   dependencies:
     import2 "^1.0.3"
     node-fetch "^2.6.7"
 
 "@nestia/sdk@^2.4.3":
-  version "2.5.8"
-  resolved "https://registry.yarnpkg.com/@nestia/sdk/-/sdk-2.5.8.tgz#ac45789acecf8465f7d74dd30e35c6bff6b89c02"
-  integrity sha512-2RxoA4pt30oqHNy+cOQ7AdIn7JRGQdV2NIafHpJLdTGICeWtZqxJtn3NcRr6fympF48JuBmhgxko8A3+3/AdXQ==
+  version "2.5.16"
+  resolved "https://registry.yarnpkg.com/@nestia/sdk/-/sdk-2.5.16.tgz#8ec7e94eb78acfff2ea52eb73f1ea74870e8b077"
+  integrity sha512-AFIVJkHbrTAyg4A+oIYHHjH/RNsh7ffPMnIsujjXzODFYg4fEy/sXP6TaH+YypgC0/3beRxhYKsuEP2RORQqmA==
   dependencies:
-    "@nestia/fetcher" "^2.5.8"
+    "@nestia/fetcher" "^2.5.16"
     cli "^1.0.1"
     get-function-location "^2.0.0"
     glob "^7.2.0"
@@ -1788,7 +1788,7 @@
     tsconfck "^2.0.1"
     tsconfig-paths "^4.1.1"
     tstl "^2.5.13"
-    typia "^5.4.5"
+    typia "^5.5.3"
 
 "@nestjs/cli@^10.0.0":
   version "10.3.2"
@@ -7839,10 +7839,10 @@ typia@^5.3.4, typia@^5.3.5:
     inquirer "^8.2.5"
     randexp "^0.5.3"
 
-typia@^5.4.5:
-  version "5.4.8"
-  resolved "https://registry.yarnpkg.com/typia/-/typia-5.4.8.tgz#b4911d0477ec882c93dfdd3327d89ce6923c81e4"
-  integrity sha512-4F2/w5SDMz7Gzyqhty3/7vs15IaAfO3PsDnmjpx4Bz75MpZORqdR8VX8scvkps/usziedhYcI1674xfqSYz2Pw==
+typia@^5.5.3:
+  version "5.5.7"
+  resolved "https://registry.yarnpkg.com/typia/-/typia-5.5.7.tgz#71f7126ece37b21ec11bfde9523340deb7f587a7"
+  integrity sha512-SwI1FPMbJz+XE0NGrPyWFn+azIjZ/+hbp0uxpqsfVBrvQlAAOFesuvUiOjm/SsSjgG/2TKcBUVgQkSmLRF3ZvA==
   dependencies:
     commander "^10.0.0"
     comment-json "^4.2.3"
