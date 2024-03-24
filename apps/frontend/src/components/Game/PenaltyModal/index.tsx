@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Modal } from '@/components/Modal';
+import { useAutoEndAction } from '@/services/useAutoEndAction';
 
 interface PenaltyModalProps {
   readonly isOpen: boolean;
@@ -11,6 +12,8 @@ interface PenaltyModalProps {
 }
 
 export const PenaltyModal: FC<PenaltyModalProps> = ({ isOpen, close, ownerNickname, penalty, money, onClose }) => {
+  const { time, onOverrideClose } = useAutoEndAction(15, isOpen, close, onClose);
+
   return (
     <Modal
       isOpen={isOpen}
@@ -18,7 +21,7 @@ export const PenaltyModal: FC<PenaltyModalProps> = ({ isOpen, close, ownerNickna
       title={`${ownerNickname}의 땅입니다!`}
       width="700px"
       height="250px"
-      onClose={onClose}
+      onClose={onOverrideClose}
     >
       <h2 className="text-lg">벌금을 내야합니다. 보유 중인 금액이 부족하면 파산합니다.</h2>
       <div className="mt-6 space-y-2">
@@ -32,7 +35,7 @@ export const PenaltyModal: FC<PenaltyModalProps> = ({ isOpen, close, ownerNickna
           </p>
         </div>
         <div>
-          <p className="text-gray-500">* 창을 닫으면 내 턴을 끝냅니다.</p>
+          <p className="text-gray-500">* 창을 닫아 끝내거나 {time}초 뒤 자동으로 턴을 끝냅니다.</p>
         </div>
       </div>
     </Modal>

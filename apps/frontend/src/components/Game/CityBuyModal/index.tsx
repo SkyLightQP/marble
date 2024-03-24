@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Button } from '@/components/Button';
 import { Modal } from '@/components/Modal';
+import { useAutoEndAction } from '@/services/useAutoEndAction';
 import { cn } from '@/utils/cn';
 
 interface CityBuyModalProps {
@@ -36,9 +37,17 @@ export const CityBuyModal: FC<CityBuyModalProps> = ({
   onClose
 }) => {
   const disableStyle = 'cursor-no-drop bg-gray-500 hover:bg-gray-500';
+  const { time, onOverrideClose } = useAutoEndAction(30, isOpen, close, onClose);
 
   return (
-    <Modal isOpen={isOpen} close={close} title={`${cityName} 구입하기`} width="700px" height="330px" onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      close={close}
+      title={`${cityName} 구입하기`}
+      width="700px"
+      height="330px"
+      onClose={onOverrideClose}
+    >
       <h2 className="text-lg">땅만 구입하거나 건물(별장, 빌딩, 호텔)을 함께 구입할 수 있습니다.</h2>
       <div className="mt-6 space-y-2">
         <p className="text-lg">보유 중인 현금: {money.toLocaleString('ko-KR')} 원</p>
@@ -69,7 +78,7 @@ export const CityBuyModal: FC<CityBuyModalProps> = ({
         </div>
         <div>
           <p className="text-gray-500">* 건물을 구입하려면 먼저 땅을 구입해야 합니다.</p>
-          <p className="text-gray-500">* 창을 닫으면 내 턴을 끝냅니다.</p>
+          <p className="text-gray-500">* 창을 닫아 끝내거나 {time}초 뒤 자동으로 턴을 끝냅니다.</p>
         </div>
       </div>
     </Modal>
