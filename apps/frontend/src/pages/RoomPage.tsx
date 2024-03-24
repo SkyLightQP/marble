@@ -12,6 +12,7 @@ import { useSocketListener } from '@/hooks/useSocketListener';
 import { useUser } from '@/hooks/useUser';
 import { RootLayout } from '@/layouts/RootLayout';
 import { useQuitListener } from '@/services/useQuitListener';
+import { lobbySound } from '@/sound';
 import { useModalStore } from '@/stores/useModalStore';
 
 export const RoomPage: React.FC = () => {
@@ -36,6 +37,11 @@ export const RoomPage: React.FC = () => {
       socket?.emit('join-room', { roomId });
     }
     socket?.emit('get-room', { roomId });
+    lobbySound.play();
+
+    return () => {
+      lobbySound.stop();
+    };
   }, [socket, roomId, location]);
 
   useQuitListener({ quitSocket: 'quit-room', roomId: roomId ?? 'loading' });

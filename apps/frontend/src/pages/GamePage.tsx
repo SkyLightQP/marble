@@ -11,6 +11,7 @@ import { useUser } from '@/hooks/useUser';
 import { RootLayout } from '@/layouts/RootLayout';
 import { useGamePlayer } from '@/services/useGamePlayer';
 import { useQuitListener } from '@/services/useQuitListener';
+import { inGameSound } from '@/sound';
 import { useGameStore } from '@/stores/useGameStore';
 import { useModalStore } from '@/stores/useModalStore';
 
@@ -29,6 +30,11 @@ export const GamePage: FC = () => {
 
   useEffect(() => {
     socket?.emit('get-game', { roomId });
+    inGameSound.play();
+
+    return () => {
+      inGameSound.stop();
+    };
   }, [socket, roomId]);
 
   useEffect(() => {

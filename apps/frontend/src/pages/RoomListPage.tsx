@@ -2,10 +2,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { RiAddFill, RiRefreshLine } from 'react-icons/ri';
+import { RiAddFill, RiRefreshLine, RiSettings2Fill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import { CreateRoomResponse, GetRoomsResponse, WebSocketError } from '@/api/SocketResponse';
 import { Button } from '@/components/Button';
+import { GameSettingModal } from '@/components/GameSettingModal';
 import { Logo } from '@/components/Logo';
 import { CreateRoomForm, createRoomFormSchema, CreateRoomModal } from '@/components/Room/CreateRoomModal';
 import { RoomPreviewCard } from '@/components/Room/RoomPreviewCard';
@@ -14,6 +15,7 @@ import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { RootLayout } from '@/layouts/RootLayout';
 import { useRefreshToken } from '@/services/useRefreshToken';
+import { lobbySound } from '@/sound';
 import { useModalStore } from '@/stores/useModalStore';
 
 export const RoomListPage: React.FC = () => {
@@ -41,6 +43,8 @@ export const RoomListPage: React.FC = () => {
     socket?.emit('get-rooms');
     socket?.emit('util:join-lobby');
 
+    lobbySound.play();
+
     const refreshRoom = setInterval(() => {
       socket?.emit('get-rooms');
     }, 1000 * 5);
@@ -48,6 +52,7 @@ export const RoomListPage: React.FC = () => {
     return () => {
       socket?.emit('util:quit-lobby');
       clearInterval(refreshRoom);
+      lobbySound.stop();
     };
   }, [socket]);
 
@@ -74,6 +79,10 @@ export const RoomListPage: React.FC = () => {
     closeModal(CreateRoomModal);
   };
 
+  const onSettingClick = () => {
+    openModal(GameSettingModal, {});
+  };
+
   return (
     <RootLayout className="h-screen w-screen p-20">
       <Logo className="-ml-1 mb-3" />
@@ -81,20 +90,28 @@ export const RoomListPage: React.FC = () => {
         <h1 className="mr-4 text-4xl font-bold">
           방 목록<span className="ml-1 text-sm font-normal text-gray-400">({rooms.length})</span>
         </h1>
-        <Button
-          className="mr-2 flex h-8 w-8 items-center justify-center text-2xl"
-          onClick={() => {
-            openModal(CreateRoomModal, {
-              onCreateRoomClick,
-              form: { register, handleSubmit, reset, errors }
-            });
-          }}
-        >
-          <RiAddFill />
-        </Button>
-        <Button className="flex h-8 w-8 items-center justify-center text-xl" onClick={() => socket?.emit('get-rooms')}>
-          <RiRefreshLine />
-        </Button>
+        <div className="flex space-x-2">
+          <Button
+            className="flex h-8 w-8 items-center justify-center text-2xl"
+            onClick={() => {
+              openModal(CreateRoomModal, {
+                onCreateRoomClick,
+                form: { register, handleSubmit, reset, errors }
+              });
+            }}
+          >
+            <RiAddFill />
+          </Button>
+          <Button
+            className="flex h-8 w-8 items-center justify-center text-xl"
+            onClick={() => socket?.emit('get-rooms')}
+          >
+            <RiRefreshLine />
+          </Button>
+          <Button className="flex h-8 w-8 items-center justify-center text-xl" onClick={onSettingClick}>
+            <RiSettings2Fill />
+          </Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-[repeat(auto-fill,minmax(20rem,1fr))] gap-4">
