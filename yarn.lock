@@ -1753,12 +1753,20 @@
     import2 "^1.0.3"
     node-fetch "^2.6.7"
 
-"@nestia/sdk@^2.4.3":
-  version "2.5.16"
-  resolved "https://registry.yarnpkg.com/@nestia/sdk/-/sdk-2.5.16.tgz#8ec7e94eb78acfff2ea52eb73f1ea74870e8b077"
-  integrity sha512-AFIVJkHbrTAyg4A+oIYHHjH/RNsh7ffPMnIsujjXzODFYg4fEy/sXP6TaH+YypgC0/3beRxhYKsuEP2RORQqmA==
+"@nestia/fetcher@^2.6.4":
+  version "2.6.4"
+  resolved "https://registry.yarnpkg.com/@nestia/fetcher/-/fetcher-2.6.4.tgz#65971db0eb6676dc1a95aa8ca65e145a205b240c"
+  integrity sha512-QVbAy4/8bVuipN+IAuxdYakSdukEEptZvU5N/GyiUof53uRc2cVvVoEXmrU1AipQ2kmYdrM4Zuv8AyX2epIL+w==
   dependencies:
-    "@nestia/fetcher" "^2.5.16"
+    import2 "^1.0.3"
+    node-fetch "^2.6.7"
+
+"@nestia/sdk@^2.4.3":
+  version "2.6.4"
+  resolved "https://registry.yarnpkg.com/@nestia/sdk/-/sdk-2.6.4.tgz#8e113040391c535a074250cb9f60cecd67a27aa7"
+  integrity sha512-fYVzB9Zn+vN2JGhu4HzHgSBC1jnhtxnCVsPkbHIfWFAoeRgIkVJeRXVGOwH0uRBqa6se4dsVIPkC9qZKZTgkPA==
+  dependencies:
+    "@nestia/fetcher" "^2.6.4"
     cli "^1.0.1"
     get-function-location "^2.0.0"
     glob "^7.2.0"
@@ -1767,8 +1775,8 @@
     ts-node ">=10.6.0"
     tsconfck "^2.0.1"
     tsconfig-paths "^4.1.1"
-    tstl "^2.5.13"
-    typia "^5.5.3"
+    tstl "^3.0.0"
+    typia "^5.5.7"
 
 "@nestjs/cli@^10.0.0":
   version "10.3.2"
@@ -7214,7 +7222,16 @@ string-natural-compare@^3.0.1:
   resolved "https://registry.npmjs.org/string-natural-compare/-/string-natural-compare-3.0.1.tgz"
   integrity sha512-n3sPwynL1nwKi3WJ6AIsClwBMa0zTi54fn2oLU6ndfTSIO05xaznjSf15PcBZU6FNWbmN5Q6cxT4V5hGvB4taw==
 
-"string-width-cjs@npm:string-width@^4.2.0", "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
+"string-width-cjs@npm:string-width@^4.2.0":
+  version "4.2.3"
+  resolved "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"
+  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
+  dependencies:
+    emoji-regex "^8.0.0"
+    is-fullwidth-code-point "^3.0.0"
+    strip-ansi "^6.0.1"
+
+"string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -7670,6 +7687,11 @@ tstl@^2.5.13:
   resolved "https://registry.npmjs.org/tstl/-/tstl-2.5.13.tgz"
   integrity sha512-h9wayHHFI5+yqt8iau0vqH96cTNhezhZ/Fk/hrIdpfkiMu3lg9nzyvMfs5bIdX51IVzZO6DudLqhkL/rVXpT6g==
 
+tstl@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/tstl/-/tstl-3.0.0.tgz#7e84c3799652e4982911db0996c086f1e0903c40"
+  integrity sha512-pR83y6/tbJx6jeGRqGJXk2t/eCUynaHEE6zsOLB0Zga8ej61LXtPfoeiROdhezpoCT15+1QMbqKB1Um5kasSKg==
+
 tsutils@^3.21.0:
   version "3.21.0"
   resolved "https://registry.npmjs.org/tsutils/-/tsutils-3.21.0.tgz"
@@ -7808,7 +7830,7 @@ typescript@^4.9.5:
   resolved "https://registry.npmjs.org/typescript/-/typescript-4.9.5.tgz"
   integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
 
-typia@^5.3.4, typia@^5.3.5, typia@^5.5.3:
+typia@^5.3.4, typia@^5.3.5, typia@^5.5.3, typia@^5.5.7:
   version "5.5.7"
   resolved "https://registry.yarnpkg.com/typia/-/typia-5.5.7.tgz#71f7126ece37b21ec11bfde9523340deb7f587a7"
   integrity sha512-SwI1FPMbJz+XE0NGrPyWFn+azIjZ/+hbp0uxpqsfVBrvQlAAOFesuvUiOjm/SsSjgG/2TKcBUVgQkSmLRF3ZvA==
