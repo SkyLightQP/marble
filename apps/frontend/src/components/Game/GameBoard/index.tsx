@@ -17,6 +17,7 @@ import { Loading } from '@/components/Loading';
 import { useSocket } from '@/hooks/useSocket';
 import { useSocketListener } from '@/hooks/useSocketListener';
 import { useUser } from '@/hooks/useUser';
+import { useWindowSize } from '@/hooks/useWindowSize';
 import { useGameStore } from '@/stores/useGameStore';
 import { useModalStore } from '@/stores/useModalStore';
 import { DotItem } from '@/types/DotItem';
@@ -31,6 +32,8 @@ interface GameBoardProps {
   readonly positions: Record<string, DotItem[]>;
 }
 
+const LARGE_SCREEN_HEIGHT = 1200;
+
 export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) => {
   const [cities, setCities] = useState<CityStateType>({});
   const [dice, setDice] = useState<number[]>([1, 1]);
@@ -39,10 +42,14 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
   const userId = useUser();
   const socket = useSocket();
   const { roomId } = useParams();
+  const [, height] = useWindowSize();
 
   useEffect(() => {
     api.functional.city.group.position.getCitiesGroupByPosition(apiConnection).then(setCities);
-  }, []);
+    if (LARGE_SCREEN_HEIGHT >= 1200) {
+      toast.success('모니터 크기에 맞춰 게임 화면을 조절합니다.');
+    }
+  }, [height]);
 
   const onDiceClick = () => {
     if (!isMyTurn) return;
@@ -116,7 +123,7 @@ export const GameBoard: FC<GameBoardProps> = ({ isMyTurn, ranks, positions }) =>
   }
 
   return (
-    <div>
+    <div className={LARGE_SCREEN_HEIGHT >= 1200 ? 'scale-110' : ''}>
       <div className="flex flex-row justify-center space-x-1">
         <SpecialCard currentPlayers={positions[0] ?? []}>
           <h1 className="flex items-center text-2xl font-bold">
