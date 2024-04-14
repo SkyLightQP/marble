@@ -1753,12 +1753,20 @@
     import2 "^1.0.3"
     node-fetch "^2.6.7"
 
-"@nestia/sdk@^2.4.3":
-  version "2.5.16"
-  resolved "https://registry.yarnpkg.com/@nestia/sdk/-/sdk-2.5.16.tgz#8ec7e94eb78acfff2ea52eb73f1ea74870e8b077"
-  integrity sha512-AFIVJkHbrTAyg4A+oIYHHjH/RNsh7ffPMnIsujjXzODFYg4fEy/sXP6TaH+YypgC0/3beRxhYKsuEP2RORQqmA==
+"@nestia/fetcher@^2.6.4":
+  version "2.6.4"
+  resolved "https://registry.yarnpkg.com/@nestia/fetcher/-/fetcher-2.6.4.tgz#65971db0eb6676dc1a95aa8ca65e145a205b240c"
+  integrity sha512-QVbAy4/8bVuipN+IAuxdYakSdukEEptZvU5N/GyiUof53uRc2cVvVoEXmrU1AipQ2kmYdrM4Zuv8AyX2epIL+w==
   dependencies:
-    "@nestia/fetcher" "^2.5.16"
+    import2 "^1.0.3"
+    node-fetch "^2.6.7"
+
+"@nestia/sdk@^2.4.3":
+  version "2.6.4"
+  resolved "https://registry.yarnpkg.com/@nestia/sdk/-/sdk-2.6.4.tgz#8e113040391c535a074250cb9f60cecd67a27aa7"
+  integrity sha512-fYVzB9Zn+vN2JGhu4HzHgSBC1jnhtxnCVsPkbHIfWFAoeRgIkVJeRXVGOwH0uRBqa6se4dsVIPkC9qZKZTgkPA==
+  dependencies:
+    "@nestia/fetcher" "^2.6.4"
     cli "^1.0.1"
     get-function-location "^2.0.0"
     glob "^7.2.0"
@@ -1767,8 +1775,8 @@
     ts-node ">=10.6.0"
     tsconfck "^2.0.1"
     tsconfig-paths "^4.1.1"
-    tstl "^2.5.13"
-    typia "^5.5.3"
+    tstl "^3.0.0"
+    typia "^5.5.7"
 
 "@nestjs/cli@^10.0.0":
   version "10.3.2"
@@ -7822,7 +7830,7 @@ typescript@^4.9.5:
   resolved "https://registry.npmjs.org/typescript/-/typescript-4.9.5.tgz"
   integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
 
-typia@^5.3.4, typia@^5.3.5, typia@^5.5.3:
+typia@^5.3.4, typia@^5.3.5, typia@^5.5.3, typia@^5.5.7:
   version "5.5.7"
   resolved "https://registry.yarnpkg.com/typia/-/typia-5.5.7.tgz#71f7126ece37b21ec11bfde9523340deb7f587a7"
   integrity sha512-SwI1FPMbJz+XE0NGrPyWFn+azIjZ/+hbp0uxpqsfVBrvQlAAOFesuvUiOjm/SsSjgG/2TKcBUVgQkSmLRF3ZvA==
