@@ -1,10 +1,10 @@
+import { ErrorCode } from '@marble/common';
 import { Inject } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { WsException } from '@nestjs/websockets';
 import { RedisClientType } from 'redis';
 import { Game } from '@/app/game/domain/game';
 import { GetGameQuery } from '@/app/game/queries/get-game.query';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 
 export type GetGameReturn = Game;
 

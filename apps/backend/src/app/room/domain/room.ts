@@ -1,10 +1,10 @@
+import { ErrorCode } from '@marble/common';
 import { WsException } from '@nestjs/websockets';
 import { nanoid } from 'nanoid';
 import { RedisClientType } from 'redis';
 import { assertParse, assertStringify } from 'typia/lib/json';
 import { Player } from '@/app/player/domain/player';
 import { SyncableToRedis } from '@/infrastructure/common/abstract/syncable-to-redis';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 
 interface RoomFields {
   readonly id: string;

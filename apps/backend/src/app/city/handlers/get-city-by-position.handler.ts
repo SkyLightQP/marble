@@ -1,9 +1,9 @@
+import { ErrorCode } from '@marble/common';
 import { City, CityPrice } from '@marble/database';
 import { NotFoundException } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { GetCityByPositionQuery } from '@/app/city/queries/get-city-by-position.query';
 import { DatabaseService } from '@/infrastructure/database/database.service';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 
 export type GetCityByPositionReturn = City & { cityPrices: Array<CityPrice> };
 

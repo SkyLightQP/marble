@@ -13,6 +13,7 @@
   },
   "private": true,
   "devDependencies": {
+	"@marble/common": "*",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "eslint": "^8.53.0",
     "eslint-config-custom": "*",

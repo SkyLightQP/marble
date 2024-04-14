@@ -1,3 +1,4 @@
+import { ErrorCode } from '@marble/common';
 import { BadRequestException, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WsResponse } from '@nestjs/websockets';
@@ -20,7 +21,6 @@ import { UpdateRoomReturn } from '@/app/room/handlers/update-room.handler';
 import { GetRoomQuery } from '@/app/room/queries/get-room.query';
 import { GetRoomsQuery } from '@/app/room/queries/get-rooms.query';
 import { AuthTokenPayload } from '@/infrastructure/common/types/auth.type';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 import { WebsocketExceptionFilter } from '@/infrastructure/filters/websocket-exception.filter';
 import { SocketJwtGuard } from '@/infrastructure/guards/socket-jwt.guard';
 

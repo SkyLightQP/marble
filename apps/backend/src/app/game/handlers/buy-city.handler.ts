@@ -1,3 +1,4 @@
+import { ErrorCode } from '@marble/common';
 import { City, CityPrice } from '@marble/database';
 import { Inject, Logger } from '@nestjs/common';
 import { CommandHandler, ICommandHandler, QueryBus } from '@nestjs/cqrs';
@@ -10,7 +11,6 @@ import { Game } from '@/app/game/domain/game';
 import { GetGameReturn } from '@/app/game/handlers/get-game.handler';
 import { GetGameQuery } from '@/app/game/queries/get-game.query';
 import { CityType } from '@/infrastructure/common/types/city-type.type';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 
 export type BuyCityReturn = { game: Game; city: City & { cityPrices: Array<CityPrice> } };
 

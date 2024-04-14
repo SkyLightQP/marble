@@ -1,3 +1,4 @@
+import { ErrorCode } from '@marble/common';
 import { Inject, Logger } from '@nestjs/common';
 import { CommandHandler, EventBus, ICommandHandler, QueryBus } from '@nestjs/cqrs';
 import { WsException } from '@nestjs/websockets';
@@ -6,7 +7,6 @@ import { EndTurnCommand } from '@/app/game/commands/end-turn.command';
 import { EndedTurnEvent } from '@/app/game/events/ended-turn.event';
 import { GetGameReturn } from '@/app/game/handlers/get-game.handler';
 import { GetGameQuery } from '@/app/game/queries/get-game.query';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 
 @CommandHandler(EndTurnCommand)
 export class EndTurnHandler implements ICommandHandler<EndTurnCommand> {

@@ -1,7 +1,7 @@
+import { ErrorCode } from '@marble/common';
 import { CanActivate, ExecutionContext, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { JsonWebTokenError } from '@nestjs/jwt';
 import { AuthTokenService } from '@/app/auth/services/auth-token.service';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 
 @Injectable()
 export class JwtGuard implements CanActivate {

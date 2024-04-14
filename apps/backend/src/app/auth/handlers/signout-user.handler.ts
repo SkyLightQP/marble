@@ -1,8 +1,8 @@
+import { ErrorCode } from '@marble/common';
 import { ForbiddenException, Logger } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { SignoutUserCommand } from '@/app/auth/commands/signout-user.command';
 import { DatabaseService } from '@/infrastructure/database/database.service';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 
 @CommandHandler(SignoutUserCommand)
 export class SignoutUserHandler implements ICommandHandler<SignoutUserCommand> {
