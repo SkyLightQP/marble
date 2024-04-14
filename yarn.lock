@@ -1737,13 +1737,13 @@
     typia "^5.5.3"
 
 "@nestia/e2e@^0.4.0":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@nestia/e2e/-/e2e-0.4.1.tgz#90a934bbf33032fa8e790d240c0fb9183611d50f"
-  integrity sha512-djyryucCySU6qrOqCsQ51c8rFtAPRHq9yHQxhc19JvdSWKNI6Q7OXRMIGEqMxfNDAI7O1dXcEqK/CLFV4OCV8g==
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/@nestia/e2e/-/e2e-0.4.3.tgz#592da3aae45cf98b532d3cdd11d20da3798f837f"
+  integrity sha512-DkZBifhM/DAtuIsK87/CkkA7x2iioY8HqBa5FvYjJ2Ls3G3bzYj3ota2vTqXKsHIZxR1W9ls0bJ2ZrodBXWa4Q==
   dependencies:
     chalk "^4.1.2"
     cli "^1.0.1"
-    tstl "^2.5.13"
+    tstl "^3.0.0"
 
 "@nestia/fetcher@^2.4.3", "@nestia/fetcher@^2.5.16":
   version "2.5.16"
@@ -7678,6 +7678,11 @@ tstl@^2.5.13:
   version "2.5.13"
   resolved "https://registry.npmjs.org/tstl/-/tstl-2.5.13.tgz"
   integrity sha512-h9wayHHFI5+yqt8iau0vqH96cTNhezhZ/Fk/hrIdpfkiMu3lg9nzyvMfs5bIdX51IVzZO6DudLqhkL/rVXpT6g==
+
+tstl@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/tstl/-/tstl-3.0.0.tgz#7e84c3799652e4982911db0996c086f1e0903c40"
+  integrity sha512-pR83y6/tbJx6jeGRqGJXk2t/eCUynaHEE6zsOLB0Zga8ej61LXtPfoeiROdhezpoCT15+1QMbqKB1Um5kasSKg==
 
 tsutils@^3.21.0:
   version "3.21.0"
