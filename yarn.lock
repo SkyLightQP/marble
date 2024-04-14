@@ -6447,9 +6447,9 @@ nest-winston@^1.9.4:
     fast-safe-stringify "^2.1.1"
 
 nestia@^5.1.2:
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/nestia/-/nestia-5.2.2.tgz#00d06d7fd98948ea2e49f48fe35f057ffbcbfba8"
-  integrity sha512-y8uY9h0AWcRhO10BewSwsyJrbyoXRnIpNbfWqXfPLCPGp9ZehkmsfUIBduZgKoYnQ+j+Sv9dluvVY5lKPcIL1Q==
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/nestia/-/nestia-5.3.0.tgz#417abc4c997a949082eabf399530a6b12ccb0541"
+  integrity sha512-1xtpWDer2r3IVbfP7tUlYqO1ocQ6oKyA80s0fbXTX0lgnUZCZBlYVmYbnzF/FsLDpKyfvF+ZJEGsZsRcUZ4aiA==
   dependencies:
     commander "^10.0.0"
     comment-json "^4.2.3"
@@ -7659,7 +7659,16 @@ string-natural-compare@^3.0.1:
   resolved "https://registry.npmjs.org/string-natural-compare/-/string-natural-compare-3.0.1.tgz"
   integrity sha512-n3sPwynL1nwKi3WJ6AIsClwBMa0zTi54fn2oLU6ndfTSIO05xaznjSf15PcBZU6FNWbmN5Q6cxT4V5hGvB4taw==
 
-"string-width-cjs@npm:string-width@^4.2.0", "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
+"string-width-cjs@npm:string-width@^4.2.0":
+  version "4.2.3"
+  resolved "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"
+  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
+  dependencies:
+    emoji-regex "^8.0.0"
+    is-fullwidth-code-point "^3.0.0"
+    strip-ansi "^6.0.1"
+
+"string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
