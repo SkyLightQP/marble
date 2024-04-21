@@ -6,6 +6,7 @@ import { RedisClientType } from 'redis';
 import { StartGameCommand } from '@/app/game/commands/start-game.command';
 import { Game, GameFields } from '@/app/game/domain/game';
 import { StartedGameEvent } from '@/app/game/events/started-game.event';
+import { Room } from '@/app/room/domain/room';
 import { GetRoomReturn } from '@/app/room/handlers/get-room.handler';
 import { GetRoomQuery } from '@/app/room/queries/get-room.query';
 
@@ -28,8 +29,12 @@ export class StartGameHandler implements ICommandHandler<StartGameCommand> {
     if (room.isPlaying) {
       throw new WsException(ErrorCode.ROOM_IS_PLAYING);
     }
+    if (room.players.filter((player) => !player.isReady).length !== 0) {
+      throw new WsException(ErrorCode.NOT_ALL_READY);
+    }
 
     const game = Game.create(room.id, room.players);
+    this.resetReadyState(room);
     room.isPlaying = true;
 
     await room.syncRedis(this.redis);
@@ -40,5 +45,12 @@ export class StartGameHandler implements ICommandHandler<StartGameCommand> {
     Logger.log({ message: '게임을 시작했습니다.', roomId, executor });
 
     return game.toJSON();
+  }
+
+  private resetReadyState(room: Room) {
+    room.players.forEach((player) => {
+      player.isReady = false;
+    });
+    room.players.find((player) => player.id === room.owner)!!.isReady = true;
   }
 }
