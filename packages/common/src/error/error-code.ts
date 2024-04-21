@@ -1,4 +1,8 @@
 export const ErrorCode = {
+  NOT_ALL_READY: {
+    code: 'NOT_ALL_READY',
+    message: '모든 플레이어가 준비하지 않았습니다.'
+  },
   INVALID_ROOM_PEOPLE: {
     code: 'INVALID_ROOM_PEOPLE',
     message: '설정할 방 인원이 올바르지 않습니다.'
