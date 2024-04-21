@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import api from '@marble/api';
+import { ErrorCode } from '@marble/common';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -52,7 +53,7 @@ export const RegisterPage: React.FC = () => {
       navigate('/login');
     } catch (e) {
       const error = getCustomError(e);
-      if (error.code === 'USER_ALREADY_EXISTS') {
+      if (error.code === ErrorCode.USER_ALREADY_EXISTS.code) {
         toast.error('아이디 또는 닉네임이 이미 존재합니다.');
         return;
       }

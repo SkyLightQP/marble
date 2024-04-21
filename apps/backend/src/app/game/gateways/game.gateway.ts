@@ -1,3 +1,4 @@
+import { ErrorCode } from '@marble/common';
 import { BadRequestException, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WsResponse } from '@nestjs/websockets';
@@ -19,7 +20,6 @@ import { RollDiceReturn } from '@/app/game/handlers/roll-dice.handler';
 import { StartGameReturn } from '@/app/game/handlers/start-game.handler';
 import { GetGameQuery } from '@/app/game/queries/get-game.query';
 import { AuthTokenPayload } from '@/infrastructure/common/types/auth.type';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 import { WebsocketExceptionFilter } from '@/infrastructure/filters/websocket-exception.filter';
 import { SocketJwtGuard } from '@/infrastructure/guards/socket-jwt.guard';
 

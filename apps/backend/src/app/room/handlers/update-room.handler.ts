@@ -1,3 +1,4 @@
+import { ErrorCode } from '@marble/common';
 import { Inject, Logger } from '@nestjs/common';
 import { CommandHandler, EventBus, ICommandHandler, QueryBus } from '@nestjs/cqrs';
 import { WsException } from '@nestjs/websockets';
@@ -7,7 +8,6 @@ import { Room } from '@/app/room/domain/room';
 import { UpdatedRoomEvent } from '@/app/room/events/updated-room.event';
 import { GetRoomReturn } from '@/app/room/handlers/get-room.handler';
 import { GetRoomQuery } from '@/app/room/queries/get-room.query';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 
 export type UpdateRoomReturn = Room;
 

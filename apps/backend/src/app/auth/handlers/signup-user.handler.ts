@@ -1,3 +1,4 @@
+import { ErrorCode } from '@marble/common';
 import { ConflictException, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
@@ -5,7 +6,6 @@ import { hashSync } from 'bcrypt';
 import { SignupUserCommand } from '@/app/auth/commands/signup-user.command';
 import { AuthTokenService } from '@/app/auth/services/auth-token.service';
 import { DatabaseService } from '@/infrastructure/database/database.service';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 import { prismaExclude } from '@/infrastructure/utils/database.util';
 
 export interface SignupUserReturn {

@@ -1,9 +1,9 @@
+import { ErrorCode } from '@marble/common';
 import { ForbiddenException, Logger } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { JsonWebTokenError } from '@nestjs/jwt';
 import { RefreshAccessTokenCommand } from '@/app/auth/commands/refresh-access-token.command';
 import { AuthTokenService, RefreshAccessTokenReturn } from '@/app/auth/services/auth-token.service';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 
 @CommandHandler(RefreshAccessTokenCommand)
 export class RefreshAccessTokenHandler implements ICommandHandler<RefreshAccessTokenCommand> {

@@ -1,3 +1,4 @@
+import { ErrorCode } from '@marble/common';
 import { Inject, Logger } from '@nestjs/common';
 import { CommandHandler, EventBus, ICommandHandler, QueryBus } from '@nestjs/cqrs';
 import { WsException } from '@nestjs/websockets';
@@ -7,7 +8,6 @@ import { GAME_CARD_AMOUNT } from '@/app/game/constants/game-board.constant';
 import { RolledDiceEvent } from '@/app/game/events/rolled-dice.event';
 import { GetGameReturn } from '@/app/game/handlers/get-game.handler';
 import { GetGameQuery } from '@/app/game/queries/get-game.query';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 
 export type RollDiceReturn = number[];
 

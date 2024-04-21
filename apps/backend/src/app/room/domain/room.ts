@@ -1,10 +1,10 @@
+import { ErrorCode } from '@marble/common';
 import { WsException } from '@nestjs/websockets';
 import { nanoid } from 'nanoid';
 import { RedisClientType } from 'redis';
 import { assertParse, assertStringify } from 'typia/lib/json';
 import { Player } from '@/app/player/domain/player';
 import { SyncableToRedis } from '@/infrastructure/common/abstract/syncable-to-redis';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 
 interface RoomFields {
   readonly id: string;
@@ -38,6 +38,9 @@ export class Room extends SyncableToRedis {
     if (this.players.length >= this.maxPlayer) {
       throw new WsException(ErrorCode.ROOM_IS_FULL);
     }
+    if (this.owner === player.userId) {
+      player.toggleReady();
+    }
     this.players.push(player);
   }
 
@@ -70,7 +73,14 @@ export class Room extends SyncableToRedis {
 
   public static fromJSON(json: string): Room {
     const { id, name, owner, players, maxPlayer, isPlaying } = assertParse<RoomFields>(json);
-    return new Room(id, name, owner, players, maxPlayer, isPlaying);
+    return new Room(
+      id,
+      name,
+      owner,
+      players.map((p) => Player.fromObject(p)),
+      maxPlayer,
+      isPlaying
+    );
   }
 
   public async syncRedis(redis: RedisClientType): Promise<void> {

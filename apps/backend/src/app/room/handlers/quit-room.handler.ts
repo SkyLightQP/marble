@@ -1,3 +1,4 @@
+import { ErrorCode } from '@marble/common';
 import { Inject, Logger } from '@nestjs/common';
 import { CommandHandler, EventBus, ICommandHandler } from '@nestjs/cqrs';
 import { WsException } from '@nestjs/websockets';
@@ -6,7 +7,6 @@ import { QuitRoomCommand } from '@/app/room/commands/quit-room.command';
 import { Room } from '@/app/room/domain/room';
 import { DestroyedRoomEvent } from '@/app/room/events/destroyed-room.event';
 import { QuitRoomEvent } from '@/app/room/events/quit-room.event';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 
 export type QuitRoomReturn = Room;
 

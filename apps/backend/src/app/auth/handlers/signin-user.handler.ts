@@ -1,10 +1,10 @@
+import { ErrorCode } from '@marble/common';
 import { Logger, NotFoundException } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { compareSync } from 'bcrypt';
 import { SigninUserCommand } from '@/app/auth/commands/signin-user.command';
 import { AuthTokenService } from '@/app/auth/services/auth-token.service';
 import { DatabaseService } from '@/infrastructure/database/database.service';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 
 export interface SigninUserReturn {
   readonly accessToken: string;

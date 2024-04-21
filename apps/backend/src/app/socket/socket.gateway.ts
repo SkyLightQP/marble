@@ -1,7 +1,7 @@
+import { ErrorCode } from '@marble/common';
 import { BadRequestException, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ConnectedSocket, SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
 import type { Server, Socket } from 'socket.io';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 import { WebsocketExceptionFilter } from '@/infrastructure/filters/websocket-exception.filter';
 import { SocketJwtGuard } from '@/infrastructure/guards/socket-jwt.guard';
 

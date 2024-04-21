@@ -1,3 +1,4 @@
+import { ErrorCode } from '@marble/common';
 import { Inject, Logger } from '@nestjs/common';
 import { CommandHandler, EventBus, ICommandHandler, QueryBus } from '@nestjs/cqrs';
 import { WsException } from '@nestjs/websockets';
@@ -7,7 +8,6 @@ import { JoinRoomCommand } from '@/app/room/commands/join-room.command';
 import { Room } from '@/app/room/domain/room';
 import { JoinedRoomEvent } from '@/app/room/events/joined-room.event';
 import { GetUserByUidQuery } from '@/app/user/queries/get-user-by-uid.query';
-import { ErrorCode } from '@/infrastructure/error/error-code';
 
 export type JoinRoomReturn = Room;
 
