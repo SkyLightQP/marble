@@ -122,7 +122,14 @@ export class Game extends SyncableToRedis {
   public static fromJSON(json: string): Game {
     const { roomId, turn, playerOrder, currentOrderPlayerIndex, playerStatus, cityWhoHave } =
       assertParse<GameFields>(json);
-    return new Game(roomId, turn, playerOrder, currentOrderPlayerIndex, playerStatus, cityWhoHave);
+    return new Game(
+      roomId,
+      turn,
+      playerOrder.map((p) => Player.fromObject(p)),
+      currentOrderPlayerIndex,
+      playerStatus,
+      cityWhoHave
+    );
   }
 
   public async syncRedis(redis: RedisClientType): Promise<void> {

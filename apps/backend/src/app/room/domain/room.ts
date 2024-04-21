@@ -70,7 +70,14 @@ export class Room extends SyncableToRedis {
 
   public static fromJSON(json: string): Room {
     const { id, name, owner, players, maxPlayer, isPlaying } = assertParse<RoomFields>(json);
-    return new Room(id, name, owner, players, maxPlayer, isPlaying);
+    return new Room(
+      id,
+      name,
+      owner,
+      players.map((p) => Player.fromObject(p)),
+      maxPlayer,
+      isPlaying
+    );
   }
 
   public async syncRedis(redis: RedisClientType): Promise<void> {
