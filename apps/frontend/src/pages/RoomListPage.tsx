@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { ErrorCode } from '@marble/common';
 import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -63,7 +64,7 @@ export const RoomListPage: React.FC = () => {
     socket?.emit('join-room', { roomId: id });
   });
   useSocketListener<WebSocketError>('exception', (error) => {
-    if (error.code === 'PLAYER_NOT_FOUND') return;
+    if (error.code === ErrorCode.PLAYER_NOT_FOUND.code) return;
     toast.error(error.message);
   });
 

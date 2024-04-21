@@ -1,3 +1,4 @@
+import { ErrorCode } from '@marble/common';
 import { FC, useEffect, useMemo } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -61,7 +62,7 @@ export const GamePage: FC = () => {
   });
   useSocketListener<WebSocketError>('exception', (error) => {
     toast.error(error.message);
-    if (error.code === 'ROOM_NOT_FOUND') navigate('/rooms');
+    if (error.code === ErrorCode.ROOM_NOT_FOUND.code) navigate('/rooms');
   });
 
   if (!game.isLoading || user === undefined) {
