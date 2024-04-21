@@ -6,11 +6,13 @@ import type { Socket } from 'socket.io';
 import { CreateRoomCommand } from '@/app/room/commands/create-room.command';
 import { JoinRoomCommand } from '@/app/room/commands/join-room.command';
 import { QuitRoomCommand } from '@/app/room/commands/quit-room.command';
+import { ToggleReadyCommand } from '@/app/room/commands/toggle-ready.command';
 import { UpdateRoomCommand } from '@/app/room/commands/update-room.command';
 import { CreateRoomDto } from '@/app/room/gateways/dto/create-room.dto';
 import { GetRoomDto } from '@/app/room/gateways/dto/get-room.dto';
 import { JoinRoomDto } from '@/app/room/gateways/dto/join-room.dto';
 import { QuitRoomDto } from '@/app/room/gateways/dto/quit-room.dto';
+import { ToggleReadyDto } from '@/app/room/gateways/dto/toggle-ready.dto';
 import { UpdateRoomDto } from '@/app/room/gateways/dto/update-room.dto';
 import { CreateRoomReturn } from '@/app/room/handlers/create-room.handler';
 import { GetRoomReturn } from '@/app/room/handlers/get-room.handler';
@@ -121,5 +123,19 @@ export class RoomGateway {
       })
     );
     return { event: 'update-room', data };
+  }
+
+  @UseGuards(SocketJwtGuard)
+  @SubscribeMessage('toggle-ready')
+  async handleToggleReady(
+    @MessageBody() message: ToggleReadyDto,
+    @ConnectedSocket() socket: Socket & { user: AuthTokenPayload }
+  ): Promise<void> {
+    await this.commandBus.execute(
+      new ToggleReadyCommand({
+        roomId: message.roomId,
+        userId: socket.user.sub
+      })
+    );
   }
 }
