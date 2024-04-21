@@ -38,6 +38,9 @@ export class Room extends SyncableToRedis {
     if (this.players.length >= this.maxPlayer) {
       throw new WsException(ErrorCode.ROOM_IS_FULL);
     }
+    if (this.owner === player.userId) {
+      player.toggleReady();
+    }
     this.players.push(player);
   }
 
