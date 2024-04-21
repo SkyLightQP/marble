@@ -73,6 +73,10 @@ export const RoomPage: React.FC = () => {
     socket?.emit('start-game', { roomId });
   };
 
+  const ready = () => {
+    socket?.emit('toggle-ready', { roomId });
+  };
+
   const updateRoom = () => {
     if (room === undefined) return;
     openModal(UpdateRoomModal, {
@@ -99,16 +103,22 @@ export const RoomPage: React.FC = () => {
       </div>
       <RoomMenu
         onStartClick={startGame}
+        onReadyClick={ready}
         onQuitClick={quitRoom}
         onSettingClick={updateRoom}
         isOwner={user === room?.owner}
       />
 
       <div>
-        {room?.players.map(({ userId, nickname }) => (
+        {room?.players.map(({ userId, nickname, isReady }) => (
           <h3 key={nickname} className="text-2xl font-bold">
             {nickname}
-            {room.owner === userId && <span className="ml-1 font-normal text-gray-400">(방장)</span>}
+            {isReady ? (
+              <span className="ml-1 font-normal text-cyan-400">(준비)</span>
+            ) : (
+              <span className="ml-1 font-normal text-gray-400">(대기)</span>
+            )}
+            {room.owner === userId && <span className="ml-1 text-xl font-normal text-gray-400">(방장)</span>}
           </h3>
         ))}
       </div>

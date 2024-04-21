@@ -24,7 +24,7 @@ export const RoomMenu: FC<RoomMenuProps> = ({ onStartClick, onReadyClick, onSett
         <span className="ml-1 text-base">게임 시작</span>
       </Button>
       <Button
-        className={cn('flex h-8 w-28 items-center justify-center text-2xl', disableButton)}
+        className={cn('flex h-8 w-28 items-center justify-center text-2xl', isOwner && 'hidden')}
         onClick={onReadyClick}
       >
         <RiCheckFill />
