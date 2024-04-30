@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@marble/database": "*",
-    "@nestia/core": "^2.4.3",
+    "@nestia/core": "^3.0.0",
     "@nestia/e2e": "^0.4.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.1.1",
