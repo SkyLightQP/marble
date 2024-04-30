@@ -16,7 +16,7 @@
     "package.json"
   ],
   "dependencies": {
-    "@nestia/fetcher": "^2.4.3",
+    "@nestia/fetcher": "^3.0.0",
     "typia": "^5.3.4"
   },
   "devDependencies": {
