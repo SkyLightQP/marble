@@ -51,6 +51,6 @@ export class StartGameHandler implements ICommandHandler<StartGameCommand> {
     room.players.forEach((player) => {
       player.isReady = false;
     });
-    room.players.find((player) => player.id === room.owner)!!.isReady = true;
+    room.players.find((player) => player.userId === room.owner)!!.isReady = true;
   }
 }
