@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@marble/tsconfig": "*",
-    "@nestia/sdk": "^2.4.3",
+    "@nestia/sdk": "^3.0.0",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
     "@types/bcrypt": "^5.0.2",
