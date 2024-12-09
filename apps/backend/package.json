@@ -30,7 +30,7 @@
     "cookie-parser": "^1.4.6",
     "dayjs": "^1.11.10",
     "helmet": "^7.1.0",
-    "nanoid": "4",
+    "nanoid": "5",
     "nest-winston": "^1.9.4",
     "redis": "^4.6.12",
     "reflect-metadata": "^0.2.0",
