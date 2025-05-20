@@ -1471,6 +1471,11 @@
   resolved "https://registry.yarnpkg.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.4.15.tgz#d7c6e6755c78567a951e04ab52ef0fd26de59f32"
   integrity sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==
 
+"@jridgewell/sourcemap-codec@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.5.0.tgz#3188bcb273a414b0d215fd22a58540b989b9409a"
+  integrity sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==
+
 "@jridgewell/trace-mapping@0.3.9":
   version "0.3.9"
   resolved "https://registry.yarnpkg.com/@jridgewell/trace-mapping/-/trace-mapping-0.3.9.tgz#6534fd5933a53ba7cbf3a17615e273a0d1273ff9"
@@ -2721,6 +2726,11 @@ acorn-walk@^8.1.1:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-8.3.2.tgz#7703af9415f1b6db9315d6895503862e231d34aa"
   integrity sha512-cjkyv4OtNCIeqhHrfS81QWXoCBPExR/J62oyEqepVw8WaQeSqpW2uhuLPh1m9eWhDuOo/jUXVTlifvesOWp/4A==
+
+acorn@^8.12.1:
+  version "8.14.0"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.14.0.tgz#063e2c70cac5fb4f6467f0b11152e04c682795b0"
+  integrity sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==
 
 acorn@^8.4.1, acorn@^8.7.1, acorn@^8.8.2, acorn@^8.9.0:
   version "8.11.3"
@@ -4029,6 +4039,11 @@ es-module-lexer@^1.2.1:
   resolved "https://registry.yarnpkg.com/es-module-lexer/-/es-module-lexer-1.5.2.tgz#00b423304f2500ac59359cc9b6844951f372d497"
   integrity sha512-l60ETUTmLqbVbVHv1J4/qj+M8nq7AwMzEcg3kmJDt9dCNrTk+yHcYFf/Kw75pMDwd9mPcIGCG5LcS20SxYRzFA==
 
+es-module-lexer@^1.5.4:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/es-module-lexer/-/es-module-lexer-1.5.4.tgz#a8efec3a3da991e60efa6b633a7cad6ab8d26b78"
+  integrity sha512-MVNK56NiMrOwitFB7cqDwq0CQutbw+0BvLshJSse0MUNU+y1FC3bUS/AQg7oUng+/wKrrki7JfmwtVHkVfPLlw==
+
 es-object-atoms@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/es-object-atoms/-/es-object-atoms-1.0.0.tgz#ddb55cd47ac2e240701260bc2a8e31ecb643d941"
@@ -4511,7 +4526,7 @@ fast-diff@^1.1.2:
   resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.3.0.tgz#ece407fa550a64d638536cd727e129c61616e0f0"
   integrity sha512-VxPP4NqbUjj6MaAOafWeUn2cXWLcCtljklUtZf0Ind4XQ+QPtmA0b18zZy0jIQx+ExRVCR/ZQpBmik5lXshNsw==
 
-fast-glob@^3.2.12, fast-glob@^3.2.9, fast-glob@^3.3.0:
+fast-glob@^3.2.9, fast-glob@^3.3.0, fast-glob@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.3.2.tgz#a904501e57cfdd2ffcded45e99a54fef55e46129"
   integrity sha512-oX2ruAFQwf/Orj8m737Y5adxDQO0LAB7/S5MnxCdTNDd4p6BsyIVsv9JQsATbTSq8KHRpLwIHbVlUNatxd+1Ow==
@@ -5776,7 +5791,14 @@ magic-string@0.30.5:
   dependencies:
     "@jridgewell/sourcemap-codec" "^1.4.15"
 
-magic-string@^0.30.1, magic-string@^0.30.8:
+magic-string@^0.30.11:
+  version "0.30.14"
+  resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.30.14.tgz#e9bb29870b81cfc1ec3cc656552f5a7fcbf19077"
+  integrity sha512-5c99P1WKTed11ZC0HMJOj6CDIue6F8ySu+bJL+85q1zBEIY8IklrJ1eiKC2NDRh3Ct3FcvmJPyQHb9erXMTJNw==
+  dependencies:
+    "@jridgewell/sourcemap-codec" "^1.5.0"
+
+magic-string@^0.30.8:
   version "0.30.10"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.30.10.tgz#123d9c41a0cb5640c892b041d4cfb3bd0aa4b39e"
   integrity sha512-iIRwTIf0QKV3UAnYK4PU8uiEc4SRh5jX0mwpIwETPpHdhVM4f53RSwS/vXvN1JhGX+Cs7B8qIq3d6AH49O5fAQ==
@@ -7932,14 +7954,13 @@ vary@^1, vary@~1.1.2:
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
 
 vite-plugin-commonjs@^0.10.1:
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/vite-plugin-commonjs/-/vite-plugin-commonjs-0.10.1.tgz#18585abc6020adaee733150847972f55a1f88c55"
-  integrity sha512-taP8R9kYGlCW5OzkVR0UIWRCnG6rSxeWWuA7tnU5b9t5MniibOnDY219NhisTeDhJAeGT8cEnrhVWZ9A5yD+vg==
+  version "0.10.4"
+  resolved "https://registry.yarnpkg.com/vite-plugin-commonjs/-/vite-plugin-commonjs-0.10.4.tgz#5bcf316a323e3b88e392ec2de8754ca5f249b74f"
+  integrity sha512-eWQuvQKCcx0QYB5e5xfxBNjQKyrjEWZIR9UOkOV6JAgxVhtbZvCOF+FNC2ZijBJ3U3Px04ZMMyyMyFBVWIJ5+g==
   dependencies:
-    acorn "^8.8.2"
-    fast-glob "^3.2.12"
-    magic-string "^0.30.1"
-    vite-plugin-dynamic-import "^1.5.0"
+    acorn "^8.12.1"
+    magic-string "^0.30.11"
+    vite-plugin-dynamic-import "^1.6.0"
 
 vite-plugin-dts@^3.6.3, vite-plugin-dts@^3.8.2:
   version "3.9.1"
@@ -7954,15 +7975,15 @@ vite-plugin-dts@^3.6.3, vite-plugin-dts@^3.8.2:
     magic-string "^0.30.8"
     vue-tsc "^1.8.27"
 
-vite-plugin-dynamic-import@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/vite-plugin-dynamic-import/-/vite-plugin-dynamic-import-1.5.0.tgz#a28f4768da977f0e448009489617aec259180b63"
-  integrity sha512-Qp85c+AVJmLa8MLni74U4BDiWpUeFNx7NJqbGZyR2XJOU7mgW0cb7nwlAMucFyM4arEd92Nfxp4j44xPi6Fu7g==
+vite-plugin-dynamic-import@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/vite-plugin-dynamic-import/-/vite-plugin-dynamic-import-1.6.0.tgz#c9680b2093fc897721fe535202acc8af77537ae4"
+  integrity sha512-TM0sz70wfzTIo9YCxVFwS8OA9lNREsh+0vMHGSkWDTZ7bgd1Yjs5RV8EgB634l/91IsXJReg0xtmuQqP0mf+rg==
   dependencies:
-    acorn "^8.8.2"
-    es-module-lexer "^1.2.1"
-    fast-glob "^3.2.12"
-    magic-string "^0.30.1"
+    acorn "^8.12.1"
+    es-module-lexer "^1.5.4"
+    fast-glob "^3.3.2"
+    magic-string "^0.30.11"
 
 vite@^5.0.2, vite@^5.1.3, vite@^5.2.8:
   version "5.4.19"
