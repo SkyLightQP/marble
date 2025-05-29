@@ -12,6 +12,7 @@ export default [
     languageOptions: {
       globals: {
         JSX: true,
+        Howler: 'readonly',
         ...globals.browser,
         ...globals.node
       }

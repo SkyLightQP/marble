@@ -35,7 +35,9 @@ export default [
       'import/extensions': 'off',
       'import/no-unresolved': 'off',
       'import/no-extraneous-dependencies': 'off',
-      'import/prefer-default-export': 'off'
+      'import/prefer-default-export': 'off',
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': 'warn'
     }
   }
 ];
