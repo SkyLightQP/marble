@@ -147,6 +147,9 @@ importers:
       nestia:
         specifier: ^7.0.0
         version: 7.0.0
+      socket.io:
+        specifier: ^4.8.1
+        version: 4.8.1
       source-map-support:
         specifier: ^0.5.21
         version: 0.5.21

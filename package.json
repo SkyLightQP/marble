@@ -19,12 +19,8 @@
     "eslint": "^8.53.0",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.9",
-    "turbo": "^1.10.16"
+    "turbo": "^2.5.3"
   },
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
   "pnpm": {
     "ignoredBuiltDependencies": [
       "bcrypt"
@@ -32,5 +28,6 @@
     "onlyBuiltDependencies": [
       "bcrypt"
     ]
-  }
+  },
+  "packageManager": "pnpm@10.4.0"
 }
