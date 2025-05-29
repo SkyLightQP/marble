@@ -6,11 +6,11 @@ import path from 'path';
 import tsEslint from 'typescript-eslint';
 import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const fileName = fileURLToPath(import.meta.url);
+const dirName = path.dirname(fileName);
 
 const compat = new FlatCompat({
-  baseDirectory: __dirname
+  baseDirectory: dirName
 });
 
 /** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.ConfigFile} */
