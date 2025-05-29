@@ -13,14 +13,17 @@ const compat = new FlatCompat({
   baseDirectory: __dirname
 });
 
+/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.ConfigFile} */
 export default [
   js.configs.recommended,
-  tsEslint.configs.recommended,
+  ...tsEslint.configs.recommended,
   ...compat.extends('airbnb'),
   prettier,
   ...turbo,
   {
-    ignores: ['node_modules/', 'dist/', 'build/', 'api/', 'lib/'],
+    ignores: ['node_modules/', 'dist/', 'build/', 'api/', 'lib/']
+  },
+  {
     rules: {
       'arrow-body-style': 'off',
       'jsx-quotes': 'off',
