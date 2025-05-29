@@ -18,7 +18,7 @@ export class ToggleReadyHandler implements ICommandHandler<ToggleReadyCommand> {
 
   async execute({ args: { roomId, userId } }: ToggleReadyCommand): Promise<void> {
     const room = await this.queryBus.execute<GetRoomQuery, GetRoomReturn>(new GetRoomQuery({ roomId }));
-    const player = room.players.find((player) => player.userId === userId);
+    const player = room.players.find((p) => p.userId === userId);
 
     if (player === undefined) {
       throw new WsException(ErrorCode.PLAYER_NOT_FOUND);

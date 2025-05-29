@@ -18,6 +18,7 @@ export const useAutoEndAction = (
       closeModal();
       onEnd();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [time]);
 
   const onOverrideClose = () => {

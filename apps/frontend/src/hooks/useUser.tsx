@@ -15,6 +15,8 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
       setUser(result.userId);
     } catch (e) {
       setUser(undefined);
+      // eslint-disable-next-line no-console
+      console.error('Failed to fetch user:', e);
     }
   }, []);
 

@@ -56,7 +56,8 @@ export class Player extends SyncableToRedis {
     return new Player(userId, id, nickname, socketClientId, isReady, isDisable);
   }
 
-  public async syncRedis(redis: RedisClientType): Promise<void> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public async syncRedis(_redis: RedisClientType): Promise<void> {
     throw new Error('Player domain is only use with Room domain.');
   }
 }
