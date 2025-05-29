@@ -8,21 +8,26 @@
     "db:push": "turbo db:push",
     "prepare": "turbo prepare",
     "predev": "turbo predev",
-	"start": "turbo start",
-	"lint": "turbo lint"
+    "start": "turbo start",
+    "lint": "turbo lint"
   },
   "private": true,
   "devDependencies": {
-	"@marble/common": "*",
+    "@marble/common": "workspace:*",
+    "@marble/eslint-config-custom": "workspace:*",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "eslint": "^8.53.0",
-    "eslint-config-custom": "*",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.9",
-    "turbo": "^1.10.16"
+    "turbo": "^2.5.3"
   },
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ]
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "bcrypt"
+    ],
+    "onlyBuiltDependencies": [
+      "bcrypt"
+    ]
+  },
+  "packageManager": "pnpm@10.4.0"
 }

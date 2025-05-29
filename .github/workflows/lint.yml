@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Run eslint
-        run: yarn run lint
+        run: pnpm lint

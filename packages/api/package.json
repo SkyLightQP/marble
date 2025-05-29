@@ -7,7 +7,7 @@
   "typings": "lib/api/index.d.ts",
   "scripts": {
     "predev": "npm run build:sdk && npm run compile",
-    "build:sdk": "rimraf ../../apps/backend/src/api/functional && cd ../../apps/backend && npx nestia sdk && cd ../../packages/api",
+    "build:sdk": "rimraf ../../apps/backend/src/api/functional && cd ../../apps/backend && pnpm nestia sdk && cd ../../packages/api",
     "compile": "rimraf lib && tsc",
     "prepare": "ts-patch install && typia patch"
   },
@@ -16,13 +16,13 @@
     "package.json"
   ],
   "dependencies": {
-    "@nestia/fetcher": "^2.4.3",
-    "typia": "^5.3.4"
+    "@nestia/fetcher": "^6.0.6",
+    "typia": "^9.3.1"
   },
   "devDependencies": {
     "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
-    "ts-patch": "^3.1.1",
-    "typescript": "5.6.3"
+    "ts-patch": "^3.3.0",
+	"typescript": "5.8.3"
   }
 }
