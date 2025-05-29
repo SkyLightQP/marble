@@ -13,7 +13,7 @@ interface SettingStoreAction {
 
 export const useSettingStore = create(
   persist<SettingStoreState & SettingStoreAction>(
-    (set, get) => ({
+    (set) => ({
       backgroundVolume: 0.1,
       isBackgroundMute: false,
       setBackgroundVolume: (volume) => set({ backgroundVolume: volume }),

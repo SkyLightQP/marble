@@ -35,7 +35,6 @@ export class ArrivedCityListener implements IEventHandler<RolledDiceEvent> {
     );
     const cityOwnerId = game.cityWhoHave[city.id];
     const socketId = executePlayer.socketClientId;
-    const playerStatus = game.getPlayerStatus(executePlayer.userId);
 
     if (cityOwnerId === executePlayer.userId) {
       game.increaseCurrentOrderPlayerIndex();
