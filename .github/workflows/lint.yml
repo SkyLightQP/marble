@@ -1,19 +1,33 @@
-name: lint
+name: Check code style with ESLint
 on:
   workflow_dispatch:
-  push:
+  pull_request:
     branches:
+      - main
       - release
 
 jobs:
-  check-lint:
+  eslint:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 24 ]
     steps:
-      - name: Checkout the source code.
-        uses: actions/checkout@master
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.4.0
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run eslint
-        run: pnpm lint
+      - name: Run ESLint
+        run: pnpm turbo lint
