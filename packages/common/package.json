@@ -6,7 +6,7 @@
   "types": "./src/index.ts",
   "scripts": {
     "build": "vite build",
-    "predev": "yarn build"
+    "predev": "pnpm build"
   },
   "dependencies": {},
   "devDependencies": {
