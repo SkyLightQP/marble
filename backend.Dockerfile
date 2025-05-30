@@ -1,11 +1,12 @@
-FROM node:20-alpine as base
+FROM node:22-alpine as base
 
 FROM base AS builder
 
 WORKDIR /workspace
 
 COPY package.json ./
-COPY yarn.lock ./
+COPY pnpm-lock.yaml ./
+COPY pnpm-workspace.yaml ./
 COPY turbo.json ./
 COPY ./apps/backend/package.json ./apps/backend/package.json
 COPY ./apps/backend ./apps/backend
@@ -13,7 +14,7 @@ COPY ./packages ./packages
 
 ARG DATABASE_URL
 
-RUN pnpm install && pnpm prepare && pnpm predev && pnpm turbo run build --filter=backend
+RUN pnpm install && pnpm prepare && pnpm predev && pnpm turbo run build --filter=@marble/backend
 
 FROM base AS runner
 
@@ -29,4 +30,4 @@ EXPOSE 8080
 
 VOLUME ["./apps/backend/logs"]
 
-CMD cd ./apps/backend && pnpm start --filter=backend
+CMD cd ./apps/backend && pnpm start --filter=@marble/backend
