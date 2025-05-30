@@ -26,8 +26,8 @@ USER node
 
 COPY --from=builder --chown=node:node /workspace/ ./
 
-ENV TZ Asia/Seoul
-ENV NODE_ENV production
+ENV TZ=Asia/Seoul
+ENV NODE_ENV=production
 EXPOSE 8080
 
 VOLUME ["./apps/backend/logs"]
