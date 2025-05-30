@@ -26,6 +26,6 @@
 	"typescript": "5.8.3"
   },
   "turbo": {
-	"dependsOn": ["database#predev"]
+	"dependsOn": ["@marble/database#predev"]
   }
 }
