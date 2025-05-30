@@ -1,4 +1,4 @@
-FROM node:22-alpine as base
+FROM node:22-alpine AS base
 
 FROM base AS builder
 
@@ -16,7 +16,7 @@ COPY ./packages ./packages
 
 ARG DATABASE_URL
 
-RUN pnpm install && pnpm prepare && pnpm predev && pnpm turbo run build --filter=@marble/backend
+RUN pnpm install && pnpm predev && pnpm turbo run build --filter=@marble/backend
 
 FROM base AS runner
 
@@ -32,4 +32,4 @@ EXPOSE 8080
 
 VOLUME ["./apps/backend/logs"]
 
-CMD cd ./apps/backend/dist/src && node main.js
+CMD ["cd", "./apps/backend/dist/src", "&&", "node", "main.js"]
