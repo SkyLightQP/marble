@@ -13,6 +13,14 @@
       "cache": false,
       "dependsOn": ["^prepare"]
     },
+	"@marble/database#predev": {
+	  "cache": false,
+	  "dependsOn": ["^prepare"]
+	},
+	"@marble/api#predev": {
+	  "cache": false,
+	  "dependsOn": ["^prepare", "@marble/database#predev"]
+	},
     "dev": {
       "cache": false,
       "persistent": true
