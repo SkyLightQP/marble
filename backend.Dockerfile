@@ -2,6 +2,8 @@ FROM node:22-alpine as base
 
 FROM base AS builder
 
+RUN npm i -g pnpm
+
 WORKDIR /workspace
 
 COPY package.json ./
@@ -30,4 +32,4 @@ EXPOSE 8080
 
 VOLUME ["./apps/backend/logs"]
 
-CMD cd ./apps/backend && pnpm start --filter=@marble/backend
+CMD cd ./apps/backend/dist/src && node main.js
