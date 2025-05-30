@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from 'react';
-import { RiExternalLinkFill, RiGamepadFill, RiGithubFill } from 'react-icons/ri';
+import { RiGitCommitLine, RiGithubFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import axios from 'redaxios';
 import { Button } from '@/components/Button';
+import { CityCardBox } from '@/components/Landing/CityCardBox';
 import { Logo } from '@/components/Logo';
-import Image from '@/images/thumb.png';
 
 const GITHUB_COMMIT_API = 'https://api.github.com/repos/SkyLightQP/marble/commits?sha=release';
 
@@ -32,60 +32,116 @@ export const LandingPage: FC = () => {
   }, []);
 
   return (
-    <>
-      <div className="mb-20 pt-20 px-40 flex justify-between items-center">
-        <div>
-          <Logo className="text-4xl -ml-1" />
-          <p className="text-2xl font-bold">웹에서 주사위 보드게임을 플레이 해보세요!</p>
-        </div>
-        <div>
-          <Button
-            className="w-60 h-16 text-xl font-bold flex justify-center items-center bg-cyan-500 hover:bg-cyan-600"
-            onClick={() => navigate('/rooms')}
-          >
-            <RiGamepadFill className="mr-2" /> 게임 시작
+    <div className="w-screen min-h-screen bg-gray-50 text-stone-950">
+      <div className="container mx-auto px-6 lg:px-0">
+        <header className="py-5 flex justify-between">
+          <Logo className="text-2xl" />
+          <Button className="px-4 py-1.5 rounded-xl hidden lg:block" onClick={() => navigate('/rooms')}>
+            게임시작
           </Button>
-        </div>
-      </div>
+        </header>
 
-      <div className="mb-20 flex flex-col items-center relative">
-        <div className="absolute bg-cover w-full h-full -z-50 blur-md" style={{ backgroundImage: `url(${Image})` }} />
-        <img src={Image} width={960} alt="게임화면 미리보기" />
-      </div>
-
-      <div className="px-40 mb-10">
-        <h1 className="text-3xl font-bold mb-4 flex items-center">
-          최근 커밋{' '}
-          <a
-            className="ml-2 hover:text-gray-600"
-            href="https://github.com/SkyLightQP/marble/"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="github"
-          >
-            <RiGithubFill />
-          </a>
-        </h1>
-        <div>
-          {commits.map((commit) => (
-            <div
-              key={commit.sha}
-              className="flex items-center border-2 border-gray-200 px-4 py-4 border-b-0 first:rounded-t-md last:rounded-b-md last:border-b-2"
-            >
-              <p className="font-medium">{commit.commit.message}</p>
-              <a
-                className="ml-1 hover:text-gray-600"
-                href={commit.html_url}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="show commit in github"
-              >
-                <RiExternalLinkFill />
-              </a>
+        <main>
+          <section className="flex justify-between mt-6 flex-col lg:flex-row">
+            <div className="flex flex-col justify-center">
+              <h1 className="text-4xl font-bold leading-10 lg:text-5xl lg:leading-[1.1]">
+                웹으로 즐기는
+                <br />
+                도시경영 주사위
+                <br />
+                보드게임.
+              </h1>
+              <div className="mt-4">
+                <p className="text-lg font-bold">시간과 장소를 가리지 않고 친구와 보드게임을 해보세요.</p>
+                <p className="text-sm text-gray-500">
+                  * 모바일 환경은 지원하지 않습니다. 데스크톱, 태블릿을 이용해주세요.
+                </p>
+              </div>
+              <div className="mt-6">
+                <Button
+                  className="px-5 py-1.5 rounded-xl text-lg  bg-gray-300 hover:bg-gray-400 lg:bg-blue-600 lg:hover:bg-blue-700"
+                  onClick={() => navigate('/rooms')}
+                >
+                  게임시작
+                </Button>
+              </div>
             </div>
-          ))}
-        </div>
+
+            <div className="flex-col items-end hidden lg:flex">
+              <div className="grid grid-cols-3 gap-2 mb-3 justify-end">
+                <CityCardBox color="blue">
+                  <p className="text-2xl font-bold">서울</p>
+                  <p>SEOUL</p>
+                </CityCardBox>
+                <CityCardBox color="green">
+                  <p className="text-2xl font-bold">원주</p>
+                  <p>WONJU</p>
+                </CityCardBox>
+                <CityCardBox color="red">
+                  <p className="text-2xl font-bold">전주</p>
+                  <p>JEONJU</p>
+                </CityCardBox>
+              </div>
+              <div className="grid grid-cols-4 gap-2 justify-end">
+                <CityCardBox color="red">
+                  <span role="img" aria-label="dice" className="text-7xl">
+                    🎲
+                  </span>
+                </CityCardBox>
+                <CityCardBox color="yellow">
+                  <p className="text-2xl font-bold">광주</p>
+                  <p>GWANGJU</p>
+                </CityCardBox>
+                <CityCardBox color="blue">
+                  <p className="text-2xl font-bold">대구</p>
+                  <p>DAEGU</p>
+                </CityCardBox>
+                <CityCardBox color="green">
+                  <p className="text-2xl font-bold">부산</p>
+                  <p>BUSAN</p>
+                </CityCardBox>
+              </div>
+            </div>
+          </section>
+
+          <section className="mt-16">
+            <h3 className="text-2xl font-bold flex items-center">
+              <RiGitCommitLine className="mr-0.5" />
+              변경 내역
+            </h3>
+            <div className="mt-2">
+              {commits.map((commit) => (
+                <div key={commit.sha} className="flex items-center">
+                  <a
+                    className="mb-0.5 hover:text-gray-600"
+                    href={commit.html_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="show commit in github"
+                  >
+                    {commit.commit.message}
+                  </a>
+                </div>
+              ))}
+            </div>
+          </section>
+        </main>
+
+        <footer className="mt-10 py-10">
+          <div className="text-center text-sm text-gray-500">
+            © {new Date().getFullYear()} Daegyeom Ha. All rights reserved.
+            <br />
+            <a
+              className="hover:text-gray-600"
+              href="https://github.com/SkyLightQP/marble/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              View source on <RiGithubFill className="inline text-base" />
+            </a>
+          </div>
+        </footer>
       </div>
-    </>
+    </div>
   );
 };
