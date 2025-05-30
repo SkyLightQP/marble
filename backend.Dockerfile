@@ -32,4 +32,4 @@ EXPOSE 8080
 
 VOLUME ["./apps/backend/logs"]
 
-CMD ["cd", "./apps/backend/dist/src", "&&", "node", "main.js"]
+CMD ["sh", "-c", "cd ./apps/backend/dist/src && node main.js"]
