@@ -46,13 +46,13 @@ pnpm build
 ```
 
 ## 환경변수
-- [.env.example](./.env.example) 참고
+- 각 패키지에 있는 `.env.example` 파일을 참고하여 `.env` 파일을 생성합니다.
 ```dotenv
-# 프론트엔드에서 사용합니다.
+# Frontend
 VITE_BASEPATH=
 VITE_API_HOST=
 
-# 백엔드에서 사용합니다.
+# Backend
 TZ=
 
 CORS_DEVELOPMENT_ORIGIN=
@@ -69,7 +69,7 @@ REDIS_PORT=
 REDIS_PASSWORD=
 API_PREFIX=/
 
-# Prisma 빌드 시 사용합니다.
+# Database
 DATABASE_URL="postgresql://user:password@host:port/database?schema="
 
 ```
