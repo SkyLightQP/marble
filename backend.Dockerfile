@@ -2,7 +2,7 @@ FROM node:22-alpine AS base
 
 FROM base AS builder
 
-RUN npm i -g pnpm
+RUN apk add --no-cache openssl && npm i -g pnpm
 
 WORKDIR /workspace
 
@@ -21,6 +21,8 @@ RUN pnpm install && pnpm predev && pnpm turbo run build --filter=@marble/backend
 FROM base AS runner
 
 WORKDIR /workspace
+
+RUN apk add --no-cache openssl
 
 USER node
 
