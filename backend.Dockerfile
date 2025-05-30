@@ -13,7 +13,7 @@ COPY ./packages ./packages
 
 ARG DATABASE_URL
 
-RUN yarn install && yarn prepare && yarn predev && yarn turbo run build --filter=backend
+RUN pnpm install && pnpm prepare && pnpm predev && pnpm turbo run build --filter=backend
 
 FROM base AS runner
 
@@ -29,4 +29,4 @@ EXPOSE 8080
 
 VOLUME ["./apps/backend/logs"]
 
-CMD cd ./apps/backend && yarn start --filter=backend
+CMD cd ./apps/backend && pnpm start --filter=backend

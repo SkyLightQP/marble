@@ -49,8 +49,10 @@ export class StartGameHandler implements ICommandHandler<StartGameCommand> {
 
   private resetReadyState(room: Room) {
     room.players.forEach((player) => {
+      // eslint-disable-next-line no-param-reassign
       player.isReady = false;
     });
-    room.players.find((player) => player.userId === room.owner)!!.isReady = true;
+    // eslint-disable-next-line no-param-reassign
+    room.players.find((player) => player.userId === room.owner)!.isReady = true;
   }
 }

@@ -56,7 +56,7 @@ export const CityInformationModal: FC<CityInformationModalProps> = ({ isOpen, cl
             <span>{price.building.toLocaleString('ko-KR')} 원</span>
           </p>
           <p>
-            <span className="inline-block w-16">호텡 가격:</span> <span>{price.hotel.toLocaleString('ko-KR')} 원</span>
+            <span className="inline-block w-16">호텔 가격:</span> <span>{price.hotel.toLocaleString('ko-KR')} 원</span>
           </p>
         </div>
       </div>

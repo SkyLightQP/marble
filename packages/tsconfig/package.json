@@ -8,6 +8,7 @@
   },
   "files": [
     "base.json",
-	"nest.json"
+	"nest.json",
+	"react.json"
   ]
 }

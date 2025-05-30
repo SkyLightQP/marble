@@ -1,7 +1,8 @@
+import { Provider } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { createClient } from 'redis';
 
-export const REDIS_PROVIDER = [
+export const REDIS_PROVIDER: Provider[] = [
   {
     provide: 'REDIS_CLIENT',
     useFactory: async (config: ConfigService) => {

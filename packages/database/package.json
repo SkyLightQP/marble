@@ -7,14 +7,15 @@
   "scripts": {
     "db:generate": "prisma format && prisma generate",
     "db:push": "prisma db push --skip-generate",
-    "predev": "yarn db:generate && vite build"
+    "predev": "pnpm db:generate && vite build"
   },
   "dependencies": {
     "@prisma/client": "^5.6.0"
   },
   "devDependencies": {
+    "@marble/tsconfig": "workspace:*",
     "prisma": "^5.6.0",
-    "typescript": "^5.3.2",
+    "typescript": "5.8.3",
     "vite": "^5.0.2",
     "vite-plugin-dts": "^3.6.3"
   }

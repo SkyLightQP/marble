@@ -11,8 +11,6 @@ interface RoomMenuProps {
   readonly isOwner?: boolean;
 }
 
-const disableButton = 'bg-gray-500 cursor-no-drop hover:bg-gray-600';
-
 export const RoomMenu: FC<RoomMenuProps> = ({ onStartClick, onReadyClick, onSettingClick, onQuitClick, isOwner }) => {
   return (
     <div className="mb-8 flex items-center space-x-2">
