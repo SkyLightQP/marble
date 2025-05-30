@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { RiGithubFill, RiGitPullRequestLine } from 'react-icons/ri';
+import { RiGitCommitLine, RiGithubFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import axios from 'redaxios';
 import { Button } from '@/components/Button';
@@ -93,8 +93,8 @@ export const LandingPage: FC = () => {
                   <p>GWANGJU</p>
                 </CityCardBox>
                 <CityCardBox color="blue">
-                  <p className="text-2xl font-bold">부산</p>
-                  <p>BUSAN</p>
+                  <p className="text-2xl font-bold">대구</p>
+                  <p>DAEGU</p>
                 </CityCardBox>
                 <CityCardBox color="green">
                   <p className="text-2xl font-bold">부산</p>
@@ -106,7 +106,7 @@ export const LandingPage: FC = () => {
 
           <section className="mt-16">
             <h3 className="text-2xl font-bold flex items-center">
-              <RiGitPullRequestLine className="mr-0.5" />
+              <RiGitCommitLine className="mr-0.5" />
               변경 내역
             </h3>
             <div className="mt-2">
