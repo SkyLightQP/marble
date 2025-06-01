@@ -15,7 +15,10 @@ export const CityCardBox: FC<PropsWithChildren<CityCardBoxProps>> = ({ color, ch
 
   return (
     <div
-      className={cn('w-64 h-64 rounded-md border-2 flex items-center justify-center flex-col', borderColorMap[color])}
+      className={cn(
+        'lg:w-40 lg:h-40 2xl:w-64 2xl:h-64 rounded-md border-2 flex items-center justify-center flex-col',
+        borderColorMap[color]
+      )}
     >
       {children}
     </div>

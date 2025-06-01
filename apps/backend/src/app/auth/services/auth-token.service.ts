@@ -1,10 +1,9 @@
 import { ErrorCode } from '@marble/common';
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import dayjs from 'dayjs';
+import { RedisClientType } from 'redis';
 import { AuthTokenPayload } from '@/infrastructure/common/types/auth.type';
-import { DatabaseService } from '@/infrastructure/database/database.service';
 
 export interface RefreshAccessTokenReturn {
   readonly accessToken: string;
@@ -16,46 +15,38 @@ export class AuthTokenService {
   constructor(
     private readonly jwtService: JwtService,
     private readonly config: ConfigService,
-    private readonly prisma: DatabaseService
+    @Inject('REDIS_CLIENT') private readonly redis: RedisClientType
   ) {}
-
-  private ACCESS_TOKEN_EXPIRE_DAY = 1;
-
-  private REFRESH_TOKEN_EXPIRE_DAY = 14;
 
   generateAccessToken(payload: AuthTokenPayload): string {
     const secret = this.config.get('ACCESS_TOKEN_SECRET');
-    const accessToken = this.jwtService.sign(
+    const accessTokenExpireDay = this.config.get('ACCESS_TOKEN_EXPIRE_DAYS');
+    return this.jwtService.sign(
       {
         ...payload
       },
       {
         secret,
-        expiresIn: `${this.ACCESS_TOKEN_EXPIRE_DAY}d`
+        expiresIn: `${accessTokenExpireDay}d`
       }
     );
-
-    return accessToken;
   }
 
   async generateRefreshToken(payload: AuthTokenPayload): Promise<string> {
     const secret = this.config.get('REFRESH_TOKEN_SECRET');
+    const refreshTokenExpireDay = this.config.get('REFRESH_TOKEN_EXPIRE_DAYS');
     const refreshToken = this.jwtService.sign(
       {
         ...payload
       },
       {
         secret,
-        expiresIn: `${this.REFRESH_TOKEN_EXPIRE_DAY}d`
+        expiresIn: `${refreshTokenExpireDay}d`
       }
     );
 
-    await this.prisma.refreshTokenWhiteList.create({
-      data: {
-        token: refreshToken,
-        expiredAt: dayjs().add(this.REFRESH_TOKEN_EXPIRE_DAY, 'day').toDate()
-      }
-    });
+    const whitelistTTL = refreshTokenExpireDay * 24 * 60 * 60;
+    await this.redis.set(`refreshToken:${refreshToken}`, payload.sub, { EX: whitelistTTL, NX: true });
 
     return refreshToken;
   }
@@ -79,16 +70,8 @@ export class AuthTokenService {
   }
 
   async isRefreshTokenInWhiteList(token: string): Promise<boolean> {
-    const refreshToken = await this.prisma.refreshTokenWhiteList.findFirst({
-      where: {
-        token,
-        expiredAt: {
-          gte: new Date()
-        }
-      }
-    });
-
-    return refreshToken !== null;
+    const isInRedis = await this.redis.exists(`refreshToken:${token}`);
+    return isInRedis === 1;
   }
 
   async refreshAccessToken(refreshToken: string): Promise<RefreshAccessTokenReturn> {
