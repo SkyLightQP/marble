@@ -18,36 +18,34 @@ export class AuthTokenService {
     @Inject('REDIS_CLIENT') private readonly redis: RedisClientType
   ) {}
 
-  private ACCESS_TOKEN_EXPIRE_DAY = 1;
-
-  private REFRESH_TOKEN_EXPIRE_DAY = 14;
-
   generateAccessToken(payload: AuthTokenPayload): string {
     const secret = this.config.get('ACCESS_TOKEN_SECRET');
+    const accessTokenExpireDay = this.config.get('ACCESS_TOKEN_EXPIRE_DAY');
     return this.jwtService.sign(
       {
         ...payload
       },
       {
         secret,
-        expiresIn: `${this.ACCESS_TOKEN_EXPIRE_DAY}d`
+        expiresIn: `${accessTokenExpireDay}d`
       }
     );
   }
 
   async generateRefreshToken(payload: AuthTokenPayload): Promise<string> {
     const secret = this.config.get('REFRESH_TOKEN_SECRET');
+    const refreshTokenExpireDay = this.config.get('REFRESH_TOKEN_EXPIRE_DAY');
     const refreshToken = this.jwtService.sign(
       {
         ...payload
       },
       {
         secret,
-        expiresIn: `${this.REFRESH_TOKEN_EXPIRE_DAY}d`
+        expiresIn: `${refreshTokenExpireDay}d`
       }
     );
 
-    const whitelistTTL = this.REFRESH_TOKEN_EXPIRE_DAY * 24 * 60 * 60;
+    const whitelistTTL = refreshTokenExpireDay * 24 * 60 * 60;
     await this.redis.set(`refreshToken:${refreshToken}`, payload.sub, { EX: whitelistTTL, NX: true });
 
     return refreshToken;
