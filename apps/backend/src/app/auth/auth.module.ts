@@ -7,6 +7,7 @@ import { SignoutUserHandler } from '@/app/auth/handlers/signout-user.handler';
 import { SignupUserHandler } from '@/app/auth/handlers/signup-user.handler';
 import { AuthTokenService } from '@/app/auth/services/auth-token.service';
 import { DatabaseModule } from '@/infrastructure/database/database.module';
+import { RedisModule } from '@/infrastructure/redis/redis.module';
 
 const commands = [SignupUserHandler, SigninUserHandler, RefreshAccessTokenHandler, SignoutUserHandler];
 const queries = [];
@@ -14,7 +15,7 @@ const services = [AuthTokenService];
 
 @Global()
 @Module({
-  imports: [DatabaseModule, JwtModule.register({})],
+  imports: [DatabaseModule, JwtModule.register({}), RedisModule],
   providers: [...commands, ...queries, ...services],
   controllers: [AuthController],
   exports: [AuthTokenService]
