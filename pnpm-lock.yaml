@@ -296,6 +296,9 @@ importers:
 
   packages/common:
     devDependencies:
+      '@marble/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
       '@types/node':
         specifier: ^22.15.27
         version: 22.15.27
