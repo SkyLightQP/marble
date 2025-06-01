@@ -47,9 +47,9 @@ export const LoginPage: React.FC = () => {
   return (
     <RootLayout className="h-screen w-screen">
       <div className="flex h-full flex-col items-center justify-center text-center">
-        <div className="mb-5">
+        <div className="mb-8">
           <Logo />
-          <h2 className="text-lg">로그인하기</h2>
+          <h1 className="text-lg mt-1 font-bold">로그인</h1>
         </div>
 
         <div className="mb-3">

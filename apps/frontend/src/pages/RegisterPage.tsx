@@ -64,13 +64,11 @@ export const RegisterPage: React.FC = () => {
   return (
     <RootLayout className="h-screen w-screen">
       <DemoNotification />
+
       <div className="flex h-full flex-col items-center justify-center text-center">
-        <div className="mb-5">
-          <div className="mb-3">
-            <Logo />
-            <h3 className="text-md">웹기반 도시건설 보드게임</h3>
-          </div>
-          <h2 className="text-lg">회원가입하기</h2>
+        <div className="mb-8">
+          <Logo />
+          <h1 className="text-lg mt-1 font-bold">회원가입</h1>
         </div>
 
         <div className="mb-3">
@@ -82,7 +80,7 @@ export const RegisterPage: React.FC = () => {
         </div>
 
         <div className="mb-3">
-          <Label htmlFor="registerPage-password">비밀번호</Label>
+          <Label htmlFor="registerPage-password">비밀번호 (6자리 이상)</Label>
           <Input
             id="registerPage-password"
             type="password"
@@ -133,7 +131,7 @@ export const RegisterPage: React.FC = () => {
           <Button className="h-10 w-56" onClick={handleSubmit(onRegisterButtonClick)}>
             회원가입
           </Button>
-          <Button className="h-10 w-56" onClick={() => navigate(-1)}>
+          <Button className="h-10 w-56 bg-gray-400 hover:bg-gray-500" onClick={() => navigate(-1)}>
             뒤로가기
           </Button>
         </div>
