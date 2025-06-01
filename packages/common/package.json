@@ -12,7 +12,7 @@
   "devDependencies": {
 	"@marble/tsconfig": "workspace:*",
     "@types/node": "^22.15.27",
-    "vite": "^5.2.8",
+    "vite": "^6.0.0",
     "vite-plugin-dts": "^3.8.2",
 	"typescript": "5.8.3"
   }
