@@ -20,7 +20,7 @@ export class AuthTokenService {
 
   generateAccessToken(payload: AuthTokenPayload): string {
     const secret = this.config.get('ACCESS_TOKEN_SECRET');
-    const accessTokenExpireDay = this.config.get('ACCESS_TOKEN_EXPIRE_DAY');
+    const accessTokenExpireDay = this.config.get('ACCESS_TOKEN_EXPIRE_DAYS');
     return this.jwtService.sign(
       {
         ...payload
@@ -34,7 +34,7 @@ export class AuthTokenService {
 
   async generateRefreshToken(payload: AuthTokenPayload): Promise<string> {
     const secret = this.config.get('REFRESH_TOKEN_SECRET');
-    const refreshTokenExpireDay = this.config.get('REFRESH_TOKEN_EXPIRE_DAY');
+    const refreshTokenExpireDay = this.config.get('REFRESH_TOKEN_EXPIRE_DAYS');
     const refreshToken = this.jwtService.sign(
       {
         ...payload
