@@ -129,14 +129,12 @@ export const LandingPage: FC = () => {
 
         <footer className="mt-10 py-10">
           <div className="text-center text-sm text-gray-500">
-            © {new Date().getFullYear()} Daegyeom Ha. All rights reserved.
+            <a className="hover:text-gray-600" href="https://daegyeo.me/?utm_source=marble&utm_medium=footer">
+              Made with ❤️ by Daegyeom Ha.
+            </a>
+
             <br />
-            <a
-              className="hover:text-gray-600"
-              href="https://github.com/SkyLightQP/marble/"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a className="hover:text-gray-600" href="https://github.com/SkyLightQP/marble/">
               View source on <RiGithubFill className="inline text-base" />
             </a>
           </div>
