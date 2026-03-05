@@ -17,6 +17,6 @@
     "prisma": "^5.6.0",
     "typescript": "5.8.3",
     "vite": "^5.0.2",
-    "vite-plugin-dts": "^3.6.3"
+    "vite-plugin-dts": "^4.0.0"
   }
 }
