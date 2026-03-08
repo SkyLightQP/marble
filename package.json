@@ -15,11 +15,11 @@
   "devDependencies": {
     "@marble/common": "workspace:*",
     "@marble/eslint-config-custom": "workspace:*",
-    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-    "eslint": "^9.27.0",
-    "prettier": "^3.5.3",
-    "prettier-plugin-tailwindcss": "^0.6.11",
-    "turbo": "^2.5.3"
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "eslint": "^9.39.4",
+    "prettier": "^3.8.1",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "turbo": "^2.8.14"
   },
   "pnpm": {
     "ignoredBuiltDependencies": [
