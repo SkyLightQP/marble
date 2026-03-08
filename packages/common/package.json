@@ -10,10 +10,10 @@
   },
   "dependencies": {},
   "devDependencies": {
-	"@marble/tsconfig": "workspace:*",
-    "@types/node": "^22.15.27",
-    "vite": "^5.2.8",
-    "vite-plugin-dts": "^3.8.2",
-	"typescript": "5.8.3"
+    "@marble/tsconfig": "workspace:*",
+    "@types/node": "^25.3.5",
+    "typescript": "5.9.3",
+    "vite": "7.3.1",
+    "vite-plugin-dts": "^4.5.4"
   }
 }
